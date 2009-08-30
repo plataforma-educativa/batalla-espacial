@@ -1,0 +1,12 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Batalla Espacial: Objetivo</title>
+    </head>
+    <body>
+        <h1>Objetivo</h1>
+        <p> El objetivo del juego es programar una Civilización, con su
+            Comandante y Pilotos capaces de llevar hasta su Base la mayor
+            cantidad posible de sustancias teniendo en cuenta que en la misma
+            partida pueden existir otras Civilizaciones.</p>
+    </body>
+</html>

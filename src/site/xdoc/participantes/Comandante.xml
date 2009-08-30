@@ -1,0 +1,16 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Batalla Espacial: Comandante</title>
+    </head>
+    <body>
+        <h1>Comandante</h1>
+        <p>
+            <ol>
+                <li> No tiene representación en el tablero pero tiene la
+                    capacidad de armar un escuadrón de Pilotos.</li>
+                <li> El escuadrón se armará al comienzo del juego y no se le
+                    volverá a solicitar un nuevo escuadrón.</li>
+            </ol>
+        </p>
+    </body>
+</html>

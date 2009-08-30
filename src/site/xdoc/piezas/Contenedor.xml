@@ -1,0 +1,18 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Batalla Espacial: Contenedor</title>
+    </head>
+    <body>
+        <h1>Contenedor</h1>
+        <p>
+            <ol>
+                <li> Son dispuestos en forma azarosa al comienzo del juego</li>
+                <li> No se mueven.</li>
+                <li> La cantidad es determinada en forma azarosa al comienzo del
+                    juego</li>
+                <li> Tiene capacidad de recepción de sustancias ilimitada</li>
+                <li> Pueden ser destruidos por ataques o choques.</li>
+            </ol>
+        </p>
+    </body>
+</html>

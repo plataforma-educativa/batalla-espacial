@@ -1,0 +1,16 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Batalla Espacial: Civilización</title>
+    </head>
+    <body>
+        <h1>Civilización</h1>
+        <p>
+            <ol>
+                <li> No tiene representación en el tablero pero debe contar con
+                    un Comandante.</li>
+                <li> El juego le pedirá a la Civilización que indique su
+                    comandante sólo una vez.</li>
+            </ol>
+        </p>
+    </body>
+</html>

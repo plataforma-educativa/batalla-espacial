@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Batalla Espacial: Base</title>
+    </head>
+    <body>
+        <h1>Base</h1>
+        <p>
+            <ol>
+                <li> Son dispuestas en forma azarosa al comienzo del juego.</li>
+                <li> No se mueven.</li>
+                <li> Habrá una base por civilización.</li>
+                <li> Tiene capacidad de recepción de sustancias ilimitada.</li>
+                <li> No pueden atacar.</li>
+                <li> Posee un escudo que la protege. A medida que sufre ataques
+                    y choques el nivel del escudo se reduce. Cuando el escudo se
+                    agota (nivel 0%) cualquier ataque o choque ocasiona su
+                    destrucción.</li>
+            </ol>
+        </p>
+    </body>
+</html>

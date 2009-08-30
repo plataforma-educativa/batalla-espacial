@@ -1,0 +1,73 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Batalla Espacial: Reglas</title>
+    </head>
+    <body>
+        <h1>Reglas</h1>
+        <h2>Mecánica del Juego</h2>
+        <p>
+            <ol>
+                <li> Existirá un tablero rectangular de dimensiones azarosas.
+                </li>
+                <li> Existirá un Comandante por Civilización</li>
+                <li> Al comienzo del juego se le solicitará a cada Comandante
+                    que arme un escuadrón de Pilotos a los cuales el juego les
+                    asignará una nave.</li>
+                <li> Luego de esto, la mecánica del juego será de rondas con
+                    turnos en cada ronda.</li>
+                <li> Un turno es la posibilidad que se le da a un Piloto de
+                    tomar una decisión y obrar en consecuencia. Para ello en
+                    cada turno se le pedirá al Piloto que indique cual es el
+                    próximo Comando que la nave tiene que ejecutar.</li>
+                <li> Una ronda es un conjunto de turnos que involucra al total
+                    de pilotos vivos y a un piloto a punto de morir (su nave
+                    quedó sin protección y fue chocada o atacada).</li>
+                <li> El orden de los turnos dentro de una ronda será azaroso y
+                    determinado para cada ronda en particular.</li>
+                <li> Las consecuencias de la decisión de un Piloto se verán
+                    reflejadas en el estado del juego inmediatamente después de
+                    que el Piloto exprese la misma. Por lo tanto, cuando el
+                    próximo Piloto tenga que tomar su decisión contará con el
+                    estado resultante de todas las decisiones de los Pilotos
+                    consultados con anterioridad.</li>
+                <li>
+                    Los Tipos de Pieza que pueden aparecer sobre el Tablero son:
+                    <ul>
+                        <li>
+                            <strong>Base</strong>
+                            <br />
+                            Serán el punto de partida de las naves y receptáculo
+                            de sustancias
+                        </li>
+                        <li>
+                            <strong>Nave</strong>
+                            <br />
+                            Serán comandadas por los pilotos
+                        </li>
+                        <li>
+                            <strong>Asteroide</strong>
+                            <br />
+                            Representa los cuerpos estelares o basura espacial
+                            que atenta contra la salud de una nave
+                        </li>
+                        <li>
+                            <strong>Contenedor</strong>
+                            <br />
+                            Representa la sustancias útiles que se encuentran en
+                            el espacio.
+                        </li>
+                    </ul>
+                </li>
+                <li> Todas las piezas poseen una cantidad de puntos de vida
+                    definida por su tipo (Base, Nave, Asteroide, Contenedor).
+                    Los puntos de vida son afectados en los choques y ataques.
+                    Cuando cualquier Pieza queda sin puntos de vida es retirada
+                    de la partida. En el caso de Naves y Bases, los puntos de
+                    vida se representan como escudos.</li>
+                <li> Todas las Piezas pueden ser atacadas o chocadas por otras
+                    Piezas.</li>
+            </ol>
+        </p>
+    </body>
+</html>

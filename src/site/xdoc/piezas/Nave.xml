@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Batalla Espacial: Nave</title>
+    </head>
+    <body>
+        <h1>Nave</h1>
+        <p>
+            <ol>
+                <li> Son ubicadas en el casillero de la base de su civilización
+                    al comienzo.</li>
+                <li> Pueden moverse a alguno de los casilleros contiguos.</li>
+                <li> El número de naves es determinado al comienzo del juego.
+                </li>
+                <li> Tiene capacidad de recepción de sustancias limitada.</li>
+                <li> Pueden atacar a Naves, Meteoritos, Bases y Contenedores, no
+                    necesariamente los destruirán en el primer ataque. Esto
+                    dependerá de la cantidad de puntos de vida que tengan los
+                    elementos en cuestión.</li>
+                <li> Posee un escudo que la protege. A medida que sufre ataques
+                    y choques el nivel del escudo se reduce. Cuando el escudo se
+                    agota (nivel 0%, tiene exactamente 1 punto de vida)
+                    cualquier ataque o choque ocasiona su destrucción.</li>
+                <li> Cuenta con dos tipos de armas, Torpedos de Fotones y Láser.
+                    Los primeros tienen mayor poder de ataque, pero su número es
+                    limitado. El Láser es utilizado como arma secundaria cuando
+                    se agotan los Torpedos (es inagotable).</li>
+            </ol>
+        </p>
+    </body>
+</html>

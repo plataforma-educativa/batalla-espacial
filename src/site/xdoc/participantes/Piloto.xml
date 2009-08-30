@@ -1,0 +1,104 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Batalla Espacial: Piloto</title>
+    </head>
+    <body>
+        <h1>Piloto</h1>
+        <p>
+            <ol>
+                <li> Es asignado a una Nave, recibiendo su Cabina de Control a
+                    través de la cual puede maniobrarla, conocer su estado y el
+                    contexto en el que se encuentra.</li>
+                <li> Podrá controlar su nave mediante Comandos.</li>
+                <li> El juego solicitará a cada Piloto un Comando por turno.
+                </li>
+                <li>
+                    Los comandos posibles son:
+                    <ul>
+                        <li>
+                            <strong> AVANZAR</strong>
+                            <br />
+                            Mueve la nave un casillero en la dirección indicada.
+                            El casillero al que se desea avanzar no debe estar
+                            ocupado por otra Pieza, caso contrario se produce un
+                            choque y el movimiento no se realiza.
+                        </li>
+                        <li>
+                            <strong> ATACAR</strong>
+                            <br />
+                            Puede atacar a cualquiera de las otras Piezas del
+                            Tablero. Las distintas Piezas reaccionan de manera
+                            diferentes a los ataques, pero todas pueden ser
+                            destruidas, y por consiguiente retiradas de la
+                            Partida.
+                        </li>
+                        <li>
+                            <strong> TRANSFERIR CARGA</strong>
+                            <br />
+                            Puede transferir carga desde o hacia la bodega de la
+                            nave, interactuando con una Nave o Base de la misma
+                            Civilización, o con un Contenedor.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Para seleccionar el próximo Comando, cada Piloto podrá
+                    solicitarle al Radar de la Cabina de Control el reporte en
+                    una dirección dada de un casillero contiguo. Podrá solicitar
+                    el número de reportes que desee. Este reporte contendrá:
+                    <ul>
+                        <li>
+                            <strong> ESPECTRO</strong>
+                            <br />
+                            Permitirá identificar si lo que hay en esa dirección
+                            es un ASTEROIDE, BASE, CONTENEDOR, NAVE, VACIO o
+                            DESCONOCIDO. Este último indicará que en esa
+                            dirección no se puede mover porque se termina el
+                            tablero.
+                        </li>
+                        <li>
+                            <strong> CIVILIZACION</strong>
+                            <br />
+                            Permite determinar la civilización que hay allí.
+                        </li>
+                        <li>
+                            <strong> CANTIDAD DE SUSTANCIA</strong>
+                            <br />
+                            Indica la cantidad de sustancia de determinado tipo
+                            que hay en esa dirección.
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Adicionalmente, el Piloto podrá solicitar la lista de
+                    eventos que tuvieron relación con su nave desde su última
+                    decisión. Estos eventos pueden ser:
+                    <ul>
+                        <li>
+                            <strong> ATAQUE</strong>
+                            <br />
+                            La nave fue atacada
+                        </li>
+                        <li>
+                            <strong> CHOQUE</strong>
+                            <br />
+                            La nave fue chocada
+                        </li>
+                        <li>
+                            <strong> DESPEGUE</strong>
+                            <br />
+                            Se recibe al efectuar el primer MOVER saliendo de la
+                            base
+                        </li>
+                        <li>
+                            <strong> DESTRUCCIÓN</strong>
+                            <br />
+                            Si se recibe, la decisión que tenga que tomar el
+                            piloto será la última de su vida.
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+        </p>
+    </body>
+</html>

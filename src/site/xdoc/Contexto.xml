@@ -1,0 +1,13 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Batalla Espacial: Contexto</title>
+    </head>
+    <body>
+        <h1>Contexto</h1>
+        <p> Es un juego de tablero para programadores donde existen
+            Civilizaciones con Naves que parten de una Base, pueden trasladar
+            sustancias que encuentren en el espacio y tienen poder de ataque. En
+            el espacio también existen Asteroides que obstruyen los movimientos
+            de las Naves.</p>
+    </body>
+</html>
