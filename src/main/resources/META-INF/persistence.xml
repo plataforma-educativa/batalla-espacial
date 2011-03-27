@@ -1,0 +1,18 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+    version="2.0">
+
+    <persistence-unit name="eficienciaPersistenceUnit" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>     
+        <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+        <validation-mode>CALLBACK</validation-mode>
+        <properties>
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:derby:db/eficiencia;create=true"/>
+            <property name="javax.persistence.jdbc.user" value="eficiencia"/>
+            <property name="javax.persistence.jdbc.password" value="eficiencia"/>
+        </properties>
+    </persistence-unit>
+</persistence>
