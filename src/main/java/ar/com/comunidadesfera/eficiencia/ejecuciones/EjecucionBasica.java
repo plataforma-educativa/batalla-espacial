@@ -1,8 +1,5 @@
 package ar.com.comunidadesfera.eficiencia.ejecuciones;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-
 import ar.com.comunidadesfera.eficiencia.Ejecucion;
 import ar.com.comunidadesfera.eficiencia.instrumentos.Contador;
 import ar.com.comunidadesfera.eficiencia.instrumentos.ContadorBasico;
@@ -24,7 +21,7 @@ public class EjecucionBasica implements Ejecucion {
     }
 
     @Override
-    public Contador getContadorDeInstrucciones() {
+    public Contador contarInstrucciones() {
 
         if (this.contador == null) {
             
@@ -34,12 +31,6 @@ public class EjecucionBasica implements Ejecucion {
         return this.contador;
     }
     
-    protected void setContadorDeInstrucciones(ContadorBasico contador) {
-        
-        contador.setEjecucion(this);
-        this.contador = contador;
-    }
-
     @Override
     public Modulo getModulo() {
         

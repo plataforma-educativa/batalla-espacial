@@ -48,6 +48,7 @@ public class Problema extends Entidad {
     @Override
     protected void describir(StringBuilder builder) {
         
+        super.describir(builder);
         this.describirPropiedad(builder, "dimensiones", this.dimensiones);
     }
 

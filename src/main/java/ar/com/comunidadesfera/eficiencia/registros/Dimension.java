@@ -44,6 +44,7 @@ public class Dimension extends Entidad {
     @Override
     protected void describir(StringBuilder builder) {
 
+        super.describir(builder);
         this.describirPropiedad(builder, "nombre", this.getNombre());
         this.describirPropiedad(builder, "valor", this.getValor());
     }

@@ -5,13 +5,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.Transient;
-
 import ar.com.comunidadesfera.eficiencia.Ejecucion;
+import ar.com.comunidadesfera.eficiencia.registros.Categoria;
+import ar.com.comunidadesfera.eficiencia.registros.Discriminante;
+import ar.com.comunidadesfera.eficiencia.registros.Medicion;
+import ar.com.comunidadesfera.eficiencia.registros.Medida;
+import ar.com.comunidadesfera.eficiencia.registros.Unidad;
 
 public class ContadorBasico implements Contador {
 
@@ -19,26 +18,34 @@ public class ContadorBasico implements Contador {
     
     private long cuenta;
     
-    private String discriminante;
+    private Discriminante discriminante;
 
     private Map<String, Contador> parciales;
     
-    protected ContadorBasico(Ejecucion ejecucion, String discriminante) {
-        
-        this.ejecucion = ejecucion;
-        this.cuenta = 0;
-        this.discriminante = discriminante;
-        this.parciales = new TreeMap<String, Contador>();
-    }
-
+    /**
+     * Inicializa el Contador para todo el Módulo de la Ejecución dada.
+     * El Discriminante del Contador resulta ser todo el Módulo.
+     * 
+     * @param ejecucion
+     */
     public ContadorBasico(Ejecucion ejecucion) {
         
-        this(ejecucion, null);
+        this(ejecucion, ejecucion.getModulo());
     }
     
-    protected ContadorBasico() {
+    /**
+     * Inicializa el Contador para el Discriminante indicado, perteneciente
+     * al Módulo de la Ejecución dada.
+     * 
+     * @param ejecucion
+     * @param discriminante
+     */
+    protected ContadorBasico(Ejecucion ejecucion, Discriminante discriminante) {
         
-        this(null, null);
+        this.ejecucion = ejecucion;
+        this.discriminante = discriminante;
+        this.parciales = new TreeMap<String, Contador>();
+        this.cuenta = 0;
     }
     
     @Override
@@ -84,7 +91,13 @@ public class ContadorBasico implements Contador {
         
         if (contador == null) {
             
-            contador = new ContadorBasico(this.getEjecucion(), discriminante);
+            Discriminante categoria = new Categoria(discriminante, 
+                                                    this.getEjecucion().getModulo(),
+                                                    this.getDiscriminante());
+            
+            contador = new ContadorBasico(this.getEjecucion(), 
+                                          categoria);
+            
             this.parciales.put(discriminante, contador);
         }
         
@@ -105,27 +118,29 @@ public class ContadorBasico implements Contador {
             
             for (Contador parcial : parciales) {
                 
-                this.parciales.put(parcial.getDiscriminante(), parcial);
+                this.parciales.put(parcial.getDiscriminante().getNombre(), 
+                                   parcial);
             }
         }
     }
 
     @Override
-    public String getDiscriminante() {
+    public Discriminante getDiscriminante() {
 
         return this.discriminante;
-    }
-    
-    public void setDiscriminante(String discriminante) {
-        
-        this.discriminante = discriminante;
     }
 
     public long getCuenta() {
         return cuenta;
     }
 
-    public void setCuenta(long cuenta) {
-        this.cuenta = cuenta;
+    @Override
+    public Medicion getMedicion() {
+        
+        // TODO parametrizar las Unidades 
+        return new Medicion(this.ejecucion.getProblema(), 
+                            this.ejecucion.getModulo(),
+                            this.getDiscriminante(),
+                            new Medida(this.getValor(), Unidad.INSTRUCCIONES));
     }
 }

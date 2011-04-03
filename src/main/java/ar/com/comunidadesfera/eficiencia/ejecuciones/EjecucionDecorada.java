@@ -23,9 +23,9 @@ public abstract class EjecucionDecorada<T extends Ejecucion> implements Ejecucio
     }
     
     @Override
-    public Contador getContadorDeInstrucciones() {
+    public Contador contarInstrucciones() {
 
-        return this.getEjecucion().getContadorDeInstrucciones();
+        return this.getEjecucion().contarInstrucciones();
     }
 
     @Override

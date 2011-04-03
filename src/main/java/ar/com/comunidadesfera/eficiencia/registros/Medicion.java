@@ -15,6 +15,35 @@ public class Medicion extends Entidad {
     
     private Modulo modulo;
 
+    private Discriminante discriminante;
+    
+    private Medida resultado;
+
+    public Medicion() {
+    }
+
+    /**
+     * Inicializa la Medición del Módulo para el Problema indicado con
+     * el resultado dado. El Discriminante de la Medición es todo Módulo.
+     * 
+     * @param problema
+     * @param modulo
+     * @param resultado
+     */
+    public Medicion(Problema problema, Modulo modulo, Medida resultado) {
+        
+        this(problema, modulo, modulo, resultado);
+    }
+    
+    public Medicion(Problema problema, Modulo modulo, Discriminante discriminente, 
+                    Medida resultado) {
+        
+        this.problema = problema;
+        this.modulo = modulo;
+        this.discriminante = discriminente;
+        this.resultado = resultado;
+    }
+    
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, 
               optional = false, orphanRemoval = true)
     public Problema getProblema() {
@@ -35,10 +64,37 @@ public class Medicion extends Entidad {
         this.modulo = modulo;
     }
     
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
+              optional = false)
+    public Medida getResultado() {
+        
+        return this.resultado;
+    }
+
+    public void setResultado(Medida resultado) {
+
+        this.resultado = resultado;
+    }
+
+    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = {})
+    public Discriminante getDiscriminante() {
+
+        return this.discriminante;
+    }
+    
+    public void setDiscriminante(Discriminante discriminante) {
+
+        this.discriminante = discriminante;
+    }
+    
     @Override
     protected void describir(StringBuilder builder) {
-
+        
+        super.describir(builder);
         this.describirPropiedad(builder, "problema", this.getProblema());
         this.describirPropiedad(builder, "modulo", this.getModulo());
+        this.describirPropiedad(builder, "discriminante", this.getDiscriminante());
     }
+
+
 }

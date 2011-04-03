@@ -10,6 +10,7 @@ import ar.com.comunidadesfera.eficiencia.Contexto;
 import ar.com.comunidadesfera.eficiencia.Eficiencia;
 import ar.com.comunidadesfera.eficiencia.Ejecucion;
 import ar.com.comunidadesfera.eficiencia.instrumentos.Contador;
+import ar.com.comunidadesfera.eficiencia.registros.Discriminante;
 
 public class EficienciaTest extends TestBasico {
 
@@ -39,7 +40,7 @@ public class EficienciaTest extends TestBasico {
         Ejecucion ejecucion10 = this.contexto.iniciarEjecucion(Datos.Ejecucion.SIMPLE_10.modulo.nombre, 
                                                                Datos.Ejecucion.SIMPLE_10.tamaño);
         
-        Contador contador = ejecucion10.getContadorDeInstrucciones();
+        Contador contador = ejecucion10.contarInstrucciones();
         
         String[] numeros = new String[(int)Datos.Ejecucion.SIMPLE_10.tamaño[0]];
         for (int i = 0; i < numeros.length; i++) {
@@ -57,13 +58,13 @@ public class EficienciaTest extends TestBasico {
         Assert.assertThat("algoritmo de la ejecucion", 
                           ejecucion10.getModulo().getNombre(),
                           Matchers.is(Datos.Ejecucion.SIMPLE_10.modulo.nombre));
-        Assert.assertThat(ejecucion10.getContadorDeInstrucciones(), 
+        Assert.assertThat(ejecucion10.contarInstrucciones(), 
                           Matchers.sameInstance(contador));
 
         /* N : 20 */
         Ejecucion ejecucion20 = this.contexto.iniciarEjecucion(Datos.Ejecucion.SIMPLE_20.modulo.nombre, 
                                                                Datos.Ejecucion.SIMPLE_20.tamaño);
-        contador = ejecucion20.getContadorDeInstrucciones();
+        contador = ejecucion20.contarInstrucciones();
         
         numeros = new String[(int)Datos.Ejecucion.SIMPLE_20.tamaño[0]];
         for (int i = 0; i < numeros.length; i++) {
@@ -95,7 +96,7 @@ public class EficienciaTest extends TestBasico {
         Ejecucion ejecucion = this.contexto.iniciarEjecucion(Datos.Ejecucion.MULTIPLES_PASOS.modulo.nombre, 
                                                              Datos.Ejecucion.MULTIPLES_PASOS.tamaño);
         
-        Contador contador = ejecucion.getContadorDeInstrucciones();
+        Contador contador = ejecucion.contarInstrucciones();
         
         Random random = new Random();
         int[] valores = new int[(int) Datos.Ejecucion.MULTIPLES_PASOS.tamaño[0]];
@@ -118,7 +119,7 @@ public class EficienciaTest extends TestBasico {
         Ejecucion ejecucion = this.contexto.iniciarEjecucion(Datos.Ejecucion.MULTIPLES_PASOS.modulo.nombre, 
                                                              Datos.Ejecucion.MULTIPLES_PASOS.tamaño);
         
-        Contador contador = ejecucion.getContadorDeInstrucciones();
+        Contador contador = ejecucion.contarInstrucciones();
         
         Contador contadorG = contador.getParcial("generaciones");
         Contador contadorI = contador.getParcial("incrementos");
@@ -147,16 +148,16 @@ public class EficienciaTest extends TestBasico {
                           contador.getValor(),
                           Matchers.is(Datos.Ejecucion.MULTIPLES_PASOS.tamaño[0] * 3 + 1));
         Assert.assertThat(contador.getDiscriminante(),
-                          Matchers.nullValue());
+                          Matchers.is((Discriminante)ejecucion.getModulo()));
         Assert.assertThat("contador de asignaciones",
                           contadorG.getValor(),
                           Matchers.is(Datos.Ejecucion.MULTIPLES_PASOS.tamaño[0]));
-        Assert.assertThat(contadorG.getDiscriminante(),
+        Assert.assertThat(contadorG.getDiscriminante().getNombre(),
                           Matchers.is("generaciones"));
         Assert.assertThat("contador de asignaciones",
                           contadorI.getValor(),
                           Matchers.is(Datos.Ejecucion.MULTIPLES_PASOS.tamaño[0]));
-        Assert.assertThat(contadorI.getDiscriminante(),
+        Assert.assertThat(contadorI.getDiscriminante().getNombre(),
                           Matchers.is("incrementos"));
         
     }

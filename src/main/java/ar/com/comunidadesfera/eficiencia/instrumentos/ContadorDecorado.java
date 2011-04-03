@@ -1,6 +1,7 @@
 package ar.com.comunidadesfera.eficiencia.instrumentos;
 
 import ar.com.comunidadesfera.eficiencia.Ejecucion;
+import ar.com.comunidadesfera.eficiencia.registros.Discriminante;
 
 /**
  * Implementación básica del patrón Decorador (Decorator o Wrapper) para
@@ -50,7 +51,7 @@ public abstract class ContadorDecorado<T extends Contador> implements Contador {
         return this.getContador().getParcial(discriminante);
     }
 
-    public String getDiscriminante() {
+    public Discriminante getDiscriminante() {
         
         return this.getContador().getDiscriminante();
     }

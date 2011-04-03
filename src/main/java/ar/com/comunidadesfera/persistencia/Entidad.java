@@ -48,18 +48,14 @@ public abstract class Entidad {
 
         StringBuilder builder = new StringBuilder(this.getClass().getSimpleName())
                                         .append("[");
-        
-        this.describirPropiedad(builder, "id", this.id);
-        
         this.describir(builder);
-        
         builder.setCharAt(builder.length() - 1, ']');
-        
-        return super.toString();
+        return builder.toString();
     }
     
     protected void describir(StringBuilder builder) {
         
+        this.describirPropiedad(builder, "id", this.id);
     }
     
     protected final void describirPropiedad(StringBuilder builder, 

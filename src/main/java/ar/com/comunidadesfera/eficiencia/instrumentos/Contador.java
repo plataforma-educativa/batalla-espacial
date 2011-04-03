@@ -1,8 +1,17 @@
 package ar.com.comunidadesfera.eficiencia.instrumentos;
 
 import ar.com.comunidadesfera.eficiencia.Ejecucion;
+import ar.com.comunidadesfera.eficiencia.InstrumentoDeMedicion;
+import ar.com.comunidadesfera.eficiencia.registros.Discriminante;
 
-public interface Contador {
+/**
+ * Instrumento de Medición que permite contabilizar recursos discretos a partir
+ * de una interfaz incremental.
+ * 
+ * @author Mariano Tugnarelli
+ *
+ */
+public interface Contador  extends InstrumentoDeMedicion {
 
     /**
      * @post incrementa la cuenta llevada por el Contador en 1.
@@ -37,9 +46,10 @@ public interface Contador {
     Contador getParcial(String discriminante);
 
     /**
-     * @return identificador discriminante del Contador si se trata de uno
-     *         parcial, null en caso contrario.
+     * @return Discriminante asociado al Contador. En caso de que sea el 
+     *         Contador principal (no parcial) de la Ejecución, el Discriminante
+     *         es el Módulo de la Ejecución.
      */
-    String getDiscriminante();
+    Discriminante getDiscriminante();
 
 }

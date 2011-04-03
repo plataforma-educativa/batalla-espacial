@@ -7,11 +7,6 @@ import ar.com.comunidadesfera.eficiencia.registros.Problema;
 public interface Ejecucion {
 
     /**
-     * @return Contador de instrucciones asociado a la Ejecución.
-     */
-    Contador getContadorDeInstrucciones();
-
-    /**
      * @return Módulo al que corresponde la Ejecución.
      */
     Modulo getModulo();
@@ -20,5 +15,10 @@ public interface Ejecucion {
      * @return Problema sobre el que se realiza la Ejecución.
      */
     Problema getProblema();
+
+    /**
+     * @return Contador de instrucciones asociado a la Ejecución.
+     */
+    Contador contarInstrucciones();
 
 }
