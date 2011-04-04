@@ -1,0 +1,12 @@
+Criterios de listo (DONE)
+-------------------------
+* + de 75 % de cobertura sobre el código
+* Ningún bug identificado por FindBugs.
+*
+*
+
+Criterio de aceptación
+----------------------
+* Test Unitario de aceptación: test que demuestre cómo usar la funcionalidad.
+
+

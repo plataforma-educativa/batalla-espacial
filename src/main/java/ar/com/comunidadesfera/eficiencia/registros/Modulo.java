@@ -7,16 +7,20 @@ import javax.persistence.PrePersist;
 @Entity
 public class Modulo extends Discriminante {
 
+    protected static final int VERSION_MINIMA = 1;
+    
     private String descripcion;
     
     private int version;
     
     public Modulo() {
+        this(null);
     }
 
     public Modulo(String nombre) {
     
         super(nombre);
+        this.setVersion(VERSION_MINIMA);
     }
     
     @Override
@@ -47,9 +51,9 @@ public class Modulo extends Discriminante {
     @PrePersist
     protected void verificarVersion() {
         
-        if (this.getVersion() < 1) {
+        if (this.getVersion() < VERSION_MINIMA) {
             
-            this.setVersion(1);
+            this.setVersion(VERSION_MINIMA);
         }
     } 
 }

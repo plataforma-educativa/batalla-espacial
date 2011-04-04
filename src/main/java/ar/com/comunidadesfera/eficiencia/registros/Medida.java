@@ -18,8 +18,8 @@ public class Medida extends Entidad {
 
     public Medida(long magnitud, Unidad unidad) {
         super();
-        this.magnitud = magnitud;
-        this.unidad = unidad;
+        this.setMagnitud(magnitud);
+        this.setUnidad(unidad);
     }
 
     @Column(nullable = false)

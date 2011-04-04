@@ -72,11 +72,6 @@ public class ContadorBasico implements Contador {
 
         return this.ejecucion;
     }
-
-    public void setEjecucion(Ejecucion ejecucion) {
-        
-        this.ejecucion = ejecucion;
-    }
     
     @Override
     public void incrementar(long incremento) {

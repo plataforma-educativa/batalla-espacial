@@ -38,10 +38,10 @@ public class Medicion extends Entidad {
     public Medicion(Problema problema, Modulo modulo, Discriminante discriminente, 
                     Medida resultado) {
         
-        this.problema = problema;
-        this.modulo = modulo;
-        this.discriminante = discriminente;
-        this.resultado = resultado;
+        this.setProblema(problema);
+        this.setModulo(modulo);
+        this.setDiscriminante(discriminente);
+        this.setResultado(resultado);
     }
     
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, 

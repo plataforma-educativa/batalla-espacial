@@ -16,7 +16,7 @@ public class Dimension extends Entidad {
     }
 
     public Dimension(long valor) {
-        this.valor = valor;
+        this.setValor(valor);
     }
     
     @Column(nullable = true, length = 500)

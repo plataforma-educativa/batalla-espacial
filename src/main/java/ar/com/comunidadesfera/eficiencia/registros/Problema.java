@@ -24,11 +24,11 @@ public class Problema extends Entidad {
     
     public Problema(long[] tamaño) {
         
-        this.dimensiones = new ArrayList<Dimension>(tamaño.length);
+        this.setDimensiones(new ArrayList<Dimension>(tamaño.length));
         
         for (long valor : tamaño) {
             
-            this.dimensiones.add(new Dimension(valor));
+            this.getDimensiones().add(new Dimension(valor));
         }
     }
 
