@@ -1,8 +1,8 @@
 package ar.com.comunidadesfera.eficiencia.instrumentos;
 
-import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 import ar.com.comunidadesfera.eficiencia.Ejecucion;
@@ -20,7 +20,7 @@ public class ContadorBasico implements Contador {
     
     private Discriminante discriminante;
 
-    private Map<String, Contador> parciales;
+    private Map<String, ContadorBasico> parciales;
     
     /**
      * Inicializa el Contador para todo el Módulo de la Ejecución dada.
@@ -44,7 +44,7 @@ public class ContadorBasico implements Contador {
         
         this.ejecucion = ejecucion;
         this.discriminante = discriminante;
-        this.parciales = new TreeMap<String, Contador>();
+        this.parciales = new TreeMap<String, ContadorBasico>();
         this.cuenta = 0;
     }
     
@@ -82,7 +82,7 @@ public class ContadorBasico implements Contador {
     @Override
     public Contador getParcial(String discriminante) {
 
-        Contador contador = this.parciales.get(discriminante);
+        ContadorBasico contador = this.parciales.get(discriminante);
         
         if (contador == null) {
             
@@ -97,26 +97,6 @@ public class ContadorBasico implements Contador {
         }
         
         return contador;
-    }
-
-    /**
-     * @return mapa con los Contadores parciales asociados.
-     */
-    public Collection<Contador>  getParciales() {
-        
-        return this.parciales.values();
-    }
-    
-    public void setParciales(Set<Contador> parciales) {
-        
-        if (parciales != null) {
-            
-            for (Contador parcial : parciales) {
-                
-                this.parciales.put(parcial.getDiscriminante().getNombre(), 
-                                   parcial);
-            }
-        }
     }
 
     @Override
@@ -137,5 +117,25 @@ public class ContadorBasico implements Contador {
                             this.ejecucion.getModulo(),
                             this.getDiscriminante(),
                             new Medida(this.getValor(), Unidad.INSTRUCCIONES));
+    }
+
+    @Override
+    public List<Medicion> getMediciones() {
+
+        List<Medicion> mediciones = new LinkedList<Medicion>();
+        
+        this.agregarMediciones(mediciones);
+        
+        return mediciones;
+    }
+    
+    protected void agregarMediciones(List<Medicion> mediciones) {
+        
+        mediciones.add(this.getMedicion());
+        
+        for (ContadorBasico contador : this.parciales.values()) {
+            
+            contador.agregarMediciones(mediciones);
+        }
     }
 }

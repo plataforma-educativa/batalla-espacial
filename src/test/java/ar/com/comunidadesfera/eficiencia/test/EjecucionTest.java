@@ -1,5 +1,8 @@
 package ar.com.comunidadesfera.eficiencia.test;
 
+import static ar.com.comunidadesfera.eficiencia.test.Datos.Ejecucion.SIMPLE_10;
+import static ar.com.comunidadesfera.eficiencia.test.Datos.Ejecucion.SIMPLE_20;
+
 import java.util.List;
 
 import org.hamcrest.Matchers;
@@ -8,6 +11,7 @@ import org.junit.Test;
 
 import ar.com.comunidadesfera.eficiencia.Ejecucion;
 import ar.com.comunidadesfera.eficiencia.InstrumentoDeMedicion;
+import ar.com.comunidadesfera.eficiencia.excepciones.EjecucionTerminadaException;
 import ar.com.comunidadesfera.eficiencia.instrumentos.Contador;
 import ar.com.comunidadesfera.eficiencia.registros.Dimension;
 import ar.com.comunidadesfera.eficiencia.registros.Medicion;
@@ -23,21 +27,23 @@ public class EjecucionTest extends TestBasico {
     @Test
     public void getModulo() {
         
-        this.ejecucion = this.contexto.iniciarEjecucion(Datos.Ejecucion.SIMPLE_10.modulo.nombre, 
-                                                        Datos.Ejecucion.SIMPLE_10.tamaño);
+        this.ejecucion = this.contexto.iniciarEjecucion(SIMPLE_10.modulo.nombre, 
+                                                        SIMPLE_10.tamaño);
         
         Modulo modulo = this.ejecucion.getModulo();
         
         Assert.assertThat("nombre del módulo",
                           modulo.getNombre(), 
-                          Matchers.is(Datos.Ejecucion.SIMPLE_10.modulo.nombre));
+                          Matchers.is(SIMPLE_10.modulo.nombre));
+        
+        this.ejecucion.terminar();
     }
     
     @Test
     public void getProblema() {
         
-        this.ejecucion = this.contexto.iniciarEjecucion(Datos.Ejecucion.SIMPLE_10.modulo.nombre,
-                                                        Datos.Ejecucion.SIMPLE_10.tamaño);
+        this.ejecucion = this.contexto.iniciarEjecucion(SIMPLE_10.modulo.nombre,
+                                                        SIMPLE_10.tamaño);
         
         Problema problema = this.ejecucion.getProblema();
         Assert.assertThat(problema, Matchers.notNullValue());
@@ -48,9 +54,9 @@ public class EjecucionTest extends TestBasico {
                           Matchers.notNullValue());
         Assert.assertThat("cantidad de dimensiones", 
                           dimensiones.size(), 
-                          Matchers.is(Datos.Ejecucion.SIMPLE_10.tamaño.length));
+                          Matchers.is(SIMPLE_10.tamaño.length));
         
-        for (int i = 0; i < Datos.Ejecucion.SIMPLE_10.tamaño.length; i++) {
+        for (int i = 0; i < SIMPLE_10.tamaño.length; i++) {
             
             Dimension dimension = dimensiones.get(i);
             
@@ -59,14 +65,14 @@ public class EjecucionTest extends TestBasico {
                               Matchers.nullValue());
             Assert.assertThat("valor de la dimensión " + i,
                               dimension.getValor(), 
-                              Matchers.is(Datos.Ejecucion.SIMPLE_10.tamaño[i]));
+                              Matchers.is(SIMPLE_10.tamaño[i]));
         }
         
         Assert.assertThat("cantidad de dimensiones", 
                           problema.dimensiones(), 
-                          Matchers.is(Datos.Ejecucion.SIMPLE_10.tamaño.length));
+                          Matchers.is(SIMPLE_10.tamaño.length));
         
-        for (int i = 0; i < Datos.Ejecucion.SIMPLE_10.tamaño.length; i++) {
+        for (int i = 0; i < SIMPLE_10.tamaño.length; i++) {
 
             Dimension dimension = problema.getDimension(i);
             
@@ -75,7 +81,7 @@ public class EjecucionTest extends TestBasico {
                               Matchers.nullValue());
             Assert.assertThat("valor de la dimensión " + i,
                               dimension.getValor(), 
-                              Matchers.is(Datos.Ejecucion.SIMPLE_10.tamaño[i]));
+                              Matchers.is(SIMPLE_10.tamaño[i]));
             
             dimension.setNombre("N" + i);
             
@@ -86,25 +92,24 @@ public class EjecucionTest extends TestBasico {
                               Matchers.is("N" + i));
         }
        
+        this.ejecucion.terminar();
     }
     
     @Test
     public void contarInstrucciones() {
         
-        Datos.Ejecucion datos = Datos.Ejecucion.SIMPLE_20;
-        
-        this.ejecucion = this.contexto.iniciarEjecucion(datos.modulo.nombre,
-                                                        datos.tamaño);
+        this.ejecucion = this.contexto.iniciarEjecucion(SIMPLE_20.modulo.nombre,
+                                                        SIMPLE_20.tamaño);
 
         Contador contador = this.ejecucion.contarInstrucciones();
         long cuenta = 0;
         
-        for (int dimension = 0; dimension < datos.tamaño.length; dimension++) {
+        for (int dimension = 0; dimension < SIMPLE_20.tamaño.length; dimension++) {
             
             contador.incrementar(2);
             cuenta+=2;
             
-            for (int i = 0; i < datos.tamaño[dimension]; i++) {
+            for (int i = 0; i < SIMPLE_20.tamaño[dimension]; i++) {
 
                 contador.incrementar();
                 cuenta+=1;
@@ -127,6 +132,19 @@ public class EjecucionTest extends TestBasico {
                           Matchers.is(cuenta));
         Assert.assertThat("unidad del resultado", medida.getUnidad(),
                           Matchers.is(Unidad.INSTRUCCIONES));
+        
+        this.ejecucion.terminar();
     }
     
+    
+    @Test(expected = EjecucionTerminadaException.class)
+    public void throwEjecucionTerminadaException() {
+        
+        this.ejecucion = this.contexto.iniciarEjecucion(SIMPLE_20.modulo.nombre,
+                                                        SIMPLE_20.tamaño);
+        
+        this.ejecucion.terminar();
+        
+        this.ejecucion.contarInstrucciones();
+    }
 }

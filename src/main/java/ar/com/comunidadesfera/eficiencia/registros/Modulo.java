@@ -7,7 +7,7 @@ import javax.persistence.PrePersist;
 @Entity
 public class Modulo extends Discriminante {
 
-    protected static final int VERSION_MINIMA = 1;
+    public static final int VERSION_MINIMA = 1;
     
     private String descripcion;
     
@@ -49,7 +49,7 @@ public class Modulo extends Discriminante {
     }
 
     @PrePersist
-    protected void verificarVersion() {
+    public void verificarVersion() {
         
         if (this.getVersion() < VERSION_MINIMA) {
             

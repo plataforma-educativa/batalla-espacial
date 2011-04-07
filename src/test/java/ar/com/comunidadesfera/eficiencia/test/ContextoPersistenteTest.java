@@ -1,5 +1,7 @@
 package ar.com.comunidadesfera.eficiencia.test;
 
+import static ar.com.comunidadesfera.eficiencia.test.Datos.Ejecucion.SIMPLE_10;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -8,7 +10,7 @@ import ar.com.comunidadesfera.eficiencia.Ejecucion;
 import ar.com.comunidadesfera.eficiencia.contextos.ContextoBasico;
 
 
-public class ContextoPersistenteTest extends PersistenciaTest {
+public class ContextoPersistenteTest extends TestDePersistencia {
 
     protected Contexto contexto;
     
@@ -25,11 +27,12 @@ public class ContextoPersistenteTest extends PersistenciaTest {
     @Test
     public void ejecucionPersistente() {
         
-        Ejecucion ejecucion = this.contexto.iniciarEjecucion(Datos.Ejecucion.SIMPLE_10.modulo.nombre, 
-                                                             Datos.Ejecucion.SIMPLE_10.tamaño);
+        Ejecucion ejecucion = this.contexto.iniciarEjecucion(SIMPLE_10.modulo.nombre, 
+                                                             SIMPLE_10.tamaño);
         
 //        this.em.refresh(ejecucion);
         //  TODO
-
+        
+        ejecucion.terminar();
     }
 }

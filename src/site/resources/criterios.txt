@@ -1,6 +1,6 @@
 Criterios de listo (DONE)
 -------------------------
-* + de 75 % de cobertura sobre el código
+* + de 75 % de cobertura sobre el total de líneas de código y métodos.
 * Ningún bug identificado por FindBugs.
 *
 *

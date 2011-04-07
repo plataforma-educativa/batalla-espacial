@@ -11,11 +11,6 @@ public class Categoria extends Discriminante {
 
     public Categoria() {
     }
-
-    public Categoria(String nombre, Modulo modulo) {
-        
-        this(nombre, modulo, modulo);
-    }
     
     public Categoria(String nombre, Modulo modulo, Discriminante entorno) {
         

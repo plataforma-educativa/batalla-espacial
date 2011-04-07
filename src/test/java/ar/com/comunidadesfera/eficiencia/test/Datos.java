@@ -4,15 +4,24 @@ public class Datos {
 
     public enum Modulo {
       
-        SIMPLE ("EficienciaTest.algoritmoSimple"),
-        MULTIPLES_PASOS ("EficienciaTest.algoritmoMultiplesPasos"),
-        VACIO ("");
+        SIMPLE ("EficienciaTest.algoritmoSimple", 
+                "Algoritmo simple.",
+                2),
+        MULTIPLES_PASOS ("EficienciaTest.algoritmoMultiplesPasos", 
+                         "Algoritmo de múltiples pasos.", 
+                         1),
+        VACIO ("", "", 1);
         
         public final String nombre;
+        public final String descripcion;
+        public final int version;
         
-        private Modulo(String nombre) {
+        private Modulo(String nombre, String descripcion, int version) {
             
             this.nombre = nombre;
+            this.descripcion = descripcion;
+            this.version = version;
+            
         }
     };
     

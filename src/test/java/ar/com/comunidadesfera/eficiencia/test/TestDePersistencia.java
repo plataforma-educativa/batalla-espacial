@@ -17,9 +17,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public abstract class PersistenciaTest {
+public abstract class TestDePersistencia extends TestBasico {
 
-    private final static Logger logger = LoggerFactory.getLogger(PersistenciaTest.class);
+    private final static Logger logger = LoggerFactory.getLogger(TestDePersistencia.class);
+    
     protected static EntityManagerFactory emFactory;
     protected EntityManager em = null;
 
@@ -27,7 +28,7 @@ public abstract class PersistenciaTest {
     public static void initEntityManagerFactory() throws Exception {
         
         Properties testConfig = new Properties();
-        testConfig.load(PersistenciaTest.class.getResourceAsStream("/test-persistence.properties"));
+        testConfig.load(TestDePersistencia.class.getResourceAsStream("/test-persistence.properties"));
         
         emFactory = new Ejb3Configuration()
                         .configure("eficienciaPersistenceUnit",testConfig)
@@ -64,6 +65,6 @@ public abstract class PersistenciaTest {
     }
 
     protected EntityManagerFactory getEntityManagerFactory() {
-        return PersistenciaTest.emFactory;
+        return TestDePersistencia.emFactory;
     }
 }

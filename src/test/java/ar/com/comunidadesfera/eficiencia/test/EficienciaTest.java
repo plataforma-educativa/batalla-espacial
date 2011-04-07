@@ -1,5 +1,9 @@
 package ar.com.comunidadesfera.eficiencia.test;
 
+import static ar.com.comunidadesfera.eficiencia.test.Datos.Ejecucion.MULTIPLES_PASOS;
+import static ar.com.comunidadesfera.eficiencia.test.Datos.Ejecucion.SIMPLE_10;
+import static ar.com.comunidadesfera.eficiencia.test.Datos.Ejecucion.SIMPLE_20;
+
 import java.util.Random;
 
 import org.hamcrest.Matchers;
@@ -37,12 +41,12 @@ public class EficienciaTest extends TestBasico {
     public void medirAlgoritmoSimpleConContador() {
         
         /* N : 10 */
-        Ejecucion ejecucion10 = this.contexto.iniciarEjecucion(Datos.Ejecucion.SIMPLE_10.modulo.nombre, 
-                                                               Datos.Ejecucion.SIMPLE_10.tamaño);
+        Ejecucion ejecucion10 = this.contexto.iniciarEjecucion(SIMPLE_10.modulo.nombre, 
+                                                               SIMPLE_10.tamaño);
         
         Contador contador = ejecucion10.contarInstrucciones();
         
-        String[] numeros = new String[(int)Datos.Ejecucion.SIMPLE_10.tamaño[0]];
+        String[] numeros = new String[(int)SIMPLE_10.tamaño[0]];
         for (int i = 0; i < numeros.length; i++) {
             
             numeros[i] = String.valueOf(i);
@@ -51,22 +55,24 @@ public class EficienciaTest extends TestBasico {
         
         Assert.assertThat("valor del contador ", 
                           contador.getValor(), 
-                          Matchers.is(Datos.Ejecucion.SIMPLE_10.tamaño[0]));
+                          Matchers.is(SIMPLE_10.tamaño[0]));
         Assert.assertThat("ejecución del contador", 
                           contador.getEjecucion(), 
                           Matchers.sameInstance(ejecucion10));
         Assert.assertThat("algoritmo de la ejecucion", 
                           ejecucion10.getModulo().getNombre(),
-                          Matchers.is(Datos.Ejecucion.SIMPLE_10.modulo.nombre));
+                          Matchers.is(SIMPLE_10.modulo.nombre));
         Assert.assertThat(ejecucion10.contarInstrucciones(), 
                           Matchers.sameInstance(contador));
+        
+        ejecucion10.terminar();
 
         /* N : 20 */
-        Ejecucion ejecucion20 = this.contexto.iniciarEjecucion(Datos.Ejecucion.SIMPLE_20.modulo.nombre, 
-                                                               Datos.Ejecucion.SIMPLE_20.tamaño);
+        Ejecucion ejecucion20 = this.contexto.iniciarEjecucion(SIMPLE_20.modulo.nombre, 
+                                                               SIMPLE_20.tamaño);
         contador = ejecucion20.contarInstrucciones();
         
-        numeros = new String[(int)Datos.Ejecucion.SIMPLE_20.tamaño[0]];
+        numeros = new String[(int)SIMPLE_20.tamaño[0]];
         for (int i = 0; i < numeros.length; i++) {
             
             numeros[i] = String.valueOf(i);
@@ -80,26 +86,28 @@ public class EficienciaTest extends TestBasico {
         
         Assert.assertThat("valor del contador ", 
                           contador.getValor(), 
-                          Matchers.is(Datos.Ejecucion.SIMPLE_20.tamaño[0]));
+                          Matchers.is(SIMPLE_20.tamaño[0]));
         Assert.assertThat("ejecución del contador", 
                           contador.getEjecucion(),
                           Matchers.sameInstance(ejecucion20));
         Assert.assertThat("algoritmo de la ejecucion",
                           ejecucion20.getModulo().getNombre(),
-                          Matchers.is(Datos.Ejecucion.SIMPLE_20.modulo.nombre));
+                          Matchers.is(SIMPLE_20.modulo.nombre));
+        
+        ejecucion20.terminar();
 
     }
 
     @Test
     public void medirAlgoritmoMultipleConContador() {
         
-        Ejecucion ejecucion = this.contexto.iniciarEjecucion(Datos.Ejecucion.MULTIPLES_PASOS.modulo.nombre, 
-                                                             Datos.Ejecucion.MULTIPLES_PASOS.tamaño);
+        Ejecucion ejecucion = this.contexto.iniciarEjecucion(MULTIPLES_PASOS.modulo.nombre, 
+                                                             MULTIPLES_PASOS.tamaño);
         
         Contador contador = ejecucion.contarInstrucciones();
         
         Random random = new Random();
-        int[] valores = new int[(int) Datos.Ejecucion.MULTIPLES_PASOS.tamaño[0]];
+        int[] valores = new int[(int) MULTIPLES_PASOS.tamaño[0]];
         for(int i = 0; i < valores.length; i++) {
             
             valores[i] = random.nextInt();
@@ -110,14 +118,16 @@ public class EficienciaTest extends TestBasico {
         
         Assert.assertThat("valor del contador ", 
                 contador.getValor(), 
-                Matchers.is(Datos.Ejecucion.MULTIPLES_PASOS.tamaño[0] * 2));
+                Matchers.is(MULTIPLES_PASOS.tamaño[0] * 2));
+        
+        ejecucion.terminar();
     }
     
     @Test
     public void medirAlgoritmoMultipleConContadoresParciales() {
         
-        Ejecucion ejecucion = this.contexto.iniciarEjecucion(Datos.Ejecucion.MULTIPLES_PASOS.modulo.nombre, 
-                                                             Datos.Ejecucion.MULTIPLES_PASOS.tamaño);
+        Ejecucion ejecucion = this.contexto.iniciarEjecucion(MULTIPLES_PASOS.modulo.nombre, 
+                                                             MULTIPLES_PASOS.tamaño);
         
         Contador contador = ejecucion.contarInstrucciones();
         
@@ -128,7 +138,7 @@ public class EficienciaTest extends TestBasico {
         
         /* inicialización */
         contador.incrementar();
-        int[] valores = new int[(int) Datos.Ejecucion.MULTIPLES_PASOS.tamaño[0]];
+        int[] valores = new int[(int) MULTIPLES_PASOS.tamaño[0]];
         for(int i = 0; i < valores.length; i++) {
             
             /* cuenta el incremento */
@@ -146,19 +156,20 @@ public class EficienciaTest extends TestBasico {
         
         Assert.assertThat("contador total",
                           contador.getValor(),
-                          Matchers.is(Datos.Ejecucion.MULTIPLES_PASOS.tamaño[0] * 3 + 1));
+                          Matchers.is(MULTIPLES_PASOS.tamaño[0] * 3 + 1));
         Assert.assertThat(contador.getDiscriminante(),
                           Matchers.is((Discriminante)ejecucion.getModulo()));
         Assert.assertThat("contador de asignaciones",
                           contadorG.getValor(),
-                          Matchers.is(Datos.Ejecucion.MULTIPLES_PASOS.tamaño[0]));
+                          Matchers.is(MULTIPLES_PASOS.tamaño[0]));
         Assert.assertThat(contadorG.getDiscriminante().getNombre(),
                           Matchers.is("generaciones"));
         Assert.assertThat("contador de asignaciones",
                           contadorI.getValor(),
-                          Matchers.is(Datos.Ejecucion.MULTIPLES_PASOS.tamaño[0]));
+                          Matchers.is(MULTIPLES_PASOS.tamaño[0]));
         Assert.assertThat(contadorI.getDiscriminante().getNombre(),
                           Matchers.is("incrementos"));
         
+        ejecucion.terminar();
     }
 }

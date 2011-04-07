@@ -1,5 +1,7 @@
 package ar.com.comunidadesfera.eficiencia.test;
 
+import static ar.com.comunidadesfera.eficiencia.test.Datos.Ejecucion.MULTIPLES_PASOS;
+
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,8 +18,8 @@ public class MedicionTest extends TestBasico {
     @Test
     public void medicion() {
         
-        Ejecucion ejecucion = this.contexto.iniciarEjecucion(Datos.Ejecucion.MULTIPLES_PASOS.modulo.nombre, 
-                                                             Datos.Ejecucion.MULTIPLES_PASOS.tamaño);
+        Ejecucion ejecucion = this.contexto.iniciarEjecucion(MULTIPLES_PASOS.modulo.nombre, 
+                                                             MULTIPLES_PASOS.tamaño);
         final String discriminante = "pares";
         
         Contador contadorTotal = ejecucion.contarInstrucciones();
@@ -26,7 +28,7 @@ public class MedicionTest extends TestBasico {
         long cuentaTotal = 0;
         long cuentaParcial = 0;
         
-        for (int i = 0; i < Datos.Ejecucion.MULTIPLES_PASOS.tamaño[0]; i++) {
+        for (int i = 0; i < MULTIPLES_PASOS.tamaño[0]; i++) {
             
             contadorTotal.incrementar();
             cuentaTotal+=1;
@@ -68,6 +70,8 @@ public class MedicionTest extends TestBasico {
         
         Assert.assertThat("discriminanteParcial", discriminanteParcial,
                           this.discriminanteCon(discriminante, discriminanteTotal));        
+        
+        ejecucion.terminar();
         
     }
 }

@@ -9,7 +9,9 @@ import org.junit.runners.Suite.SuiteClasses;
     EficienciaTest.class,
     EjecucionTest.class,
     MedicionTest.class,
-    ContextoPersistenteTest.class
+    ContextoPersistenteTest.class,
+    EjecucionObservadaTest.class,
+    ModuloTest.class
 })
 public abstract class EficienciaTestSuit {
 
