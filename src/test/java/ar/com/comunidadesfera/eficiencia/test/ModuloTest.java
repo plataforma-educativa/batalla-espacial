@@ -48,4 +48,26 @@ public class ModuloTest {
           
         }
     }
+
+    @Test
+    public void getIndentificacion() {
+        
+        Modulo modulo = new Modulo();
+        modulo.setNombre(MULTIPLES_PASOS.nombre);
+        modulo.setDescripcion(MULTIPLES_PASOS.descripcion);
+        modulo.setEntorno(null);
+        modulo.setVersion(MULTIPLES_PASOS.version);
+
+        /* por el momento la identificación es igual al nombre,
+         * se verificará esta decisión de diseño a futuro */
+        Assert.assertThat("identificacion", modulo.getIdentificacion(),
+                          Matchers.is(MULTIPLES_PASOS.nombre));
+        
+        final String identificacion = "test:" + MULTIPLES_PASOS.nombre;
+        
+        modulo.setIdentificacion(identificacion);
+        
+        Assert.assertThat("identificacion", modulo.getIdentificacion(),
+                          Matchers.is(identificacion));
+    }
 }

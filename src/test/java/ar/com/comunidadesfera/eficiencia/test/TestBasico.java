@@ -12,6 +12,7 @@ import ar.com.comunidadesfera.eficiencia.registros.Modulo;
 import ar.com.comunidadesfera.eficiencia.registros.Problema;
 import ar.com.comunidadesfera.eficiencia.registros.Unidad;
 import ar.com.comunidadesfera.eficiencia.test.matchers.DiscriminanteCon;
+import ar.com.comunidadesfera.eficiencia.test.matchers.EstaEntre;
 import ar.com.comunidadesfera.eficiencia.test.matchers.MedicionDe;
 import ar.com.comunidadesfera.eficiencia.test.matchers.MedidaCon;
 
@@ -42,5 +43,10 @@ public abstract class TestBasico {
                                                    Discriminante entorno) {
      
         return new DiscriminanteCon(nombre, entorno);
+    }
+    
+    public <T extends Comparable<T>> Matcher<T> estaEntre(T inferior, T superior) {
+        
+        return new EstaEntre<T>(inferior, superior);
     }
 }

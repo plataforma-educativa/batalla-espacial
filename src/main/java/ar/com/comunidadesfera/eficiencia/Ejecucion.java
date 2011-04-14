@@ -28,6 +28,12 @@ public interface Ejecucion {
     void agregarObservador(Observador observador);
 
     /**
+     * @post cancela la registración del Observador de la Ejecución.
+     * @param observador
+     */
+    void removerObservador(Observador observador);
+
+    /**
      * @post da por terminada la Ejecución. Invocaciones posteriores a métodos
      *       que devuelvan Contadores generarán exceptiones. 
      */
@@ -58,4 +64,5 @@ public interface Ejecucion {
         void ejecucionTerminada(Ejecucion ejecucion);
         
     }
+
 }

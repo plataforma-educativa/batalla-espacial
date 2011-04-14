@@ -1,5 +1,6 @@
 package ar.com.comunidadesfera.eficiencia.ejecuciones;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class EjecucionBasica implements Ejecucion {
         
         this.modulo = new Modulo(nombreModulo);
         this.problema = new Problema(tamaño);
+        this.problema.setInicio(new Date());
         this.observadores = new LinkedList<Ejecucion.Observador>();
     }
 
@@ -67,7 +69,8 @@ public class EjecucionBasica implements Ejecucion {
         }
         
         this.terminada = true;
-
+        this.getProblema().setFin(new Date());
+        
         this.notificarEjecucionTerminada();
     }
 
@@ -77,6 +80,12 @@ public class EjecucionBasica implements Ejecucion {
         this.observadores.add(observador);
     }
 
+    @Override
+    public void removerObservador(Observador observador) {
+        
+        this.observadores.remove(observador);
+    }
+    
     private void notificarEjecucionTerminada() {
         
         for (Observador observador : this.observadores) {
@@ -92,4 +101,5 @@ public class EjecucionBasica implements Ejecucion {
             observador.instrumentoDeMedicionCreado(this, instrumento);
         }
     }
+
 }

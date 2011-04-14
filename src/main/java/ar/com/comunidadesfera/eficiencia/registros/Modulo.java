@@ -3,8 +3,11 @@ package ar.com.comunidadesfera.eficiencia.registros;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrePersist;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"identificacion", "version"})) 
 public class Modulo extends Discriminante {
 
     public static final int VERSION_MINIMA = 1;
@@ -12,6 +15,8 @@ public class Modulo extends Discriminante {
     private String descripcion;
     
     private int version;
+
+    private String identificacion;
     
     public Modulo() {
         this(null);
@@ -48,6 +53,22 @@ public class Modulo extends Discriminante {
         return version;
     }
 
+    @Column(nullable = false, updatable = false)
+    public String getIdentificacion() {
+
+        if (this.identificacion == null) {
+            
+            this.identificacion = this.getNombre();
+        }
+        
+        return this.identificacion;
+    } 
+    
+    public void setIdentificacion(String identificacion) {
+        
+        this.identificacion = identificacion;
+    }
+    
     @PrePersist
     public void verificarVersion() {
         
@@ -55,5 +76,6 @@ public class Modulo extends Discriminante {
             
             this.setVersion(VERSION_MINIMA);
         }
-    } 
+    }
+
 }

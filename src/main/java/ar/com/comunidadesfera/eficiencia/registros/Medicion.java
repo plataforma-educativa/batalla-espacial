@@ -44,8 +44,7 @@ public class Medicion extends Entidad {
         this.setResultado(resultado);
     }
     
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, 
-              optional = false, orphanRemoval = true)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = {})
     public Problema getProblema() {
         return problema;
     }
@@ -54,8 +53,7 @@ public class Medicion extends Entidad {
         this.problema = problema;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {}, 
-               optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = {})
     public Modulo getModulo() {
         return modulo;
     }
@@ -64,8 +62,7 @@ public class Medicion extends Entidad {
         this.modulo = modulo;
     }
     
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL,
-              optional = false)
+    @OneToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public Medida getResultado() {
         
         return this.resultado;
@@ -94,6 +91,7 @@ public class Medicion extends Entidad {
         this.describirPropiedad(builder, "problema", this.getProblema());
         this.describirPropiedad(builder, "modulo", this.getModulo());
         this.describirPropiedad(builder, "discriminante", this.getDiscriminante());
+        this.describirPropiedad(builder, "resultado", this.getResultado());
     }
 
 

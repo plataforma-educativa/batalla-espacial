@@ -3,6 +3,7 @@ package ar.com.comunidadesfera.eficiencia.test;
 import static ar.com.comunidadesfera.eficiencia.test.Datos.Ejecucion.SIMPLE_10;
 import static ar.com.comunidadesfera.eficiencia.test.Datos.Ejecucion.SIMPLE_20;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hamcrest.Matchers;
@@ -42,11 +43,20 @@ public class EjecucionTest extends TestBasico {
     @Test
     public void getProblema() {
         
+        Date antesDeIniciar = new Date();
         this.ejecucion = this.contexto.iniciarEjecucion(SIMPLE_10.modulo.nombre,
                                                         SIMPLE_10.tamaño);
-        
+        Date despuesDeIniciar = new Date();
+
         Problema problema = this.ejecucion.getProblema();
         Assert.assertThat(problema, Matchers.notNullValue());
+        
+        Assert.assertThat("fin", problema.getInicio(),
+                          Matchers.notNullValue());
+        Assert.assertThat("inicio", problema.getInicio(), 
+                          this.estaEntre(antesDeIniciar, despuesDeIniciar));
+        Assert.assertThat("fin", problema.getFin(),
+                         Matchers.nullValue());
         
         List<Dimension> dimensiones = problema.getDimensiones();
         Assert.assertThat("dimensiones",
@@ -92,7 +102,13 @@ public class EjecucionTest extends TestBasico {
                               Matchers.is("N" + i));
         }
        
+        Date antesDeTerminar = new Date();
         this.ejecucion.terminar();
+        Date despuesDeTerminar = new Date();
+        
+        Assert.assertThat("fin", 
+                          problema.getFin(),
+                          this.estaEntre(antesDeTerminar, despuesDeTerminar));  
     }
     
     @Test

@@ -5,6 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import ar.com.comunidadesfera.eficiencia.Contexto;
 import ar.com.comunidadesfera.eficiencia.Ejecucion;
 import ar.com.comunidadesfera.eficiencia.ejecuciones.EjecucionBasica;
+import ar.com.comunidadesfera.eficiencia.persistencia.AdministradorDeMediciones;
 
 /**
  * Implementación básica de un Contexto de Eficiencia.
@@ -33,12 +34,21 @@ public class ContextoBasico implements Contexto {
     @Override
     public Ejecucion iniciarEjecucion(String nombreAlgoritmo, long[] tamaño) {
         
-        return new EjecucionBasica(nombreAlgoritmo, tamaño);
+        Ejecucion ejecucion = new EjecucionBasica(nombreAlgoritmo, tamaño);
+        
+        if (this.isPersistente()) {
+            
+            new PersistirMedicionesAlTerminarEjecucion(ejecucion);
+        }
+        
+        return ejecucion;
     }
 
     public void setEntityManagerFactory(EntityManagerFactory emFactory) {
 
         this.emFactory = emFactory;
+        
+        AdministradorDeMediciones.instancia().setEntityManagerFactory(this.emFactory);
     }
 
 }

@@ -31,7 +31,41 @@
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
+                    <configuration>
+                        <compilerArgument>-proc:none</compilerArgument>
+                    </configuration>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>run-annotation-processors-only</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <compilerArgument>-proc:only</compilerArgument>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Agrega los fuentes generados para el metamodelo de JPA 2  -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <phase>process-sources</phase>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources/annotations</source>
+                            </sources>
+                        </configuration>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -70,6 +104,11 @@
             <artifactId>hibernate-validator</artifactId>
             <version>4.1.0.Final</version>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jpamodelgen</artifactId>
+            <version>1.0.0.Final</version>
         </dependency>
         <dependency>
             <groupId>org.apache.derby</groupId>

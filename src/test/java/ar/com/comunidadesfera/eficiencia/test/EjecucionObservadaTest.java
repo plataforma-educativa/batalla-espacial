@@ -92,4 +92,19 @@ public class EjecucionObservadaTest extends TestBasico {
         this.ejecucion.getProblema();
         this.ejecucion.terminar();
     }
+    
+    @Test
+    public void removerObservador() {
+        
+        /* expectativas */
+        this.simulador.checking(new Expectations(){{
+            
+            oneOf(observador).instrumentoDeMedicionCreado(with(ejecucion), 
+                                                          with(any(InstrumentoDeMedicion.class)));
+        }});
+        
+        this.ejecucion.contarInstrucciones().incrementar();
+        this.ejecucion.removerObservador(this.observador);
+        this.ejecucion.terminar();
+    }
 }

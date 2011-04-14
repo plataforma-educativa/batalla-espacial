@@ -29,7 +29,7 @@ public class Datos {
         
         SIMPLE_10 (Modulo.SIMPLE, 10),
         SIMPLE_20 (Modulo.SIMPLE, 20),
-        MULTIPLES_PASOS (Modulo.MULTIPLES_PASOS, 5),
+        MULTIPLES_PASOS (Modulo.MULTIPLES_PASOS, 5, 4),
         VACIA(null, 0);
                    
         public final Modulo modulo;
