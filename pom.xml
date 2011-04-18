@@ -48,7 +48,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- Agrega los fuentes generados para el metamodelo de JPA 2  -->
+            <!-- Agrega los fuentes generados para el metamodelo de JPA 2 -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
@@ -63,6 +63,25 @@
                         </configuration>
                         <goals>
                             <goal>add-source</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.8.1</version>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>verify</id>
+                        <goals>
+                            <goal>verify</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -93,11 +112,25 @@
 
     <dependencies>
 
+        <!-- CDI - Context and Dependency Injection -->
+        <dependency>
+            <groupId>org.jboss.weld.se</groupId>
+            <artifactId>weld-se-core</artifactId>
+            <version>1.1.1.Final</version>
+            <scope>compile</scope>
+        </dependency>
+
         <!-- Persistencia -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <version>3.6.0.Final</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -121,11 +154,11 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.6.1</version>
+            <version>1.5.6</version>
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Test -->
+        <!-- Pruebas -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -142,6 +175,20 @@
             <groupId>org.jmock</groupId>
             <artifactId>jmock-junit4</artifactId>
             <version>2.5.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Pruebas de Integración -->
+        <dependency>
+            <groupId>org.jboss.arquillian</groupId>
+            <artifactId>arquillian-junit</artifactId>
+            <version>1.0.0.Alpha5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.container</groupId>
+            <artifactId>arquillian-weld-se-embedded-1.1</artifactId>
+            <version>1.0.0.Alpha5</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

@@ -1,4 +1,4 @@
-package ar.com.comunidadesfera.eficiencia.test;
+package ar.com.comunidadesfera.persistencia.test;
 
 import java.util.Properties;
 
@@ -13,14 +13,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import ar.com.comunidadesfera.eficiencia.test.TestBasico;
 
 
 public abstract class TestDePersistencia extends TestBasico {
 
-    private final static Logger logger = LoggerFactory.getLogger(TestDePersistencia.class);
-    
     protected static EntityManagerFactory emFactory;
     protected EntityManager em = null;
 

@@ -25,6 +25,7 @@ import ar.com.comunidadesfera.eficiencia.registros.Medicion_;
 import ar.com.comunidadesfera.eficiencia.registros.Modulo_;
 import ar.com.comunidadesfera.eficiencia.registros.Problema_;
 import ar.com.comunidadesfera.eficiencia.registros.Unidad;
+import ar.com.comunidadesfera.persistencia.test.TestDePersistencia;
 
 public class ContextoPersistenteTest extends TestDePersistencia {
 
