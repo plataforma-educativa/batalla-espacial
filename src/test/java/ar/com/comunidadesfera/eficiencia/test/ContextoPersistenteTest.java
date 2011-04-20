@@ -1,7 +1,7 @@
 package ar.com.comunidadesfera.eficiencia.test;
 
-import static ar.com.comunidadesfera.eficiencia.test.Datos.Ejecucion.SIMPLE_10;
 import static ar.com.comunidadesfera.eficiencia.test.Datos.Ejecucion.MULTIPLES_PASOS;
+import static ar.com.comunidadesfera.eficiencia.test.Datos.Ejecucion.SIMPLE_10;
 
 import java.util.Date;
 import java.util.List;
@@ -16,7 +16,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import ar.com.comunidadesfera.eficiencia.Contexto;
 import ar.com.comunidadesfera.eficiencia.Ejecucion;
 import ar.com.comunidadesfera.eficiencia.contextos.ContextoBasico;
 import ar.com.comunidadesfera.eficiencia.instrumentos.Contador;
@@ -28,8 +27,6 @@ import ar.com.comunidadesfera.eficiencia.registros.Unidad;
 import ar.com.comunidadesfera.persistencia.test.TestDePersistencia;
 
 public class ContextoPersistenteTest extends TestDePersistencia {
-
-    protected Contexto contexto;
     
     private Date inicio;
     

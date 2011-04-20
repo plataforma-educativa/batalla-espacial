@@ -25,7 +25,7 @@ public abstract class TestBasico {
     }
 
     @Before
-    public void init() {
+    public void inicializarContexto() {
         
         this.contexto = Eficiencia.getContexto();
     }

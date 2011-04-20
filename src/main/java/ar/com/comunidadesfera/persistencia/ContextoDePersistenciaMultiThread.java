@@ -34,23 +34,31 @@ public class ContextoDePersistenciaMultiThread implements ContextoDePersistencia
     private ThreadLocal<Deque<EntityManager>> emStackThreadLocal = new ThreadLocal<Deque<EntityManager>>();
     
     @Override
-    public EntityManager getEntityManager() {
-        
-        logger.debug("Obteniendo el Entity Manager del Contexto");
+    public EntityManager buscarEntityManager() {
+
+        logger.debug("Buscando el Entity Manager del Contexto");
         
         final Deque<EntityManager> entityManagerStack = this.emStackThreadLocal.get();
         
-        if ((entityManagerStack == null) || (entityManagerStack.isEmpty())) {
+        return (entityManagerStack != null) && (! entityManagerStack.isEmpty()) ?
+                entityManagerStack.peek() : null;            
+    }
+    
+    @Override
+    public EntityManager getEntityManager() {
+        
+        EntityManager entityManager = this.buscarEntityManager();
+
+        if (entityManager == null) {
             
             logger.error("No se encontró un Entity Manager en el Contexto.");
-
+            
             throw new NoExisteEntityManagerException("No se encontró un Entity Manager en el Contexto de Persistencia." +
                                                      "Asegúrese que el método esté anotado como @Transaccional y que " +
                                                      "estén activados los interceptores.");
-
-        } 
+        }
         
-        return entityManagerStack.peek();    
+        return entityManager;
     }
 
     @Override

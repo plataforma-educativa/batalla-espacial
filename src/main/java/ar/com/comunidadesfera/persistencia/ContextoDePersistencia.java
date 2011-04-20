@@ -18,13 +18,20 @@ public interface ContextoDePersistencia {
 
     /**
      * @pre  ha sido registrado un Entity Manager en el Contexto.
-     * @post busca el Entity Manager en el Contexto y lo devuelve.
+     * @post obtiene el Entity Manager en el Contexto y lo devuelve.
      * @throws NoExisteEntityManagerException si no existe un Entity Manager 
      *         registrado en el Contexto.
      * @return Entity Manager asociado al Contexto.
      */
     EntityManager getEntityManager();
 
+    /**
+     * @post busca el EntityManager en el Contexto y lo devuelve, si no 
+     *       existe devuelve null.
+     * @return Entity Manager asociado al Contexto o null.
+     */
+    EntityManager buscarEntityManager();
+    
     /**
      * @post crea y registra un nuevo EntityManager en el Contexto.
      * @return Entity Manager asociado al Contexto.

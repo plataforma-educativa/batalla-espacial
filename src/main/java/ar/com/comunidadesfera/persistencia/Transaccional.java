@@ -22,9 +22,9 @@ import javax.interceptor.InterceptorBinding;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Transaccional {
 
-//    /**
-//     * Define la estrategia para manipular el contexto transaccional.
-//     */
-//    EstrategiaTransaccional estrategia() default EstrategiaTransaccional.REQUERIDA;
+    /**
+     * Define la estrategia para manipular el contexto transaccional.
+     */
+    EstrategiaTransaccional estrategia() default EstrategiaTransaccional.REQUERIDA;
     
 }
