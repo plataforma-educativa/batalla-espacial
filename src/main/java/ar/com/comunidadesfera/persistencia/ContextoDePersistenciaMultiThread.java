@@ -107,6 +107,12 @@ public class ContextoDePersistenciaMultiThread implements ContextoDePersistencia
         return this.emf;
     }
     
+    /**
+     * @post inicializa la instancia, asociándola a la unidad de persistencia
+     *       dada.
+     * @param persistenceUnitName
+     * @param persistenceUnitProperties
+     */
     @Inject
     public void inicializar(@Configuracion(Tipo.PERSISTENCE_UNIT_NAME) String persistenceUnitName,
                             @Configuracion(Tipo.PERSISTENCE_UNIT_PROPERTIES) Map<Object, Object> persistenceUnitProperties) {
@@ -114,6 +120,11 @@ public class ContextoDePersistenciaMultiThread implements ContextoDePersistencia
         logger.info("Inicializando Contexto de Persistencia con la Persistence Unit: " + persistenceUnitName);
 
         this.emf = Persistence.createEntityManagerFactory(persistenceUnitName, persistenceUnitProperties);
+    }
+
+    public void setEntityManagerFactory(EntityManagerFactory emf) {
+
+        this.emf = emf;
     }
 
 }

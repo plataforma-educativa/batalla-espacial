@@ -31,9 +31,7 @@
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
-                    <configuration>
-                        <compilerArgument>-proc:none</compilerArgument>
-                    </configuration>
+                    <compilerArgument>-proc:none</compilerArgument>
                 </configuration>
                 <executions>
                     <execution>
@@ -93,6 +91,12 @@
                 <configuration>
                     <encoding>ISO-8859-1</encoding>
                     <format>html</format>
+                    <instrumentation>
+                        <excludes>
+                            <!-- excluye el código generado por el metamodelo de JPA -->
+                            <exclude>**/*_.class</exclude>
+                        </excludes>
+                    </instrumentation>
                 </configuration>
             </plugin>
         </plugins>

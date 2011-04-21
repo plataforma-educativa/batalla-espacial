@@ -1,6 +1,11 @@
 <beans xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/beans_1_0.xsd">
+
+    <!-- Activa los interceptores, definiendo además su orden -->
     <interceptors>
-        <class>ar.com.comunidadesfera.persistencia.InterceptorTransaccional</class>
+        <class>ar.com.comunidadesfera.persistencia.InterceptorTransaccionRequerida</class>
+        <class>ar.com.comunidadesfera.persistencia.InterceptorNuevaTransaccionRequerida</class>
+        <class>ar.com.comunidadesfera.persistencia.InterceptorTransaccionSoportada</class>
+        <class>ar.com.comunidadesfera.persistencia.InterceptorTransaccionNoSoportada</class>
     </interceptors>
 </beans>

@@ -199,7 +199,7 @@ public abstract class InterceptorTransaccionalTest<T extends InterceptorTransacc
                                       this.expectativasSinSesionArrojandoException());
             
             /* se espera una excepción */
-            Assert.fail();
+            Assert.fail("Se debería haber lanzado una excepción en la ejecución");
             
             // No se configura en la anotación @Test(exception = Exception.class) 
             // porque ante un fail se distociona el error
@@ -245,7 +245,7 @@ public abstract class InterceptorTransaccionalTest<T extends InterceptorTransacc
                                       this.expectativasConSesionSinTransaccionActivaArrojandoException());
             
             /* se espera una excepción */
-            Assert.fail();
+            Assert.fail("Se debería haber lanzado una excepción en la ejecución");
             
             // No se configura en la anotación @Test(exception = Exception.class) 
             // porque ante un fail se distociona el error
@@ -292,7 +292,7 @@ public abstract class InterceptorTransaccionalTest<T extends InterceptorTransacc
                                       this.expectativasConTransaccionActivaArrojandoException());
             
             /* se espera una excepción */
-            Assert.fail();
+            Assert.fail("Se debería haber lanzado una excepción en la ejecución");
             
             // No se configura en la anotación @Test(exception = Exception.class) 
             // porque ante un fail se distociona el error

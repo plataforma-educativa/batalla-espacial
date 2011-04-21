@@ -7,7 +7,9 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith( Suite.class )
 @SuiteClasses( {
     InterceptorTransaccionRequeridaTest.class,
-    InterceptorNuevaTransaccionRequeridaTest.class
+    InterceptorNuevaTransaccionRequeridaTest.class,
+    InterceptorTransaccionSoportadaTest.class,
+    InterceptorTransaccionNoSoportadaTest.class
 })
 public class TransaccionesTestSuit {
 
