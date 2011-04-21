@@ -4,15 +4,15 @@ import javax.persistence.EntityManager;
 
 import org.jmock.Expectations;
 
-import ar.com.comunidadesfera.persistencia.InterceptorNuevaTransaccionRequerida;
+import ar.com.comunidadesfera.persistencia.InterceptorTransaccionRequerida;
 
-public class InterceptorNuevaTransaccionRequeridaTest 
-    extends InterceptorTransaccionalTest<InterceptorNuevaTransaccionRequerida> {
+public class InterceptorTransaccionRequeridaTest 
+    extends InterceptorTransaccionalTest<InterceptorTransaccionRequerida> {
 
     @Override
-    protected InterceptorNuevaTransaccionRequerida crearInterceptor() {
+    protected InterceptorTransaccionRequerida crearInterceptor() {
 
-        return new InterceptorNuevaTransaccionRequerida();
+        return new InterceptorTransaccionRequerida();
     }
 
     @Override
@@ -77,32 +77,63 @@ public class InterceptorNuevaTransaccionRequeridaTest
     protected Expectations expectativasConSesionSinTransaccionActiva()
             throws Exception {
 
-        /* son las mismas expectativas */
-        return this.expectativasSinSesion();
+        return new Expectations(){{
+
+            oneOf(transaccion).begin();
+            inSequence(secuencia);
+            then(estadoTransaccion.is(ACTIVA));
+            
+            oneOf(contextoDeInvocacion).proceed();
+            inSequence(secuencia);
+            
+            oneOf(transaccion).commit();
+            inSequence(secuencia);
+        }};
     }
 
     @Override
     protected Expectations expectativasConSesionSinTransaccionActivaArrojandoException()
             throws Exception {
 
-        /* son las mismas expectativas */
-        return this.expectativasSinSesionArrojandoException();
+        return new Expectations(){{
+
+            oneOf(transaccion).begin();
+            inSequence(secuencia);
+            then(estadoTransaccion.is(ACTIVA));
+            
+            oneOf(contextoDeInvocacion).proceed();
+            will(throwException(with(any(Exception.class))));
+            inSequence(secuencia);
+            
+            oneOf(transaccion).rollback();
+            inSequence(secuencia);
+        }};
     }
 
     @Override
     protected Expectations expectativasConTransaccionActiva() 
             throws Exception {
 
-        /* son las mismas expectativas */
-        return this.expectativasSinSesion();
+        return new Expectations(){{
+
+            oneOf(contextoDeInvocacion).proceed();
+            inSequence(secuencia);
+        }};
     }
 
     @Override
     protected Expectations expectativasConTransaccionActivaArrojandoException()
             throws Exception {
 
-        /* son las mismas expectativas */
-        return this.expectativasSinSesionArrojandoException();
+        return new Expectations(){{
+
+            oneOf(contextoDeInvocacion).proceed();
+            will(throwException(with(any(Exception.class))));
+            inSequence(secuencia);
+            
+            oneOf(transaccion).setRollbackOnly();
+            inSequence(secuencia);
+        }};
     }
 
 }

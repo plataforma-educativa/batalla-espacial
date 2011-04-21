@@ -7,6 +7,7 @@ import javax.persistence.EntityTransaction;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.Sequence;
+import org.jmock.States;
 import org.jmock.integration.junit4.JMock;
 import org.jmock.integration.junit4.JUnit4Mockery;
 import org.junit.Assert;
@@ -19,6 +20,10 @@ import ar.com.comunidadesfera.persistencia.InterceptorTransaccional;
 
 @RunWith(JMock.class)
 public abstract class InterceptorTransaccionalTest<T extends InterceptorTransaccional> {
+    
+    protected static final String ACTIVA = "transaccion activa";
+    protected static final String INACTIVA = "transaccion inactiva";
+    
     
     private Mockery simulador = new JUnit4Mockery();
     
@@ -41,18 +46,20 @@ public abstract class InterceptorTransaccionalTest<T extends InterceptorTransacc
     protected EntityManager sesion;
     
     /**
-     * Transacción (EntityTransaaction) activada en el contexto, previo a la
-     * invocación del método interceptado.
-     */
-    protected EntityTransaction transaccionPrevia;
-    
-    /**
      * Transacción (EntityTransaction) activada en la invocación del método
      * interceptado. 
      */
     protected EntityTransaction transaccion;
     
+    /**
+     * Secuencia principal de invocaciones.
+     */
     protected Sequence secuencia;
+
+    /**
+     * Estados por los que pasa la transacción (ACTIVA / INACTIVA)
+     */
+    protected States estadoTransaccion;
     
     @Before
     public void inicializarInterceptor() throws Exception {
@@ -64,22 +71,19 @@ public abstract class InterceptorTransaccionalTest<T extends InterceptorTransacc
         this.sesion = this.simulador.mock(EntityManager.class, "sesion");
         this.transaccion = this.simulador.mock(EntityTransaction.class, "transaccion");
         this.sesionPrevia = this.simulador.mock(EntityManager.class, "sesionPrevia");
-        this.transaccionPrevia = this.simulador.mock(EntityTransaction.class, "transaccionPrevia");
         
         this.secuencia = this.simulador.sequence("invocacion");
+        this.estadoTransaccion = this.simulador.states("transaccion").startsAs(INACTIVA);
         
         this.interceptor.setContextoDePersistencia(this.contextoDePersistencia);
 
-        this.simulador.checking(this.expectativasGenerales());
+        this.simulador.checking(this.expectativasComunes());
     }
     
     /**
-     * @post crea las expectativas generales; permite la ejecución de múltiples
-     *       métodos y define su retorno. 
-     *  
-     * @return Expectivas generales
+     * @return Expectativas comunes a todos los tests.
      */
-    protected Expectations expectativasGenerales() {
+    private Expectations expectativasComunes() {
         
         return new Expectations() {{
 
@@ -87,14 +91,64 @@ public abstract class InterceptorTransaccionalTest<T extends InterceptorTransacc
             will(returnValue(transaccion));
             
             allowing(sesionPrevia).getTransaction();
-            will(returnValue(transaccionPrevia));
+            will(returnValue(transaccion));
             
             allowing(transaccion).isActive();
+            when(estadoTransaccion.is(ACTIVA));
             will(returnValue(true));
             
-            allowing(transaccionPrevia).isActive();
-            will(returnValue(true));
+            allowing(transaccion).isActive();
+            when(estadoTransaccion.is(INACTIVA));
+            will(returnValue(false));
             
+        }};
+    }
+    
+    /**
+     * @return Expectativas comunes a todos los tests sin sesión.
+     */
+    private Expectations expectativasComunesSinSesion() { 
+        
+        return new Expectations() {{
+           
+            allowing(contextoDePersistencia).buscarEntityManager();
+            will(returnValue(null));
+            
+        }};
+    }
+    
+    /**
+     * @return Expectativas comunes a todos los tests con sesión. 
+     */
+    private Expectations expectativasComunesConSesion() {
+        
+        return new Expectations() {{
+    
+            allowing(contextoDePersistencia).buscarEntityManager();
+            will(returnValue(sesionPrevia));
+            
+        }};
+    }
+    
+    /**
+     * @return Expectativs comunes a todos los test con transacción activa.
+     */
+    private Expectations expectativasComunesConTransaccionActiva() {
+        
+        return new Expectations() {{
+
+            estadoTransaccion.become(ACTIVA);
+        }};
+    }
+    
+    /**
+     * @return Expectativs comunes a todos los test sin transacción activa.
+     */
+    private Expectations expectativasComunesSinTransaccionActiva() {
+        
+        return new Expectations() {{
+
+            estadoTransaccion.become(INACTIVA);
         }};
     }
     
@@ -126,7 +180,8 @@ public abstract class InterceptorTransaccionalTest<T extends InterceptorTransacc
     public final void delimitarTransaccionEnEjecucionSinSesion() 
         throws Exception{
         
-        this.delimitarTransaccion(this.expectativasSinSesion());
+        this.delimitarTransaccion(this.expectativasComunesSinSesion(),
+                                  this.expectativasSinSesion());
     }
     
     /**
@@ -140,7 +195,8 @@ public abstract class InterceptorTransaccionalTest<T extends InterceptorTransacc
 
         try {
             
-            this.delimitarTransaccion(this.expectativasSinSesionArrojandoException());
+            this.delimitarTransaccion(this.expectativasComunesSinSesion(),
+                                      this.expectativasSinSesionArrojandoException());
             
             /* se espera una excepción */
             Assert.fail();
@@ -165,7 +221,9 @@ public abstract class InterceptorTransaccionalTest<T extends InterceptorTransacc
     public final void delimitarTransaccionEnEjecucionConSesionSinTransaccionActiva() 
         throws Exception {
         
-        this.delimitarTransaccion(this.expectativasConSesionSinTransaccionActiva());
+        this.delimitarTransaccion(this.expectativasComunesConSesion(),
+                                  this.expectativasComunesSinTransaccionActiva(),
+                                  this.expectativasConSesionSinTransaccionActiva());
     }
     
     /**
@@ -182,7 +240,9 @@ public abstract class InterceptorTransaccionalTest<T extends InterceptorTransacc
 
         try {
             
-            this.delimitarTransaccion(this.expectativasConSesionSinTransaccionActivaArrojandoException());
+            this.delimitarTransaccion(this.expectativasComunesConSesion(),
+                                      this.expectativasComunesSinTransaccionActiva(),
+                                      this.expectativasConSesionSinTransaccionActivaArrojandoException());
             
             /* se espera una excepción */
             Assert.fail();
@@ -208,7 +268,9 @@ public abstract class InterceptorTransaccionalTest<T extends InterceptorTransacc
     public final void delimitarTransaccionEnEjecucionConTransaccionActiva() 
         throws Exception {
         
-        this.delimitarTransaccion(this.expectativasConTransaccionActiva());
+        this.delimitarTransaccion(this.expectativasComunesConSesion(),
+                                  this.expectativasComunesConTransaccionActiva(),
+                                  this.expectativasConTransaccionActiva());
     }
     
     /**
@@ -225,7 +287,9 @@ public abstract class InterceptorTransaccionalTest<T extends InterceptorTransacc
         
         try {
             
-            this.delimitarTransaccion(this.expectativasConTransaccionActivaArrojandoException());
+            this.delimitarTransaccion(this.expectativasComunesConSesion(),
+                                      this.expectativasComunesConTransaccionActiva(),
+                                      this.expectativasConTransaccionActivaArrojandoException());
             
             /* se espera una excepción */
             Assert.fail();

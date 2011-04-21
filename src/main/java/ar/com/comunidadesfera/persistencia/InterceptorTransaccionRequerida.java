@@ -21,12 +21,17 @@ public class InterceptorTransaccionRequerida extends InterceptorTransaccional {
 
         EntityManager entityManager = this.contexto.buscarEntityManager();
         
-        escenario.setSesionPropagada(entityManager != null);
 
-        if (! escenario.isSesionPropagada()) {
+        if (entityManager == null) {
             
+            escenario.setIniciaSesion();
             entityManager = this.contexto.agregarEntityManager();
+            
+        } else if (entityManager.getTransaction().isActive()) {
+            
+            escenario.setPropagaTransaccion();
         }
+        
         
         return entityManager;
     }
@@ -34,7 +39,7 @@ public class InterceptorTransaccionRequerida extends InterceptorTransaccional {
     @Override
     protected void beginTry(EntityManager em, Escenario escenario) {
         
-        if (! escenario.isSesionPropagada()) {
+        if (! escenario.propagaTransaccion()) {
             
             this.begin(em);
         }
@@ -43,7 +48,7 @@ public class InterceptorTransaccionRequerida extends InterceptorTransaccional {
     @Override
     protected void endTry(EntityManager em, Escenario escenario) {
         
-        if (! escenario.isSesionPropagada()) {
+        if (! escenario.propagaTransaccion()) {
             
             this.commit(em);
         }
@@ -52,7 +57,7 @@ public class InterceptorTransaccionRequerida extends InterceptorTransaccional {
     @Override
     protected void onCatch(EntityManager em, Escenario escenario) {
 
-        if (escenario.isSesionPropagada()) {
+        if (escenario.propagaTransaccion()) {
             
             this.setRollbackOnly(em);
             

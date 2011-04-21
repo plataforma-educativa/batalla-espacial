@@ -21,10 +21,10 @@ public class InterceptorTransaccionSoportada extends InterceptorTransaccional {
 
         EntityManager entityManager = this.contexto.buscarEntityManager();
         
-        escenario.setSesionPropagada(entityManager != null);
 
-        if (! escenario.isSesionPropagada()) {
+        if (entityManager == null) {
             
+            escenario.setIniciaSesion();
             entityManager = this.contexto.agregarEntityManager();
         }
         

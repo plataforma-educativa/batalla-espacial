@@ -58,7 +58,7 @@ public abstract class InterceptorTransaccional {
 
         } catch (Exception e) {
             
-            this.rollback(em);
+            this.onCatch(em, escenario);
             
             throw e;
             
@@ -117,7 +117,7 @@ public abstract class InterceptorTransaccional {
      */
     protected void onFinally(EntityManager em, Escenario escenario) {
         
-        if (! escenario.isSesionPropagada()) {
+        if (escenario.iniciaSesion()) {
             
             this.contexto.removerEntityManager(em);
 
@@ -210,14 +210,31 @@ public abstract class InterceptorTransaccional {
      */
     protected static class Escenario {
         
-        private boolean sesionPropagada = false;
+        private boolean iniciaSesion = false;
 
-        public boolean isSesionPropagada() {
-            return sesionPropagada;
+        private boolean propagaTransaccion = false;
+        
+        /**
+         * @return si el interceptor inicia una sesión (Entity Manager)
+         */
+        public boolean iniciaSesion() {
+            return iniciaSesion;
         }
 
-        public void setSesionPropagada(boolean sesionPropagada) {
-            this.sesionPropagada = sesionPropagada;
+        public void setIniciaSesion() {
+            this.iniciaSesion = true;
         }
+
+        /**
+         * @return si el interceptor inicia una transacción (Entity Transaction)
+         */
+        public boolean propagaTransaccion() {
+            return this.propagaTransaccion;
+        }
+
+        public void setPropagaTransaccion() {
+            this.propagaTransaccion = true;
+        }
+        
     }
 }

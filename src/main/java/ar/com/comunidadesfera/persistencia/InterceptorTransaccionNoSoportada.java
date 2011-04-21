@@ -18,8 +18,7 @@ public class InterceptorTransaccionNoSoportada extends InterceptorTransaccional 
     @Override
     protected EntityManager init(Escenario escenario) {
         
-        escenario.setSesionPropagada(false);
-        
+        escenario.setIniciaSesion();
         return this.contexto.agregarEntityManager();
     }
 

@@ -18,40 +18,26 @@ public class InterceptorNuevaTransaccionRequerida extends InterceptorTransaccion
     @Override
     protected EntityManager init(Escenario escenario) {
 
-        escenario.setSesionPropagada(false);
-
+        escenario.setIniciaSesion();
         return this.contexto.agregarEntityManager();
     }
 
     @Override
     protected void beginTry(EntityManager em, Escenario escenario) {
-        
-        if (! escenario.isSesionPropagada()) {
-            
-            this.begin(em);
-        }
+          
+        this.begin(em);
     }
 
     @Override
     protected void endTry(EntityManager em, Escenario escenario) {
         
-        if (! escenario.isSesionPropagada()) {
-            
-            this.commit(em);
-        }
+        this.commit(em);
     }
 
     @Override
     protected void onCatch(EntityManager em, Escenario escenario) {
 
-        if (escenario.isSesionPropagada()) {
-            
-            this.setRollbackOnly(em);
-            
-        } else {
-            
-            this.rollback(em);
-        }
+        this.rollback(em);
     }
 
 }
