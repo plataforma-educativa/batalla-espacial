@@ -25,6 +25,6 @@ public @interface Transaccional {
     /**
      * Define la estrategia para manipular el contexto transaccional.
      */
-    EstrategiaTransaccional estrategia() default EstrategiaTransaccional.REQUERIDA;
+    EstrategiaTransaccional value() default EstrategiaTransaccional.REQUERIDA;
     
 }

@@ -1,7 +1,5 @@
 package ar.com.comunidadesfera.eficiencia.test.persistencia;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -10,13 +8,13 @@ import org.jmock.Mockery;
 import org.jmock.integration.junit4.JMock;
 import org.jmock.integration.junit4.JUnit4Mockery;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 
 import ar.com.comunidadesfera.eficiencia.persistencia.AdministradorDeMediciones;
-import ar.com.comunidadesfera.eficiencia.registros.Medicion;
 
 @RunWith(JMock.class)
+@Ignore
 public class AdministradorDeMedicionesTest {
 
     private Mockery simulador = new JUnit4Mockery();

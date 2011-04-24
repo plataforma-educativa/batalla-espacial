@@ -9,6 +9,8 @@ import javax.persistence.NoResultException;
 import ar.com.comunidadesfera.eficiencia.registros.Discriminante;
 import ar.com.comunidadesfera.eficiencia.registros.Medicion;
 import ar.com.comunidadesfera.eficiencia.registros.Modulo;
+import ar.com.comunidadesfera.persistencia.EstrategiaTransaccional;
+import ar.com.comunidadesfera.persistencia.Transaccional;
 
 public class AdministradorDeMediciones {
 
@@ -30,6 +32,7 @@ public class AdministradorDeMediciones {
      * @param mediciones
      * @throws PersistenciaException
      */
+    @Transaccional(EstrategiaTransaccional.REQUERIDA)
     public void guardar(List<Medicion> mediciones) throws PersistenciaException {
 
         EntityManager em = this.emf.createEntityManager();

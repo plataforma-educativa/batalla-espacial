@@ -13,7 +13,7 @@ import javax.persistence.EntityManager;
  *
  */
 @Interceptor
-@Transaccional(estrategia = EstrategiaTransaccional.SOPORTADA)
+@Transaccional(EstrategiaTransaccional.SOPORTADA)
 public class InterceptorTransaccionSoportada extends InterceptorTransaccional {
 
     @Override
