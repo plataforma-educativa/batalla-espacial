@@ -81,7 +81,6 @@ public class TransporteDeSustanciasTest {
 
     @Test(expected = IllegalArgumentException.class)
     @Theory
-    @Ignore // Falla para la base espacial
     public void agregarSustanciasEnExceso(Sustancia sustancia) {
         
         long capacidad = transporte.getCapacidadDisponible(sustancia);
@@ -90,7 +89,6 @@ public class TransporteDeSustanciasTest {
 
     @Test(expected = IllegalArgumentException.class)
     @Theory
-    @Ignore // Falla para todas
     public void agregarSustanciasNegativas(Sustancia sustancia) {
         
         transporte.agregarSustancia(sustancia, -100L);
@@ -146,7 +144,6 @@ public class TransporteDeSustanciasTest {
 
     @Test(expected = IllegalArgumentException.class)
     @Theory
-    @Ignore // Falla para todass
     public void extraerSustanciasNegativas(Sustancia sustancia) {
         
         long cantidadInicial = transporte.getCapacidadDisponible(sustancia) / 2L;

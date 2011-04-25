@@ -217,6 +217,7 @@ public abstract class Pieza implements Comparable<Pieza>, Cloneable {
     /**
      * @see Object#equals(java.lang.Object)
      */
+    @Override
     public boolean equals(Object otro) {
         
         boolean iguales = false;
@@ -227,6 +228,12 @@ public abstract class Pieza implements Comparable<Pieza>, Cloneable {
         }
         
         return iguales;
+    }
+    
+    @Override
+    public int hashCode() {
+        
+        return (int) this.numero;
     }
     
     /**

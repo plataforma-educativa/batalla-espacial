@@ -17,7 +17,6 @@ import ar.com.comunidadesfera.batallaespacial.comandos.Atacar;
 import ar.com.comunidadesfera.batallaespacial.comandos.Avanzar;
 import ar.com.comunidadesfera.batallaespacial.comandos.Comando;
 import ar.com.comunidadesfera.batallaespacial.comandos.TransferirCarga;
-import ar.com.comunidadesfera.batallaespacial.piezas.nave.ControlNaveDeCombate;
 
 @RunWith(Theories.class)
 public abstract class ControlTest<T extends Control> {
@@ -113,17 +112,15 @@ public abstract class ControlTest<T extends Control> {
         Assert.assertThat("carga", transferir.getCarga(), Matchers.equalTo(carga));
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     @Theory
-    @Ignore
     public void transferirDesdeCargaNegativa(Direccion desde, Sustancia sustancia) {
         
         transferirDesde(desde, sustancia, -80L);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     @Theory
-    @Ignore
     public void transferirHaciaCargaNegativa(Direccion hacia, Sustancia sustancia) {
         
         transferirHacia(hacia, sustancia, -1L);

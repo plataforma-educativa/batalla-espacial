@@ -49,10 +49,10 @@ public class Tablero implements Iterable<Pieza> {
      */
     public Tablero(int filas, int columnas) {
     
+        this.casilleros = new TreeMap<Casillero,Pieza>();
         this.setFilas(filas);
         this.setColumnas(columnas);
         this.definir();
-        this.casilleros = new TreeMap<Casillero,Pieza>();
     }
 
     /**
@@ -396,19 +396,18 @@ public class Tablero implements Iterable<Pieza> {
         
         public Casillero clone() {
             
-            Casillero clon;
             try {
                 
-                clon = (Casillero) super.clone();
-                
-            } catch (Exception error) {
+                return (Casillero) super.clone();
 
-                error.printStackTrace();
-                clon = null;
+            } catch (CloneNotSupportedException e) {
+                
+                throw new RuntimeException("Error no esperado al intentar clonar Casillero",
+                                           e);
             }
-            return clon;
         }
         
+        @Override
         public boolean equals(Object otro) {
             
             boolean iguales = false;
@@ -417,7 +416,12 @@ public class Tablero implements Iterable<Pieza> {
                 
                 iguales = this.compareTo((Casillero) otro) == 0;
             }
-            return iguales;
+            return iguales;            
+        }
+        
+        @Override
+        public int hashCode() {
+            return (int) this.numero;
         }
     }
 

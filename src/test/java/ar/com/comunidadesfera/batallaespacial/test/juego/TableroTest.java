@@ -69,7 +69,6 @@ public class TableroTest {
         this.piezas = this.crearPiezas();
     }
     
-    @Ignore
     @Test
     public void crearTableroDefinido() {
 

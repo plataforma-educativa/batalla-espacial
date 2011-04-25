@@ -44,7 +44,6 @@ public class ContenedorTest extends PiezaTest<Contenedor> {
     
     @Test
     @Theory
-    @Ignore
     public void getNivelDeCarga(Sustancia sustancia) {
         
         Contenedor contenedor = this.getPieza();

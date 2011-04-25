@@ -84,6 +84,12 @@ public class Contenedor extends Pieza implements TransporteDeSustancias {
     public void agregarSustancia(Sustancia sustancia, long cantidad)
             throws IllegalArgumentException {
 
+        /* verifica la cantidad */
+        if (cantidad < 0) {
+            
+            throw new IllegalArgumentException("Cantidad a agregar no puede ser negativa");
+        }
+        
         /* verifica la capacidad disponible */
         if (this.getCapacidadDisponible(sustancia) < cantidad) {
          
@@ -103,6 +109,11 @@ public class Contenedor extends Pieza implements TransporteDeSustancias {
     public void extraerSustancia(Sustancia sustancia, long cantidad)
             throws IllegalArgumentException {
 
+        if (cantidad < 0) {
+            
+            throw new IllegalArgumentException("Cantidad a extraer no puede ser negativa");
+        }
+            
         if (cantidad > 0) {
             
             /* actualiza la carga de la sustancia */
@@ -163,7 +174,7 @@ public class Contenedor extends Pieza implements TransporteDeSustancias {
      */
     public byte getNivelDeCarga() {
         
-        return (byte) (this.getCarga() / this.getCapacidad() * 100);
+        return (byte) ((float)this.getCarga() / (float) this.getCapacidad() * 100.0);
     }
 
     /**
