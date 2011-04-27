@@ -7,7 +7,6 @@ package ar.com.comunidadesfera.batallaespacial;
  */
 public enum Sustancia {
 
-    // TODO : inventar otras sustancias.
     ANTIMATERIA,
     METAL,
     CRISTAL;

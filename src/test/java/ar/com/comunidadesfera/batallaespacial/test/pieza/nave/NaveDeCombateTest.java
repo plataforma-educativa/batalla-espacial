@@ -25,10 +25,6 @@ import ar.com.comunidadesfera.batallaespacial.test.civilizaciones.simulada.Pilot
 import ar.com.comunidadesfera.batallaespacial.test.pieza.ComprobarClon;
 import ar.com.comunidadesfera.batallaespacial.test.pieza.EscenarioSimulado;
 
-@RunWith( Suite.class )
-@SuiteClasses({ 
-    ControlNaveDeCombateTest.class       
-})
 public class NaveDeCombateTest extends NaveTest<NaveDeCombate> {
 
     private CivilizacionSimulada civilizacion;

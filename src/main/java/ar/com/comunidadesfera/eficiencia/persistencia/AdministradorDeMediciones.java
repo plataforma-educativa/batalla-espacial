@@ -18,7 +18,7 @@ public class AdministradorDeMediciones {
 
     private volatile EntityManagerFactory emf;
 
-    private AdministradorDeMediciones() {
+    protected AdministradorDeMediciones() {
 
     }
 

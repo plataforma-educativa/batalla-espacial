@@ -6,7 +6,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ar.com.comunidadesfera.batallaespacial.Notificacion;
+import ar.com.comunidadesfera.batallaespacial.Reporte;
 import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
+import ar.com.comunidadesfera.batallaespacial.juego.escenarios.Escenario;
+import ar.com.comunidadesfera.batallaespacial.test.matchers.ReporteDePieza;
 
 public abstract class PiezaTest<T extends Pieza> {
 
@@ -88,9 +91,11 @@ public abstract class PiezaTest<T extends Pieza> {
         /* comprueba las notificaciones */
         Assert.assertThat("cambios", observador.getCambios(),
                           Matchers.equalTo(cambios));
-        Assert.assertThat("pieza", observador.getPieza(), 
-                          Matchers.equalTo((Pieza) pieza));
         
+        if (cambios > 0) {
+            Assert.assertThat("pieza", observador.getPieza(), 
+                              Matchers.equalTo((Pieza) pieza));
+        }
         /* comprueba que al retirar el observador no se reportan modificaciones */
         pieza.quitarObservador(observador);
         observador.detener();
@@ -108,9 +113,21 @@ public abstract class PiezaTest<T extends Pieza> {
 
     @Test
     public void reportar() {
-        
-        // TODO
+     
+        Reporte reporte = this.pieza.reportar();
+        Assert.assertThat("reporte", reporte, this.reporteDePieza());
     }
+    
+    /**
+     * @post crea y devuelve el Matcher para el reporte.
+     * 
+     * @param reporte
+     */
+    protected ReporteDePieza<T> reporteDePieza() {
+
+        return new ReporteDePieza<T>(this.pieza);
+    }
+    
 
     @Test
     public void compareTo() {
@@ -145,33 +162,56 @@ public abstract class PiezaTest<T extends Pieza> {
     public void modificarPuntos() {
         
         EscenarioSimulado escenario = new EscenarioSimulado(new Notificacion[0]);
+
+        this.modificarPuntos(0, escenario);
         
-        int puntosIniciales = pieza.getPuntos();
-        
-        pieza.modificarPuntos(0, escenario);
-        
-        Assert.assertThat("puntos", pieza.getPuntos(),
-                          Matchers.equalTo(puntosIniciales));
-        
-        int delta = puntosIniciales / 2;
-        pieza.modificarPuntos(delta, escenario);
-        
-        Assert.assertThat("puntos", pieza.getPuntos(),
-                          Matchers.equalTo(puntosIniciales + delta));
-        
-        pieza.modificarPuntos(-delta, escenario);
-        
-        Assert.assertThat("puntos", pieza.getPuntos(),
-                          Matchers.equalTo(puntosIniciales));
-        
-        pieza.modificarPuntos(-puntosIniciales, escenario);
-        
-        Assert.assertThat("puntos", pieza.getPuntos(),
-                          Matchers.equalTo(0));
-        
+        final int puntos = this.pieza.getPuntos();
+        this.modificarPuntos(puntos / 2, escenario);
+        this.modificarPuntos(-puntos / 2, escenario);
+        this.modificarPuntos(puntos, escenario);
         pieza.modificarPuntos(1, escenario);
-        
-        Assert.assertThat("puntos", pieza.getPuntos(),
-                          Matchers.equalTo(1));
     }
+    
+    /**
+     * @post verifica que la pieza tiene los puntos esperados.
+     * @param puntosEsperados
+     */
+    private void comprobarPuntos(int puntosEsperados) {
+        
+        Assert.assertThat("puntos", pieza.getPuntos(), 
+                          Matchers.is(puntosEsperados));
+    }
+    
+    /**
+     * @post modifica los puntos de la pieza según delta y escenario,
+     *       verificando los puntos resultantes.  
+     * 
+     * @param delta
+     * @param escenario
+     */
+    private void modificarPuntos(int delta, Escenario escenario) {
+        
+        final int iniciales = this.pieza.getPuntos();
+        
+        this.pieza.modificarPuntos(delta, escenario);
+
+        final int esperados = this.getPuntosEsperados(iniciales, delta, escenario);
+        
+        this.comprobarPuntos(esperados);
+    }
+    
+    /**
+     * @pre  se ha invocado el método modificarPuntos(delta, escenario).
+     * @post devuelve la cantidad de puntos esperados para pieza.
+     *       
+     * @param iniciales
+     * @param deltas
+     * @return
+     */
+    protected int getPuntosEsperados(int iniciales, int delta, Escenario escenario) {
+        
+        // TODO verificar overflow.
+        return iniciales += delta;
+    }
+    
 }

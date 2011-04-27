@@ -4,6 +4,7 @@ import ar.com.comunidadesfera.batallaespacial.Reporte;
 import ar.com.comunidadesfera.batallaespacial.Reporte.Espectro;
 import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
 import ar.com.comunidadesfera.batallaespacial.juego.ReporteEstatico;
+import ar.com.comunidadesfera.batallaespacial.juego.escenarios.Escenario;
 
 public class AgujeroNegro extends Pieza {
 
@@ -25,4 +26,14 @@ public class AgujeroNegro extends Pieza {
         return reporte;
     }
 
+    /**
+     * @post no modifica ningún estado en la Pieza. El Agujero negro
+     *       es inmune a todo cambio.
+     */
+    @Override
+    public void modificarPuntos(int delta, Escenario escenario) {
+    
+        /* redefinido para no sufrir alteraciones */
+    }
+    
 }

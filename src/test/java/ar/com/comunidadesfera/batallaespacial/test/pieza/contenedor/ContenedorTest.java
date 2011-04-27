@@ -2,15 +2,16 @@ package ar.com.comunidadesfera.batallaespacial.test.pieza.contenedor;
 
 import org.hamcrest.Matchers;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 
+import ar.com.comunidadesfera.batallaespacial.Reporte.Espectro;
 import ar.com.comunidadesfera.batallaespacial.Sustancia;
 import ar.com.comunidadesfera.batallaespacial.piezas.contenedor.Contenedor;
+import ar.com.comunidadesfera.batallaespacial.test.matchers.ReporteDePieza;
 import ar.com.comunidadesfera.batallaespacial.test.pieza.ComprobarClon;
 import ar.com.comunidadesfera.batallaespacial.test.pieza.PiezaTest;
 
@@ -62,6 +63,18 @@ public class ContenedorTest extends PiezaTest<Contenedor> {
         contenedor.agregarSustancia(sustancia, contenedor.getCapacidadDisponible(sustancia));
         Assert.assertThat("nivelDeCarga", contenedor.getNivelDeCarga(),
                           Matchers.equalTo((byte) 100));
+    }
+    
+    @Override
+    protected ReporteDePieza<Contenedor> reporteDePieza() {
+    
+        // TODO verificar cantidad de sustancia con valores
+        
+        return super.reporteDePieza()
+                    .setEspectro(Matchers.is(Espectro.CONTENEDOR))
+                    .setCivilizacion(Matchers.nullValue())
+                    .setCantidadDeSustancia(Matchers.is(0L), Sustancia.values());
+        
     }
     
 }

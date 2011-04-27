@@ -1,8 +1,13 @@
 package ar.com.comunidadesfera.batallaespacial.test.pieza.base;
 
+import org.hamcrest.Matchers;
+
+import ar.com.comunidadesfera.batallaespacial.Reporte.Espectro;
+import ar.com.comunidadesfera.batallaespacial.Sustancia;
 import ar.com.comunidadesfera.batallaespacial.piezas.base.BaseEspacial;
 import ar.com.comunidadesfera.batallaespacial.piezas.nave.Nave;
 import ar.com.comunidadesfera.batallaespacial.piezas.nave.NaveDeCombate;
+import ar.com.comunidadesfera.batallaespacial.test.matchers.ReporteDePieza;
 import ar.com.comunidadesfera.batallaespacial.test.pieza.ComprobarClon;
 import ar.com.comunidadesfera.batallaespacial.test.pieza.ComprobarClonPieza;
 import ar.com.comunidadesfera.batallaespacial.test.pieza.PiezaTest;
@@ -34,4 +39,13 @@ public class BaseEspacialTest extends PiezaTest<BaseEspacial> {
         return new ComprobarClonPieza<BaseEspacial>("Base Espacial");
     }
     
+    @Override
+    protected ReporteDePieza<BaseEspacial> reporteDePieza() {
+
+        // TODO verificar civilizacion y cantidad de sustancia con valores
+        
+        return super.reporteDePieza()
+                    .setEspectro(Matchers.is(Espectro.BASE))
+                    .setCantidadDeSustancia(Matchers.is(0L), Sustancia.values());
+    }
 }

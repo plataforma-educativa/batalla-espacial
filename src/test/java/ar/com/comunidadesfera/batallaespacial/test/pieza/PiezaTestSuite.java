@@ -18,6 +18,7 @@ import ar.com.comunidadesfera.batallaespacial.test.pieza.nave.NaveDeCombateTest;
     ContenedorTest.class,
     AsteroideTest.class,
     BaseEspacialTest.class,
+    AgujeroNegroTest.class,
     TransporteDeSustanciasTest.class,
     PistaDeAterrizajeTest.class,
     ControlNaveDeCombateTest.class,

@@ -15,7 +15,7 @@ import ar.com.comunidadesfera.batallaespacial.ui.TableroLayout.Posicion;
  * @author Mariano Tugnarelli
  *
  */
-public class LabelPieza extends JLabel implements Pieza.Observador {
+public class LabelPieza extends JLabel implements Pieza.Observador, Cloneable {
 
     /**
      * 

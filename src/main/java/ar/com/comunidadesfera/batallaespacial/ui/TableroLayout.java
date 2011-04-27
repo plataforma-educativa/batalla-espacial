@@ -218,5 +218,12 @@ public class TableroLayout implements LayoutManager2 {
             return iguales;
         }
         
+        @Override
+        public int hashCode() {
+
+            return this.componente.hashCode();
+        }
+        
     }
-}
+}            // TODO Auto-generated method stub
+

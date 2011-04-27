@@ -23,8 +23,8 @@ public class BatallaEspacial {
     }
 
     /**
-     * @pre se encuentra inicializada la Vista de la AplicaciÃ³n.
-     * @post instancia y devuelve el ControlAplicaciÃ³n.
+     * @pre se encuentra inicializada la Vista de la Aplicación.
+     * @post instancia y devuelve el ControlAplicación.
      */
     protected ControlAplicacion crearControlAplicacion() {
         
@@ -32,7 +32,7 @@ public class BatallaEspacial {
     }
     
     /**
-     * @post instancia y devuelve la VistaAplicaciÃ³n.
+     * @post instancia y devuelve la VistaAplicación.
      */
     protected VistaAplicacion crearVistaAplicacion() {
         
