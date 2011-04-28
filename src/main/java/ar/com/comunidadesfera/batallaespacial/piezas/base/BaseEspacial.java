@@ -80,8 +80,9 @@ public class BaseEspacial extends Pieza  implements TransporteDeSustancias,
 
     
     /**
-     * @see Pieza#reportar()
+     * @see Detectable#reportar()
      */
+    @Override
     public Reporte reportar() {
         
         return new ReporteEstatico(Espectro.BASE, this.getCivilizacion(), null);

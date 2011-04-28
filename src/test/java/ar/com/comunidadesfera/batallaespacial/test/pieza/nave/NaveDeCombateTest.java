@@ -10,9 +10,6 @@ import java.util.Queue;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
 
 import ar.com.comunidadesfera.batallaespacial.CabinaDeControl;
 import ar.com.comunidadesfera.batallaespacial.Control;

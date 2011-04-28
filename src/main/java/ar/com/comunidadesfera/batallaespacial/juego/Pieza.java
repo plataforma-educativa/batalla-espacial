@@ -4,11 +4,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import ar.com.comunidadesfera.batallaespacial.Reporte;
 import ar.com.comunidadesfera.batallaespacial.juego.Tablero.Casillero;
 import ar.com.comunidadesfera.batallaespacial.juego.escenarios.Escenario;
 
-public abstract class Pieza implements Comparable<Pieza>, Cloneable {
+public abstract class Pieza implements Comparable<Pieza>, Detectable, Cloneable {
 
     /**
      * Generador de factores aleatorios utilizado por las Piezas.
@@ -191,15 +190,6 @@ public abstract class Pieza implements Comparable<Pieza>, Cloneable {
         this.setPuntos(this.getPuntos() + delta);
     }
     
-    
-    /**
-     * @pre ninguna
-     * @post construye un Reporte de la Pieza que indica su situación.
-     * 
-     * @return Reporte de la Pieza.
-     */
-    public abstract Reporte reportar();
-
     /**
      * 
      * @return Número que identifica la Pieza.

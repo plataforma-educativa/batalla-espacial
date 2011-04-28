@@ -20,6 +20,9 @@ public class AgujeroNegro extends Pieza {
         return "Agujero Negro";
     }
 
+    /**
+     * @see Detectable#reportar()
+     */
     @Override
     public Reporte reportar() {
 

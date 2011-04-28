@@ -12,21 +12,22 @@ import ar.com.comunidadesfera.batallaespacial.Civilizacion;
 import ar.com.comunidadesfera.batallaespacial.Reporte;
 import ar.com.comunidadesfera.batallaespacial.Reporte.Espectro;
 import ar.com.comunidadesfera.batallaespacial.Sustancia;
-import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
+import ar.com.comunidadesfera.batallaespacial.juego.Detectable;
 
-public class ReporteDePieza<T extends Pieza> extends TypeSafeMatcher<Reporte> {
+public class ConfrontadorDeReporte<T extends Detectable> extends TypeSafeMatcher<Reporte> {
 
-    private T pieza;
+    private T detectable;
     
     private Matcher<? super Espectro> espectro;
 
     private Matcher<? super Civilizacion> civilizacion;
     
-    private Map<Sustancia, Matcher<? super Long>> cantidadDeSustancia = new HashMap<Sustancia, Matcher<? super Long>>();
+    private Map<Sustancia, Matcher<? super Long>> cantidadDeSustancia;
     
-    public ReporteDePieza(T pieza) {
+    public ConfrontadorDeReporte(T pieza) {
 
-        this.pieza = pieza;
+        this.detectable = pieza;
+        this.cantidadDeSustancia = new HashMap<Sustancia, Matcher<? super Long>>();
     }
 
     @Override
@@ -88,21 +89,21 @@ public class ReporteDePieza<T extends Pieza> extends TypeSafeMatcher<Reporte> {
         return matches;
     }
     
-    public ReporteDePieza<T> setEspectro(Matcher<? super Espectro> espectro) {
+    public ConfrontadorDeReporte<T> setEspectro(Matcher<? super Espectro> espectro) {
         
         this.espectro = espectro;
         
         return this;
     }
     
-    public ReporteDePieza<T> setCivilizacion(Matcher<? super Civilizacion> civilizacion) {
+    public ConfrontadorDeReporte<T> setCivilizacion(Matcher<? super Civilizacion> civilizacion) {
         
         this.civilizacion = civilizacion;
         
         return this;
     }
     
-    public ReporteDePieza<T> setCantidadDeSustancia(Matcher<? super Long> cantidadDeSustancia,
+    public ConfrontadorDeReporte<T> setCantidadDeSustancia(Matcher<? super Long> cantidadDeSustancia,
                                                     Sustancia... sustancias) {
 
         for (Sustancia sustancia : sustancias) {
@@ -113,8 +114,8 @@ public class ReporteDePieza<T extends Pieza> extends TypeSafeMatcher<Reporte> {
         return this;
     }
     
-    public T getPieza() {
+    public T getDetectable() {
         
-        return pieza;
+        return detectable;
     }
 }

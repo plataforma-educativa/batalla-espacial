@@ -187,8 +187,9 @@ public class Contenedor extends Pieza implements TransporteDeSustancias {
     }
 
     /**
-     * @see Pieza#reportar()
+     * @see Detectable#reportar()
      */
+    @Override
     public Reporte reportar() {
 
         return new ReporteEstatico(Espectro.CONTENEDOR, null, 

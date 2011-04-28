@@ -254,8 +254,9 @@ public class NaveDeCombate extends Nave implements TransporteDeSustancias {
     }
 
     /**
-     * @see Pieza#reportar()
+     * @see Detectable#reportar()
      */
+    @Override
     public Reporte reportar() {
 
         return new ReporteEstatico(Espectro.NAVE, this.getCivilizacion(), null);

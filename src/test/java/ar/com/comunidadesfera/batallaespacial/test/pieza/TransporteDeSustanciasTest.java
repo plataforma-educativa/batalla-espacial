@@ -2,7 +2,6 @@ package ar.com.comunidadesfera.batallaespacial.test.pieza;
 
 import org.hamcrest.Matchers;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.theories.DataPoints;
 import org.junit.experimental.theories.Theories;

@@ -6,10 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ar.com.comunidadesfera.batallaespacial.Notificacion;
-import ar.com.comunidadesfera.batallaespacial.Reporte;
 import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
 import ar.com.comunidadesfera.batallaespacial.juego.escenarios.Escenario;
-import ar.com.comunidadesfera.batallaespacial.test.matchers.ReporteDePieza;
 
 public abstract class PiezaTest<T extends Pieza> {
 
@@ -109,25 +107,7 @@ public abstract class PiezaTest<T extends Pieza> {
         T clon = (T) pieza.clone();
         
         this.comprobarClon().ejecutar(pieza, clon);
-    }
-
-    @Test
-    public void reportar() {
-     
-        Reporte reporte = this.pieza.reportar();
-        Assert.assertThat("reporte", reporte, this.reporteDePieza());
-    }
-    
-    /**
-     * @post crea y devuelve el Matcher para el reporte.
-     * 
-     * @param reporte
-     */
-    protected ReporteDePieza<T> reporteDePieza() {
-
-        return new ReporteDePieza<T>(this.pieza);
-    }
-    
+    }    
 
     @Test
     public void compareTo() {

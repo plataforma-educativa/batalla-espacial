@@ -12,8 +12,9 @@ public class Asteroide extends Pieza {
     }
 
     /**
-     * @see Pieza#reportar()
+     * @see Detectable#reportar()
      */
+    @Override
     public Reporte reportar() {
 
         return new ReporteEstatico(Espectro.ASTEROIDE, null, null);
