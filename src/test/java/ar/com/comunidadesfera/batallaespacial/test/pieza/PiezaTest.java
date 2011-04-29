@@ -39,10 +39,8 @@ public abstract class PiezaTest<T extends Pieza> {
         Assert.assertThat("puntos", pieza.getPuntos(), Matchers.greaterThan(0));
         Assert.assertThat("número", pieza.getNumero(), Matchers.greaterThanOrEqualTo(0));
         Assert.assertThat("casillero", pieza.getCasillero(), Matchers.nullValue());
-
-        // TODO Falla con BaseEspacial
-        // Assert.assertThat("identificacion", pieza.getIdentificacion(),
-        // Matchers.notNullValue());
+        Assert.assertThat("identificacion", pieza.getIdentificacion(),
+                          Matchers.notNullValue());
     }
 
     protected ComprobarClon<T> comprobarClon() {

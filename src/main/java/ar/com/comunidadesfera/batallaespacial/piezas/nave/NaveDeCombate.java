@@ -13,10 +13,13 @@ import ar.com.comunidadesfera.batallaespacial.Notificacion;
 import ar.com.comunidadesfera.batallaespacial.Piloto;
 import ar.com.comunidadesfera.batallaespacial.Radar;
 import ar.com.comunidadesfera.batallaespacial.Reporte;
-import ar.com.comunidadesfera.batallaespacial.Sustancia;
 import ar.com.comunidadesfera.batallaespacial.Reporte.Espectro;
+import ar.com.comunidadesfera.batallaespacial.Sustancia;
+import ar.com.comunidadesfera.batallaespacial.juego.Detectable;
 import ar.com.comunidadesfera.batallaespacial.juego.ReporteEstatico;
 import ar.com.comunidadesfera.batallaespacial.juego.escenarios.Escenario;
+import ar.com.comunidadesfera.batallaespacial.piezas.CabinaDeControlBasica;
+import ar.com.comunidadesfera.batallaespacial.piezas.PiezaControlable;
 import ar.com.comunidadesfera.batallaespacial.piezas.TransporteDeSustancias;
 import ar.com.comunidadesfera.batallaespacial.piezas.contenedor.Contenedor;
 
@@ -28,7 +31,8 @@ import ar.com.comunidadesfera.batallaespacial.piezas.contenedor.Contenedor;
  * @author Mariano Tugnarelli
  *
  */
-public class NaveDeCombate extends Nave implements TransporteDeSustancias {
+public class NaveDeCombate extends Nave 
+    implements TransporteDeSustancias, PiezaControlable {
 
     /**
      * Características comunes a todas las Naves de Combate.
@@ -99,7 +103,7 @@ public class NaveDeCombate extends Nave implements TransporteDeSustancias {
     private void inicializar() {
         
         /* crea la bodega utilizando un Contenedor */
-        this.cabina = new CabinaNaveDeCombate(this);
+        this.cabina = new CabinaDeControlBasica(this);
         this.control = new ControlNaveDeCombate(this);
         this.monitor = new MonitorNaveDeCombate(this);
         this.notificaciones = new LinkedList<Notificacion>();

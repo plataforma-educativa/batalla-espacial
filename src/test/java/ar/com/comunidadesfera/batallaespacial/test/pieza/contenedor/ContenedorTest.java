@@ -62,4 +62,12 @@ public class ContenedorTest extends PiezaTest<Contenedor> {
         Assert.assertThat("nivelDeCarga", contenedor.getNivelDeCarga(),
                           Matchers.equalTo((byte) 100));
     }    
+    
+    @Override
+    protected void comprobarEstadoInicial(Contenedor pieza) {
+        super.comprobarEstadoInicial(pieza);
+        
+        Assert.assertThat("civilizacion", pieza.getCivilizacion(),
+                          Matchers.nullValue());
+    }
 }

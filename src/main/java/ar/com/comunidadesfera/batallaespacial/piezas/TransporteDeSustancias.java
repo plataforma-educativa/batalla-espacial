@@ -3,7 +3,7 @@ package ar.com.comunidadesfera.batallaespacial.piezas;
 import ar.com.comunidadesfera.batallaespacial.Civilizacion;
 import ar.com.comunidadesfera.batallaespacial.Sustancia;
 
-public interface TransporteDeSustancias {
+public interface TransporteDeSustancias extends Cloneable {
 
     /**
      * @pre ninguna.

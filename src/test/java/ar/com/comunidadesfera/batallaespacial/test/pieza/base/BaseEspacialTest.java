@@ -3,6 +3,7 @@ package ar.com.comunidadesfera.batallaespacial.test.pieza.base;
 import ar.com.comunidadesfera.batallaespacial.piezas.base.BaseEspacial;
 import ar.com.comunidadesfera.batallaespacial.piezas.nave.Nave;
 import ar.com.comunidadesfera.batallaespacial.piezas.nave.NaveDeCombate;
+import ar.com.comunidadesfera.batallaespacial.test.civilizaciones.simulada.CivilizacionSimulada;
 import ar.com.comunidadesfera.batallaespacial.test.pieza.ComprobarClon;
 import ar.com.comunidadesfera.batallaespacial.test.pieza.ComprobarClonPieza;
 import ar.com.comunidadesfera.batallaespacial.test.pieza.PiezaTest;
@@ -25,7 +26,11 @@ public class BaseEspacialTest extends PiezaTest<BaseEspacial> {
     @Override
     protected BaseEspacial instanciar() {
 
-        return new BaseEspacial(100);
+        BaseEspacial base = new BaseEspacial(100);
+        
+        base.setCivilizacion(new CivilizacionSimulada());
+        
+        return base;
     }
 
     @Override
