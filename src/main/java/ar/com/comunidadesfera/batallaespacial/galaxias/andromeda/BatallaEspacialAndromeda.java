@@ -1,8 +1,10 @@
 package ar.com.comunidadesfera.batallaespacial.galaxias.andromeda;
 
-import ar.com.comunidadesfera.batallaespacial.BatallaEspacial;
+import ar.com.comunidadesfera.batallaespacial.aplicacion.BatallaEspacialBasica;
+import ar.com.comunidadesfera.batallaespacial.calificadores.Alternativa;
 
-public class BatallaEspacialAndromeda extends BatallaEspacial {
+@Alternativa
+public class BatallaEspacialAndromeda extends BatallaEspacialBasica {
 
     @Override
     protected ControlAplicacion crearControlAplicacion() {

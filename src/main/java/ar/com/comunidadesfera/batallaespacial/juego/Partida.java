@@ -46,7 +46,7 @@ public class Partida<T extends Participante> {
     private Configuracion<T> configuracion;
     
     /**
-     * ControlAplicacion del Radar de las Naves
+     * Control del Radar de las Naves
      */
     private ControlDeRadar controlDeRadar;
     
@@ -119,13 +119,13 @@ public class Partida<T extends Participante> {
         return tablero;
     }
 
-    protected void setTablero(Tablero tablero) {
+    private void setTablero(Tablero tablero) {
         this.tablero = tablero;
         
         this.procesarTablero();
     }
 
-    protected void procesarTablero() {
+    private void procesarTablero() {
 
         /* para todas las piezas existentes en el tablero asigna el reglamento */
         for (Pieza pieza : this.tablero) {
@@ -142,7 +142,7 @@ public class Partida<T extends Participante> {
         return this.pilotos;
     }
     
-    protected void setPilotos(List<PilotoControlado> pilotos) {
+    private void setPilotos(List<PilotoControlado> pilotos) {
         this.pilotos = pilotos;
     }
     
@@ -152,7 +152,7 @@ public class Partida<T extends Participante> {
      *       
      * @return
      */
-    protected void asignarPiezas() {
+    private void asignarPiezas() {
         
         for (Participante participante : this.getConfiguracion().getParticipantes()) {
             
@@ -190,7 +190,7 @@ public class Partida<T extends Participante> {
         return configuracion;
     }
 
-    protected void setConfiguracion(Configuracion<T> configuracion) {
+    private void setConfiguracion(Configuracion<T> configuracion) {
         this.configuracion = configuracion;
     }
 
@@ -198,7 +198,7 @@ public class Partida<T extends Participante> {
         return controlDeRadar;
     }
 
-    protected void setControlDeRadar(ControlDeRadar controlDeRadar) {
+    private void setControlDeRadar(ControlDeRadar controlDeRadar) {
         this.controlDeRadar = controlDeRadar;
     }
 
@@ -206,7 +206,7 @@ public class Partida<T extends Participante> {
         return this.bases;
     }
 
-    protected void setBases(List<BaseEspacial> bases) {
+    private void setBases(List<BaseEspacial> bases) {
         this.bases = bases;
     }
     
@@ -214,7 +214,7 @@ public class Partida<T extends Participante> {
         return this.naves;
     }
 
-    protected void setNaves(List<Nave> naves) {
+    private void setNaves(List<Nave> naves) {
         this.naves = naves;
     }
     
@@ -242,7 +242,7 @@ public class Partida<T extends Participante> {
     /**
      * @post configura la reglamentación a utilizar por la Partida.
      */
-    public void setReglamentacion(Reglamentacion reglamentacion) {
+    private void setReglamentacion(Reglamentacion reglamentacion) {
         
         this.reglamentacion = reglamentacion;
 
@@ -272,7 +272,7 @@ public class Partida<T extends Participante> {
      *       Participantes.
      * @param definicionDeBases
      */
-    public void setEstrategiaDeDefinicionDeBases(DefinicionDeBases definicionDeBases) {
+    private void setEstrategiaDeDefinicionDeBases(DefinicionDeBases definicionDeBases) {
 
         this.estrategiaDeDefinicionDeBases = definicionDeBases;
         
@@ -293,7 +293,7 @@ public class Partida<T extends Participante> {
      *       de los Participantes.
      * @param definicionDeNaves
      */
-    public void setEstrategiaDeDefinicionDeNaves(DefinicionDeNaves definicionDeNaves) {
+    private void setEstrategiaDeDefinicionDeNaves(DefinicionDeNaves definicionDeNaves) {
         
         this.estrategiaDeDefinicionDeNaves = definicionDeNaves;
         

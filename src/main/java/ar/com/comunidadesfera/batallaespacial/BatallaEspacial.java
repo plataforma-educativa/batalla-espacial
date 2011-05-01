@@ -1,51 +1,17 @@
 package ar.com.comunidadesfera.batallaespacial;
 
-import ar.com.comunidadesfera.batallaespacial.aplicacion.ControlAplicacion;
-import ar.com.comunidadesfera.batallaespacial.ui.FrameAplicacion;
-import ar.com.comunidadesfera.batallaespacial.ui.VistaAplicacion;
-import ar.com.comunidadesfera.batallaespacial.ui.VistaAplicacionThreadSafe;
 
-public class BatallaEspacial {
-
-    private ControlAplicacion control;
-    private VistaAplicacion vista;
-    
-    public BatallaEspacial() {
-        
-        super();
-        this.vista = this.crearVistaAplicacion();
-        
-        this.control = this.crearControlAplicacion();
-        
-        /* hace visible el frame */
-        this.getVista().setVisible(true);
-        
-    }
+/**
+ * Interfaz que define las instancias de Batalla Espacial.
+ * 
+ * @author Mariano Tugnarelli
+ *
+ */
+public interface BatallaEspacial {
 
     /**
-     * @pre se encuentra inicializada la Vista de la Aplicación.
-     * @post instancia y devuelve el ControlAplicación.
+     * @post inicia la ejecución de una BatallaEspacial.
      */
-    protected ControlAplicacion crearControlAplicacion() {
-        
-        return new ControlAplicacion(this.getVista());
-    }
+    void iniciar();
     
-    /**
-     * @post instancia y devuelve la VistaAplicación.
-     */
-    protected VistaAplicacion crearVistaAplicacion() {
-        
-        return new VistaAplicacionThreadSafe(new FrameAplicacion());
-    }
-
-    public ControlAplicacion getControl() {
-        
-        return this.control;
-    }
-    
-    public VistaAplicacion getVista() {
-        
-        return this.vista;
-    }
 }

@@ -5,11 +5,13 @@ import java.util.Properties;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
 
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
-import org.jboss.weld.environment.se.events.ContainerInitialized;
 
+import ar.com.comunidadesfera.batallaespacial.BatallaEspacial;
+import ar.com.comunidadesfera.batallaespacial.calificadores.Basica;
 import ar.com.comunidadesfera.persistencia.Configuracion;
 import ar.com.comunidadesfera.persistencia.Configuracion.Tipo;
 
@@ -27,15 +29,23 @@ public class PlataformaEducativa {
     @Produces @Configuracion(Tipo.PERSISTENCE_UNIT_PROPERTIES)
     public static final Map<Object, Object> PERSISTENCE_UNIT_PROPERTIES = new Properties();
     
+    private BatallaEspacial batallaEspacial;
     
-    public PlataformaEducativa() {
+    @Inject 
+    public void setBatallaEspacial(@Basica BatallaEspacial batallaEspacial) {
         
+        this.batallaEspacial = batallaEspacial;
     }
     
-
+    public void iniciar() {
+        
+        this.batallaEspacial.iniciar();
+    }
+    
     public static void main(String[] args) {
         
         WeldContainer weld = new Weld().initialize();
-        weld.event().select(ContainerInitialized.class).fire(new ContainerInitialized());
+//        weld.event().select(ContainerInitialized.class).fire(new ContainerInitialized());
+        weld.instance().select(PlataformaEducativa.class).get().iniciar();
     }
 }

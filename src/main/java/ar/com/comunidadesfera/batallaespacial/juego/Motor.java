@@ -29,7 +29,7 @@ public class Motor implements Runnable {
     /**
      * Partida del juego. 
      */
-    private Partida partida;
+    private Partida<?> partida;
 
     /**
      * Lista de Observadores del Motor. 
@@ -43,7 +43,7 @@ public class Motor implements Runnable {
     private Semaphore semaforo; 
 
 
-    public Motor(List<? extends Piloto> pilotos, Partida partida, int rondas) {
+    public Motor(List<? extends Piloto> pilotos, Partida<?> partida, int rondas) {
         super();
 
         this.setPilotos(pilotos);
@@ -130,11 +130,11 @@ public class Motor implements Runnable {
         this.pilotos = pilotos;
     }
     
-    private Partida getPartida() {
+    private Partida<?> getPartida() {
         return this.partida;
     }
     
-    private void setPartida(Partida partida) {
+    private void setPartida(Partida<?> partida) {
         this.partida = partida;
     }
     

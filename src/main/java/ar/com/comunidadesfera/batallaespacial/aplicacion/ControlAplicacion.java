@@ -41,7 +41,7 @@ public class ControlAplicacion implements VistaAplicacion.Observador,
     
     public static final String COLOR_DEFAULT = "FF0000";
     public static final String NAVES_DEFAULT  = "1";
-    public static final String TABLERO_PRESENTACION = "/ar/uba/fi/algo3/batallaespacial/config/presentacion.tablero";
+    public static final String TABLERO_PRESENTACION = "/ar/com/comunidadesfera/batallaespacial/config/presentacion.tablero";
     public static final String[] INFORMES_BASE = {
         "puntos",
         "carga"
@@ -96,6 +96,11 @@ public class ControlAplicacion implements VistaAplicacion.Observador,
     protected void crearPresentacion() {
         
         InputStream origen = this.getClass().getResourceAsStream(TABLERO_PRESENTACION);
+        
+        if (origen == null) {
+            
+            throw new RecursoNoEncontradoException(TABLERO_PRESENTACION);
+        }
         
         Tablero tablero = this.crearTablero(new InputStreamReader(origen));
         

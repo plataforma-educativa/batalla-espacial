@@ -1,35 +1,23 @@
 package ar.com.comunidadesfera.batallaespacial.aplicacion;
 
-import ar.com.comunidadesfera.batallaespacial.ui.FrameAplicacion;
-import ar.com.comunidadesfera.batallaespacial.ui.VistaAplicacion;
-import ar.com.comunidadesfera.batallaespacial.ui.VistaAplicacionThreadSafe;
+import ar.com.comunidadesfera.batallaespacial.BatallaEspacial;
 
+/**
+ * Punto de entrada de la aplicación.
+ * 
+ * @author Mariano Tugnarelli
+ *
+ */
 public class BatallaEspacialApp {
-
-    private ControlAplicacion control;
-    private VistaAplicacion vista;
-    
-    public BatallaEspacialApp() {
-        
-        super();
-        this.vista = new VistaAplicacionThreadSafe(new FrameAplicacion());
-        this.control = new ControlAplicacion(this.vista);
-    }
-
-    public void run() {
-
-        /* hace visible el frame */
-        this.vista.setVisible(true);
-    }
     
     /**
      * @param args
      */
     public static void main(String[] args) {
     
-        BatallaEspacialApp app = new BatallaEspacialApp();
+        BatallaEspacial batallaEspacial = new BatallaEspacialBasica();
         
-        app.run();
+        batallaEspacial.iniciar();
     }
 
 }

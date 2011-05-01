@@ -17,7 +17,7 @@ import ar.com.comunidadesfera.batallaespacial.piezas.nave.NaveDeCombate;
 
 public class FabricaPrototipicaDePiezas implements FabricaDePiezas {
 
-    public static final String PROTOTIPOS_PROPERTIES = "/ar/uba/fi/algo3/batallaespacial/config/prototipos.properties";
+    public static final String PROTOTIPOS_PROPERTIES = "/ar/com/comunidadesfera/batallaespacial/config/prototipos.properties";
     public static final String VALOR_DEFAULT = "1";
     public static final String NAVE = "nave";
     public static final String BASE = "base";
@@ -67,6 +67,12 @@ public class FabricaPrototipicaDePiezas implements FabricaDePiezas {
             /* properties de configuración */
             Properties properties = new Properties();
             resource = this.getClass().getResourceAsStream(propertiesResource);  
+            
+            if (resource == null) {
+                
+                throw new RecursoNoEncontradoException(propertiesResource);
+            }
+            
             properties.load(resource);
         
             int intValue;
@@ -145,7 +151,7 @@ public class FabricaPrototipicaDePiezas implements FabricaDePiezas {
             
         } catch (IOException e) {
 
-            e.printStackTrace();
+            throw new RecursoNoEncontradoException(propertiesResource, e);
             
         } finally {
             

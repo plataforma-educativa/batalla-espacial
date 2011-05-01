@@ -9,16 +9,19 @@ import ar.com.comunidadesfera.batallaespacial.galaxias.andromeda.BatallaEspacial
  * @author Mariano Tugnarelli
  *
  */
-public class BatallaEspacial {
+public class BatallaEspacial 
+    implements ar.com.comunidadesfera.batallaespacial.BatallaEspacial {
 
-    @SuppressWarnings("unused")
     private ar.com.comunidadesfera.batallaespacial.BatallaEspacial implementacion;
     
-    /**
-     * @post Inicia la ejecución de la batalla espacial.
-     */
     public BatallaEspacial() {
      
         this.implementacion = new BatallaEspacialAndromeda();
+    }
+
+    @Override
+    public void iniciar() {
+
+        this.implementacion.iniciar();
     }
 }
