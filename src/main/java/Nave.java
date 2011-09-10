@@ -117,7 +117,7 @@ public class Nave {
     }
 
     /**
-     * @pre existe otra Pieza ocupando el casillero destino. 
+     * @pre existe otra Pieza ocupando el casillero destinatario del ataque. 
      * @post ataca a la Pieza en el casillero contiguo en dirección NORTE.
      */
     public void atacarAlNorte() {
@@ -126,7 +126,7 @@ public class Nave {
     }
 
     /**
-     * @pre existe otra Pieza ocupando el casillero destino. 
+     * @pre existe otra Pieza ocupando el casillero destinatario del ataque. 
      * @post ataca a la Pieza en el casillero contiguo en dirección SUR.
      */
     public void atacarAlSur() {
@@ -135,7 +135,7 @@ public class Nave {
     }
 
     /**
-     * @pre existe otra Pieza ocupando el casillero destino. 
+     * @pre existe otra Pieza ocupando el casillero destinatario del ataque. 
      * @post ataca a la Pieza en el casillero contiguo en dirección ESTE.
      */
     public void atacarAlEste() {
@@ -144,7 +144,7 @@ public class Nave {
     }
 
     /**
-     * @pre existe otra Pieza ocupando el casillero destino. 
+     * @pre existe otra Pieza ocupando el casillero destinatario del ataque. 
      * @post ataca a la Pieza en el casillero contiguo en dirección OESTE.
      */
     public void atacarAlOeste() {
