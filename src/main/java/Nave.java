@@ -20,6 +20,8 @@ import ar.com.comunidadesfera.batallaespacial.civilizaciones.humana.ordenes.Tran
  */
 public class Nave {
 
+    private static final String DESCRIPCION = "Nave a la espera de comandos";
+    
     private static int navesCreadas = 0;
 
     private PilotoSubalterno piloto;
@@ -278,5 +280,14 @@ public class Nave {
     public Monitor getMonitor() {
         
         return this.monitor;
+    }
+    
+    @Override
+    public String toString() {
+
+        /* Devuelve una descripción para que al ser usado desde un intérprete al intentar mostrar
+         * el contenido de una variable que la referencie.
+         */
+        return DESCRIPCION;
     }
 }

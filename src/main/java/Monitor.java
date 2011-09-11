@@ -14,6 +14,8 @@ import ar.com.comunidadesfera.batallaespacial.civilizaciones.humana.ordenes.Orde
  */
 public class Monitor {
 
+    private static final String DESCRIPCION = "Monitor de la Nave";
+    
     private PilotoSubalterno piloto;
     
     protected Monitor(PilotoSubalterno piloto) {
@@ -66,5 +68,14 @@ public class Monitor {
     public byte getNivelDeEscudos() {
         
         return this.monitorear(new MonitorearNivelDeEscudos());
+    }
+    
+    @Override
+    public String toString() {
+
+        /* Devuelve una descripción para que al ser usado desde un intérprete al intentar mostrar
+         * el contenido de una variable que la referencie.
+         */
+        return DESCRIPCION;
     }
 }

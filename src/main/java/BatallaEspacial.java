@@ -12,6 +12,8 @@ import ar.com.comunidadesfera.batallaespacial.galaxias.andromeda.BatallaEspacial
 public class BatallaEspacial 
     implements ar.com.comunidadesfera.batallaespacial.BatallaEspacial {
 
+    private static final String DESCRIPCION = "Batalla Espacial iniciada";
+    
     private ar.com.comunidadesfera.batallaespacial.BatallaEspacial implementacion;
     
     public BatallaEspacial() {
@@ -23,5 +25,14 @@ public class BatallaEspacial
     public void iniciar() {
 
         this.implementacion.iniciar();
+    }
+    
+    @Override
+    public String toString() {
+
+        /* Devuelve una descripción para que al ser usado desde un intérprete al intentar mostrar
+         * el contenido de una variable que la referencie.
+         */
+        return DESCRIPCION;
     }
 }

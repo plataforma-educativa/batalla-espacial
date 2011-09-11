@@ -14,6 +14,8 @@ import ar.com.comunidadesfera.batallaespacial.civilizaciones.humana.ordenes.Repo
  */
 public class Radar {
     
+    private static final String DESCRIPCION = "Radar de la Nave";
+    
     private PilotoSubalterno piloto;
     
     protected Radar(PilotoSubalterno piloto) {
@@ -113,5 +115,14 @@ public class Radar {
     public int buscarAlSur(Sustancia sustancia) {
 
         return this.buscar(sustancia, Direccion.SUR);
+    }
+    
+    @Override
+    public String toString() {
+
+        /* Devuelve una descripción para que al ser usado desde un intérprete al intentar mostrar
+         * el contenido de una variable que la referencie.
+         */
+        return DESCRIPCION;
     }
 }
