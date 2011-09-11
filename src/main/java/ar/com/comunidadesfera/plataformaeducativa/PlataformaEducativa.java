@@ -45,7 +45,6 @@ public class PlataformaEducativa {
     public static void main(String[] args) {
         
         WeldContainer weld = new Weld().initialize();
-//        weld.event().select(ContainerInitialized.class).fire(new ContainerInitialized());
         weld.instance().select(PlataformaEducativa.class).get().iniciar();
     }
 }
