@@ -12,6 +12,7 @@ import org.jboss.weld.environment.se.WeldContainer;
 
 import ar.com.comunidadesfera.batallaespacial.BatallaEspacial;
 import ar.com.comunidadesfera.batallaespacial.calificadores.Basica;
+import ar.com.comunidadesfera.batallaespacial.calificadores.Dinamica;
 import ar.com.comunidadesfera.persistencia.Configuracion;
 import ar.com.comunidadesfera.persistencia.Configuracion.Tipo;
 
@@ -32,7 +33,7 @@ public class PlataformaEducativa {
     private BatallaEspacial batallaEspacial;
     
     @Inject 
-    public void setBatallaEspacial(@Basica BatallaEspacial batallaEspacial) {
+    public void setBatallaEspacial(@Dinamica BatallaEspacial batallaEspacial) {
         
         this.batallaEspacial = batallaEspacial;
     }
