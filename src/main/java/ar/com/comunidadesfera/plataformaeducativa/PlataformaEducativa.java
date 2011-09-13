@@ -11,7 +11,6 @@ import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
 
 import ar.com.comunidadesfera.batallaespacial.BatallaEspacial;
-import ar.com.comunidadesfera.batallaespacial.calificadores.Basica;
 import ar.com.comunidadesfera.batallaespacial.calificadores.Dinamica;
 import ar.com.comunidadesfera.persistencia.Configuracion;
 import ar.com.comunidadesfera.persistencia.Configuracion.Tipo;

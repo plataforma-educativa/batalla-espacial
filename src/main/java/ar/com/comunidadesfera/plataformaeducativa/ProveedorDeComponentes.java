@@ -1,6 +1,7 @@
 package ar.com.comunidadesfera.plataformaeducativa;
 
 import java.lang.annotation.Annotation;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -42,6 +43,11 @@ public class ProveedorDeComponentes {
         }
     };
     
+    private final static Annotation CUALIFICADOR_DINAMICO = new AnnotationLiteral<Dinamica>() {
+        
+        private static final long serialVersionUID = 1L;
+    };
+    
     private Proveedor<BatallaEspacial> batallaEspacial;
     
     private BeanManager beanManager;
@@ -65,7 +71,7 @@ public class ProveedorDeComponentes {
         return this.batallaEspacial.get();
     }
     
-    public Set<Bean<?>> getAlternativasBatallaEspacial() {
+    public Set<Alternativa<BatallaEspacial>> getAlternativasBatallaEspacial() {
         
         return this.batallaEspacial.getAlternativas();
     }
@@ -105,14 +111,56 @@ public class ProveedorDeComponentes {
             }   
         }
         
+        @SuppressWarnings("unchecked")
+        protected void seleccionar(Alternativa<T> alternativa) {
+            
+            this.provider = this.instance.select((Class<T>) alternativa.getImplementacion());
+        }
+        
         public T get() {
             
             return this.provider != null ? this.provider.get() : null;
         }
         
-        public Set<Bean<?>> getAlternativas() {
+        public Set<Alternativa<T>> getAlternativas() {
             
-            return beanManager.getBeans(this.interfaz, CUALIFICADORES_DISPONIBLES);
+            Set<Alternativa<T>> alternativas = new HashSet<Alternativa<T>>();
+            
+            Set<Bean<?>> beans = beanManager.getBeans(this.interfaz, CUALIFICADORES_DISPONIBLES);
+
+            /* remueve todos los beans que están cualificados como Dinámicos */
+            for (Bean<?> bean: beans) {
+                
+                if (! bean.getQualifiers().contains(CUALIFICADOR_DINAMICO)) {
+                    
+                    alternativas.add(new Alternativa<T>(this, bean));
+                }
+            }
+            
+            return alternativas;
+        }
+    }
+    
+    
+    public class Alternativa<T> {
+        
+        private Proveedor<T> proveedor;
+        
+        private Bean<?> bean;
+        
+        protected Alternativa(Proveedor<T> proveedor, Bean<?> bean) {
+            
+            this.bean = bean;
+            this.proveedor = proveedor;
+        }
+        
+        public Class<?> getImplementacion() {
+            return this.bean.getBeanClass();
+        }
+        
+        public void seleccionar() {
+            
+            this.proveedor.seleccionar(this);
         }
     }
 }
