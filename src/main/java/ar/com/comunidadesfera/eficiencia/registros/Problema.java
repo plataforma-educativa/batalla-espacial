@@ -24,8 +24,7 @@ public class Problema extends Entidad {
 
     private Date fin;
     
-    @SuppressWarnings("unchecked")
-    private List<Dimension> dimensiones = Collections.EMPTY_LIST;
+    private List<Dimension> dimensiones = Collections.emptyList();
 
     public Problema() {
     }

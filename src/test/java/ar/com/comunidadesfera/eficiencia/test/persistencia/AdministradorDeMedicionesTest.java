@@ -33,8 +33,8 @@ public class AdministradorDeMedicionesTest {
         
         this.simulador.checking(this.expectativasComunes());
         
-        this.administrador = AdministradorDeMediciones.instancia();
-        this.administrador.setEntityManagerFactory(emf);
+        this.administrador = new AdministradorDeMediciones();
+        this.administrador.setEntityManager(emf.createEntityManager());
     }
     
     /**

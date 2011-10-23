@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ar.com.comunidadesfera.eficiencia.Ejecucion;
-import ar.com.comunidadesfera.eficiencia.Ejecucion.Observador;
 import ar.com.comunidadesfera.eficiencia.InstrumentoDeMedicion;
 import ar.com.comunidadesfera.eficiencia.persistencia.AdministradorDeMediciones;
 import ar.com.comunidadesfera.eficiencia.persistencia.PersistenciaException;
@@ -19,11 +18,13 @@ import ar.com.comunidadesfera.eficiencia.persistencia.PersistenciaException;
  * @author Mariano Tugnarelli
  *
  */
-public class PersistirMedicionesAlTerminarEjecucion implements Observador {
+public class PersistirMedicionesAlTerminarEjecucion implements Ejecucion.Observador {
 
     private final static Logger logger = LoggerFactory.getLogger(PersistirMedicionesAlTerminarEjecucion.class);
     
     private Ejecucion ejecucion;
+    
+    private AdministradorDeMediciones administradorDeMediciones;
     
     private List<InstrumentoDeMedicion> instrumentos;
     
@@ -59,8 +60,7 @@ public class PersistirMedicionesAlTerminarEjecucion implements Observador {
                 
                 try {
                     
-                    AdministradorDeMediciones.instancia()
-                        .guardar(instrumento.getMediciones());
+                    this.administradorDeMediciones.guardar(instrumento.getMediciones());
 
                 } catch (PersistenciaException pe) {
                     
@@ -88,4 +88,8 @@ public class PersistirMedicionesAlTerminarEjecucion implements Observador {
         }
     }
 
+    public void setAdministradorDeMediciones(AdministradorDeMediciones administrador) {
+        
+        this.administradorDeMediciones = administrador;
+    }
 }

@@ -19,6 +19,7 @@ import org.junit.Test;
 import ar.com.comunidadesfera.eficiencia.Ejecucion;
 import ar.com.comunidadesfera.eficiencia.contextos.ContextoBasico;
 import ar.com.comunidadesfera.eficiencia.instrumentos.Contador;
+import ar.com.comunidadesfera.eficiencia.persistencia.AdministradorDeMediciones;
 import ar.com.comunidadesfera.eficiencia.registros.Medicion;
 import ar.com.comunidadesfera.eficiencia.registros.Medicion_;
 import ar.com.comunidadesfera.eficiencia.registros.Modulo_;
@@ -35,7 +36,9 @@ public class ContextoPersistenteTest extends TestDePersistencia {
         
         ContextoBasico contextoBasico = new ContextoBasico(); 
         
-        contextoBasico.setEntityManagerFactory(this.getEntityManagerFactory());
+        AdministradorDeMediciones administradorDeMediciones = new AdministradorDeMediciones();
+        administradorDeMediciones.setEntityManager(this.em);
+        contextoBasico.setAdministradorDeMediciones(administradorDeMediciones);
         
         this.contexto = contextoBasico;
         this.contexto.setPersistente(true);
@@ -45,6 +48,8 @@ public class ContextoPersistenteTest extends TestDePersistencia {
     
     @Test
     public void medicionIndividual() {
+        
+        this.em.getTransaction().begin();
         
         Ejecucion ejecucion = this.contexto.iniciarEjecucion(SIMPLE_10.modulo.nombre, 
                                                              SIMPLE_10.tamaño);
@@ -61,6 +66,8 @@ public class ContextoPersistenteTest extends TestDePersistencia {
         }
         
         ejecucion.terminar();
+        
+        this.em.getTransaction().commit();
         
         List<Medicion> mediciones = this.buscarMediciones(SIMPLE_10.modulo.nombre);
         
@@ -79,6 +86,7 @@ public class ContextoPersistenteTest extends TestDePersistencia {
     @Test
     public void medicionesMultiples() {
 
+        this.em.getTransaction().begin();
         
         Ejecucion ejecucion = this.contexto.iniciarEjecucion(MULTIPLES_PASOS.modulo.nombre, 
                                                              MULTIPLES_PASOS.tamaño);
@@ -110,6 +118,8 @@ public class ContextoPersistenteTest extends TestDePersistencia {
         }
         
         ejecucion.terminar();
+        
+        this.em.getTransaction().commit();
         
         List<Medicion> mediciones = this.buscarMediciones(MULTIPLES_PASOS.modulo.nombre);
         

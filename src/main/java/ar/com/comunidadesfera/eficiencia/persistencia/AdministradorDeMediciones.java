@@ -2,8 +2,8 @@ package ar.com.comunidadesfera.eficiencia.persistencia;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 
 import ar.com.comunidadesfera.eficiencia.registros.Discriminante;
@@ -13,17 +13,16 @@ import ar.com.comunidadesfera.persistencia.EstrategiaTransaccional;
 import ar.com.comunidadesfera.persistencia.Transaccional;
 
 public class AdministradorDeMediciones {
+    
+    private EntityManager em;
 
-    private static final AdministradorDeMediciones instancia = new AdministradorDeMediciones();
-
-    private volatile EntityManagerFactory emf;
-
-    protected AdministradorDeMediciones() {
+    public AdministradorDeMediciones() {
 
     }
 
-    public void setEntityManagerFactory(EntityManagerFactory emf) {
-        this.emf = emf;
+    @Inject
+    public void setEntityManager(EntityManager em) {
+        this.em = em;
     }
     
     /**
@@ -35,33 +34,10 @@ public class AdministradorDeMediciones {
     @Transaccional(EstrategiaTransaccional.REQUERIDA)
     public void guardar(List<Medicion> mediciones) throws PersistenciaException {
 
-        EntityManager em = this.emf.createEntityManager();
+        for (Medicion medicion : mediciones) {
 
-        try {
-
-            em.getTransaction().begin();
-
-            for (Medicion medicion : mediciones) {
-
-                this.guardarMedicion(em, medicion);
-            }
-
-            em.getTransaction().commit();
-
-        } catch (Exception e) {
-
-            if (em.getTransaction().isActive()) {
-
-                em.getTransaction().rollback();
-            }
-            
-            throw new PersistenciaException("Guardando Mediciones", e);
-
-        } finally {
-
-            em.close();
+            this.guardarMedicion(medicion);
         }
-
     }
 
     /**
@@ -70,11 +46,11 @@ public class AdministradorDeMediciones {
      * @param em
      * @param medicion
      */
-    private void guardarMedicion(EntityManager em, Medicion medicion) {
+    private void guardarMedicion(Medicion medicion) {
 
-        this.guardarModulo(em, medicion);
-        this.guardarProblema(em, medicion);
-        this.guardarDiscriminante(em, medicion);
+        this.guardarModulo(medicion);
+        this.guardarProblema(medicion);
+        this.guardarDiscriminante(medicion);
         
         em.persist(medicion);
     }
@@ -85,7 +61,7 @@ public class AdministradorDeMediciones {
      * @param em
      * @param medicion
      */
-    private void guardarProblema(EntityManager em, Medicion medicion) {
+    private void guardarProblema(Medicion medicion) {
 
         if (!em.contains(medicion.getProblema())) {
 
@@ -100,7 +76,7 @@ public class AdministradorDeMediciones {
      * @param em
      * @param medicion
      */
-    private void guardarModulo(EntityManager em, Medicion medicion) {
+    private void guardarModulo(Medicion medicion) {
 
         Modulo modulo = medicion.getModulo();
 
@@ -130,7 +106,7 @@ public class AdministradorDeMediciones {
      * @param em
      * @param medicion
      */
-    private void guardarDiscriminante(EntityManager em, Medicion medicion) {
+    private void guardarDiscriminante(Medicion medicion) {
         
         Discriminante discriminante = medicion.getDiscriminante();
 
@@ -151,11 +127,6 @@ public class AdministradorDeMediciones {
                 em.persist(medicion.getDiscriminante());
             }
         }
-    }
-    
-    public static AdministradorDeMediciones instancia() {
-        
-        return instancia;
     }
 
 }

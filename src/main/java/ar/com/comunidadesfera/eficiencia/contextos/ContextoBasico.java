@@ -1,6 +1,6 @@
 package ar.com.comunidadesfera.eficiencia.contextos;
 
-import javax.persistence.EntityManagerFactory;
+import javax.inject.Inject;
 
 import ar.com.comunidadesfera.eficiencia.Contexto;
 import ar.com.comunidadesfera.eficiencia.Ejecucion;
@@ -15,9 +15,9 @@ import ar.com.comunidadesfera.eficiencia.persistencia.AdministradorDeMediciones;
  */
 public class ContextoBasico implements Contexto {
 
-    private EntityManagerFactory emFactory;
-    
     private boolean persistente = false;
+    
+    private AdministradorDeMediciones administradorDeMediciones;
     
     @Override
     public void setPersistente(boolean esPersistente) {
@@ -38,17 +38,16 @@ public class ContextoBasico implements Contexto {
         
         if (this.isPersistente()) {
             
-            new PersistirMedicionesAlTerminarEjecucion(ejecucion);
+            new PersistirMedicionesAlTerminarEjecucion(ejecucion)
+                    .setAdministradorDeMediciones(this.administradorDeMediciones);
         }
         
         return ejecucion;
     }
 
-    public void setEntityManagerFactory(EntityManagerFactory emFactory) {
-
-        this.emFactory = emFactory;
+    @Inject
+    public void setAdministradorDeMediciones(AdministradorDeMediciones administrador) {
         
-        AdministradorDeMediciones.instancia().setEntityManagerFactory(this.emFactory);
+        this.administradorDeMediciones = administrador;
     }
-
 }
