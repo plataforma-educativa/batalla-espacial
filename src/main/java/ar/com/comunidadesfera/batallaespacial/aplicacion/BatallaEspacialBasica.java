@@ -1,8 +1,13 @@
 package ar.com.comunidadesfera.batallaespacial.aplicacion;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import ar.com.comunidadesfera.batallaespacial.BatallaEspacial;
-import ar.com.comunidadesfera.batallaespacial.aplicacion.ControlAplicacion;
 import ar.com.comunidadesfera.batallaespacial.calificadores.Basica;
+import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
+import ar.com.comunidadesfera.batallaespacial.juego.Participante;
+import ar.com.comunidadesfera.batallaespacial.juego.Partida;
 import ar.com.comunidadesfera.batallaespacial.ui.FrameAplicacion;
 import ar.com.comunidadesfera.batallaespacial.ui.VistaAplicacion;
 import ar.com.comunidadesfera.batallaespacial.ui.VistaAplicacionThreadSafe;
@@ -17,11 +22,14 @@ import ar.com.comunidadesfera.batallaespacial.ui.VistaAplicacionThreadSafe;
 @Basica
 public class BatallaEspacialBasica implements BatallaEspacial {
 
+    private List<Observador> observadores;
+    
     private ControlAplicacion control;
     private VistaAplicacion vista;
     
     public BatallaEspacialBasica() {
 
+        this.observadores = new LinkedList<Observador>();
     }
 
     /**
@@ -61,5 +69,29 @@ public class BatallaEspacialBasica implements BatallaEspacial {
         /* hace visible el frame */
         this.getVista().setVisible(true);
         
+        for (Observador observador : this.observadores) {
+            
+            observador.iniciada(this);
+        }
+        
+    }
+
+    @Override
+    public void agregarObservador(Observador observador) {
+
+        this.observadores.add(observador);
+    }
+    
+    @Override
+    public <P extends Participante> Partida<P> jugar(Configuracion<P> configuracion) {
+        
+        Partida<P> partida = new Partida<P>(configuracion);
+        
+        for (Observador observador : this.observadores) {
+            
+            observador.jugando(this, partida);
+        }
+        
+        return partida;
     }
 }

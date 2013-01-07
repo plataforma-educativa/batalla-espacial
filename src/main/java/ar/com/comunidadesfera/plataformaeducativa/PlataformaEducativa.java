@@ -43,7 +43,7 @@ public class PlataformaEducativa {
     }
     
     public static void main(String[] args) {
-        
+
         WeldContainer weld = new Weld().initialize();
         weld.instance().select(PlataformaEducativa.class).get().iniciar();
     }

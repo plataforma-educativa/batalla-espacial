@@ -1,6 +1,10 @@
 package ar.com.comunidadesfera.batallaespacial.aplicacion;
 
+import java.io.InputStream;
+
+import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
 import ar.com.comunidadesfera.batallaespacial.juego.FabricaDePiezas;
+import ar.com.comunidadesfera.batallaespacial.juego.Participante;
 import ar.com.comunidadesfera.batallaespacial.juego.Tablero;
 
 /**
@@ -17,7 +21,17 @@ public interface FabricaDeTableros {
      * 
      * @return Tablero  
      */
+    @Deprecated
     Tablero crearTablero();
+
+    /**
+     * @pre ha sido especificada la Fabrica de Piezas a utilizar. 
+     * @post construye un Tablero.
+     *
+     * @param configuracion 
+     * @return nuevo tablero creado a partir de la configuración dada.  
+     */
+    Tablero crearTablero(Configuracion<? extends Participante> configuracion, InputStream origen);
     
     /**
      * Asigna la Fabrica de Piezas especificada, que será utilizada

@@ -1,5 +1,6 @@
 package ar.com.comunidadesfera.batallaespacial.juego;
 
+import java.nio.file.Path;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,6 +23,11 @@ public class Configuracion<T extends Participante> {
      * Timeout entre Rondas
      */
     private long timeout;
+    
+    /**
+     * Ruta a partir de la cual se relativiza la configuración
+     */
+    private Path ruta;
     
     /**
      * Participantes de la Partida
@@ -91,5 +97,13 @@ public class Configuracion<T extends Participante> {
         this.timeout = timeout;
     }
 
-
+    public Path getRuta() {
+        
+        return this.ruta;
+    }
+    
+    public void setRuta(Path ruta) {
+        
+        this.ruta = ruta;
+    }
 }

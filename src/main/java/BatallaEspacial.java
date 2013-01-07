@@ -1,5 +1,8 @@
 
 import ar.com.comunidadesfera.batallaespacial.galaxias.andromeda.BatallaEspacialAndromeda;
+import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
+import ar.com.comunidadesfera.batallaespacial.juego.Participante;
+import ar.com.comunidadesfera.batallaespacial.juego.Partida;
 
 /**
  * Batalla Espacial en la Galaxia Andrómeda.
@@ -34,5 +37,22 @@ public class BatallaEspacial
          * el contenido de una variable que la referencie.
          */
         return DESCRIPCION;
+    }
+    
+    @Override
+    public void agregarObservador(Observador observador) {
+     
+        this.implementacion.agregarObservador(observador);
+    }
+    
+    @Override
+    public <P extends Participante> Partida<P> jugar(Configuracion<P> configuracion) {
+     
+        return this.implementacion.jugar(configuracion);
+    }
+    
+    public static void main(String[] args) {
+        
+        new BatallaEspacial().iniciar();
     }
 }
