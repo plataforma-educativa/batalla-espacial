@@ -39,7 +39,10 @@ import ar.com.comunidadesfera.batallaespacial.test.pieza.nave.NaveDeCombateTest;
     AsteroideDetectableTest.class,
     ContenedorDetectableTest.class,
     BaseEspacialDetectableTest.class,
-    NaveDeCombateDetectableTest.class
+    NaveDeCombateDetectableTest.class,
+    
+    /* Servicios de una Pieza */
+    PiezaVisitableTest.class
     
 })
 public class PiezaTestSuite {

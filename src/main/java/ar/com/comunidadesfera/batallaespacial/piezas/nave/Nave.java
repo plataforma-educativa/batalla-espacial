@@ -1,7 +1,9 @@
 package ar.com.comunidadesfera.batallaespacial.piezas.nave;
 
+import ar.com.comunidadesfera.batallaespacial.Civilizacion;
 import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
 import ar.com.comunidadesfera.batallaespacial.juego.Tablero.Casillero;
+import ar.com.comunidadesfera.batallaespacial.piezas.VisitanteDePiezas;
 import ar.com.comunidadesfera.batallaespacial.piezas.base.PistaDeAterrizaje;
 
 /**
@@ -150,5 +152,14 @@ public abstract class Nave extends Pieza {
         super.setCasillero(casillero);
     }
     
+    public Civilizacion getCivilizacion() {
+        
+        return null;
+    }
     
+    @Override
+    public void recibir(VisitanteDePiezas visitante) {
+
+        visitante.visitar(this);
+    }
 }

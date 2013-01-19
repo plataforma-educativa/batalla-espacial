@@ -1,7 +1,7 @@
 package ar.com.comunidadesfera.batallaespacial.aplicacion;
 
-import java.awt.Color;
-
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import ar.com.comunidadesfera.batallaespacial.Civilizacion;
 import ar.com.comunidadesfera.batallaespacial.juego.FabricaDePiezas;
 import ar.com.comunidadesfera.batallaespacial.juego.Participante;
@@ -14,20 +14,30 @@ import ar.com.comunidadesfera.batallaespacial.juego.Participante;
  */
 public class ParticipanteExtendido extends Participante {
 
-    private Color color;
+    private Paint pintura;
     
     public ParticipanteExtendido(Civilizacion civilizacion, int naves, 
                         FabricaDePiezas fabrica, String color) {
         super(civilizacion, naves, fabrica);
-        this.setColor(Color.decode(color)); 
+        this.setPintura(Color.web(color)); 
     }
 
-    public Color getColor() {
-        return color;
+    @Deprecated
+    public java.awt.Color getColor() {
+        return java.awt.Color.RED;
     }
 
-    protected void setColor(Color color) {
-        this.color = color;
+    /**
+     * 
+     * @return pintura utilizada para identificar las Piezas que le pertenecen.
+     */
+    public Paint getPintura() {
+        
+        return this.pintura;
+    }
+    
+    protected void setPintura(Paint pintura) {
+        this.pintura = pintura;
     }
 
 }

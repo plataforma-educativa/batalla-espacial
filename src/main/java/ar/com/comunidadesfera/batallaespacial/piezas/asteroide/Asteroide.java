@@ -2,8 +2,10 @@ package ar.com.comunidadesfera.batallaespacial.piezas.asteroide;
 
 import ar.com.comunidadesfera.batallaespacial.Reporte;
 import ar.com.comunidadesfera.batallaespacial.Reporte.Espectro;
+import ar.com.comunidadesfera.batallaespacial.juego.Detectable;
 import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
 import ar.com.comunidadesfera.batallaespacial.juego.ReporteEstatico;
+import ar.com.comunidadesfera.batallaespacial.piezas.VisitanteDePiezas;
 
 public class Asteroide extends Pieza {
 
@@ -34,5 +36,11 @@ public class Asteroide extends Pieza {
         super.distorsionar();
         
         this.setPuntos((int) (Pieza.azar.nextFloat() * this.getPuntos()));
+    }
+    
+    @Override
+    public void recibir(VisitanteDePiezas visitante) {
+     
+        visitante.visitar(this);
     }
 }

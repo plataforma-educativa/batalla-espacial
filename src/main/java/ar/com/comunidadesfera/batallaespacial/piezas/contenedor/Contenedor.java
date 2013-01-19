@@ -6,11 +6,13 @@ import java.util.Map;
 
 import ar.com.comunidadesfera.batallaespacial.Civilizacion;
 import ar.com.comunidadesfera.batallaespacial.Reporte;
-import ar.com.comunidadesfera.batallaespacial.Sustancia;
 import ar.com.comunidadesfera.batallaespacial.Reporte.Espectro;
+import ar.com.comunidadesfera.batallaespacial.Sustancia;
+import ar.com.comunidadesfera.batallaespacial.juego.Detectable;
 import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
 import ar.com.comunidadesfera.batallaespacial.juego.ReporteEstatico;
 import ar.com.comunidadesfera.batallaespacial.piezas.TransporteDeSustancias;
+import ar.com.comunidadesfera.batallaespacial.piezas.VisitanteDePiezas;
 
 /**
  * Pieza que implementa un Transporte de Sustancias.
@@ -222,6 +224,12 @@ public class Contenedor extends Pieza implements TransporteDeSustancias {
 
             this.modificarCarga(sustancia, carga);
         }
+    }
+    
+    @Override
+    public void recibir(VisitanteDePiezas visitante) {
+     
+        visitante.visitar(this);
     }
 }
 

@@ -11,6 +11,7 @@ import ar.com.comunidadesfera.batallaespacial.Reporte.Espectro;
 import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
 import ar.com.comunidadesfera.batallaespacial.juego.ReporteEstatico;
 import ar.com.comunidadesfera.batallaespacial.piezas.TransporteDeSustancias;
+import ar.com.comunidadesfera.batallaespacial.piezas.VisitanteDePiezas;
 import ar.com.comunidadesfera.batallaespacial.piezas.contenedor.Contenedor;
 import ar.com.comunidadesfera.batallaespacial.piezas.nave.Nave;
 
@@ -184,5 +185,11 @@ public class BaseEspacial extends Pieza  implements TransporteDeSustancias,
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	@Override
+	public void recibir(VisitanteDePiezas visitante) {
+
+	    visitante.visitar(this);
 	}
 }

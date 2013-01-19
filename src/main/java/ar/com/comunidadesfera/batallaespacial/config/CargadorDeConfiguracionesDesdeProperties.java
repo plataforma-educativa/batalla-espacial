@@ -7,6 +7,8 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.lang.exception.ExceptionUtils;
@@ -160,12 +162,14 @@ public class CargadorDeConfiguracionesDesdeProperties implements CargadorDeConfi
     }
 
     @Override
+    @Inject
     public void setFabricaDeTableros(FabricaDeTableros fabrica) {
         
         this.fabricaDeTableros = fabrica;
     }
     
     @Override
+    @Inject
     public void setFabricaDePiezas(FabricaDePiezas fabrica) {
         
         this.fabricaDePiezas = fabrica;

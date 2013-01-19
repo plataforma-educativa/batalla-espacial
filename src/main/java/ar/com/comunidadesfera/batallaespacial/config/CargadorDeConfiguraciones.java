@@ -3,8 +3,6 @@ package ar.com.comunidadesfera.batallaespacial.config;
 import java.nio.file.Path;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import ar.com.comunidadesfera.batallaespacial.aplicacion.FabricaDeTableros;
 import ar.com.comunidadesfera.batallaespacial.aplicacion.ParticipanteExtendido;
 import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
@@ -25,10 +23,8 @@ public interface CargadorDeConfiguraciones {
     
     Configuracion<ParticipanteExtendido> cargar(Path ruta) throws ConfiguracionInvalidaException;
 
-    @Inject
     void setFabricaDeTableros(FabricaDeTableros fabrica);
 
-    @Inject
     void setFabricaDePiezas(FabricaDePiezas fabrica);
 
 }

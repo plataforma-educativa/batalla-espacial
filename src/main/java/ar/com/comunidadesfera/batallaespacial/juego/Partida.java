@@ -7,12 +7,9 @@ import java.util.TreeSet;
 
 import ar.com.comunidadesfera.batallaespacial.Comandante;
 import ar.com.comunidadesfera.batallaespacial.Piloto;
-import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.BaseUnicaCentral;
 import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.DefinicionDeBases;
 import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.DefinicionDeNaves;
-import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.NavesDeCombatePosicionadasEnBase;
 import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.Reglamentacion;
-import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.ReglamentacionBasica;
 import ar.com.comunidadesfera.batallaespacial.piezas.base.BaseEspacial;
 import ar.com.comunidadesfera.batallaespacial.piezas.nave.Nave;
 
@@ -88,10 +85,9 @@ public class Partida<T extends Participante> {
         
         this.setConfiguracion(configuracion);
         
-        // TODO Leer desde la configuración las estrategias utilizadas.
-        this.setReglamentacion(new ReglamentacionBasica());
-        this.setEstrategiaDeDefinicionDeBases(new BaseUnicaCentral());
-        this.setEstrategiaDeDefinicionDeNaves(new NavesDeCombatePosicionadasEnBase());
+        this.setReglamentacion(configuracion.getReglamentacion());
+        this.setEstrategiaDeDefinicionDeBases(configuracion.getDefinicionDeBases());
+        this.setEstrategiaDeDefinicionDeNaves(configuracion.getDefinicionDeNaves());
         
         this.setTablero(configuracion.getTablero());
         this.setControlDeRadar(new ControlDeRadar(this.getTablero()));

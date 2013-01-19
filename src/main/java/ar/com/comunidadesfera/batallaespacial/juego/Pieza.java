@@ -6,6 +6,8 @@ import java.util.Random;
 
 import ar.com.comunidadesfera.batallaespacial.juego.Tablero.Casillero;
 import ar.com.comunidadesfera.batallaespacial.juego.escenarios.Escenario;
+import ar.com.comunidadesfera.batallaespacial.piezas.PiezaNoVisitableException;
+import ar.com.comunidadesfera.batallaespacial.piezas.VisitanteDePiezas;
 
 public abstract class Pieza implements Comparable<Pieza>, Detectable, Cloneable {
 
@@ -265,6 +267,17 @@ public abstract class Pieza implements Comparable<Pieza>, Detectable, Cloneable 
     }
 
     /**
+     * @post invoca sobre el visitante el método correspodiente al subtipo de Pieza. 
+     * 
+     * @param visitante
+     */
+    public void recibir(VisitanteDePiezas visitante) {
+        
+        /* por defecto una pieza no acepta visitantes */
+        throw new PiezaNoVisitableException();
+    }
+
+    /**
      * Pieza.Observador define la interfaz para los objetos que deben
      * ser notificados ante un cambio de una Pieza. 
      *
@@ -279,4 +292,5 @@ public abstract class Pieza implements Comparable<Pieza>, Detectable, Cloneable 
          */
         void cambio(Pieza pieza);
     }
+
 }

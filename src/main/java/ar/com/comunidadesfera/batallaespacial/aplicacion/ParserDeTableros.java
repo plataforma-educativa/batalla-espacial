@@ -5,6 +5,8 @@ import java.io.Reader;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+import javax.inject.Inject;
+
 import ar.com.comunidadesfera.batallaespacial.juego.CasilleroInvalidoException;
 import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
 import ar.com.comunidadesfera.batallaespacial.juego.FabricaDePiezas;
@@ -176,29 +178,24 @@ public class ParserDeTableros implements FabricaDeTableros {
         return this.delimitador.pattern();
     }
 
-
     public void setDelimitador(String delimitador) {
         this.delimitador = Pattern.compile(delimitador);
     }
-
 
     public FabricaDePiezas getFabricaDePiezas() {
         return fabricaDePiezas;
     }
 
-
+    @Inject
     public void setFabricaDePiezas(FabricaDePiezas fabricaDePiezas) {
         this.fabricaDePiezas = fabricaDePiezas;
     }
-
 
     public Reader getOrigen() {
         return origen;
     }
 
-
     public void setOrigen(Reader origen) {
         this.origen = origen;
     }
-
 }

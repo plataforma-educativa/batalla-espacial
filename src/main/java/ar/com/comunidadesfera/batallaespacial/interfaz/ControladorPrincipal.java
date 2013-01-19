@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -15,8 +17,10 @@ import javafx.stage.FileChooserBuilder;
 import javax.inject.Inject;
 
 import ar.com.comunidadesfera.batallaespacial.BatallaEspacial;
+import ar.com.comunidadesfera.batallaespacial.aplicacion.ParticipanteExtendido;
 import ar.com.comunidadesfera.batallaespacial.config.CargadorDeConfiguraciones;
 import ar.com.comunidadesfera.batallaespacial.config.ConfiguracionInvalidaException;
+import ar.com.comunidadesfera.batallaespacial.juego.Partida;
 
 
 public class ControladorPrincipal {
@@ -28,13 +32,18 @@ public class ControladorPrincipal {
     private URL location;
 
     @FXML
-    private GridPane panelTablero; 
+    private ScrollPane panelMarcoTablero; 
 
     @Inject
     private BatallaEspacial batallaEspacial;
     
     @Inject
     private CargadorDeConfiguraciones cargador;
+
+    private Partida<ParticipanteExtendido> partida;
+    
+    @Inject
+    private DibujanteDePiezas dibujante;
     
     @FXML
     void nuevaPartida(ActionEvent event) {
@@ -59,6 +68,8 @@ public class ControladorPrincipal {
     @FXML
     void initialize() {
 
+        Button boton = new Button("OK");
+        this.panelMarcoTablero.setContent(boton);
     }
 
     
@@ -66,7 +77,17 @@ public class ControladorPrincipal {
         
         try {
             
-            this.batallaEspacial.jugar(this.cargador.cargar(rutaConfiguracion));
+            this.panelMarcoTablero.setContent(null);
+            
+            this.partida = this.batallaEspacial.jugar(this.cargador.cargar(rutaConfiguracion));
+            
+            this.dibujante.setConfiguracion(this.partida.getConfiguracion());
+            
+            GridPane panelTablero = new PanelTablero(this.partida.getTablero(), this.dibujante);
+
+            this.panelMarcoTablero.setContent(panelTablero);
+                        
+            this.partida.comenzar();
             
         } catch (ConfiguracionInvalidaException e) {
             
