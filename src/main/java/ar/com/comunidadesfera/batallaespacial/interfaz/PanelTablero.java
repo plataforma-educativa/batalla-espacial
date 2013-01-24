@@ -1,5 +1,7 @@
 package ar.com.comunidadesfera.batallaespacial.interfaz;
 
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
@@ -16,35 +18,67 @@ public class PanelTablero extends GridPane implements VisitanteDePiezas {
     
     private DibujanteDePiezas dibujanteDePiezas;
     
-    public PanelTablero(Tablero tablero, DibujanteDePiezas dibujanteDePiezas) {
+    private Controlador controlador;
+    
+    public PanelTablero() {
         super();
+    }
+    
+    public void setControlador(Controlador controlador) {
+        
+        this.controlador = controlador;
+    }
+    
+    public void setTablero(Tablero tablero) {
         
         this.tablero = tablero;
-        this.dibujanteDePiezas = dibujanteDePiezas;
-        
-        this.disponerPiezas();
     }
 
-    private void disponerPiezas() {
+    public void setDibujanteDePiezas(DibujanteDePiezas dibujanteDePiezas) {
+        
+        this.dibujanteDePiezas = dibujanteDePiezas;
+    }
+
+    public void disponerPiezas() {
 
         this.setVgap(3);
         this.setHgap(3);
+        this.setGridLinesVisible(true);
         
         /* Recorre todas las Piezas que están ocupando una posición en el Tablero */
         for (Pieza pieza : this.tablero) {
                             
             this.agregar(pieza);
         }
+        
+        for (int columna = 0; columna <= this.tablero.getColumnas() + 2; columna++) {
+            
+            this.add(this.dibujanteDePiezas.dibujarMargen(), columna, 0);
+            this.add(this.dibujanteDePiezas.dibujarMargen(), columna, this.tablero.getFilas() + 2);
+        }
+        
+        for (int fila = 1; fila <= this.tablero.getFilas() + 1; fila++) {
+            
+            this.add(this.dibujanteDePiezas.dibujarMargen(), 0, fila);
+            this.add(this.dibujanteDePiezas.dibujarMargen(), this.tablero.getColumnas() + 2, fila);
+        }
+        
     }
+    
 
     private void agregar(Pieza pieza) {
         
         if (pieza != null) {
             
             /* dibuja la Pieza */
-            Node nodoPieza = this.dibujanteDePiezas.dibujar(pieza);
+            Node dibujoPieza = this.dibujanteDePiezas.dibujar(pieza);
             
-            this.actualizar(new PanelPieza(pieza, nodoPieza));
+            PanelPieza panelPieza = new PanelPieza();
+            panelPieza.setPieza(pieza);
+            panelPieza.setDibujoPieza(dibujoPieza);
+            panelPieza.setControlador(this.controlador);
+            
+            this.actualizar(panelPieza);
 
             /* hace tareas específicas para cada tipo de Pieza */
             pieza.recibir(this);
@@ -57,12 +91,15 @@ public class PanelTablero extends GridPane implements VisitanteDePiezas {
         
         Tablero.Casillero casillero = pieza.getCasillero();
         
+        /* en caso de estar ocupando otra posición */
         this.getChildren().remove(panel);
 
         if (casillero != null) {
 
-            /* en caso de estar ocupando otra posición */
-            this.add(panel, casillero.getColumna(), casillero.getFila());
+            this.add(panel, casillero.getColumna() + 1, casillero.getFila() + 1); 
+
+            GridPane.setValignment(panel, VPos.CENTER);
+            GridPane.setHalignment(panel, HPos.CENTER);
         }
         
         panel.setPanelTablero(this);

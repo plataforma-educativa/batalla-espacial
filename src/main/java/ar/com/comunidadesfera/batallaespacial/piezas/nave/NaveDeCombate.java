@@ -18,6 +18,8 @@ import ar.com.comunidadesfera.batallaespacial.Sustancia;
 import ar.com.comunidadesfera.batallaespacial.juego.Detectable;
 import ar.com.comunidadesfera.batallaespacial.juego.ReporteEstatico;
 import ar.com.comunidadesfera.batallaespacial.juego.escenarios.Escenario;
+import ar.com.comunidadesfera.batallaespacial.piezas.Arma;
+import ar.com.comunidadesfera.batallaespacial.piezas.Arsenal;
 import ar.com.comunidadesfera.batallaespacial.piezas.CabinaDeControlBasica;
 import ar.com.comunidadesfera.batallaespacial.piezas.PiezaControlable;
 import ar.com.comunidadesfera.batallaespacial.piezas.TransporteDeSustancias;
@@ -39,11 +41,6 @@ public class NaveDeCombate extends Nave
      */
     private static AtomicLong capacidadDeCarga = new AtomicLong(100);
     private static AtomicInteger  capacidadTorpedos = new AtomicInteger(20);
-    
-    /**
-     * Cantidad de torpedos.
-     */
-    private int cantidadDeTorpedos;
     
     /**
      * Bodega de carga de la Nave
@@ -79,6 +76,8 @@ public class NaveDeCombate extends Nave
      * Piloto al mando de la nave
      */
     private Piloto piloto;
+    
+    private ArsenalNaveDeCombate arsenal;
 
     /**
      * Crea una NaveDeCombate con los puntos indicados.
@@ -89,7 +88,8 @@ public class NaveDeCombate extends Nave
     
         super(puntos);
         
-        this.setCantidadDeTorpedos(NaveDeCombate.getCapacidadTorpedos());
+        this.arsenal = new ArsenalNaveDeCombate();
+
         this.bodega = new Contenedor(this.getPuntos(), NaveDeCombate.getCapacidadDeCarga());
         
         this.inicializar();
@@ -125,7 +125,7 @@ public class NaveDeCombate extends Nave
      */
     public synchronized int getCantidadDeTorpedos() {
         
-        return cantidadDeTorpedos;
+        return this.arsenal.getMuniciones(Arma.TORPEDO_DE_FOTONES);
     }
 
     /**
@@ -134,17 +134,9 @@ public class NaveDeCombate extends Nave
      * 
      * @param cantidadDeTorpedos
      */
-    public void setCantidadDeTorpedos(int cantidadDeTorpedos) {
+    public synchronized void setCantidadDeTorpedos(int cantidadDeTorpedos) {
         
-        if (cantidadDeTorpedos < 0) {
-            
-            throw new IllegalArgumentException("La cantidad de torpedos invalida");
-        }
-        
-        synchronized (this) {
-            
-            this.cantidadDeTorpedos = cantidadDeTorpedos;
-        }
+        this.arsenal.setMuniciones(Arma.TORPEDO_DE_FOTONES, cantidadDeTorpedos);
         
         this.notificar();
     }
@@ -340,5 +332,11 @@ public class NaveDeCombate extends Nave
     public static void setCapacidadTorpedos(int capacidadTorpedos) {
         
         NaveDeCombate.capacidadTorpedos.set(capacidadTorpedos);
+    }
+
+    @Override
+    public Arsenal getArsenal() {
+
+        return this.arsenal;
     }
 }

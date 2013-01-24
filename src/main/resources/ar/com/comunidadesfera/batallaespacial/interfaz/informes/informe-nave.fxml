@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<fx:root type="javafx.scene.control.TitledPane" fx:id="panel" animated="false" text="" xmlns:fx="http://javafx.com/fxml">
+  <content>
+    <GridPane id="GridPane">
+      <children>
+        <Label text="civilizacion" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label text="puntos" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label fx:id="civilizacion" text="" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Label fx:id="puntos" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label text="carga" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <Label fx:id="carga" text="" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Label text="arsenal" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+        <Label fx:id="arsenal" text="" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <Label text="escudos" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <Label fx:id="escudos" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+  </content>
+</fx:root>

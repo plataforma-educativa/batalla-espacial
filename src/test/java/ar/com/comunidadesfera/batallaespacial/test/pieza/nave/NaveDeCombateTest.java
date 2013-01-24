@@ -1,9 +1,7 @@
 package ar.com.comunidadesfera.batallaespacial.test.pieza.nave;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
 
 import java.util.Queue;
 
@@ -15,6 +13,7 @@ import ar.com.comunidadesfera.batallaespacial.CabinaDeControl;
 import ar.com.comunidadesfera.batallaespacial.Control;
 import ar.com.comunidadesfera.batallaespacial.Notificacion;
 import ar.com.comunidadesfera.batallaespacial.Piloto;
+import ar.com.comunidadesfera.batallaespacial.piezas.Arsenal;
 import ar.com.comunidadesfera.batallaespacial.piezas.nave.NaveDeCombate;
 import ar.com.comunidadesfera.batallaespacial.test.civilizaciones.simulada.CivilizacionSimulada;
 import ar.com.comunidadesfera.batallaespacial.test.civilizaciones.simulada.ComandanteSimulado;
@@ -64,8 +63,8 @@ public class NaveDeCombateTest extends NaveTest<NaveDeCombate> {
     @Override
     protected int cambiarParaObservar(NaveDeCombate pieza) {
 
-        pieza.setCantidadDeTorpedos(50);
-        pieza.setCantidadDeTorpedos(80);
+        pieza.setCantidadDeTorpedos(15);
+        pieza.setCantidadDeTorpedos(5);
 
         return 2;
     }
@@ -84,9 +83,9 @@ public class NaveDeCombateTest extends NaveTest<NaveDeCombate> {
         Assert.assertThat("cantidad de torpedos", nave.getCantidadDeTorpedos(),
                           Matchers.equalTo(NaveDeCombate.getCapacidadTorpedos()));
         
-        nave.setCantidadDeTorpedos(100);
+        nave.setCantidadDeTorpedos(15);
         Assert.assertThat("cantidad de torpedos", nave.getCantidadDeTorpedos(),
-                          Matchers.equalTo(100));
+                          Matchers.equalTo(15));
     }
     
     @Test
@@ -137,5 +136,15 @@ public class NaveDeCombateTest extends NaveTest<NaveDeCombate> {
                           Matchers.hasItems(Notificacion.ATAQUE, 
                                             Notificacion.CHOQUE));
         
+    }
+    
+    @Test
+    public void getArsenal() {
+     
+        NaveDeCombate nave = this.instanciar();
+        
+        Arsenal arsenal = nave.getArsenal();
+        
+        Assert.assertThat("arsenal", arsenal, Matchers.notNullValue());
     }
 }

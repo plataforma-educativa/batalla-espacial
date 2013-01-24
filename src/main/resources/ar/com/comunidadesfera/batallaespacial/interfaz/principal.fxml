@@ -8,7 +8,7 @@
 <?import javafx.scene.paint.*?>
 <?scenebuilder-stylesheet estilos.css?>
 
-<BorderPane mouseTransparent="false" pickOnBounds="true" prefHeight="400.0" prefWidth="600.0" style="&#10;" xmlns:fx="http://javafx.com/fxml" fx:controller="ar.com.comunidadesfera.batallaespacial.interfaz.ControladorPrincipal">
+<fx:root type="javafx.scene.layout.BorderPane" mouseTransparent="false" pickOnBounds="true" prefHeight="400.0" prefWidth="600.0" style="&#10;" xmlns:fx="http://javafx.com/fxml" fx:controller="ar.com.comunidadesfera.batallaespacial.interfaz.ControladorPrincipal">
   <center>
     <TabPane cache="false" mouseTransparent="false" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" side="TOP" tabClosingPolicy="UNAVAILABLE" visible="true" BorderPane.margin="$x1">
       <tabs>
@@ -26,11 +26,7 @@
                 <Insets />
               </padding>
               <right>
-                <TitledPane animated="false" collapsible="false" contentDisplay="LEFT" expanded="true" maxHeight="1.7976931348623157E308" maxWidth="150.0" minHeight="-1.0" minWidth="-Infinity" prefWidth="150.0" text="Detalles" BorderPane.alignment="CENTER" BorderPane.margin="$x1">
-                  <content>
-                    <TilePane prefHeight="200.0" prefWidth="200.0" />
-                  </content>
-                </TitledPane>
+                <fx:include fx:id="panelInformes" source="informes/informes.fxml" />
               </right>
             </BorderPane>
           </content>
@@ -71,4 +67,4 @@
       </menus>
     </MenuBar>
   </top>
-</BorderPane>
+</fx:root>

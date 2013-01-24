@@ -4,10 +4,12 @@ import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
 
-import java.awt.Color;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -69,7 +71,7 @@ public class CargadorDeConfiguracionesDesdePropertiesTest {
         participante = configuracion.getParticipantes().get(0);
         assertThat("civilizacion del participante 1", participante.getCivilizacion(), is(Numenor.class));
         assertThat("cantida de naves del participante 1", participante.getCantidadNaves(), is(3));
-        assertThat("color del participante 1", participante.getColor(), is(Color.decode("0x00AA22")));
+        assertThat("color del participante 1", participante.getPintura(), is((Paint) Color.web("0x00AA22")));
         
         /* Interacciones */
         verify(fabricaDeTableros).crearTablero(Mockito.eq(configuracion), Mockito.<InputStream>any());
@@ -101,17 +103,17 @@ public class CargadorDeConfiguracionesDesdePropertiesTest {
         participante = configuracion.getParticipantes().get(0); 
         assertThat("civilizacion del participante 1", participante.getCivilizacion(), is(Numenor.class));
         assertThat("cantida de naves del participante 1", participante.getCantidadNaves(), is(3));
-        assertThat("color del participante 1", participante.getColor(), is(Color.decode("0x00AA22")));
+        assertThat("color del participante 1", participante.getPintura(), is((Paint) Color.web("0x00AA22")));
 
         participante = configuracion.getParticipantes().get(1); 
         assertThat("civilizacion del participante 2", participante.getCivilizacion(), is(CivilizacionSimulada.class));
         assertThat("cantida de naves del participante 2", participante.getCantidadNaves(), is(8));
-        assertThat("color del participante 2", participante.getColor(), notNullValue());
+        assertThat("color del participante 2", participante.getPintura(), notNullValue());
         
         participante = configuracion.getParticipantes().get(2); 
         assertThat("civilizacion del participante 3", participante.getCivilizacion(), is(CivilizacionHumana.class));
         assertThat("cantida de naves del participante 3", participante.getCantidadNaves(), greaterThan(0));
-        assertThat("color del participante 3", participante.getColor(), is(Color.decode("0xFF00FF")));
+        assertThat("color del participante 3", participante.getPintura(), is((Paint) Color.web("0xFF00FF")));
         
         /* Interacciones */
         verify(fabricaDeTableros).crearTablero(Mockito.eq(configuracion), Mockito.<InputStream>any());

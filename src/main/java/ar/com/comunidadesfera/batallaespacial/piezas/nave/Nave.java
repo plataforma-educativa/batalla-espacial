@@ -1,8 +1,12 @@
 package ar.com.comunidadesfera.batallaespacial.piezas.nave;
 
+import java.util.Map;
+
 import ar.com.comunidadesfera.batallaespacial.Civilizacion;
+import ar.com.comunidadesfera.batallaespacial.Sustancia;
 import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
 import ar.com.comunidadesfera.batallaespacial.juego.Tablero.Casillero;
+import ar.com.comunidadesfera.batallaespacial.piezas.Arsenal;
 import ar.com.comunidadesfera.batallaespacial.piezas.VisitanteDePiezas;
 import ar.com.comunidadesfera.batallaespacial.piezas.base.PistaDeAterrizaje;
 
@@ -162,4 +166,14 @@ public abstract class Nave extends Pieza {
 
         visitante.visitar(this);
     }
+    
+    /**
+     * @return carga que lleva la Nave en su/s bodega/s.
+     */
+    public abstract Map<Sustancia, Long> getCarga();
+    
+    /**
+     * @return Arsenal con el que cuenta la Nave.
+     */
+    public abstract Arsenal getArsenal();
 }

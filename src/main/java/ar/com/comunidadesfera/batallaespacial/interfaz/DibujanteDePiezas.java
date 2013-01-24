@@ -11,6 +11,7 @@ import javafx.scene.shape.LineToBuilder;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.MoveToBuilder;
 import javafx.scene.shape.Path;
+import javafx.scene.shape.RectangleBuilder;
 import ar.com.comunidadesfera.batallaespacial.aplicacion.ParticipanteExtendido;
 import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
 import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
@@ -25,8 +26,10 @@ public class DibujanteDePiezas implements VisitanteDePiezas {
 
     private Node dibujo;
     
-    private final double dimension = 40.0;
-
+    private final double dimension = 30.0;
+    
+    private final double margen = dimension * 0.1;
+    
     private Configuracion<ParticipanteExtendido> configuracion;
 
     public DibujanteDePiezas() {
@@ -35,6 +38,11 @@ public class DibujanteDePiezas implements VisitanteDePiezas {
     public void setConfiguracion(Configuracion<ParticipanteExtendido> configuracion) {
         
         this.configuracion = configuracion;
+    }
+    
+    public double getDimension() {
+        
+        return this.dimension;
     }
     
     @Override
@@ -49,10 +57,10 @@ public class DibujanteDePiezas implements VisitanteDePiezas {
         dibujoNave.setStrokeWidth(1);
 
         dibujoNave.getElements().addAll(
-                MoveToBuilder.create().x(this.dimension / 2).y(0).build(),
-                LineToBuilder.create().x(this.dimension).y(this.dimension).build(),
-                LineToBuilder.create().x(0).y(this.dimension).build(),
-                LineToBuilder.create().x(this.dimension / 2).y(0).build());
+                MoveToBuilder.create().x(this.dimension / 2).y(this.margen).build(),
+                LineToBuilder.create().x(this.dimension - this.margen).y(this.dimension - this.margen).build(),
+                LineToBuilder.create().x(this.margen).y(this.dimension - this.margen).build(),
+                LineToBuilder.create().x(this.dimension / 2).y(this.margen).build());
         
         this.dibujo = dibujoNave;
 
@@ -68,11 +76,11 @@ public class DibujanteDePiezas implements VisitanteDePiezas {
 
         grafico.setStroke(new Color(0.0, 0.0, 0.0, 1.0));
         grafico.setFill(participante.getPintura());
-        grafico.fillRoundRect(this.dimension * 0.1,  this.dimension * 0.1, 
-                              this.dimension * 0.8, this.dimension * 0.8,
+        grafico.fillRoundRect(this.margen, this.margen, 
+                              this.dimension - 2 * this.margen, this.dimension - 2 * this.margen,
                               this.dimension * 0.1, this.dimension * 0.1);
-        grafico.strokeRoundRect(this.dimension * 0.1,  this.dimension * 0.1, 
-                                this.dimension * 0.8, this.dimension * 0.8,
+        grafico.strokeRoundRect(this.margen, this.margen, 
+                                this.dimension - 2 * this.margen, this.dimension - 2 * this.margen,
                                 this.dimension * 0.1, this.dimension * 0.1);
 
         this.dibujo = dibujoContenedor;
@@ -123,10 +131,10 @@ public class DibujanteDePiezas implements VisitanteDePiezas {
         
         grafico.setStroke(new Color(0.0, 0.0, 0.0, 1.0));
         grafico.setFill(new Color(1.0, 0.99, 0.7, 1.0));
-        grafico.fillOval(this.dimension * 0.1, this.dimension * 0.1, 
-                         this.dimension * 0.8, this.dimension * 0.8);
-        grafico.strokeOval(this.dimension * 0.1, this.dimension * 0.1, 
-                           this.dimension * 0.8, this.dimension * 0.8);
+        grafico.fillOval(this.margen, this.margen, 
+                         this.dimension - 2 * this.margen, this.dimension - 2 * this.margen);
+        grafico.strokeOval(this.margen, this.margen, 
+                           this.dimension - 2 * this.margen, this.dimension - 2 * this.margen);
 
         this.dibujo = dibujoContenedor;
     }
@@ -153,5 +161,15 @@ public class DibujanteDePiezas implements VisitanteDePiezas {
         }
         
         return this.dibujo;
+    }
+    
+    public Node dibujarMargen() {
+        
+        return RectangleBuilder.create()
+                    .width(this.dimension)
+                    .height(this.dimension)
+                    .fill(Color.GRAY)
+                    .stroke(Color.GRAY)
+                    .build();
     }
 }

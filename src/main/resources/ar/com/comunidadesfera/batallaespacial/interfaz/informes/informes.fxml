@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<VBox id="VBox" fx:id="panel" alignment="TOP_CENTER" minWidth="-1.0" prefWidth="-1.0" spacing="5.0" xmlns:fx="http://javafx.com/fxml" fx:controller="ar.com.comunidadesfera.batallaespacial.interfaz.informes.ControladorInformes" />

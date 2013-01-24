@@ -7,9 +7,7 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.FileChooserBuilder;
@@ -20,10 +18,12 @@ import ar.com.comunidadesfera.batallaespacial.BatallaEspacial;
 import ar.com.comunidadesfera.batallaespacial.aplicacion.ParticipanteExtendido;
 import ar.com.comunidadesfera.batallaespacial.config.CargadorDeConfiguraciones;
 import ar.com.comunidadesfera.batallaespacial.config.ConfiguracionInvalidaException;
+import ar.com.comunidadesfera.batallaespacial.interfaz.informes.ControladorInformes;
 import ar.com.comunidadesfera.batallaespacial.juego.Partida;
+import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
 
 
-public class ControladorPrincipal {
+public class ControladorPrincipal implements Controlador {
 
     @FXML
     private ResourceBundle resources;
@@ -34,6 +34,9 @@ public class ControladorPrincipal {
     @FXML
     private ScrollPane panelMarcoTablero; 
 
+    @FXML
+    private ControladorInformes panelInformesController;
+    
     @Inject
     private BatallaEspacial batallaEspacial;
     
@@ -44,7 +47,7 @@ public class ControladorPrincipal {
     
     @Inject
     private DibujanteDePiezas dibujante;
-    
+
     @FXML
     void nuevaPartida(ActionEvent event) {
 
@@ -68,10 +71,7 @@ public class ControladorPrincipal {
     @FXML
     void initialize() {
 
-        Button boton = new Button("OK");
-        this.panelMarcoTablero.setContent(boton);
     }
-
     
     private void jugar(Path rutaConfiguracion) {
         
@@ -83,8 +83,12 @@ public class ControladorPrincipal {
             
             this.dibujante.setConfiguracion(this.partida.getConfiguracion());
             
-            GridPane panelTablero = new PanelTablero(this.partida.getTablero(), this.dibujante);
-
+            PanelTablero panelTablero = new PanelTablero();
+            panelTablero.setTablero(this.partida.getTablero());
+            panelTablero.setDibujanteDePiezas(this.dibujante);
+            panelTablero.setControlador(this);
+            panelTablero.disponerPiezas();
+            
             this.panelMarcoTablero.setContent(panelTablero);
                         
             this.partida.comenzar();
@@ -94,6 +98,12 @@ public class ControladorPrincipal {
             // TODO 
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void seleccionar(Pieza pieza, Vista origen) {
+
+        this.panelInformesController.seleccionar(pieza, origen);
     }
     
 }

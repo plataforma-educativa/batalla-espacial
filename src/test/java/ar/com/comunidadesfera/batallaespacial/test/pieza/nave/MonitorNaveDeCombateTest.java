@@ -20,7 +20,7 @@ public class  MonitorNaveDeCombateTest {
     public static final Sustancia[] sustancias = Sustancia.values();
     
     @DataPoints
-    public static final int[] cantidadesDeTorpedos = new int[] { 1, 10, 50, 1000 };
+    public static final int[] cantidadesDeTorpedos = new int[] { 1, 5, 10, 15 };
     
     @DataPoints
     public static final long[] cantidadesDeSustancias = new long[] { 10, 20, 25, 50 };
