@@ -10,7 +10,7 @@
         <validation-mode>CALLBACK</validation-mode>
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="update" />
-            <property name="hibernate.show_sql" value="false" />
+            <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value="false" />
             <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:derby:db/eficiencia;create=true"/>

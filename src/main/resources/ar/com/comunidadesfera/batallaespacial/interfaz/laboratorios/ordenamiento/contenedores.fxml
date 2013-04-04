@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?scenebuilder-preview-i18n-resource ../../contenido.properties?>
+
+<fx:root type="javafx.scene.layout.AnchorPane" prefHeight="377.0000999999975" prefWidth="554.0" snapToPixel="true" xmlns:fx="http://javafx.com/fxml" fx:controller="ar.com.comunidadesfera.batallaespacial.interfaz.ordenamiento.ControladorOrdenarContenedores">
+  <GridPane gridLinesVisible="false" hgap="5.0" padding="$x2" vgap="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <children>
+      <Label text="%ordenamiento.problema" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+        <font>
+          <Font name="System Bold" size="13.0" fx:id="x1" />
+        </font>
+      </Label>
+      <Label alignment="CENTER_LEFT" text="%ordenamiento.problema.descripcion" textOverrun="WORD_ELLIPSIS" underline="false" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.valignment="TOP" />
+      <Label font="$x1" text="%ordenamiento.implementacion" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.valignment="TOP">
+        <labelFor>
+          <ComboBox fx:id="selectorImplementacion" promptText="" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <items>
+              <FXCollections fx:factory="observableArrayList" />
+            </items>
+          </ComboBox>
+        </labelFor>
+      </Label>
+      <fx:reference source="selectorImplementacion" />
+      <Label id="etiqueta" fx:id="paqueteImplementacion" text="" textOverrun="LEADING_ELLIPSIS" wrapText="false" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+      <Label font="$x1" text="%ordenamiento.parametros" textAlignment="LEFT" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.valignment="TOP">
+        <labelFor>
+          <ListView fx:id="listaParametros" minHeight="-1.0" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        </labelFor>
+      </Label>
+      <fx:reference source="listaParametros" />
+      <Label font="$x1" text="%ordenamiento.resultado" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.valignment="TOP">
+        <labelFor>
+          <TableView id="tablaContenedoresOrdenados" fx:id="tablaResultado" maxWidth="-1.0" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" tableMenuButtonVisible="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <columns>
+              <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="37.0" sortable="false" text="%ordenamiento.resultado.numero" fx:id="columnaNumero" />
+              <TableColumn editable="true" minWidth="150.0" prefWidth="75.0" sortable="false" text="%ordenamiento.resultado.identificador" fx:id="columnaContenedor" />
+              <TableColumn prefWidth="75.0" sortable="false" text="%ordenamiento.resultado.puntos" fx:id="columnaPuntos" />
+              <TableColumn prefWidth="75.0" sortable="false" text="%ordenamiento.resultado.carga" fx:id="columnaCarga" />
+            </columns>
+          </TableView>
+        </labelFor>
+      </Label>
+      <fx:reference source="tablaResultado" />
+      <ToolBar orientation="HORIZONTAL" prefWidth="-1.0" style="&#10;&#10;" visible="true" GridPane.columnIndex="0" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4">
+        <items>
+          <Button fx:id="botonOrdenar" alignment="CENTER" cancelButton="false" contentDisplay="LEFT" defaultButton="true" disable="false" minWidth="-1.0" mnemonicParsing="false" style="" text="%ordenamiento.ordenar" textAlignment="LEFT" />
+        </items>
+        <GridPane.margin>
+          <Insets fx:id="x2" />
+        </GridPane.margin>
+      </ToolBar>
+    </children>
+    <columnConstraints>
+      <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="120.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    </columnConstraints>
+    <rowConstraints>
+      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" vgrow="NEVER" />
+      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
+      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
+      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" percentHeight="-1.0" prefHeight="150.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" vgrow="NEVER" />
+      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" percentHeight="-1.0" prefHeight="150.0" vgrow="ALWAYS" />
+    </rowConstraints>
+  </GridPane>
+  <padding>
+    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+  </padding>
+</fx:root>

@@ -6,13 +6,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
-<?scenebuilder-stylesheet estilos.css?>
+<?scenebuilder-preview-i18n-resource contenido.properties?>
 
-<fx:root type="javafx.scene.layout.BorderPane" mouseTransparent="false" pickOnBounds="true" prefHeight="400.0" prefWidth="600.0" style="&#10;" xmlns:fx="http://javafx.com/fxml" fx:controller="ar.com.comunidadesfera.batallaespacial.interfaz.ControladorPrincipal">
+<fx:root type="javafx.scene.layout.BorderPane" mouseTransparent="false" pickOnBounds="true" prefHeight="590.0" prefWidth="740.0" style="&#10;" stylesheets="ar/com/comunidadesfera/batallaespacial/interfaz/estilos.css" xmlns:fx="http://javafx.com/fxml" fx:controller="ar.com.comunidadesfera.batallaespacial.interfaz.ControladorPrincipal">
   <center>
     <TabPane cache="false" mouseTransparent="false" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" side="TOP" tabClosingPolicy="UNAVAILABLE" visible="true" BorderPane.margin="$x1">
       <tabs>
-        <Tab text="Partida">
+        <Tab text="%seccion.partida">
           <content>
             <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
               <center>
@@ -31,12 +31,37 @@
             </BorderPane>
           </content>
         </Tab>
-        <Tab closable="false" text="Metricas">
+        <Tab id="" text="%seccion.laboratorio">
           <content>
-            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            <BorderPane id="laboratorio" prefHeight="200.0" prefWidth="200.0">
+              <center>
+                <TabPane id="" disable="false" prefHeight="200.0" prefWidth="200.0" side="RIGHT" tabClosingPolicy="UNAVAILABLE">
+                  <tabs>
+                    <Tab text="%ordenamiento.titulo">
+                      <content>
+                        <fx:include fx:id="panelOrdenamiento" source="laboratorios/ordenamiento/contenedores.fxml" />
+                      </content>
+                    </Tab>
+                    <Tab text="%busqueda.titulo">
+                      <content>
+                        <fx:include fx:id="panelBusqueda" source="laboratorios/busqueda/piezas.fxml" />
+                      </content>
+                    </Tab>
+                  </tabs>
+                </TabPane>
+              </center>
+              <padding>
+                <Insets top="5.0" />
+              </padding>
+            </BorderPane>
           </content>
         </Tab>
-        <Tab text="Configuracion">
+        <Tab closable="false" text="%seccion.registros">
+          <content>
+            <fx:include fx:id="panelEficiencia" source="eficiencia/mediciones.fxml" />
+          </content>
+        </Tab>
+        <Tab text="%seccion.configuracion">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
           </content>
@@ -47,21 +72,20 @@
   <top>
     <MenuBar>
       <menus>
-        <Menu mnemonicParsing="false" text="Partida">
+        <Menu mnemonicParsing="false" text="%menu.partida">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#nuevaPartida" text="Nueva" />
-            <MenuItem mnemonicParsing="false" text="Salir" />
+            <MenuItem mnemonicParsing="false" onAction="#nuevaPartida" text="%menu.partida.nueva" />
+            <MenuItem mnemonicParsing="false" text="%menu.partida.salir" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Metricas">
+        <Menu mnemonicParsing="false" text="%menu.metricas">
           <items>
-            <MenuItem mnemonicParsing="false" text="Iniciar" />
-            <MenuItem mnemonicParsing="false" text="Terminar" />
+            <CheckMenuItem mnemonicParsing="false" text="%menu.metricas.registrar" fx:id="menuMetricasRegistrar" />
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="Ayuda">
+        <Menu mnemonicParsing="false" text="%menu.ayuda">
           <items>
-            <MenuItem mnemonicParsing="false" text="Acerca de..." />
+            <MenuItem mnemonicParsing="false" text="%menu.ayuda.acercaDe" />
           </items>
         </Menu>
       </menus>

@@ -1,0 +1,23 @@
+/* Colores:
+ * 
+ * celeste  : #cce3f4
+ * amarillo : #efdd68
+ * verde    : #bfe05f
+ * 
+ */
+
+.chart-pie-label{
+    -fx-font-size: 0px;
+}
+
+#laboratorio .tab-header-background {
+    -fx-background-color: #cce3f4;
+}
+
+#laboratorio .tool-bar {
+    -fx-alignment: CENTER_RIGHT;
+}
+
+#laboratorio .button {
+    -fx-label-padding: 0px 25px 0px 25px;
+}

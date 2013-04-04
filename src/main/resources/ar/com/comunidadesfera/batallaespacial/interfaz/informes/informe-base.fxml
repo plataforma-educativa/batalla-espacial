@@ -5,16 +5,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
+<?scenebuilder-preview-i18n-resource ../contenido.properties?>
 
 <fx:root type="javafx.scene.control.TitledPane" fx:id="panel" animated="false" text="" xmlns:fx="http://javafx.com/fxml">
   <content>
     <GridPane id="GridPane">
       <children>
-        <Label text="civilizacion" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <Label text="puntos" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label text="%informe.base.civilizacion" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label text="%informe.base.puntos" GridPane.columnIndex="0" GridPane.rowIndex="1" />
         <Label fx:id="civilizacion" text="" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <Label fx:id="puntos" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Label text="carga" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <Label text="%informe.base.carga" GridPane.columnIndex="0" GridPane.rowIndex="2" />
         <Label fx:id="carga" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       </children>
       <columnConstraints>

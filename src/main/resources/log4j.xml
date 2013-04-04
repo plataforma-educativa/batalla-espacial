@@ -8,13 +8,26 @@
         </layout>
     </appender>
 
+    <appender name="FILE" class="org.apache.log4j.RollingFileAppender">
+        <!-- The active file to log to -->
+        <param name="file" value="/tmp/batalla-espacial/batalla-espacial.log" />
+        <param name="append" value="true" />
+        <param name="encoding" value="UTF-8" />
+
+        <layout class="org.apache.log4j.PatternLayout">
+            <!-- The log message pattern -->
+            <param name="ConversionPattern" value="%5p %d{ISO8601} [%t][%x] [%C#%M:%L] - %m%n" />
+        </layout>
+    </appender>
+
     <category name="ar.com.comunidadesfera.eficiencia">
         <priority value="DEBUG" />
     </category>
 
     <root>
         <priority value="INFO" />
-        <appender-ref ref="CONSOLE" />
+<!--         <appender-ref ref="CONSOLE" /> -->
+        <appender-ref ref="FILE" />
     </root>
 
 </log4j:configuration>

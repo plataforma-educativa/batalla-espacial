@@ -24,4 +24,45 @@
                 d.entorno = :entorno
         </query>
     </named-query>
+    
+    <named-query name="listarModulos">
+        <query>
+            SELECT m
+            FROM Modulo m
+            ORDER BY
+                m.nombre
+        </query>
+    </named-query>
+    
+    <named-query name="buscarModulos">
+        <query>
+            SELECT m
+            FROM Modulo m
+            WHERE
+                UPPER(m.nombre) LIKE UPPER(:nombre)
+            ORDER BY
+                m.nombre
+        </query>
+    </named-query>
+    
+    <named-query name="calcularMedicionesPorModulo">
+        <query>
+            SELECT new ar.com.comunidadesfera.eficiencia.reporte.ItemSimple(m, m.resultado.magnitud)
+            FROM Medicion m 
+            WHERE 
+                m.discriminante = :modulo
+        </query>
+    </named-query>
+    
+    <named-query name="calcularMedicionesPorDiscriminante">
+        <query>
+            SELECT new ar.com.comunidadesfera.eficiencia.reporte.ItemSimple(m.discriminante.nombre, SUM(m.resultado.magnitud))
+            FROM Medicion m 
+            WHERE 
+                m.discriminante.entorno = :discriminante
+            GROUP BY
+                m.discriminante.nombre
+        </query>
+    </named-query>
+    
 </entity-mappings>

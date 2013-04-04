@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?scenebuilder-preview-i18n-resource ../contenido.properties?>
+
+<BorderPane prefHeight="425.0000999999975" prefWidth="710.0000999999975" xmlns:fx="http://javafx.com/fxml" fx:controller="ar.com.comunidadesfera.batallaespacial.interfaz.eficiencia.ControladorEficiencia">
+  <center>
+    <VBox alignment="TOP_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="0.0">
+      <children>
+        <ScatterChart fx:id="grafico" legendSide="BOTTOM" legendVisible="true" title="%metricas.grafico.titulo" VBox.vgrow="ALWAYS">
+          <xAxis>
+            <NumberAxis label="%metricas.grafico.abscisas" side="BOTTOM" />
+          </xAxis>
+          <yAxis>
+            <NumberAxis side="LEFT" />
+          </yAxis>
+        </ScatterChart>
+      </children>
+      <padding>
+        <Insets left="10.0" />
+      </padding>
+    </VBox>
+  </center>
+  <left>
+    <VBox prefHeight="-1.0" prefWidth="300.0">
+      <children>
+        <Label text="%metricas.modulos.titulo">
+          <font>
+            <Font name="System Bold" size="13.0" />
+          </font>
+          <labelFor>
+            <TableView fx:id="tablaModulos" editable="true" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" tableMenuButtonVisible="true" VBox.vgrow="SOMETIMES">
+              <columns>
+                <TableColumn editable="false" maxWidth="100.0" minWidth="30.0" prefWidth="30.0" resizable="true" text="%metricas.modulos.id" fx:id="columnaId" />
+                <TableColumn maxWidth="24.0" minWidth="24.0" prefWidth="24.0" sortable="false" text="%metricas.modulos.seleccionado" fx:id="columnaSeleccionado" />
+                <TableColumn editable="false" prefWidth="300.0" text="%metricas.modulos.nombre" fx:id="columnaNombre" />
+                <TableColumn editable="false" prefWidth="75.0" text="%metricas.modulos.version" fx:id="columnaVersion" />
+                <TableColumn editable="false" prefWidth="200.0" text="%metricas.modulos.descripcion" fx:id="columnaDescripcion" />
+              </columns>
+            </TableView>
+          </labelFor>
+        </Label>
+        <HBox prefHeight="-1.0" prefWidth="-1.0" snapToPixel="true" spacing="5.0" visible="true" VBox.vgrow="NEVER">
+          <children>
+            <TextField id="campoBuscar" fx:id="campoFiltro" prefWidth="168.0" promptText="%metricas.modulos.filtro" HBox.hgrow="ALWAYS" />
+            <Button fx:id="botonBuscar" alignment="CENTER" cancelButton="false" defaultButton="true" mnemonicParsing="false" onAction="#buscarModulos" text="%metricas.modulos.buscar" textOverrun="CLIP" />
+          </children>
+          <padding>
+            <Insets bottom="5.0" top="5.0" />
+          </padding>
+          <VBox.margin>
+            <Insets />
+          </VBox.margin>
+        </HBox>
+        <fx:reference source="tablaModulos" />
+        <PieChart id="PieChart" fx:id="graficoDistribucion" labelLineLength="-20.0" labelsVisible="true" style="" title="">
+          <padding>
+            <Insets />
+          </padding>
+        </PieChart>
+      </children>
+    </VBox>
+  </left>
+  <padding>
+    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+  </padding>
+</BorderPane>
