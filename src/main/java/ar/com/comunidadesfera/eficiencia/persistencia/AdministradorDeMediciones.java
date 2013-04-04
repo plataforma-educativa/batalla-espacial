@@ -9,6 +9,8 @@ import javax.persistence.NoResultException;
 import ar.com.comunidadesfera.eficiencia.registros.Discriminante;
 import ar.com.comunidadesfera.eficiencia.registros.Medicion;
 import ar.com.comunidadesfera.eficiencia.registros.Modulo;
+import ar.com.comunidadesfera.eficiencia.reporte.ItemCompuesto;
+import ar.com.comunidadesfera.eficiencia.reporte.ItemReporte;
 import ar.com.comunidadesfera.persistencia.EstrategiaTransaccional;
 import ar.com.comunidadesfera.persistencia.Transaccional;
 
@@ -128,5 +130,43 @@ public class AdministradorDeMediciones {
             }
         }
     }
+    
+    @SuppressWarnings("unchecked")
+    @Transaccional(EstrategiaTransaccional.REQUERIDA)
+    public List<Modulo> listarModulos() {
 
+        return this.em.createNamedQuery("listarModulos")
+                      .getResultList();
+    }
+
+    @SuppressWarnings("unchecked")
+    @Transaccional(EstrategiaTransaccional.REQUERIDA)
+    public List<Modulo> buscarModulos(String filtro) {
+
+        return this.em.createNamedQuery("buscarModulos")
+                      .setParameter("nombre", "%" + filtro + "%")
+                      .getResultList();
+    }
+    
+    @SuppressWarnings("unchecked")
+    @Transaccional(EstrategiaTransaccional.REQUERIDA)
+    public List<ItemReporte<Medicion>> calcularMediciones(Modulo modulo) {
+
+        return this.em.createNamedQuery("calcularMedicionesPorModulo")
+                      .setParameter("modulo", modulo)
+                      .getResultList();
+    }
+
+    @SuppressWarnings("unchecked")
+    @Transaccional(EstrategiaTransaccional.REQUERIDA)
+    public ItemCompuesto<Discriminante> calcularMedicionesPorDiscriminante(Discriminante discriminante) {
+        
+        List<ItemReporte<Discriminante>> subitems = this.em.createNamedQuery("calcularMedicionesPorDiscriminante")
+                                                           .setParameter("discriminante", discriminante)
+                                                           .getResultList();
+        
+        return new ItemCompuesto<Discriminante>(discriminante,
+                                                discriminante.getNombre(), 
+                                                subitems);
+    }
 }

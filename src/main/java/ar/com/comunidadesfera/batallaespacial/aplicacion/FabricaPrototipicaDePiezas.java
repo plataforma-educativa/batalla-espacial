@@ -63,7 +63,8 @@ public class FabricaPrototipicaDePiezas implements FabricaDePiezas {
         InputStream resource = null;
         
         try {
-
+            // TODO reemplazar la implentación usando commons config. 
+            
             /* properties de configuración */
             Properties properties = new Properties();
             resource = this.getClass().getResourceAsStream(propertiesResource);  
@@ -111,8 +112,11 @@ public class FabricaPrototipicaDePiezas implements FabricaDePiezas {
             /* Contenedor */
             intValue = Integer.parseInt(properties.getProperty("contenedor.puntos",
                                                                VALOR_DEFAULT));
+            int capacidad = Integer.parseInt(properties.getProperty("contenedor.capacidad",
+                                                                    VALOR_DEFAULT));
             simbolo = properties.getProperty("contenedor.simbolo");
-            Contenedor contenedor = new Contenedor(intValue, Integer.MAX_VALUE);
+            
+            Contenedor contenedor = new Contenedor(intValue, capacidad);
             
             longValue = Long.parseLong(properties.getProperty("contenedor.sustancia",
                                                               VALOR_DEFAULT));

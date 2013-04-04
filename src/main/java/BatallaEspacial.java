@@ -1,8 +1,6 @@
 
-import ar.com.comunidadesfera.batallaespacial.galaxias.andromeda.BatallaEspacialAndromeda;
-import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
-import ar.com.comunidadesfera.batallaespacial.juego.Participante;
-import ar.com.comunidadesfera.batallaespacial.juego.Partida;
+import javafx.application.Application;
+import ar.com.comunidadesfera.plataformaeducativa.AplicacionBatallaEspacialInteractiva;
 
 /**
  * Batalla Espacial en la Galaxia Andrómeda.
@@ -12,24 +10,20 @@ import ar.com.comunidadesfera.batallaespacial.juego.Partida;
  * @author Mariano Tugnarelli
  *
  */
-public class BatallaEspacial 
-    implements ar.com.comunidadesfera.batallaespacial.BatallaEspacial {
+public class BatallaEspacial {
 
     private static final String DESCRIPCION = "Batalla Espacial iniciada";
     
-    private ar.com.comunidadesfera.batallaespacial.BatallaEspacial implementacion;
-    
     public BatallaEspacial() {
      
-        this.implementacion = new BatallaEspacialAndromeda();
+        Thread thread = new Thread(new LanzarAplicacionBatallaEspacial());
+
+        /* hack para que funcione el Interaction Pane de DrJava */
+        thread.setContextClassLoader(this.getClass().getClassLoader());
+        
+        thread.start();
     }
 
-    @Override
-    public void iniciar() {
-
-        this.implementacion.iniciar();
-    }
-    
     @Override
     public String toString() {
 
@@ -39,20 +33,13 @@ public class BatallaEspacial
         return DESCRIPCION;
     }
     
-    @Override
-    public void agregarObservador(Observador observador) {
-     
-        this.implementacion.agregarObservador(observador);
-    }
-    
-    @Override
-    public <P extends Participante> Partida<P> jugar(Configuracion<P> configuracion) {
-     
-        return this.implementacion.jugar(configuracion);
-    }
-    
-    public static void main(String[] args) {
+    private static class LanzarAplicacionBatallaEspacial implements Runnable {
         
-        new BatallaEspacial().iniciar();
+        @Override
+        public void run() {
+            
+            Application.launch(AplicacionBatallaEspacialInteractiva.class);
+            
+        }
     }
 }

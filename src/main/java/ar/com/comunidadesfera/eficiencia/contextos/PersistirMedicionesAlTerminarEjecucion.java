@@ -56,19 +56,19 @@ public class PersistirMedicionesAlTerminarEjecucion implements Ejecucion.Observa
         this.verificarEjecucion(ejecucion);
         
             
-            for (InstrumentoDeMedicion instrumento : this.instrumentos) {
+        for (InstrumentoDeMedicion instrumento : this.instrumentos) {
+            
+            try {
                 
-                try {
-                    
-                    this.administradorDeMediciones.guardar(instrumento.getMediciones());
+                this.administradorDeMediciones.guardar(instrumento.getMediciones());
 
-                } catch (PersistenciaException pe) {
-                    
-                    // TODO : mecanismo de notificación de errores.
-                    logger.error("No se pudo persistir las Mediciones al terminar la Ejecución.",
-                                 pe);
-                }
+            } catch (PersistenciaException pe) {
+                
+                // TODO : mecanismo de notificación de errores.
+                logger.error("No se pudo persistir las Mediciones al terminar la Ejecución.",
+                             pe);
             }
+        }
             
     }
     

@@ -1,6 +1,7 @@
 package ar.com.comunidadesfera.eficiencia.contextos;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import ar.com.comunidadesfera.eficiencia.Contexto;
 import ar.com.comunidadesfera.eficiencia.Ejecucion;
@@ -13,6 +14,7 @@ import ar.com.comunidadesfera.eficiencia.persistencia.AdministradorDeMediciones;
  * @author Mariano Tugnarelli
  *
  */
+@Singleton
 public class ContextoBasico implements Contexto {
 
     private boolean persistente = false;

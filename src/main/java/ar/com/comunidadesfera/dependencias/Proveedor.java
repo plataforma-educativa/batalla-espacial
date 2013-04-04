@@ -51,7 +51,9 @@ public class Proveedor<T> {
 
     private Provider<T> provider;
     
-    Proveedor(BeanManager beanManager, Class<T> interfaz, Instance<T> instance) {
+    
+    // TODO hacerlo package
+    public Proveedor(BeanManager beanManager, Class<T> interfaz, Instance<T> instance) {
      
         this.interfaz = interfaz;
         this.instance = instance;
