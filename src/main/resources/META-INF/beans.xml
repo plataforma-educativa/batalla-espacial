@@ -3,9 +3,12 @@
 
     <!-- Activa los interceptores, definiendo además su orden -->
     <interceptors>
+    
+        <!-- Persistencia -->
         <class>ar.com.comunidadesfera.persistencia.InterceptorTransaccionRequerida</class>
         <class>ar.com.comunidadesfera.persistencia.InterceptorNuevaTransaccionRequerida</class>
         <class>ar.com.comunidadesfera.persistencia.InterceptorTransaccionSoportada</class>
         <class>ar.com.comunidadesfera.persistencia.InterceptorTransaccionNoSoportada</class>
+       
     </interceptors>
 </beans>

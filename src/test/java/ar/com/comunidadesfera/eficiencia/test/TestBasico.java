@@ -1,5 +1,7 @@
 package ar.com.comunidadesfera.eficiencia.test;
 
+import java.util.Date;
+
 import org.hamcrest.Matcher;
 import org.junit.Before;
 
@@ -23,13 +25,38 @@ public abstract class TestBasico {
     public TestBasico() {
         super();
     }
-
+    
     @Before
     public void inicializarContexto() {
         
         this.contexto = Eficiencia.getContexto();
     }
 
+
+    protected void esperar(int milisegundos) {
+
+        try {
+            
+            Thread.sleep(milisegundos);
+        
+        } catch (InterruptedException ie) {
+
+            throw new RuntimeException(ie);
+        }
+    }
+    
+    protected Date registrarTiempo() {
+        
+        Date marca;
+        
+        /* asegura que la marca temporal sea única, esperando al menos un milisegundo antes
+         * y después de obtener un timestamp */
+        this.esperar(1);
+        marca = new Date();
+        this.esperar(1);
+            
+        return marca;
+    }
     
     public Matcher<Medida> medidaCon(long magnitud, Unidad unidad) {
         return new MedidaCon(magnitud, unidad);

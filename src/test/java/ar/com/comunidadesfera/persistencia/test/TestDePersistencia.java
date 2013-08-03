@@ -20,7 +20,7 @@ import ar.com.comunidadesfera.eficiencia.test.TestBasico;
 public abstract class TestDePersistencia extends TestBasico {
 
     protected static EntityManagerFactory emFactory;
-    protected EntityManager em = null;
+    protected EntityManager em = null; 
 
     @BeforeClass
     public static void initEntityManagerFactory() throws Exception {

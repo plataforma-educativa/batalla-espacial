@@ -1,6 +1,6 @@
 package ar.com.comunidadesfera.eficiencia.test;
 
-import static ar.com.comunidadesfera.eficiencia.test.Datos.Ejecucion.SIMPLE_20;
+import static ar.com.comunidadesfera.eficiencia.test.Datos.Ejecucion.*;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
@@ -32,7 +32,8 @@ public class EjecucionObservadaTest extends TestBasico {
         
         /* prepara el componente a probar */
         this.ejecucion = this.contexto.iniciarEjecucion(SIMPLE_20.modulo.nombre,
-                                                        SIMPLE_20.tamaño);
+                                                        SIMPLE_20.problema.nombre,
+                                                        SIMPLE_20.dimension);
         this.ejecucion.agregarObservador(this.observador);
     }
     

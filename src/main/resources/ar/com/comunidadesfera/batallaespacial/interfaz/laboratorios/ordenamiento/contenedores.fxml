@@ -11,7 +11,7 @@
 <?scenebuilder-preview-i18n-resource ../../contenido.properties?>
 
 <fx:root type="javafx.scene.layout.AnchorPane" prefHeight="377.0000999999975" prefWidth="554.0" snapToPixel="true" xmlns:fx="http://javafx.com/fxml" fx:controller="ar.com.comunidadesfera.batallaespacial.interfaz.ordenamiento.ControladorOrdenarContenedores">
-  <GridPane gridLinesVisible="false" hgap="5.0" padding="$x2" vgap="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+  <GridPane gridLinesVisible="false" hgap="5.0" vgap="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
     <children>
       <Label text="%ordenamiento.problema" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
         <font>
@@ -54,7 +54,7 @@
           <Button fx:id="botonOrdenar" alignment="CENTER" cancelButton="false" contentDisplay="LEFT" defaultButton="true" disable="false" minWidth="-1.0" mnemonicParsing="false" style="" text="%ordenamiento.ordenar" textAlignment="LEFT" />
         </items>
         <GridPane.margin>
-          <Insets fx:id="x2" />
+          <Insets left="-4.0" right="-4.0" />
         </GridPane.margin>
       </ToolBar>
     </children>
@@ -62,6 +62,9 @@
       <ColumnConstraints fillWidth="true" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="120.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     </columnConstraints>
+    <padding>
+      <Insets fx:id="x2" />
+    </padding>
     <rowConstraints>
       <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" vgrow="NEVER" />
       <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />

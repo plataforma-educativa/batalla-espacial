@@ -9,6 +9,7 @@ import javax.persistence.NoResultException;
 import ar.com.comunidadesfera.eficiencia.registros.Discriminante;
 import ar.com.comunidadesfera.eficiencia.registros.Medicion;
 import ar.com.comunidadesfera.eficiencia.registros.Modulo;
+import ar.com.comunidadesfera.eficiencia.registros.Problema;
 import ar.com.comunidadesfera.eficiencia.reporte.ItemCompuesto;
 import ar.com.comunidadesfera.eficiencia.reporte.ItemReporte;
 import ar.com.comunidadesfera.persistencia.EstrategiaTransaccional;
@@ -50,13 +51,28 @@ public class AdministradorDeMediciones {
      */
     private void guardarMedicion(Medicion medicion) {
 
-        this.guardarModulo(medicion);
-        this.guardarProblema(medicion);
+        this.guardarRegistroDeEjecucion(medicion);
         this.guardarDiscriminante(medicion);
         
         em.persist(medicion);
     }
 
+    /**
+     * @post persiste el RegistroDeEjecución asociado a la Medición.
+     * 
+     * @param medidion
+     */
+    private void guardarRegistroDeEjecucion(Medicion medicion) {
+        
+        if (!em.contains(medicion.getEjecucion())) {
+
+            this.guardarModulo(medicion);
+            this.guardarProblema(medicion);
+
+            em.persist(medicion.getEjecucion());
+        }
+    }
+    
     /**
      * @post persiste el Problema asociado a la Medición.
      * 
@@ -65,9 +81,23 @@ public class AdministradorDeMediciones {
      */
     private void guardarProblema(Medicion medicion) {
 
-        if (!em.contains(medicion.getProblema())) {
+        Problema problema = medicion.getProblema();
 
-            em.persist(medicion.getProblema());
+        if (problema.getId() == null) {
+
+            try {
+
+                Long id = (Long) em.createNamedQuery("buscarIdProblema")
+                                   .setParameter("nombre", problema.getNombre())
+                                   .getSingleResult();
+                
+                problema.setId(id);
+                
+            } catch (NoResultException nre) {
+                
+                /* si no encontró el problema lo persiste */
+                em.persist(medicion.getProblema());
+            }
         }
     }
 
@@ -87,9 +117,9 @@ public class AdministradorDeMediciones {
             try {
                 
                 Long id = (Long) em.createNamedQuery("buscarIdModulo")
-                                    .setParameter("identificacion", modulo.getIdentificacion())
-                                    .setParameter("version", modulo.getVersion())
-                                    .getSingleResult();
+                                   .setParameter("identificacion", modulo.getIdentificacion())
+                                   .setParameter("version", modulo.getVersion())
+                                   .getSingleResult();
                 
                 modulo.setId(id);
                 
@@ -169,4 +199,20 @@ public class AdministradorDeMediciones {
                                                 discriminante.getNombre(), 
                                                 subitems);
     }
+
+    @SuppressWarnings("unchecked")
+    @Transaccional(EstrategiaTransaccional.REQUERIDA)
+    public List<ItemCompuesto<Discriminante>> calcularMedicionesPorDimensionDiscriminante(Discriminante discriminante) {
+        
+        List<ItemReporte<Discriminante>> subitems = this.em.createNamedQuery("calcularMedicionesPorDimensionDiscriminante")
+                                                           .setParameter("discriminante", discriminante)
+                                                           .getResultList();
+//        
+//        return new ItemCompuesto<Discriminante>(discriminante,
+//                                                discriminante.getNombre(), 
+//                                                subitems);
+        
+        return null;
+    }
+
 }

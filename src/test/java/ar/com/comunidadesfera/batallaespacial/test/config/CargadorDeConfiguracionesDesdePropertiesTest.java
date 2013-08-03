@@ -69,7 +69,7 @@ public class CargadorDeConfiguracionesDesdePropertiesTest {
         ParticipanteExtendido participante;
         
         participante = configuracion.getParticipantes().get(0);
-        assertThat("civilizacion del participante 1", participante.getCivilizacion(), is(Numenor.class));
+        assertThat("civilizacion del participante 1", participante.getCivilizacion(), instanceOf(Numenor.class));
         assertThat("cantida de naves del participante 1", participante.getCantidadNaves(), is(3));
         assertThat("color del participante 1", participante.getPintura(), is((Paint) Color.web("0x00AA22")));
         
@@ -101,17 +101,17 @@ public class CargadorDeConfiguracionesDesdePropertiesTest {
         ParticipanteExtendido participante;
         
         participante = configuracion.getParticipantes().get(0); 
-        assertThat("civilizacion del participante 1", participante.getCivilizacion(), is(Numenor.class));
+        assertThat("civilizacion del participante 1", participante.getCivilizacion(), instanceOf(Numenor.class));
         assertThat("cantida de naves del participante 1", participante.getCantidadNaves(), is(3));
         assertThat("color del participante 1", participante.getPintura(), is((Paint) Color.web("0x00AA22")));
 
         participante = configuracion.getParticipantes().get(1); 
-        assertThat("civilizacion del participante 2", participante.getCivilizacion(), is(CivilizacionSimulada.class));
+        assertThat("civilizacion del participante 2", participante.getCivilizacion(), instanceOf(CivilizacionSimulada.class));
         assertThat("cantida de naves del participante 2", participante.getCantidadNaves(), is(8));
         assertThat("color del participante 2", participante.getPintura(), notNullValue());
         
         participante = configuracion.getParticipantes().get(2); 
-        assertThat("civilizacion del participante 3", participante.getCivilizacion(), is(CivilizacionHumana.class));
+        assertThat("civilizacion del participante 3", participante.getCivilizacion(), instanceOf(CivilizacionHumana.class));
         assertThat("cantida de naves del participante 3", participante.getCantidadNaves(), greaterThan(0));
         assertThat("color del participante 3", participante.getPintura(), is((Paint) Color.web("0xFF00FF")));
         

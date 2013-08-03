@@ -1,7 +1,8 @@
 package ar.com.comunidadesfera.eficiencia.test;
 
-import static ar.com.comunidadesfera.eficiencia.test.Datos.Ejecucion.MULTIPLES_PASOS;
-import static ar.com.comunidadesfera.eficiencia.test.Datos.Ejecucion.SIMPLE_10;
+import static ar.com.comunidadesfera.eficiencia.test.Datos.Ejecucion.*;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
 import java.util.Date;
 import java.util.List;
@@ -11,8 +12,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import org.hamcrest.Matchers;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,7 +22,7 @@ import ar.com.comunidadesfera.eficiencia.persistencia.AdministradorDeMediciones;
 import ar.com.comunidadesfera.eficiencia.registros.Medicion;
 import ar.com.comunidadesfera.eficiencia.registros.Medicion_;
 import ar.com.comunidadesfera.eficiencia.registros.Modulo_;
-import ar.com.comunidadesfera.eficiencia.registros.Problema_;
+import ar.com.comunidadesfera.eficiencia.registros.RegistroDeEjecucion_;
 import ar.com.comunidadesfera.eficiencia.registros.Unidad;
 import ar.com.comunidadesfera.persistencia.test.TestDePersistencia;
 
@@ -42,8 +41,8 @@ public class ContextoPersistenteTest extends TestDePersistencia {
         
         this.contexto = contextoBasico;
         this.contexto.setPersistente(true);
-        
-        this.inicio = new Date();
+
+        this.inicio = this.registrarTiempo();        
     }
     
     @Test
@@ -51,13 +50,14 @@ public class ContextoPersistenteTest extends TestDePersistencia {
         
         this.em.getTransaction().begin();
         
-        Ejecucion ejecucion = this.contexto.iniciarEjecucion(SIMPLE_10.modulo.nombre, 
-                                                             SIMPLE_10.tamaño);
+        Ejecucion ejecucion = this.contexto.iniciarEjecucion(SIMPLE_10.modulo.nombre,
+                                                             SIMPLE_10.problema.nombre,
+                                                             SIMPLE_10.dimension);
         
         Contador contador = ejecucion.contarInstrucciones();
 
         /* algoritmo medido*/
-        int[] valores = new int[(int) SIMPLE_10.tamaño[0]];
+        int[] valores = new int[(int) SIMPLE_10.dimension];
         
         for (int i = 0; i < valores.length; i++) {
             
@@ -72,15 +72,14 @@ public class ContextoPersistenteTest extends TestDePersistencia {
         List<Medicion> mediciones = this.buscarMediciones(SIMPLE_10.modulo.nombre);
         
      
-        Assert.assertThat("mediciones persistidas", mediciones.size(),
-                          Matchers.is(1));
+        assertThat("mediciones persistidas", mediciones.size(), is(1));
         
         Medicion medicion = mediciones.get(0);
-        
-        Assert.assertThat("resultado de la medición", medicion.getResultado(),
-                          this.medidaCon(SIMPLE_10.tamaño[0], Unidad.INSTRUCCIONES));
-        Assert.assertThat("resultado", medicion,
-                          this.medicionDe(ejecucion.getModulo(), ejecucion.getProblema()));
+         
+        assertThat("resultado de la medición", medicion.getResultado(),
+                   this.medidaCon(SIMPLE_10.dimension, Unidad.INSTRUCCIONES));
+        assertThat("resultado", medicion,
+                   this.medicionDe(ejecucion.getModulo(), ejecucion.getProblema()));
     }
 
     @Test
@@ -88,13 +87,14 @@ public class ContextoPersistenteTest extends TestDePersistencia {
 
         this.em.getTransaction().begin();
         
-        Ejecucion ejecucion = this.contexto.iniciarEjecucion(MULTIPLES_PASOS.modulo.nombre, 
-                                                             MULTIPLES_PASOS.tamaño);
+        Ejecucion ejecucion = this.contexto.iniciarEjecucion(MULTIPLES_PASOS.modulo.nombre,
+                                                             MULTIPLES_PASOS.problema.nombre,
+                                                             MULTIPLES_PASOS.dimension);
         
         Contador contador = ejecucion.contarInstrucciones();
         
-        int[][] matriz = new int[(int) MULTIPLES_PASOS.tamaño[0]]
-                                [(int) MULTIPLES_PASOS.tamaño[1]];
+        int[][] matriz = new int[(int) MULTIPLES_PASOS.dimension / 2]
+                                [(int) MULTIPLES_PASOS.dimension / 2];
         contador.incrementar();
         
         Contador inicializacion = contador.getParcial("inicializacion");
@@ -123,13 +123,12 @@ public class ContextoPersistenteTest extends TestDePersistencia {
         
         List<Medicion> mediciones = this.buscarMediciones(MULTIPLES_PASOS.modulo.nombre);
         
-        Assert.assertThat("mediciones persistidas", mediciones.size(),
-                          Matchers.is(3));
+        assertThat("mediciones persistidas", mediciones.size(), is(3));
 
         for(Medicion medicion : mediciones) {
             
-            Assert.assertThat("medicion de", medicion, 
-                              this.medicionDe(ejecucion.getModulo(), ejecucion.getProblema()));
+            assertThat("medicion de", medicion, 
+                       this.medicionDe(ejecucion.getModulo(), ejecucion.getProblema()));
             
         }
     }
@@ -138,21 +137,20 @@ public class ContextoPersistenteTest extends TestDePersistencia {
     public void medicionesMultiplesNuevamente() {
 
         /* comprueba que la ejecución repetida de multiples mediciones del mismo
-         * módulo resultan en distintos problemas */
+         * módulo resultan en distintas ejecuciones */
         
-        this.inicio = new Date();
+        this.inicio = this.registrarTiempo();
         this.medicionesMultiples();
         
-        this.inicio = new Date();
+        this.inicio = this.registrarTiempo();
         this.medicionesMultiples();
-
-        this.inicio = new Date();
+        
+        this.inicio = this.registrarTiempo();
         this.medicionesMultiples();
         
         List<Medicion> mediciones = this.buscarMediciones(MULTIPLES_PASOS.modulo.nombre, false);
 
-        Assert.assertThat("mediciones persistidas", mediciones.size(),
-                          Matchers.is(12));
+        assertThat("mediciones persistidas", mediciones.size(), is(9));
     }
 
     private List<Medicion> buscarMediciones(String modulo) {
@@ -167,17 +165,19 @@ public class ContextoPersistenteTest extends TestDePersistencia {
         
         Root<Medicion> medicion = query.from(Medicion.class);
         
-        Predicate restriccion = builder.equal(medicion.get(Medicion_.modulo)
-                                       .get(Modulo_.nombre), modulo);
+        Predicate restriccion = builder.equal(medicion.get(Medicion_.ejecucion)
+                                                      .get(RegistroDeEjecucion_.modulo)
+                                                      .get(Modulo_.nombre), 
+                                              modulo);
 
         if (problemaActual) {
             
             restriccion = builder.and(restriccion,
-                                      builder.greaterThanOrEqualTo(medicion.get(Medicion_.problema)
-                                                                           .get(Problema_.inicio), 
+                                      builder.greaterThanOrEqualTo(medicion.get(Medicion_.ejecucion)
+                                                                           .get(RegistroDeEjecucion_.inicio), 
                                                                    this.inicio));
         }
-        
+                
         query.where(restriccion);
         
         return this.em.createQuery(query).getResultList();

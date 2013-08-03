@@ -13,6 +13,8 @@ import ar.com.comunidadesfera.eficiencia.instrumentos.Contador;
  */
 public class OrdenadorPorSeleccion {
 
+    public static final String PROBLEMA = "Ordenar elementos";
+    
     /**
      * @post ordena los elementos de vector de mayor a menor.
      * 
@@ -21,8 +23,9 @@ public class OrdenadorPorSeleccion {
     public void ordenar(int[] vector) {
 
         Ejecucion ejecucion = Eficiencia.getContexto()
-                                .iniciarEjecucion(this.getClass().getName(), 
-                                                  new long[] { vector.length });
+                                .iniciarEjecucion(this.getClass().getName(),
+                                                  PROBLEMA,
+                                                  vector.length);
         
         Contador contador = ejecucion.contarInstrucciones();
         Contador comparaciones = contador.getParcial("comparaciones");

@@ -155,7 +155,7 @@ public class ParserDeTablerosTest {
 
         assertThat("fila de la pieza", pieza.getCasillero().getFila(), is(fila));
         assertThat("columna de la pieza", pieza.getCasillero().getColumna(), is(columna));
-        assertThat("tipo de pieza [" + fila + "," + columna + "]", pieza, is(clase));
+        assertThat("tipo de pieza [" + fila + "," + columna + "]", pieza, instanceOf(clase));
     }
 
     private InputStream origen() {

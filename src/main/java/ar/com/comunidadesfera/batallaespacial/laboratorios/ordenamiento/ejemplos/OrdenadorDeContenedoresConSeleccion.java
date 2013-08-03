@@ -16,8 +16,8 @@ public class OrdenadorDeContenedoresConSeleccion implements OrdenadorDeContenedo
     @Override
     public void ordenar(Contenedor[] contenedores) {
 
-        Ejecucion ejecucion = contexto.iniciarEjecucion(this.getClass().getSimpleName(), new long[] {contenedores.length});
-        ejecucion.getModulo().setVersion(2);
+        Ejecucion ejecucion = contexto.iniciarEjecucion("OrdenadorDeContenedoresConSeleccion", "Ordenamiento", contenedores.length);
+        ejecucion.getModulo().setVersion(3);
         Contador contador = ejecucion.contarInstrucciones();
 
         for (int longitud = contenedores.length; longitud > 1; longitud--) {
@@ -41,7 +41,7 @@ public class OrdenadorDeContenedoresConSeleccion implements OrdenadorDeContenedo
         
         ejecucion.terminar();
     }
-
+    
     private void intercambiar(Contenedor[] contenedores, int i, int j) {
 
         Contenedor contenedorI = contenedores[i];

@@ -18,7 +18,7 @@ public class DiscriminanteCon extends TypeSafeMatcher<Discriminante>{
         this.nombre = Matchers.is(nombre);
         
         if (entorno == null) {
-            this.entorno = Matchers.nullValue();
+            this.entorno = Matchers.nullValue(Discriminante.class);
             
         } else {
             this.entorno = Matchers.is(entorno);

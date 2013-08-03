@@ -25,6 +25,15 @@
         </query>
     </named-query>
     
+    <named-query name="buscarIdProblema">
+        <query>
+            SELECT p.id
+            FROM Problema p
+            WHERE
+                UPPER(p.nombre) LIKE UPPER(:nombre)
+        </query>
+    </named-query>
+        
     <named-query name="listarModulos">
         <query>
             SELECT m

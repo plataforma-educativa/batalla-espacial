@@ -5,10 +5,11 @@
  * verde    : #bfe05f
  * 
  */
-
+/*
 .chart-pie-label{
     -fx-font-size: 0px;
 }
+*/
 
 #laboratorio .tab-header-background {
     -fx-background-color: #cce3f4;
@@ -21,3 +22,14 @@
 #laboratorio .button {
     -fx-label-padding: 0px 25px 0px 25px;
 }
+
+.split-pane {
+    -fx-border-color: rgb(255,255,255);
+}
+
+.tool-bar.superior {
+    -fx-base:#FFFFFF;
+    -fx-border-color:#FFFFFF #666666 #666666 #666666;
+}
+
+  

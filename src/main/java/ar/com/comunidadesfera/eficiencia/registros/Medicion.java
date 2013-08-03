@@ -1,65 +1,65 @@
 package ar.com.comunidadesfera.eficiencia.registros;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import ar.com.comunidadesfera.persistencia.Entidad;
 
 @Entity
 public class Medicion extends Entidad {
 
-    private Problema problema;
-    
-    private Modulo modulo;
+    private RegistroDeEjecucion ejecucion;
 
     private Discriminante discriminante;
     
     private Medida resultado;
 
+    
     public Medicion() {
     }
 
     /**
-     * Inicializa la Medición del Módulo para el Problema indicado con
-     * el resultado dado. El Discriminante de la Medición es todo Módulo.
+     * Inicializa la Medición para la Ejecución indicada. 
+     * El Discriminante de la Medición es todo Módulo.
      * 
      * @param problema
      * @param modulo
      * @param resultado
-     */
-    public Medicion(Problema problema, Modulo modulo, Medida resultado) {
+     */    
+    public Medicion(RegistroDeEjecucion ejecucion, Discriminante discriminate, Medida resultado) {
         
-        this(problema, modulo, modulo, resultado);
-    }
-    
-    public Medicion(Problema problema, Modulo modulo, Discriminante discriminente, 
-                    Medida resultado) {
-        
-        this.setProblema(problema);
-        this.setModulo(modulo);
-        this.setDiscriminante(discriminente);
+        this.setEjecucion(ejecucion);
+        this.setDiscriminante(discriminate);
         this.setResultado(resultado);
     }
     
+    public void setEjecucion(RegistroDeEjecucion ejecucion) {
+       
+        this.ejecucion = ejecucion;
+    }
+    
     @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = {})
+    public RegistroDeEjecucion getEjecucion() {
+        
+        return this.ejecucion;
+    }
+
+    @Transient
     public Problema getProblema() {
-        return problema;
+
+        return this.ejecucion.getProblema();
     }
 
-    public void setProblema(Problema problema) {
-        this.problema = problema;
-    }
-
-    @ManyToOne(optional = false, fetch = FetchType.EAGER, cascade = {})
+    @Transient
     public Modulo getModulo() {
-        return modulo;
-    }
-
-    public void setModulo(Modulo modulo) {
-        this.modulo = modulo;
+        
+        return this.ejecucion.getModulo();
     }
     
     @OneToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -88,11 +88,22 @@ public class Medicion extends Entidad {
     protected void describir(StringBuilder builder) {
         
         super.describir(builder);
-        this.describirPropiedad(builder, "problema", this.getProblema());
+        this.describirPropiedad(builder, "ejecucion", this.getEjecucion());
         this.describirPropiedad(builder, "modulo", this.getModulo());
         this.describirPropiedad(builder, "discriminante", this.getDiscriminante());
         this.describirPropiedad(builder, "resultado", this.getResultado());
     }
 
+    @Transient
+    public Date getInicio() {
+
+        return this.ejecucion.getInicio();
+    }
+
+    @Transient
+    public Date getFin() {
+
+        return this.ejecucion.getFin();
+    }
 
 }

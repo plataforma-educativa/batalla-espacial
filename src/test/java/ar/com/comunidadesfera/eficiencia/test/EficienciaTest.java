@@ -1,13 +1,11 @@
 package ar.com.comunidadesfera.eficiencia.test;
 
-import static ar.com.comunidadesfera.eficiencia.test.Datos.Ejecucion.MULTIPLES_PASOS;
-import static ar.com.comunidadesfera.eficiencia.test.Datos.Ejecucion.SIMPLE_10;
-import static ar.com.comunidadesfera.eficiencia.test.Datos.Ejecucion.SIMPLE_20;
+import static ar.com.comunidadesfera.eficiencia.test.Datos.Ejecucion.*;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
 import java.util.Random;
 
-import org.hamcrest.Matchers;
-import org.junit.Assert;
 import org.junit.Test;
 
 import ar.com.comunidadesfera.eficiencia.Contexto;
@@ -15,6 +13,7 @@ import ar.com.comunidadesfera.eficiencia.Eficiencia;
 import ar.com.comunidadesfera.eficiencia.Ejecucion;
 import ar.com.comunidadesfera.eficiencia.instrumentos.Contador;
 import ar.com.comunidadesfera.eficiencia.registros.Discriminante;
+import ar.com.comunidadesfera.eficiencia.registros.RegistroDeEjecucion;
 
 public class EficienciaTest extends TestBasico {
 
@@ -22,77 +21,97 @@ public class EficienciaTest extends TestBasico {
     public void getContextoCentral() {
         
         Contexto contexto = Eficiencia.getContexto();
-        Assert.assertThat(contexto, Matchers.notNullValue());
-        Assert.assertThat(contexto, Matchers.sameInstance(this.contexto));
+        assertThat(contexto, notNullValue());
+        assertThat(contexto, sameInstance(this.contexto));
     }
     
     @Test
     public void configurarContexto() {
         
         this.contexto.setPersistente(true);
-        Assert.assertTrue("contexto persistente", 
-                          this.contexto.isPersistente());
+        assertThat("contexto persistente", this.contexto.isPersistente(), is(true));
         this.contexto.setPersistente(false);
-        Assert.assertFalse("contexto persistente", 
-                           this.contexto.isPersistente());
+        assertThat("contexto persistente", this.contexto.isPersistente(), is(false));
+    }
+
+    @Test
+    public void iniciarEjecucion() {
+        
+        Ejecucion ejecucion = this.contexto.iniciarEjecucion(SIMPLE_10.modulo.nombre, 
+                                                             SIMPLE_10.problema.nombre, 
+                                                             SIMPLE_10.dimension);
+        
+        assertThat("modulo", ejecucion.getModulo().getNombre(), is(SIMPLE_10.modulo.nombre));
+        assertThat("problema", ejecucion.getProblema().getNombre(), is(SIMPLE_10.problema.nombre));
+        assertThat("dimensión", ejecucion.getDimension(), is(SIMPLE_10.dimension));
     }
     
     @Test
-    public void medirAlgoritmoSimpleConContador() {
+    public void obtenerRegistroDeEjecucion() {
         
-        /* N : 10 */
-        Ejecucion ejecucion10 = this.contexto.iniciarEjecucion(SIMPLE_10.modulo.nombre, 
-                                                               SIMPLE_10.tamaño);
+        long antes = System.nanoTime();
         
+        Ejecucion ejecucion = this.contexto.iniciarEjecucion(SIMPLE_10.modulo.nombre, 
+                                                             SIMPLE_10.problema.nombre,
+                                                             SIMPLE_10.dimension); 
+
+        ejecucion.terminar();
+        
+        long despues = System.nanoTime();
+        
+        RegistroDeEjecucion registro = ejecucion.getRegistro();
+        
+        assertThat("registro", registro, notNullValue());
+        assertThat("problema del registro", registro.getProblema(), sameInstance(ejecucion.getProblema()));
+        assertThat("modulo del registro", registro.getModulo(), sameInstance(ejecucion.getModulo()));
+        assertThat("inicio del registro", registro.getInicio().getTime(), lessThanOrEqualTo(antes));
+        assertThat("fin del registro", registro.getFin().getTime(), lessThanOrEqualTo(despues));
+    }
+    
+    @Test
+    public void medirAlgoritmoSimple10ConContador() {
+        
+        Ejecucion ejecucion10 = this.contexto.iniciarEjecucion(SIMPLE_10.modulo.nombre,
+                                                               SIMPLE_10.problema.nombre,
+                                                               SIMPLE_10.dimension);
         Contador contador = ejecucion10.contarInstrucciones();
         
-        String[] numeros = new String[(int)SIMPLE_10.tamaño[0]];
+        String[] numeros = new String[(int)SIMPLE_10.dimension];
         for (int i = 0; i < numeros.length; i++) {
             
             numeros[i] = String.valueOf(i);
             contador.incrementar();
         }
         
-        Assert.assertThat("valor del contador ", 
-                          contador.getValor(), 
-                          Matchers.is(SIMPLE_10.tamaño[0]));
-        Assert.assertThat("ejecución del contador", 
-                          contador.getEjecucion(), 
-                          Matchers.sameInstance(ejecucion10));
-        Assert.assertThat("algoritmo de la ejecucion", 
-                          ejecucion10.getModulo().getNombre(),
-                          Matchers.is(SIMPLE_10.modulo.nombre));
-        Assert.assertThat(ejecucion10.contarInstrucciones(), 
-                          Matchers.sameInstance(contador));
+        assertThat("valor del contador ", contador.getValor(), is(SIMPLE_10.dimension));
+        assertThat("ejecución del contador", contador.getEjecucion(), sameInstance(ejecucion10));
+        assertThat("algoritmo de la ejecucion", ejecucion10.getModulo().getNombre(), is(SIMPLE_10.modulo.nombre));
+        assertThat(ejecucion10.contarInstrucciones(), sameInstance(contador));
         
         ejecucion10.terminar();
-
-        /* N : 20 */
-        Ejecucion ejecucion20 = this.contexto.iniciarEjecucion(SIMPLE_20.modulo.nombre, 
-                                                               SIMPLE_20.tamaño);
-        contador = ejecucion20.contarInstrucciones();
+    }
+    
+    @Test
+    public void medirAlgoritmoSimple20ConContador() {
         
-        numeros = new String[(int)SIMPLE_20.tamaño[0]];
+        Ejecucion ejecucion20 = this.contexto.iniciarEjecucion(SIMPLE_20.modulo.nombre,
+                                                               SIMPLE_20.problema.nombre,
+                                                               SIMPLE_20.dimension);
+        Contador contador = ejecucion20.contarInstrucciones();
+        
+        String[] numeros = new String[(int)SIMPLE_20.dimension];
         for (int i = 0; i < numeros.length; i++) {
             
             numeros[i] = String.valueOf(i);
             contador.incrementar();
             
-            Assert.assertThat("valor del contador ", 
-                              contador.getValor(), 
-                              Matchers.is(i + 1L));
+            assertThat("valor del contador ", contador.getValor(), is(i + 1L));
         }
         
         
-        Assert.assertThat("valor del contador ", 
-                          contador.getValor(), 
-                          Matchers.is(SIMPLE_20.tamaño[0]));
-        Assert.assertThat("ejecución del contador", 
-                          contador.getEjecucion(),
-                          Matchers.sameInstance(ejecucion20));
-        Assert.assertThat("algoritmo de la ejecucion",
-                          ejecucion20.getModulo().getNombre(),
-                          Matchers.is(SIMPLE_20.modulo.nombre));
+        assertThat("valor del contador ", contador.getValor(), is(SIMPLE_20.dimension));
+        assertThat("ejecución del contador", contador.getEjecucion(), sameInstance(ejecucion20));
+        assertThat("algoritmo de la ejecucion", ejecucion20.getModulo().getNombre(), is(SIMPLE_20.modulo.nombre));
         
         ejecucion20.terminar();
 
@@ -101,13 +120,14 @@ public class EficienciaTest extends TestBasico {
     @Test
     public void medirAlgoritmoMultipleConContador() {
         
-        Ejecucion ejecucion = this.contexto.iniciarEjecucion(MULTIPLES_PASOS.modulo.nombre, 
-                                                             MULTIPLES_PASOS.tamaño);
+        Ejecucion ejecucion = this.contexto.iniciarEjecucion(MULTIPLES_PASOS.modulo.nombre,
+                                                             MULTIPLES_PASOS.problema.nombre,
+                                                             MULTIPLES_PASOS.dimension);
         
         Contador contador = ejecucion.contarInstrucciones();
         
         Random random = new Random();
-        int[] valores = new int[(int) MULTIPLES_PASOS.tamaño[0]];
+        int[] valores = new int[(int) MULTIPLES_PASOS.dimension];
         for(int i = 0; i < valores.length; i++) {
             
             valores[i] = random.nextInt();
@@ -116,9 +136,7 @@ public class EficienciaTest extends TestBasico {
             contador.incrementar(2);
         }
         
-        Assert.assertThat("valor del contador ", 
-                contador.getValor(), 
-                Matchers.is(MULTIPLES_PASOS.tamaño[0] * 2));
+        assertThat("valor del contador ", contador.getValor(), is(MULTIPLES_PASOS.dimension * 2));
         
         ejecucion.terminar();
     }
@@ -127,7 +145,8 @@ public class EficienciaTest extends TestBasico {
     public void medirAlgoritmoMultipleConContadoresParciales() {
         
         Ejecucion ejecucion = this.contexto.iniciarEjecucion(MULTIPLES_PASOS.modulo.nombre, 
-                                                             MULTIPLES_PASOS.tamaño);
+                                                             MULTIPLES_PASOS.problema.nombre,
+                                                             MULTIPLES_PASOS.dimension);
         
         Contador contador = ejecucion.contarInstrucciones();
         
@@ -138,7 +157,7 @@ public class EficienciaTest extends TestBasico {
         
         /* inicialización */
         contador.incrementar();
-        int[] valores = new int[(int) MULTIPLES_PASOS.tamaño[0]];
+        int[] valores = new int[(int) MULTIPLES_PASOS.dimension];
         for(int i = 0; i < valores.length; i++) {
             
             /* cuenta el incremento */
@@ -154,21 +173,12 @@ public class EficienciaTest extends TestBasico {
         }
         
         
-        Assert.assertThat("contador total",
-                          contador.getValor(),
-                          Matchers.is(MULTIPLES_PASOS.tamaño[0] * 3 + 1));
-        Assert.assertThat(contador.getDiscriminante(),
-                          Matchers.is((Discriminante)ejecucion.getModulo()));
-        Assert.assertThat("contador de asignaciones",
-                          contadorG.getValor(),
-                          Matchers.is(MULTIPLES_PASOS.tamaño[0]));
-        Assert.assertThat(contadorG.getDiscriminante().getNombre(),
-                          Matchers.is("generaciones"));
-        Assert.assertThat("contador de asignaciones",
-                          contadorI.getValor(),
-                          Matchers.is(MULTIPLES_PASOS.tamaño[0]));
-        Assert.assertThat(contadorI.getDiscriminante().getNombre(),
-                          Matchers.is("incrementos"));
+        assertThat("contador total", contador.getValor(), is(MULTIPLES_PASOS.dimension * 3 + 1));
+        assertThat(contador.getDiscriminante(), is((Discriminante)ejecucion.getModulo()));
+        assertThat("contador de asignaciones", contadorG.getValor(), is(MULTIPLES_PASOS.dimension));
+        assertThat(contadorG.getDiscriminante().getNombre(), is("generaciones"));
+        assertThat("contador de asignaciones", contadorI.getValor(), is(MULTIPLES_PASOS.dimension));
+        assertThat(contadorI.getDiscriminante().getNombre(), is("incrementos"));
         
         ejecucion.terminar();
     }

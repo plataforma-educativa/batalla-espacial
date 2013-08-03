@@ -1,9 +1,9 @@
 package ar.com.comunidadesfera.eficiencia.test;
 
-import static ar.com.comunidadesfera.eficiencia.test.Datos.Modulo.MULTIPLES_PASOS;
+import static ar.com.comunidadesfera.eficiencia.test.Datos.Modulo.*;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
-import org.hamcrest.Matchers;
-import org.junit.Assert;
 import org.junit.Test;
 
 import ar.com.comunidadesfera.eficiencia.registros.Modulo;
@@ -19,13 +19,11 @@ public class ModuloTest {
         modulo.setEntorno(null);
         modulo.setVersion(MULTIPLES_PASOS.version);
         
-        Assert.assertThat("version", modulo.getVersion(),
-                          Matchers.is(MULTIPLES_PASOS.version));
+        assertThat("version", modulo.getVersion(), is(MULTIPLES_PASOS.version));
         
         modulo.verificarVersion();
         
-        Assert.assertThat("version", modulo.getVersion(),
-                          Matchers.is(MULTIPLES_PASOS.version));
+        assertThat("version", modulo.getVersion(), is(MULTIPLES_PASOS.version));
 
         final int[] versionesIncorrectas = {0, -1, -20000};
         
@@ -33,18 +31,13 @@ public class ModuloTest {
             
             modulo.setVersion(versionIncorrrecta);
             
-            Assert.assertThat("version incorrecta", modulo.getVersion(),
-                              Matchers.is(versionIncorrrecta));
+            assertThat("version incorrecta", modulo.getVersion(), is(versionIncorrrecta));
             
             modulo.verificarVersion();
             
-            Assert.assertThat("version luego de verificar", 
-                              modulo.getVersion(),
-                              Matchers.not(Matchers.is(versionIncorrrecta)));
+            assertThat("version luego de verificar", modulo.getVersion(), not(is(versionIncorrrecta)));
             
-            Assert.assertThat("version luego de verificar", 
-                              modulo.getVersion(),
-                              Matchers.is(Modulo.VERSION_MINIMA));
+            assertThat("version luego de verificar", modulo.getVersion(), is(Modulo.VERSION_MINIMA));
           
         }
     }
@@ -60,14 +53,12 @@ public class ModuloTest {
 
         /* por el momento la identificación es igual al nombre,
          * se verificará esta decisión de diseño a futuro */
-        Assert.assertThat("identificacion", modulo.getIdentificacion(),
-                          Matchers.is(MULTIPLES_PASOS.nombre));
+        assertThat("identificacion", modulo.getIdentificacion(), is(MULTIPLES_PASOS.nombre));
         
         final String identificacion = "test:" + MULTIPLES_PASOS.nombre;
         
         modulo.setIdentificacion(identificacion);
         
-        Assert.assertThat("identificacion", modulo.getIdentificacion(),
-                          Matchers.is(identificacion));
+        assertThat("identificacion", modulo.getIdentificacion(), is(identificacion));
     }
 }

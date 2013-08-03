@@ -18,15 +18,15 @@ public interface Contexto {
     boolean isPersistente();
 
     /**
-     * @pre <code>nombreModulo</code> identifica univocamente el módulo
-     *       a medir.
+     * @pre  <code>modulo</code> identifica unívocamente el módulo a medir.
+     *       <code>problema</code> identifica unívocamente el problema que el módulo resuelve.
      * @post inicia una nueva Ejecución para el módulo indicado sobre
-     *       un problema del tamaño indicado.
+     *       el problema del tamaño indicado.
      * 
-     * @param nombreModulo identificador del módulo a medir.
+     * @param modulo identificador del módulo a medir.
+     * @param problema identificador del problema que se resuelve.
      * @param tamaño tamaño del problema.
      * @return
      */
-    Ejecucion iniciarEjecucion(String nombreModulo, long[] tamaño);
-
+    Ejecucion iniciarEjecucion(String modulo, String problema, long tamaño);
 }

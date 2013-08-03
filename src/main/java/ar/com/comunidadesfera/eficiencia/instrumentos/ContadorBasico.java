@@ -113,8 +113,7 @@ public class ContadorBasico implements Contador {
     public Medicion getMedicion() {
         
         // TODO parametrizar las Unidades 
-        return new Medicion(this.ejecucion.getProblema(), 
-                            this.ejecucion.getModulo(),
+        return new Medicion(this.ejecucion.getRegistro(),
                             this.getDiscriminante(),
                             new Medida(this.getValor(), Unidad.INSTRUCCIONES));
     }

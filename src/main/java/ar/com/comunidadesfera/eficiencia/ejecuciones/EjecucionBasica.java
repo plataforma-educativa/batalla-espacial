@@ -11,6 +11,7 @@ import ar.com.comunidadesfera.eficiencia.instrumentos.Contador;
 import ar.com.comunidadesfera.eficiencia.instrumentos.ContadorBasico;
 import ar.com.comunidadesfera.eficiencia.registros.Modulo;
 import ar.com.comunidadesfera.eficiencia.registros.Problema;
+import ar.com.comunidadesfera.eficiencia.registros.RegistroDeEjecucion;
 
 public class EjecucionBasica implements Ejecucion {
 
@@ -20,16 +21,22 @@ public class EjecucionBasica implements Ejecucion {
     
     private Contador contador = null;
     
+    private RegistroDeEjecucion registro = null;
+    
     private boolean terminada = false;
     
     private List<Observador> observadores;
 
-    public EjecucionBasica(String nombreModulo, long[] tamaño) {
-        
-        this.modulo = new Modulo(nombreModulo);
-        this.problema = new Problema(tamaño);
-        this.problema.setInicio(new Date());
+    public EjecucionBasica(String modulo, String problema, long tamaño) {
+
+        this.modulo = new Modulo(modulo);
+        this.problema = new Problema(problema);
         this.observadores = new LinkedList<Ejecucion.Observador>();
+        this.registro = new RegistroDeEjecucion();
+        this.registro.setInicio(new Date());
+        this.registro.setDimension(tamaño);
+        this.registro.setProblema(this.problema);
+        this.registro.setModulo(this.modulo);
     }
 
     @Override
@@ -59,6 +66,18 @@ public class EjecucionBasica implements Ejecucion {
     public Problema getProblema() {
         return this.problema;
     }
+    
+    @Override
+    public long getDimension() {
+     
+        return this.getRegistro().getDimension();
+    }
+
+    @Override
+    public RegistroDeEjecucion getRegistro() {
+
+        return this.registro;
+    }
 
     @Override
     public void terminar() {
@@ -69,7 +88,7 @@ public class EjecucionBasica implements Ejecucion {
         }
         
         this.terminada = true;
-        this.getProblema().setFin(new Date());
+        this.getRegistro().setFin(new Date());
         
         this.notificarEjecucionTerminada();
     }

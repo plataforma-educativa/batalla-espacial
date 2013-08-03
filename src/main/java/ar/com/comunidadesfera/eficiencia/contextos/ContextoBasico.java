@@ -34,9 +34,9 @@ public class ContextoBasico implements Contexto {
     }
 
     @Override
-    public Ejecucion iniciarEjecucion(String nombreAlgoritmo, long[] tamaño) {
-        
-        Ejecucion ejecucion = new EjecucionBasica(nombreAlgoritmo, tamaño);
+    public Ejecucion iniciarEjecucion(String modulo, String problema, long tamaño) {
+
+        Ejecucion ejecucion = new EjecucionBasica(modulo, problema, tamaño);
         
         if (this.isPersistente()) {
             
@@ -52,4 +52,5 @@ public class ContextoBasico implements Contexto {
         
         this.administradorDeMediciones = administrador;
     }
+
 }

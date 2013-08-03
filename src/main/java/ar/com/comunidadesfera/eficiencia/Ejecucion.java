@@ -3,6 +3,7 @@ package ar.com.comunidadesfera.eficiencia;
 import ar.com.comunidadesfera.eficiencia.instrumentos.Contador;
 import ar.com.comunidadesfera.eficiencia.registros.Modulo;
 import ar.com.comunidadesfera.eficiencia.registros.Problema;
+import ar.com.comunidadesfera.eficiencia.registros.RegistroDeEjecucion;
 
 public interface Ejecucion {
 
@@ -20,6 +21,16 @@ public interface Ejecucion {
      * @return Contador de instrucciones asociado a la Ejecución.
      */
     Contador contarInstrucciones();
+
+    /**
+     * @return tamaño del problema
+     */
+    long getDimension();
+
+    /**
+     * @return Registro asociado la Ejecución. 
+     */
+    RegistroDeEjecucion getRegistro();
     
     /**
      * @post registra un Observador de la Ejecución.
@@ -39,7 +50,6 @@ public interface Ejecucion {
      */
     void terminar();
 
-    
     /**
      * Interfaz a implementar por aquellos componentes que deseen ser
      * notificados de los eventos generados por una ejecución.

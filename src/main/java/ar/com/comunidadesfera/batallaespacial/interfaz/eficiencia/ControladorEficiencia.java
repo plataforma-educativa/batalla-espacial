@@ -1,20 +1,17 @@
 package ar.com.comunidadesfera.batallaespacial.interfaz.eficiencia;
 
 import java.net.URL;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
 
-import javafx.beans.binding.IntegerExpression;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.beans.value.ObservableValueBase;
 import javafx.collections.FXCollections;
+import javafx.collections.SetChangeListener;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
@@ -25,6 +22,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.TilePane;
 import javafx.util.Callback;
 
 import javax.inject.Inject;
@@ -35,6 +37,7 @@ import ar.com.comunidadesfera.eficiencia.registros.Discriminante;
 import ar.com.comunidadesfera.eficiencia.registros.Medicion;
 import ar.com.comunidadesfera.eficiencia.registros.Modulo;
 import ar.com.comunidadesfera.eficiencia.reporte.ItemReporte;
+import ar.com.comunidadesfera.fx.Seleccion;
 
 
 public class ControladorEficiencia {
@@ -70,61 +73,47 @@ public class ControladorEficiencia {
     private ScatterChart<Long, Number> grafico;
     
     @FXML
-    private PieChart graficoDistribucion;
-
-    @FXML
     private Button botonBuscar;
     
     @FXML
     private TextField campoFiltro;
     
+    @FXML
+    private TilePane panelDistribucionesPromedio;
+    
+    @FXML
+    private BarChart<String, Number> graficoDistribucionComparativa;
+    
     @Inject
     private Contexto contexto;
     
     private StringProperty filtro;
-
-    private Map<Modulo, BooleanProperty> seleccionados = Collections.emptyMap();
     
-    private final ChangeListener<Modulo> moduloSeleccionado = new ChangeListener<Modulo>() {
+    private Seleccion<Modulo> seleccion;
 
-        @Override
-        public void changed(ObservableValue<? extends Modulo> moduloObservable,
-                            Modulo anterior, Modulo nuevo) {
-
-            if (nuevo != null) {
-                
-                seleccionados.get(nuevo).set(true);
-            }
-            
-            cargarDistribucion(nuevo);
-        }
-    };
-
-    private Callback<CellDataFeatures<Modulo, Boolean>, ObservableValue<Boolean>> 
+    private final Callback<CellDataFeatures<Modulo, Boolean>, ObservableValue<Boolean>> 
         valorCeldaSeleccionado = new Callback<CellDataFeatures<Modulo, Boolean>, ObservableValue<Boolean>>() {
             
             @Override
-            public ObservableValue<Boolean> call(CellDataFeatures<Modulo, Boolean> celda) {
+            public ObservableValue<Boolean> call(final CellDataFeatures<Modulo, Boolean> celda) {
 
-                return seleccionados.get(celda.getValue());
+                return seleccion.agregar(celda.getValue());
             }
     };
 
-    private ChangeListener<Boolean> actualizarMediciones = new ChangeListener<Boolean>() {
+    private final SetChangeListener<Modulo> actualizar = new SetChangeListener<Modulo>() {
 
         @Override
-        public void changed(ObservableValue<? extends Boolean> observable,
-                            Boolean anterior, Boolean nuevo) {
+        public void onChanged(SetChangeListener.Change<? extends Modulo> cambio) {
 
-            cargarMediciones();
+            analizar();
         }
+      
     };
-    
+  
     @FXML 
     void initialize() {
 
-        this.tablaModulos.getSelectionModel().selectedItemProperty().addListener(this.moduloSeleccionado);
-        
         this.columnaSeleccionado.setCellFactory(CheckBoxTableCell.forTableColumn(this.columnaSeleccionado));
         this.columnaSeleccionado.setCellValueFactory(this.valorCeldaSeleccionado);
         this.columnaId.setCellValueFactory(new PropertyValueFactory<Modulo, Long>("id"));
@@ -133,78 +122,167 @@ public class ControladorEficiencia {
         this.columnaVersion.setCellValueFactory(new PropertyValueFactory<Modulo, Integer>("version"));  
         
         this.filtro = this.campoFiltro.textProperty();
-        
-        this.graficoDistribucion.visibleProperty()
-            .bind(IntegerExpression.integerExpression(this.tablaModulos
-                                                          .getSelectionModel()        
-                                                          .selectedIndexProperty())
-                                   .greaterThanOrEqualTo(0));
+    
+        this.seleccion = new Seleccion<>();
+        this.seleccion.obtener().addListener(this.actualizar);
     }
 
-    public void buscarModulos() {
+    public void buscar() {
+               
+        this.buscarModulos();
+    }
+    
+    public void limpiar() {
+
+        this.tablaModulos.getItems().clear();
+        this.seleccion.limpiar();
+    }
+    
+    public void analizar() {
+        
+        this.cargarMediciones();
+        this.cargarDistribuciones();
+        this.cargarDistribucionesPromedio();
+    }
+    
+    private void buscarModulos() {
         
         List<Modulo> modulos = this.administradorDeMediciones.buscarModulos(this.filtro.get());
 
-        this.seleccionados = new HashMap<Modulo, BooleanProperty>();
-        
-        for (Modulo modulo : modulos) {
-            
-            BooleanProperty seleccionado = new SimpleBooleanProperty(false); 
-            
-            seleccionado.addListener(this.actualizarMediciones);
-            
-            this.seleccionados.put(modulo, seleccionado);
-        }
-        
         this.tablaModulos.setItems(FXCollections.observableList(modulos));
-        this.grafico.getData().clear();
     }
     
     private void cargarMediciones() {
         
         this.grafico.getData().clear();
 
-        for (Modulo modulo : this.tablaModulos.getItems()) {
+        for (Modulo modulo : this.seleccion.obtener()) {
             
-            if (this.seleccionados.get(modulo).get()) {
+            List<ItemReporte<Medicion>> items = this.administradorDeMediciones.calcularMediciones(modulo);
             
-                List<ItemReporte<Medicion>> items = this.administradorDeMediciones.calcularMediciones(modulo);
-        
-                XYChart.Series<Long, Number> serie = new XYChart.Series<>();
-        
-                serie.setName(modulo.getNombre() + " (versión " + modulo.getVersion() + ")");
+            XYChart.Series<Long, Number> serie = new XYChart.Series<>();
+            
+            serie.setName(this.getTitulo(modulo));
+            
+            for (ItemReporte<Medicion> item : items) {
                 
-                for (ItemReporte<Medicion> item : items) {
-                    
-                    // TODO Definir las dimensiones correctamente
-                    long tamaño = item.getObjeto().getProblema().getDimension(0).getValor();
-                    
-                    XYChart.Data<Long, Number> datos = new XYChart.Data<>(tamaño,
-                                                                          item.getValor());
-                    
-                    serie.getData().add(datos);
-                }
+                // TODO Definir las dimensiones correctamente
+                long tamaño = item.getObjeto().getEjecucion().getDimension();
                 
-                this.grafico.getData().add(serie);
+                XYChart.Data<Long, Number> datos = new XYChart.Data<>(tamaño, item.getValor());
+                
+                serie.getData().add(datos);
             }
+            
+            this.grafico.getData().add(serie);
         }
+        
+
     }
     
-    private void cargarDistribucion(Discriminante discriminante) {
+    private void cargarDistribucionesPromedio() {
         
-        this.graficoDistribucion.getData().clear();
+        this.panelDistribucionesPromedio.getChildren().clear();
         
-        if (discriminante != null) {
+        for (Modulo modulo : this.seleccion.obtener()) {
+            
+            PieChart grafico = new PieChart();
             
             ItemReporte<Discriminante> itemCompuesto = this.administradorDeMediciones
-                                                           .calcularMedicionesPorDiscriminante(discriminante);
-
+                                                                .calcularMedicionesPorDiscriminante(modulo);
+            
             for (ItemReporte<Discriminante> item : itemCompuesto.getSubItems()) {
-                
+          
                 PieChart.Data datos = new PieChart.Data(item.getNombre(), item.getProporcion());
-                this.graficoDistribucion.getData().add(datos);
+                grafico.getData().add(datos);
             }
+            
+            grafico.setTitle(this.getTitulo(modulo));
+            this.panelDistribucionesPromedio.getChildren().add(grafico);
         }
     }
     
+    private void cargarDistribuciones() {
+        
+        this.graficoDistribucionComparativa.getData().clear();
+
+        for (Modulo modulo : this.seleccion.obtener()) {
+            
+            List<ItemReporte<Medicion>> items = this.administradorDeMediciones.calcularMediciones(modulo);
+            
+            XYChart.Series<String, Number> serie = new XYChart.Series<>();
+            
+            serie.setName(this.getTitulo(modulo));
+            
+            for (ItemReporte<Medicion> item : items) {
+                
+                // TODO Definir las dimensiones correctamente
+                long tamaño = item.getObjeto().getEjecucion().getDimension();
+                
+                XYChart.Data<String, Number> datos = new XYChart.Data<>(String.valueOf(tamaño),
+                                                                      item.getValor());
+                
+                GridPane pane = new GridPane();
+                
+                RowConstraints fila1 = new RowConstraints();
+                fila1.setPercentHeight(50);
+                
+                RowConstraints fila2 = new RowConstraints();
+                fila2.setPercentHeight(50);
+                
+                ColumnConstraints columna = new ColumnConstraints();
+                columna.setPercentWidth(100);
+                
+                Pane nodo1 = new Pane();
+                nodo1.setStyle("-fx-background-color:#000000;");
+                nodo1.setOpacity(0.30);
+                GridPane.setConstraints(nodo1, 0, 0);
+                GridPane.setMargin(nodo1, new Insets(0,5,0,5));
+                
+                Pane nodo2 = new Pane();
+                nodo2.setStyle("-fx-background-color:#000000;");
+                nodo2.setOpacity(0.60);
+                GridPane.setConstraints(nodo2, 0, 1);
+                GridPane.setMargin(nodo2, new Insets(0,5,0,5));
+
+                pane.getChildren().addAll(nodo1, nodo2);
+                pane.getRowConstraints().addAll(fila1, fila2);
+                pane.getColumnConstraints().add(columna);
+                
+                datos.setNode(pane);
+                serie.getData().add(datos);
+            }
+            
+            this.graficoDistribucionComparativa.getData().add(serie);
+        }
+    }
+    
+    public String getTitulo(Modulo modulo) {
+        
+        return modulo.getNombre() + " (versión " + modulo.getVersion() + ")";
+    }
+    
+    public class Persona extends ObservableValueBase<String> {
+
+        private String nombre; 
+        
+        public void setNombre(String nombre) {
+            
+            this.nombre = nombre;
+            
+            this.fireValueChangedEvent();
+        }
+        
+        public String getNombre() {
+            
+            return this.nombre;
+        }
+        
+        @Override
+        public String getValue() {
+
+            return this.getNombre();
+        }
+        
+    }
 }

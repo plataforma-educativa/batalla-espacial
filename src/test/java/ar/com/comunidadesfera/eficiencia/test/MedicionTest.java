@@ -1,9 +1,11 @@
 package ar.com.comunidadesfera.eficiencia.test;
 
-import static ar.com.comunidadesfera.eficiencia.test.Datos.Ejecucion.MULTIPLES_PASOS;
+import static ar.com.comunidadesfera.eficiencia.test.Datos.Ejecucion.*;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
-import org.hamcrest.Matchers;
-import org.junit.Assert;
+import java.util.Date;
+
 import org.junit.Test;
 
 import ar.com.comunidadesfera.eficiencia.Ejecucion;
@@ -16,10 +18,13 @@ import ar.com.comunidadesfera.eficiencia.registros.Unidad;
 public class MedicionTest extends TestBasico {
 
     @Test
-    public void medicion() {
+    public void obtenerMedicion() {
         
-        Ejecucion ejecucion = this.contexto.iniciarEjecucion(MULTIPLES_PASOS.modulo.nombre, 
-                                                             MULTIPLES_PASOS.tamaño);
+        Date antes = this.registrarTiempo();
+        
+        Ejecucion ejecucion = this.contexto.iniciarEjecucion(MULTIPLES_PASOS.modulo.nombre,
+                                                             MULTIPLES_PASOS.problema.nombre,
+                                                             MULTIPLES_PASOS.dimension);
         final String discriminante = "pares";
         
         Contador contadorTotal = ejecucion.contarInstrucciones();
@@ -28,7 +33,7 @@ public class MedicionTest extends TestBasico {
         long cuentaTotal = 0;
         long cuentaParcial = 0;
         
-        for (int i = 0; i < MULTIPLES_PASOS.tamaño[0]; i++) {
+        for (int i = 0; i < MULTIPLES_PASOS.dimension; i++) {
             
             contadorTotal.incrementar();
             cuentaTotal+=1;
@@ -39,40 +44,41 @@ public class MedicionTest extends TestBasico {
                 cuentaTotal+=1;
                 cuentaParcial+=1;
             }
+            
+            this.esperar(5);
         }
-        
-        Medicion medicionTotal = contadorTotal.getMedicion();
-        
-        Assert.assertThat("medicionTotal", medicionTotal, 
-                          Matchers.notNullValue());
-        Assert.assertThat("medicionTotal", medicionTotal, 
-                          this.medicionDe(ejecucion.getModulo(), ejecucion.getProblema()));
-        Assert.assertThat("resultado de la medicionTotal", medicionTotal.getResultado(),
-                          this.medidaCon(cuentaTotal, Unidad.INSTRUCCIONES));
-        
-        Medicion medicionParcial = contadorParcial.getMedicion();
-        
-        Assert.assertThat("medicionParcial", medicionParcial,
-                          Matchers.notNullValue());
-        Assert.assertThat("medicionParcial", medicionParcial,
-                          this.medicionDe(ejecucion.getModulo(), ejecucion.getProblema()));
-        Assert.assertThat("resultado de la medicionParcial", medicionParcial.getResultado(),
-                          this.medidaCon(cuentaParcial, Unidad.INSTRUCCIONES));
-        
-        Discriminante discriminanteTotal = medicionTotal.getDiscriminante();
-        
-        Assert.assertThat("discriminanteTotal", discriminanteTotal,
-                          this.discriminanteCon(medicionTotal.getModulo().getNombre(), null));
-        Assert.assertThat(discriminanteTotal, Matchers.instanceOf(Modulo.class));
-        Assert.assertThat(discriminanteTotal, Matchers.is((Discriminante) medicionTotal.getModulo()));
-        
-        Discriminante discriminanteParcial = medicionParcial.getDiscriminante();
-        
-        Assert.assertThat("discriminanteParcial", discriminanteParcial,
-                          this.discriminanteCon(discriminante, discriminanteTotal));        
         
         ejecucion.terminar();
         
+        Date despues = this.registrarTiempo();
+        
+        Medicion medicionTotal = contadorTotal.getMedicion();
+        
+        assertThat("medicionTotal", medicionTotal, notNullValue());
+        assertThat("medicionTotal", medicionTotal, medicionDe(ejecucion.getModulo(), ejecucion.getProblema()));
+        assertThat("inicio", medicionTotal.getInicio(), greaterThanOrEqualTo(antes));
+        assertThat("fin", medicionTotal.getFin(), lessThanOrEqualTo(despues));
+        assertThat("resultado", medicionTotal.getResultado(), medidaCon(cuentaTotal, Unidad.INSTRUCCIONES));
+        
+        Medicion medicionParcial = contadorParcial.getMedicion();
+        
+        assertThat("medicionParcial", medicionParcial, notNullValue());
+        assertThat("medicionParcial", medicionParcial, medicionDe(ejecucion.getModulo(), ejecucion.getProblema()));
+        assertThat("inicio", medicionParcial.getInicio(), greaterThanOrEqualTo(antes));
+        assertThat("fin", medicionParcial.getFin(), lessThanOrEqualTo(despues));
+        assertThat("resultado", medicionParcial.getResultado(), medidaCon(cuentaParcial, Unidad.INSTRUCCIONES));
+        
+        Discriminante discriminanteTotal = medicionTotal.getDiscriminante();
+        
+        assertThat("discriminanteTotal", discriminanteTotal, discriminanteCon(medicionTotal.getModulo().getNombre(), null));
+        assertThat(discriminanteTotal, instanceOf(Modulo.class));
+        assertThat(discriminanteTotal, is((Discriminante) medicionTotal.getModulo()));
+        
+        Discriminante discriminanteParcial = medicionParcial.getDiscriminante();
+        
+        assertThat("discriminanteParcial", discriminanteParcial, discriminanteCon(discriminante, discriminanteTotal));
+        
     }
+
 }
 
