@@ -166,10 +166,9 @@ public class ControladorEficiencia {
             
             for (ItemReporte<Medicion> item : items) {
                 
-                // TODO Definir las dimensiones correctamente
-                long tamaño = item.getObjeto().getEjecucion().getDimension();
+                long dimension = item.getObjeto().getEjecucion().getDimension();
                 
-                XYChart.Data<Long, Number> datos = new XYChart.Data<>(tamaño, item.getValor());
+                XYChart.Data<Long, Number> datos = new XYChart.Data<>(dimension, item.getValor());
                 
                 serie.getData().add(datos);
             }
@@ -216,11 +215,10 @@ public class ControladorEficiencia {
             
             for (ItemReporte<Medicion> item : items) {
                 
-                // TODO Definir las dimensiones correctamente
                 long tamaño = item.getObjeto().getEjecucion().getDimension();
                 
                 XYChart.Data<String, Number> datos = new XYChart.Data<>(String.valueOf(tamaño),
-                                                                      item.getValor());
+                                                                        item.getValor());
                 
                 GridPane pane = new GridPane();
                 
