@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-<!--     <discriminante id="1" nombre="ModuloUno"/> -->
-<!--     <modulo id="1" version="1" identificacion="ModuloUno"/> -->
 
     <problema id="14" nombre="Ordenamiento"/>
+    <problema id="15" nombre="Busqueda"/>
+    <problema id="16" nombre="Arbol recubridor minimal"/>
+        
 </dataset>
