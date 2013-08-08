@@ -38,7 +38,7 @@ public class DemarcacionDeTransaccionesIT extends ITBasico {
         Properties properties = new Properties();
         
         properties.load(DemarcacionDeTransaccionesIT.class
-                            .getResourceAsStream("/test-persistence.properties"));
+                            .getResourceAsStream("./persistence.properties"));
         
         return properties;
     }

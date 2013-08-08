@@ -1,4 +1,4 @@
-package ar.com.comunidadesfera.eficiencia.test;
+package ar.com.comunidadesfera.eficiencia.test.persistencia;
 
 import static ar.com.comunidadesfera.eficiencia.test.Datos.Ejecucion.*;
 import static org.hamcrest.MatcherAssert.*;
@@ -24,7 +24,6 @@ import ar.com.comunidadesfera.eficiencia.registros.Medicion_;
 import ar.com.comunidadesfera.eficiencia.registros.Modulo_;
 import ar.com.comunidadesfera.eficiencia.registros.RegistroDeEjecucion_;
 import ar.com.comunidadesfera.eficiencia.registros.Unidad;
-import ar.com.comunidadesfera.persistencia.test.TestDePersistencia;
 
 public class ContextoPersistenteTest extends TestDePersistencia {
     

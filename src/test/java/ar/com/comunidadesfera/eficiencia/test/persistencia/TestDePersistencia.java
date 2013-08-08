@@ -1,4 +1,4 @@
-package ar.com.comunidadesfera.persistencia.test;
+package ar.com.comunidadesfera.eficiencia.test.persistencia;
 
 import java.util.Properties;
 
@@ -26,7 +26,7 @@ public abstract class TestDePersistencia extends TestBasico {
     public static void initEntityManagerFactory() throws Exception {
         
         Properties testConfig = new Properties();
-        testConfig.load(TestDePersistencia.class.getResourceAsStream("/test-persistence.properties"));
+        testConfig.load(TestDePersistencia.class.getResourceAsStream("./persistence.properties"));
         
         emFactory = new Ejb3Configuration()
                         .configure("eficienciaPersistenceUnit",testConfig)

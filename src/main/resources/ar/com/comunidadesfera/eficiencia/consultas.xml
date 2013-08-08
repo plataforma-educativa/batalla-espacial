@@ -54,7 +54,7 @@
         </query>
     </named-query>
     
-    <named-query name="calcularMedicionesPorModulo">
+    <named-query name="calcularMedicionesDeUnModulo">
         <query>
             SELECT new ar.com.comunidadesfera.eficiencia.reporte.ItemSimple(m, m.resultado.magnitud)
             FROM Medicion m 

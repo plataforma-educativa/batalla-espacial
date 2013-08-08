@@ -14,8 +14,8 @@
             <property name="hibernate.format_sql" value="false" />
             <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:derby:db/eficiencia;create=true"/>
-            <property name="javax.persistence.jdbc.user" value="eficiencia"/>
-            <property name="javax.persistence.jdbc.password" value="eficiencia"/>
+<!--             <property name="javax.persistence.jdbc.user" value="eficiencia"/> -->
+<!--             <property name="javax.persistence.jdbc.password" value="eficiencia"/> -->
         </properties>
     </persistence-unit>
 </persistence>

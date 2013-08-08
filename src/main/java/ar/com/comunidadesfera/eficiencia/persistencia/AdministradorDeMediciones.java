@@ -182,7 +182,7 @@ public class AdministradorDeMediciones {
     @Transaccional(EstrategiaTransaccional.REQUERIDA)
     public List<ItemReporte<Medicion>> calcularMediciones(Modulo modulo) {
 
-        return this.em.createNamedQuery("calcularMedicionesPorModulo")
+        return this.em.createNamedQuery("calcularMedicionesDeUnModulo")
                       .setParameter("modulo", modulo)
                       .getResultList();
     }
