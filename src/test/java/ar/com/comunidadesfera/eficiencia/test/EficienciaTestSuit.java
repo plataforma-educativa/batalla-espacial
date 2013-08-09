@@ -4,17 +4,17 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import ar.com.comunidadesfera.eficiencia.test.persistencia.ContextoPersistenteTest;
+import ar.com.comunidadesfera.eficiencia.test.persistencia.PersistenciaTestSuit;
 
 @RunWith( Suite.class )
 @SuiteClasses( {
     EficienciaTest.class,
     EjecucionTest.class,
     MedicionTest.class,
-    ContextoPersistenteTest.class,
     EjecucionObservadaTest.class,
-    ModuloTest.class
+    ModuloTest.class,
+    PersistenciaTestSuit.class,
 })
-public abstract class EficienciaTestSuit {
+public final class EficienciaTestSuit {
 
 }

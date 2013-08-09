@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:dflt="EFICIENCIA">
+	<xsd:import namespace="EFICIENCIA" schemaLocation="EFICIENCIA.xsd" />
+	<xsd:element name="dataset">
+		<xsd:complexType>
+			<xsd:choice minOccurs="0" maxOccurs="unbounded">
+				<xsd:element name="PROBLEMA" type="dflt:PROBLEMA__type" />
+				<xsd:element name="MODULO" type="dflt:MODULO__type" />
+				<xsd:element name="DIMENSION" type="dflt:DIMENSION__type" />
+				<xsd:element name="REGISTRODEEJECUCION" type="dflt:REGISTRODEEJECUCION__type" />
+				<xsd:element name="CATEGORIA" type="dflt:CATEGORIA__type" />
+				<xsd:element name="MEDIDA" type="dflt:MEDIDA__type" />
+				<xsd:element name="MEDICION" type="dflt:MEDICION__type" />
+				<xsd:element name="DISCRIMINANTE" type="dflt:DISCRIMINANTE__type" />
+				<xsd:any namespace="EFICIENCIA" />
+			</xsd:choice>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

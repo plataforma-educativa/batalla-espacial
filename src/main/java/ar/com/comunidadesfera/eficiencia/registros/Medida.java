@@ -2,6 +2,7 @@ package ar.com.comunidadesfera.eficiencia.registros;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 import ar.com.comunidadesfera.persistencia.Entidad;
@@ -33,7 +34,7 @@ public class Medida extends Entidad {
     }
 
     @Column(nullable = false)
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     public Unidad getUnidad() {
 
         return this.unidad;

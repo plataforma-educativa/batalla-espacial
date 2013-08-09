@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns="EFICIENCIA" targetNamespace="EFICIENCIA">
+	<xsd:element name="PROBLEMA" type="PROBLEMA__type" />
+	<xsd:element name="MODULO" type="MODULO__type" />
+	<xsd:element name="DIMENSION" type="DIMENSION__type" />
+	<xsd:element name="REGISTRODEEJECUCION" type="REGISTRODEEJECUCION__type" />
+	<xsd:element name="CATEGORIA" type="CATEGORIA__type" />
+	<xsd:element name="MEDIDA" type="MEDIDA__type" />
+	<xsd:element name="MEDICION" type="MEDICION__type" />
+	<xsd:element name="DISCRIMINANTE" type="DISCRIMINANTE__type" />
+	<xsd:complexType name="PROBLEMA__type">
+		<xsd:attribute name="NOMBRE" use="optional" />
+		<xsd:attribute name="ID" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="MODULO__type">
+		<xsd:attribute name="VERSION" use="optional" />
+		<xsd:attribute name="IDENTIFICACION" use="optional" />
+		<xsd:attribute name="ID" use="optional" />
+		<xsd:attribute name="DESCRIPCION" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="DIMENSION__type">
+		<xsd:attribute name="NOMBRE" use="optional" />
+		<xsd:attribute name="ID" use="optional" />
+		<xsd:attribute name="VALOR" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="REGISTRODEEJECUCION__type">
+		<xsd:attribute name="MODULO_ID" use="optional" />
+		<xsd:attribute name="DIMENSION" use="optional" />
+		<xsd:attribute name="ID" use="optional" />
+		<xsd:attribute name="INICIO" use="optional" />
+		<xsd:attribute name="FIN" use="optional" />
+		<xsd:attribute name="PROBLEMA_ID" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="CATEGORIA__type">
+		<xsd:attribute name="MODULO_ID" use="optional" />
+		<xsd:attribute name="ID" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="MEDIDA__type">
+		<xsd:attribute name="UNIDAD" use="optional" />
+		<xsd:attribute name="ID" use="optional" />
+		<xsd:attribute name="MAGNITUD" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="MEDICION__type">
+		<xsd:attribute name="DISCRIMINANTE_ID" use="optional" />
+		<xsd:attribute name="EJECUCION_ID" use="optional" />
+		<xsd:attribute name="ID" use="optional" />
+		<xsd:attribute name="RESULTADO_ID" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="DISCRIMINANTE__type">
+		<xsd:attribute name="ENTORNO_ID" use="optional" />
+		<xsd:attribute name="NOMBRE" use="optional" />
+		<xsd:attribute name="ID" use="optional" />
+	</xsd:complexType>
+</xsd:schema>

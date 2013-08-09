@@ -238,6 +238,13 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-database</artifactId>
+            <version>3.3</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- Pruebas de Integración -->
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>

@@ -33,6 +33,9 @@ public abstract class ConsultaTest {
         
         emFactory = config.configure("eficienciaPersistenceUnit",testConfig)
                           .buildEntityManagerFactory();
+        
+        /* genera / actualiza la definición del dataset */
+        DatabaseUnitils.generateDatasetDefinition();
     }
     
     @AfterClass

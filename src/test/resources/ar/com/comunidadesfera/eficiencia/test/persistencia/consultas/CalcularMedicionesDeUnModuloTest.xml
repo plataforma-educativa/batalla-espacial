@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="dataset.xsd">
+
+    <DISCRIMINANTE ID="1" NOMBRE="BusquedaSecuencial"/>
+    <MODULO ID="1" IDENTIFICACION="BusquedaSecuencial" VERSION="1"/>
+
+    <DISCRIMINANTE ID="2" NOMBRE="BusquedaBinaria"/>
+    <MODULO ID="2" IDENTIFICACION="BusquedaBinaria" VERSION="1"/>
+    
+    <DISCRIMINANTE ID="3" NOMBRE="OrdenamientoPorSeleccion"/>
+    <MODULO ID="3" IDENTIFICACION="OrdenamientoPorSeleccion" VERSION="2"/>
+    
+    <PROBLEMA ID="1" NOMBRE="Buscar"/>
+    
+    <REGISTRODEEJECUCION ID="10" PROBLEMA_ID="1" MODULO_ID="2" DIMENSION="1000" INICIO="2013-04-22 11:23:33.000000001" FIN="2013-04-22 11:23:33.000000054"/>
+    <MEDIDA ID="100" MAGNITUD="276" UNIDAD="INSTRUCCIONES"/>
+    <MEDICION ID="100" DISCRIMINANTE_ID="2" EJECUCION_ID="10" RESULTADO_ID="100"/>
+     
+</dataset>
