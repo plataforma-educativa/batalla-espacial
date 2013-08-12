@@ -23,7 +23,7 @@ public class Medicion extends Entidad {
     
     public Medicion() {
     }
-
+    
     /**
      * Inicializa la Medición para la Ejecución indicada. 
      * El Discriminante de la Medición es todo Módulo.
@@ -53,13 +53,13 @@ public class Medicion extends Entidad {
     @Transient
     public Problema getProblema() {
 
-        return this.ejecucion.getProblema();
+        return this.ejecucion != null ? this.ejecucion.getProblema() : null;
     }
 
     @Transient
     public Modulo getModulo() {
         
-        return this.ejecucion.getModulo();
+        return this.ejecucion != null ? this.ejecucion.getModulo() : null;
     }
     
     @OneToOne(optional = false, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -97,13 +97,13 @@ public class Medicion extends Entidad {
     @Transient
     public Date getInicio() {
 
-        return this.ejecucion.getInicio();
+        return this.ejecucion != null ? this.ejecucion.getInicio() : null;
     }
 
     @Transient
     public Date getFin() {
 
-        return this.ejecucion.getFin();
+        return this.ejecucion != null ? this.ejecucion.getFin() : null;
     }
 
 }

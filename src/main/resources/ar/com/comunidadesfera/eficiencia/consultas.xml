@@ -60,6 +60,8 @@
             FROM Medicion m 
             WHERE 
                 m.discriminante = :modulo
+            ORDER BY
+                m.ejecucion.dimension
         </query>
     </named-query>
     

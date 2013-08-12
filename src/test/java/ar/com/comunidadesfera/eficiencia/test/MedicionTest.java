@@ -80,5 +80,37 @@ public class MedicionTest extends TestBasico {
         
     }
 
+    
+    @Test
+    public void getModuloNulo() {
+        
+        Medicion medicion = new Medicion();
+        
+        assertThat("modulo", medicion.getModulo(), nullValue());
+    }
+    
+    @Test
+    public void getProblemaNulo() {
+        
+        Medicion medicion = new Medicion();
+
+        assertThat("problema", medicion.getProblema(), nullValue());
+    }
+    
+    @Test
+    public void getInicioNulo() {
+        
+        Medicion medicion = new Medicion();
+        
+        assertThat("inicio", medicion.getInicio(), nullValue());
+    }
+    
+    @Test
+    public void getFinNulo() {
+        
+        Medicion medicion = new Medicion();
+        
+        assertThat("fin", medicion.getFin(), nullValue());
+    }
 }
 

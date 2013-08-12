@@ -14,8 +14,11 @@ import org.junit.runner.RunWith;
 import org.unitils.UnitilsJUnit4TestClassRunner;
 import org.unitils.database.DatabaseUnitils;
 
+import ar.com.comunidadesfera.eficiencia.registros.Medicion;
+import ar.com.comunidadesfera.eficiencia.test.TestBasico;
+
 @RunWith(UnitilsJUnit4TestClassRunner.class)
-public abstract class ConsultaTest {
+public abstract class ConsultaTest extends TestBasico {
     
     protected static EntityManagerFactory emFactory;
     
@@ -59,4 +62,12 @@ public abstract class ConsultaTest {
         this.em.close();
     }
     
+    protected Medicion medicion(Long id) {
+
+        Medicion medicion = new Medicion();
+        medicion.setId(id);
+        
+        return medicion;
+    }
+
 }

@@ -15,6 +15,7 @@ import ar.com.comunidadesfera.eficiencia.registros.Problema;
 import ar.com.comunidadesfera.eficiencia.registros.Unidad;
 import ar.com.comunidadesfera.eficiencia.test.matchers.DiscriminanteCon;
 import ar.com.comunidadesfera.eficiencia.test.matchers.EstaEntre;
+import ar.com.comunidadesfera.eficiencia.test.matchers.ItemReporteQue;
 import ar.com.comunidadesfera.eficiencia.test.matchers.MedicionDe;
 import ar.com.comunidadesfera.eficiencia.test.matchers.MedidaCon;
 
@@ -75,5 +76,10 @@ public abstract class TestBasico {
     public <T extends Comparable<T>> Matcher<T> estaEntre(T inferior, T superior) {
         
         return new EstaEntre<T>(inferior, superior);
+    }
+    
+    public ItemReporteQue itemReporteQue() {
+        
+        return new ItemReporteQue();
     }
 }
