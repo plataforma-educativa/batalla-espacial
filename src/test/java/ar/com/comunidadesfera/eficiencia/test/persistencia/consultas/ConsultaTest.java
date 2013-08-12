@@ -14,7 +14,9 @@ import org.junit.runner.RunWith;
 import org.unitils.UnitilsJUnit4TestClassRunner;
 import org.unitils.database.DatabaseUnitils;
 
+import ar.com.comunidadesfera.eficiencia.registros.Categoria;
 import ar.com.comunidadesfera.eficiencia.registros.Medicion;
+import ar.com.comunidadesfera.eficiencia.registros.Modulo;
 import ar.com.comunidadesfera.eficiencia.test.TestBasico;
 
 @RunWith(UnitilsJUnit4TestClassRunner.class)
@@ -62,7 +64,7 @@ public abstract class ConsultaTest extends TestBasico {
         this.em.close();
     }
     
-    protected Medicion medicion(Long id) {
+    protected Medicion medicionConId(Long id) {
 
         Medicion medicion = new Medicion();
         medicion.setId(id);
@@ -70,4 +72,19 @@ public abstract class ConsultaTest extends TestBasico {
         return medicion;
     }
 
+    protected Modulo moduloConId(Long id) {
+        
+        Modulo modulo = new Modulo();
+        modulo.setId(id);
+        
+        return modulo;
+    }
+
+    protected Categoria categoriaConId(Long id) {
+        
+        Categoria categoria = new Categoria();
+        categoria.setId(id);
+        
+        return categoria;
+    }
 }

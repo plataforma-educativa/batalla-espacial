@@ -65,14 +65,14 @@
         </query>
     </named-query>
     
-    <named-query name="calcularMedicionesPorDiscriminante">
+    <named-query name="sumarizarMedicionesPorDiscriminanteEnUnEntorno">
         <query>
-            SELECT new ar.com.comunidadesfera.eficiencia.reporte.ItemSimple(m.discriminante.nombre, SUM(m.resultado.magnitud))
+            SELECT new ar.com.comunidadesfera.eficiencia.reporte.ItemSimple(m.discriminante, SUM(m.resultado.magnitud))
             FROM Medicion m 
             WHERE 
-                m.discriminante.entorno = :discriminante
+                m.discriminante.entorno = :entorno
             GROUP BY
-                m.discriminante.nombre
+                m.discriminante
         </query>
     </named-query>
     

@@ -191,9 +191,11 @@ public class AdministradorDeMediciones {
     @Transaccional(EstrategiaTransaccional.REQUERIDA)
     public ItemCompuesto<Discriminante> calcularMedicionesPorDiscriminante(Discriminante discriminante) {
         
-        List<ItemReporte<Discriminante>> subitems = this.em.createNamedQuery("calcularMedicionesPorDiscriminante")
-                                                           .setParameter("discriminante", discriminante)
-                                                           .getResultList();
+        List<ItemReporte<Discriminante>> subitems;
+        
+        subitems = this.em.createNamedQuery("sumarizarMedicionesPorDiscriminanteEnUnEntorno")
+                          .setParameter("entorno", discriminante)
+                          .getResultList();
         
         return new ItemCompuesto<Discriminante>(discriminante,
                                                 discriminante.getNombre(), 
