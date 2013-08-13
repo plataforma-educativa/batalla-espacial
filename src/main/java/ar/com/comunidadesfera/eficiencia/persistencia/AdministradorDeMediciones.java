@@ -10,6 +10,7 @@ import ar.com.comunidadesfera.eficiencia.registros.Discriminante;
 import ar.com.comunidadesfera.eficiencia.registros.Medicion;
 import ar.com.comunidadesfera.eficiencia.registros.Modulo;
 import ar.com.comunidadesfera.eficiencia.registros.Problema;
+import ar.com.comunidadesfera.eficiencia.registros.Unidad;
 import ar.com.comunidadesfera.eficiencia.reporte.ItemCompuesto;
 import ar.com.comunidadesfera.eficiencia.reporte.ItemReporte;
 import ar.com.comunidadesfera.persistencia.EstrategiaTransaccional;
@@ -180,9 +181,9 @@ public class AdministradorDeMediciones {
     
     @SuppressWarnings("unchecked")
     @Transaccional(EstrategiaTransaccional.REQUERIDA)
-    public List<ItemReporte<Medicion>> calcularMediciones(Modulo modulo) {
+    public List<ItemReporte<Medicion>> buscarMediciones(Modulo modulo) {
 
-        return this.em.createNamedQuery("calcularMedicionesDeUnModulo")
+        return this.em.createNamedQuery("buscarMedicionesDeUnModulo")
                       .setParameter("modulo", modulo)
                       .getResultList();
     }
@@ -195,6 +196,7 @@ public class AdministradorDeMediciones {
         
         subitems = this.em.createNamedQuery("sumarizarMedicionesPorDiscriminanteEnUnEntorno")
                           .setParameter("entorno", discriminante)
+                          .setParameter("unidadMedida", Unidad.INSTRUCCIONES)
                           .getResultList();
         
         return new ItemCompuesto<Discriminante>(discriminante,

@@ -158,7 +158,7 @@ public class ControladorEficiencia {
 
         for (Modulo modulo : this.seleccion.obtener()) {
             
-            List<ItemReporte<Medicion>> items = this.administradorDeMediciones.calcularMediciones(modulo);
+            List<ItemReporte<Medicion>> items = this.administradorDeMediciones.buscarMediciones(modulo);
             
             XYChart.Series<Long, Number> serie = new XYChart.Series<>();
             
@@ -207,7 +207,7 @@ public class ControladorEficiencia {
 
         for (Modulo modulo : this.seleccion.obtener()) {
             
-            List<ItemReporte<Medicion>> items = this.administradorDeMediciones.calcularMediciones(modulo);
+            List<ItemReporte<Medicion>> items = this.administradorDeMediciones.buscarMediciones(modulo);
             
             XYChart.Series<String, Number> serie = new XYChart.Series<>();
             

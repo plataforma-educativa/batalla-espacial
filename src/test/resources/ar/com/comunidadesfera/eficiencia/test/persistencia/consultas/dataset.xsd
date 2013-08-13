@@ -6,7 +6,6 @@
 			<xsd:choice minOccurs="0" maxOccurs="unbounded">
 				<xsd:element name="PROBLEMA" type="dflt:PROBLEMA__type" />
 				<xsd:element name="MODULO" type="dflt:MODULO__type" />
-				<xsd:element name="DIMENSION" type="dflt:DIMENSION__type" />
 				<xsd:element name="REGISTRODEEJECUCION" type="dflt:REGISTRODEEJECUCION__type" />
 				<xsd:element name="CATEGORIA" type="dflt:CATEGORIA__type" />
 				<xsd:element name="MEDIDA" type="dflt:MEDIDA__type" />

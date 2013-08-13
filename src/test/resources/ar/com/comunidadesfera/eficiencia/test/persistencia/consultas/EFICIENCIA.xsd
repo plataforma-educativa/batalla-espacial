@@ -2,7 +2,6 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns="EFICIENCIA" targetNamespace="EFICIENCIA">
 	<xsd:element name="PROBLEMA" type="PROBLEMA__type" />
 	<xsd:element name="MODULO" type="MODULO__type" />
-	<xsd:element name="DIMENSION" type="DIMENSION__type" />
 	<xsd:element name="REGISTRODEEJECUCION" type="REGISTRODEEJECUCION__type" />
 	<xsd:element name="CATEGORIA" type="CATEGORIA__type" />
 	<xsd:element name="MEDIDA" type="MEDIDA__type" />
@@ -17,11 +16,6 @@
 		<xsd:attribute name="IDENTIFICACION" use="optional" />
 		<xsd:attribute name="ID" use="optional" />
 		<xsd:attribute name="DESCRIPCION" use="optional" />
-	</xsd:complexType>
-	<xsd:complexType name="DIMENSION__type">
-		<xsd:attribute name="NOMBRE" use="optional" />
-		<xsd:attribute name="ID" use="optional" />
-		<xsd:attribute name="VALOR" use="optional" />
 	</xsd:complexType>
 	<xsd:complexType name="REGISTRODEEJECUCION__type">
 		<xsd:attribute name="MODULO_ID" use="optional" />

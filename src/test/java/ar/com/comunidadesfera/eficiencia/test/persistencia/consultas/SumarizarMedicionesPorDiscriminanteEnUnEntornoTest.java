@@ -8,6 +8,8 @@ import java.util.List;
 import org.junit.Test;
 import org.unitils.dbunit.annotation.DataSet;
 
+import ar.com.comunidadesfera.eficiencia.registros.Modulo;
+import ar.com.comunidadesfera.eficiencia.registros.Unidad;
 import ar.com.comunidadesfera.eficiencia.reporte.ItemReporte;
 
 @DataSet
@@ -17,26 +19,54 @@ public class SumarizarMedicionesPorDiscriminanteEnUnEntornoTest extends Consulta
     @Test
     public void noEncuentraMedicionesEnElEntorno() {
         
-        List<?> items = this.em.createNamedQuery("sumarizarMedicionesPorDiscriminanteEnUnEntorno")
-                               .setParameter("entorno", moduloConId(1L))
-                               .getResultList();
+        List<?> items = ejecutar(moduloConId(1L), Unidad.INSTRUCCIONES);
         
-        assertThat("items encontrados", items, empty());
+        assertThat("items sumarizados", items, empty());
     }
     
     @Test
     @SuppressWarnings("unchecked")
     public void sumarizaDosMedicionesParaCadaUnoDeLosDosDiscriminantesEnElEntorno() {
         
-        List<ItemReporte<?>> items = this.em.createNamedQuery("sumarizarMedicionesPorDiscriminanteEnUnEntorno")
-                                            .setParameter("entorno", moduloConId(2L))
-                                            .getResultList();
+        List<ItemReporte<?>> items = ejecutar(moduloConId(2L), Unidad.INSTRUCCIONES);
         
-        assertThat("items encontrador", items, hasSize(2));
-        assertThat("items", items, contains(itemReporteQue().tieneValor(472L).tieneObjeto(categoriaConId(3L)),
-                                            itemReporteQue().tieneValor(28L).tieneObjeto(categoriaConId(4L))));
+        assertThat("items sumarizados", items, hasSize(2));
+        assertThat("items", items, containsInAnyOrder(itemReporteQue().tieneValor(472L)
+                                                                      .tieneObjeto(categoriaConId(3L)),
+                                                      itemReporteQue().tieneValor(28L)
+                                                                      .tieneObjeto(categoriaConId(4L))));
     }
     
+    @Test
+    @SuppressWarnings("unchecked")
+    public void sumarizaMultiplesMedicionesConDiferentesDiscriminantesEnElEntorno() {
+        
+        
+        List<ItemReporte<?>> items = ejecutar(moduloConId(5L), Unidad.INSTRUCCIONES);
+
+        assertThat("items sumarizados", items, hasSize(3));
+        assertThat("items", items, containsInAnyOrder(itemReporteQue().tieneValor(29L)
+                                                                      .tieneObjeto(categoriaConId(6L)),
+                                                      itemReporteQue().tieneValor(58L)
+                                                                      .tieneObjeto(categoriaConId(7L)),
+                                                      itemReporteQue().tieneValor(1L)
+                                                                      .tieneObjeto(categoriaConId(8L))));
+    }
     
+    @Test
+    public void sumarizaSoloMedicionesConLaMismaUnidadMedida() {
+        
+        List<ItemReporte<?>> items = ejecutar(moduloConId(9L), Unidad.INSTRUCCIONES);
+        
+        assertThat("items sumarizados", items, hasSize(2));
+    }
     
+    @SuppressWarnings("unchecked")
+    private List<ItemReporte<?>> ejecutar(Modulo modulo, Unidad unidadMedida) {
+        
+        return this.em.createNamedQuery("sumarizarMedicionesPorDiscriminanteEnUnEntorno")
+                      .setParameter("entorno", modulo)
+                      .setParameter("unidadMedida", unidadMedida)
+                      .getResultList();
+    }
 }

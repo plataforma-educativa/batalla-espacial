@@ -54,12 +54,14 @@
         </query>
     </named-query>
     
-    <named-query name="calcularMedicionesDeUnModulo">
+    <named-query name="buscarMedicionesDeUnModulo">
         <query>
             SELECT new ar.com.comunidadesfera.eficiencia.reporte.ItemSimple(m, m.resultado.magnitud)
             FROM Medicion m 
             WHERE 
                 m.discriminante = :modulo
+                AND
+                m.resultado.unidad = :unidadMedida
             ORDER BY
                 m.ejecucion.dimension
         </query>
@@ -71,6 +73,8 @@
             FROM Medicion m 
             WHERE 
                 m.discriminante.entorno = :entorno
+                AND
+                m.resultado.unidad = :unidadMedida
             GROUP BY
                 m.discriminante
         </query>

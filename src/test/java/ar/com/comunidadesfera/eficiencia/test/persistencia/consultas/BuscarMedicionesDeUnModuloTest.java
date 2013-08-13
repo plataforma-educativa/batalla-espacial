@@ -9,28 +9,25 @@ import org.junit.Test;
 import org.unitils.dbunit.annotation.DataSet;
 
 import ar.com.comunidadesfera.eficiencia.registros.Medicion;
+import ar.com.comunidadesfera.eficiencia.registros.Modulo;
+import ar.com.comunidadesfera.eficiencia.registros.Unidad;
 import ar.com.comunidadesfera.eficiencia.reporte.ItemReporte;
 
 @DataSet
-public class CalcularMedicionesDeUnModuloTest extends ConsultaTest {
+public class BuscarMedicionesDeUnModuloTest extends ConsultaTest {
 
     @Test
     public void noEncuentraNingunaMedicionParaElModulo() {
         
-        List<?> items = this.em.createNamedQuery("calcularMedicionesDeUnModulo")
-                               .setParameter("modulo", moduloConId(1L))
-                               .getResultList();
+        List<?> items = ejecutar(moduloConId(1L), Unidad.INSTRUCCIONES);
         
         assertThat(items, is(empty()));
     }
     
     @Test
-    @SuppressWarnings("unchecked")
     public void encuentraUnaUnicaMedicion() {
         
-       List<ItemReporte<Medicion>> items = this.em.createNamedQuery("calcularMedicionesDeUnModulo")
-                                                   .setParameter("modulo", moduloConId(2L))
-                                                   .getResultList();
+       List<ItemReporte<Medicion>> items = ejecutar(moduloConId(2L), Unidad.INSTRUCCIONES);
         
         assertThat("items encontrados", items, hasSize(1));
         assertThat("item", items, contains(itemReporteQue().tieneValor(276L).tieneObjeto(medicionConId(100L))));
@@ -40,14 +37,29 @@ public class CalcularMedicionesDeUnModuloTest extends ConsultaTest {
     @SuppressWarnings("unchecked")
     public void encuentraMultiplesMediciones() {
         
-        List<ItemReporte<Medicion>> items = this.em.createNamedQuery("calcularMedicionesDeUnModulo")
-                                                   .setParameter("modulo", moduloConId(3L))
-                                                   .getResultList();
+        List<ItemReporte<Medicion>> items = ejecutar(moduloConId(3L), Unidad.INSTRUCCIONES);
         
         assertThat("items encontrados", items, hasSize(3));
         assertThat("items", items, contains(itemReporteQue().tieneValor(1002L).tieneObjeto(medicionConId(201L)),
                                             itemReporteQue().tieneValor(2005L).tieneObjeto(medicionConId(203L)),
                                             itemReporteQue().tieneValor(4102L).tieneObjeto(medicionConId(202L))));
+    }
+    
+    @Test
+    public void encuentraSoloMedicionesDeInstrucciones() {
+        
+        List<ItemReporte<Medicion>> items = ejecutar(moduloConId(4L), Unidad.INSTRUCCIONES);
+        
+        assertThat("items encontrador", items, hasSize(2));
+    }
+    
+    @SuppressWarnings("unchecked")
+    private List<ItemReporte<Medicion>> ejecutar(Modulo modulo, Unidad unidadMedida) {
+        
+        return this.em.createNamedQuery("buscarMedicionesDeUnModulo")
+                      .setParameter("modulo", modulo)
+                      .setParameter("unidadMedida", unidadMedida)
+                      .getResultList();
     }
 }
 
