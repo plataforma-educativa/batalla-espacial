@@ -6,7 +6,7 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
-import ar.com.comunidadesfera.eficiencia.reporte.ItemReporte;
+import ar.com.comunidadesfera.eficiencia.reportes.ItemReporte;
 
 public class ItemReporteQue extends TypeSafeMatcher<ItemReporte<?>> {
 

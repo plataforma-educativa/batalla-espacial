@@ -11,7 +11,7 @@ import org.unitils.dbunit.annotation.DataSet;
 import ar.com.comunidadesfera.eficiencia.registros.Medicion;
 import ar.com.comunidadesfera.eficiencia.registros.Modulo;
 import ar.com.comunidadesfera.eficiencia.registros.Unidad;
-import ar.com.comunidadesfera.eficiencia.reporte.ItemReporte;
+import ar.com.comunidadesfera.eficiencia.reportes.ItemReporte;
 
 @DataSet
 public class BuscarMedicionesDeUnModuloTest extends ConsultaTest {

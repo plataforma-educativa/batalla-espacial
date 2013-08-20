@@ -56,7 +56,7 @@
     
     <named-query name="buscarMedicionesDeUnModulo">
         <query>
-            SELECT new ar.com.comunidadesfera.eficiencia.reporte.ItemSimple(m, m.resultado.magnitud)
+            SELECT NEW ar.com.comunidadesfera.eficiencia.reportes.ItemReporte(m.resultado.magnitud, m)
             FROM Medicion m 
             WHERE 
                 m.discriminante = :modulo
@@ -69,7 +69,7 @@
     
     <named-query name="sumarizarMedicionesPorDiscriminanteEnUnEntorno">
         <query>
-            SELECT new ar.com.comunidadesfera.eficiencia.reporte.ItemSimple(m.discriminante, SUM(m.resultado.magnitud))
+            SELECT NEW ar.com.comunidadesfera.eficiencia.reportes.ItemReporte(SUM(m.resultado.magnitud), m.discriminante)
             FROM Medicion m 
             WHERE 
                 m.discriminante.entorno = :entorno
@@ -79,5 +79,20 @@
                 m.discriminante
         </query>
     </named-query>
+    
+<!--     <named-query name="sumarizarMedicionesPorDimensionDiscriminanteEnUnEntorno"> -->
+<!--         <query> -->
+<!--             SELECT new ar.com.comunidadesfera.eficiencia.reporte.ItemSimple(m.discriminante, SUM(m.resultado.magnitud)) -->
+<!--             FROM Medicion m -->
+<!--             WHERE -->
+<!--                 m.discriminante.entorno = :entorno -->
+<!--                 AND -->
+<!--                 m.resultado.unidad = :unidadMedida -->
+<!--             GROUP BY -->
+<!--                 m.discriminante  -->
+<!--                 AND -->
+<!--                 m.ejecucion.dimension = :dimensionEjecucion -->
+<!--         </query> -->
+<!--     </named-query> -->
     
 </entity-mappings>

@@ -11,8 +11,10 @@ import ar.com.comunidadesfera.eficiencia.registros.Medicion;
 import ar.com.comunidadesfera.eficiencia.registros.Modulo;
 import ar.com.comunidadesfera.eficiencia.registros.Problema;
 import ar.com.comunidadesfera.eficiencia.registros.Unidad;
-import ar.com.comunidadesfera.eficiencia.reporte.ItemCompuesto;
-import ar.com.comunidadesfera.eficiencia.reporte.ItemReporte;
+import ar.com.comunidadesfera.eficiencia.reportes.ItemReporte;
+import ar.com.comunidadesfera.eficiencia.reportes.Reporte;
+import ar.com.comunidadesfera.eficiencia.reportes.ReporteAgrupadoPorClasificacion;
+import ar.com.comunidadesfera.eficiencia.reportes.ReporteSimple;
 import ar.com.comunidadesfera.persistencia.EstrategiaTransaccional;
 import ar.com.comunidadesfera.persistencia.Transaccional;
 
@@ -181,16 +183,16 @@ public class AdministradorDeMediciones {
     
     @SuppressWarnings("unchecked")
     @Transaccional(EstrategiaTransaccional.REQUERIDA)
-    public List<ItemReporte<Medicion>> buscarMediciones(Modulo modulo) {
+    public Reporte<Medicion> buscarMediciones(Modulo modulo) {
 
-        return this.em.createNamedQuery("buscarMedicionesDeUnModulo")
-                      .setParameter("modulo", modulo)
-                      .getResultList();
+        return new ReporteSimple<>(this.em.createNamedQuery("buscarMedicionesDeUnModulo")
+                                          .setParameter("modulo", modulo)
+                                          .getResultList());
     }
 
     @SuppressWarnings("unchecked")
     @Transaccional(EstrategiaTransaccional.REQUERIDA)
-    public ItemCompuesto<Discriminante> calcularMedicionesPorDiscriminante(Discriminante discriminante) {
+    public Reporte<Discriminante> calcularMedicionesPorDiscriminante(Discriminante discriminante) {
         
         List<ItemReporte<Discriminante>> subitems;
         
@@ -199,24 +201,22 @@ public class AdministradorDeMediciones {
                           .setParameter("unidadMedida", Unidad.INSTRUCCIONES)
                           .getResultList();
         
-        return new ItemCompuesto<Discriminante>(discriminante,
-                                                discriminante.getNombre(), 
-                                                subitems);
+        return new ReporteAgrupadoPorClasificacion<>(subitems);
     }
 
-    @SuppressWarnings("unchecked")
-    @Transaccional(EstrategiaTransaccional.REQUERIDA)
-    public List<ItemCompuesto<Discriminante>> calcularMedicionesPorDimensionDiscriminante(Discriminante discriminante) {
-        
-        List<ItemReporte<Discriminante>> subitems = this.em.createNamedQuery("calcularMedicionesPorDimensionDiscriminante")
-                                                           .setParameter("discriminante", discriminante)
-                                                           .getResultList();
+//    @SuppressWarnings("unchecked")
+//    @Transaccional(EstrategiaTransaccional.REQUERIDA)
+//    public List<ItemCompuesto<Discriminante>> calcularMedicionesPorDimensionDiscriminante(Discriminante discriminante) {
 //        
-//        return new ItemCompuesto<Discriminante>(discriminante,
-//                                                discriminante.getNombre(), 
-//                                                subitems);
-        
-        return null;
-    }
+//        List<ItemReporte<Discriminante>> subitems = this.em.createNamedQuery("calcularMedicionesPorDimensionDiscriminante")
+//                                                           .setParameter("discriminante", discriminante)
+//                                                           .getResultList();
+////        
+////        return new ItemCompuesto<Discriminante>(discriminante,
+////                                                discriminante.getNombre(), 
+////                                                subitems);
+//        
+//        return null;
+//    }
 
 }

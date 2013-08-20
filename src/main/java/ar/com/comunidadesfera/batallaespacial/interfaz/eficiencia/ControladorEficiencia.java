@@ -36,7 +36,8 @@ import ar.com.comunidadesfera.eficiencia.persistencia.AdministradorDeMediciones;
 import ar.com.comunidadesfera.eficiencia.registros.Discriminante;
 import ar.com.comunidadesfera.eficiencia.registros.Medicion;
 import ar.com.comunidadesfera.eficiencia.registros.Modulo;
-import ar.com.comunidadesfera.eficiencia.reporte.ItemReporte;
+import ar.com.comunidadesfera.eficiencia.reportes.ItemReporte;
+import ar.com.comunidadesfera.eficiencia.reportes.Reporte;
 import ar.com.comunidadesfera.fx.Seleccion;
 
 
@@ -158,13 +159,13 @@ public class ControladorEficiencia {
 
         for (Modulo modulo : this.seleccion.obtener()) {
             
-            List<ItemReporte<Medicion>> items = this.administradorDeMediciones.buscarMediciones(modulo);
+            Reporte<Medicion> reporte = this.administradorDeMediciones.buscarMediciones(modulo);
             
             XYChart.Series<Long, Number> serie = new XYChart.Series<>();
             
             serie.setName(this.getTitulo(modulo));
             
-            for (ItemReporte<Medicion> item : items) {
+            for (ItemReporte<Medicion> item : reporte.getItems()) {
                 
                 long dimension = item.getObjeto().getEjecucion().getDimension();
                 
@@ -187,10 +188,10 @@ public class ControladorEficiencia {
             
             PieChart grafico = new PieChart();
             
-            ItemReporte<Discriminante> itemCompuesto = this.administradorDeMediciones
+            Reporte<Discriminante> reporte = this.administradorDeMediciones
                                                                 .calcularMedicionesPorDiscriminante(modulo);
             
-            for (ItemReporte<Discriminante> item : itemCompuesto.getSubItems()) {
+            for (ItemReporte<Discriminante> item : reporte.getItems()) {
           
                 PieChart.Data datos = new PieChart.Data(item.getNombre(), item.getProporcion());
                 grafico.getData().add(datos);
@@ -207,13 +208,13 @@ public class ControladorEficiencia {
 
         for (Modulo modulo : this.seleccion.obtener()) {
             
-            List<ItemReporte<Medicion>> items = this.administradorDeMediciones.buscarMediciones(modulo);
+            Reporte<Medicion> reporte = this.administradorDeMediciones.buscarMediciones(modulo);
             
             XYChart.Series<String, Number> serie = new XYChart.Series<>();
             
             serie.setName(this.getTitulo(modulo));
             
-            for (ItemReporte<Medicion> item : items) {
+            for (ItemReporte<Medicion> item : reporte.getItems()) {
                 
                 long tamaño = item.getObjeto().getEjecucion().getDimension();
                 
