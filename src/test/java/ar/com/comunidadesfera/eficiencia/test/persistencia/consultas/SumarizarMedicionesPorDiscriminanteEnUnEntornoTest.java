@@ -31,10 +31,10 @@ public class SumarizarMedicionesPorDiscriminanteEnUnEntornoTest extends Consulta
         List<ItemReporte<?>> items = ejecutar(moduloConId(2L), Unidad.INSTRUCCIONES);
         
         assertThat("items sumarizados", items, hasSize(2));
-        assertThat("items", items, containsInAnyOrder(itemReporteQue().tieneValor(472L)
-                                                                      .tieneObjeto(categoriaConId(3L)),
-                                                      itemReporteQue().tieneValor(28L)
-                                                                      .tieneObjeto(categoriaConId(4L))));
+        assertThat("items", items, containsInAnyOrder(itemReporteCon().valor(472L)
+                                                                      .objeto(categoriaConId(3L)),
+                                                      itemReporteCon().valor(28L)
+                                                                      .objeto(categoriaConId(4L))));
     }
     
     @Test
@@ -45,12 +45,12 @@ public class SumarizarMedicionesPorDiscriminanteEnUnEntornoTest extends Consulta
         List<ItemReporte<?>> items = ejecutar(moduloConId(5L), Unidad.INSTRUCCIONES);
 
         assertThat("items sumarizados", items, hasSize(3));
-        assertThat("items", items, containsInAnyOrder(itemReporteQue().tieneValor(29L)
-                                                                      .tieneObjeto(categoriaConId(6L)),
-                                                      itemReporteQue().tieneValor(58L)
-                                                                      .tieneObjeto(categoriaConId(7L)),
-                                                      itemReporteQue().tieneValor(1L)
-                                                                      .tieneObjeto(categoriaConId(8L))));
+        assertThat("items", items, containsInAnyOrder(itemReporteCon().valor(29L)
+                                                                      .objeto(categoriaConId(6L)),
+                                                      itemReporteCon().valor(58L)
+                                                                      .objeto(categoriaConId(7L)),
+                                                      itemReporteCon().valor(1L)
+                                                                      .objeto(categoriaConId(8L))));
     }
     
     @Test

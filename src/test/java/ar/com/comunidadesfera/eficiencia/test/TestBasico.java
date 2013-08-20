@@ -15,7 +15,7 @@ import ar.com.comunidadesfera.eficiencia.registros.Problema;
 import ar.com.comunidadesfera.eficiencia.registros.Unidad;
 import ar.com.comunidadesfera.eficiencia.test.matchers.DiscriminanteCon;
 import ar.com.comunidadesfera.eficiencia.test.matchers.EstaEntre;
-import ar.com.comunidadesfera.eficiencia.test.matchers.ItemReporteQue;
+import ar.com.comunidadesfera.eficiencia.test.matchers.ItemReporteCon;
 import ar.com.comunidadesfera.eficiencia.test.matchers.MedicionDe;
 import ar.com.comunidadesfera.eficiencia.test.matchers.MedidaCon;
 
@@ -78,8 +78,8 @@ public abstract class TestBasico {
         return new EstaEntre<T>(inferior, superior);
     }
     
-    public ItemReporteQue itemReporteQue() {
+    public ItemReporteCon itemReporteCon() {
         
-        return new ItemReporteQue();
+        return new ItemReporteCon();
     }
 }

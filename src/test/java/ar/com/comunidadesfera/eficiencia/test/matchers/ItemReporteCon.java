@@ -8,31 +8,31 @@ import org.hamcrest.TypeSafeMatcher;
 
 import ar.com.comunidadesfera.eficiencia.reportes.ItemReporte;
 
-public class ItemReporteQue extends TypeSafeMatcher<ItemReporte<?>> {
+public class ItemReporteCon extends TypeSafeMatcher<ItemReporte<?>> {
 
     private Matcher<? extends Number> valor;
 
     private Matcher<?> objeto;
     
-    public ItemReporteQue() {
+    public ItemReporteCon() {
 
     }
     
-    public ItemReporteQue tieneValor(Number valor) {
+    public ItemReporteCon valor(Number valor) {
         
         this.valor = is(equalTo(valor));
         
         return this;
     }
     
-    public ItemReporteQue tieneValor(Matcher<? extends Number> valor) {
+    public ItemReporteCon valor(Matcher<? extends Number> valor) {
         
         this.valor = valor;
         
         return this;
     }
     
-    public ItemReporteQue tieneObjeto(Object objeto) {
+    public ItemReporteCon objeto(Object objeto) {
         
         this.objeto = is(equalTo(objeto));
         

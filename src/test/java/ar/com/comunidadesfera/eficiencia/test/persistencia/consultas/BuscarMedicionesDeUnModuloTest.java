@@ -30,7 +30,7 @@ public class BuscarMedicionesDeUnModuloTest extends ConsultaTest {
        List<ItemReporte<Medicion>> items = ejecutar(moduloConId(2L), Unidad.INSTRUCCIONES);
         
         assertThat("items encontrados", items, hasSize(1));
-        assertThat("item", items, contains(itemReporteQue().tieneValor(276L).tieneObjeto(medicionConId(100L))));
+        assertThat("item", items, contains(itemReporteCon().valor(276L).objeto(medicionConId(100L))));
     }
 
     @Test
@@ -40,9 +40,9 @@ public class BuscarMedicionesDeUnModuloTest extends ConsultaTest {
         List<ItemReporte<Medicion>> items = ejecutar(moduloConId(3L), Unidad.INSTRUCCIONES);
         
         assertThat("items encontrados", items, hasSize(3));
-        assertThat("items", items, contains(itemReporteQue().tieneValor(1002L).tieneObjeto(medicionConId(201L)),
-                                            itemReporteQue().tieneValor(2005L).tieneObjeto(medicionConId(203L)),
-                                            itemReporteQue().tieneValor(4102L).tieneObjeto(medicionConId(202L))));
+        assertThat("items", items, contains(itemReporteCon().valor(1002L).objeto(medicionConId(201L)),
+                                            itemReporteCon().valor(2005L).objeto(medicionConId(203L)),
+                                            itemReporteCon().valor(4102L).objeto(medicionConId(202L))));
     }
     
     @Test
