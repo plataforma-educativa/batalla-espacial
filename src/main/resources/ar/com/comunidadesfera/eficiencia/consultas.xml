@@ -82,14 +82,15 @@
     
     <named-query name="sumarizarMedicionesPorDiscriminanteDimensionEnUnEntorno">
         <query>
-            SELECT NEW ar.com.comunidadesfera.eficiencia.reportes.ItemReporte(AVG(m.resultado.magnitud), d)
+            SELECT NEW ar.com.comunidadesfera.eficiencia.reportes.ItemReporte(AVG(m.resultado.magnitud), d, m.ejecucion.dimension)
             FROM Medicion m join m.discriminante d
             WHERE
                 d.entorno = :entorno
                 AND
                 m.resultado.unidad = :unidadMedida
             GROUP BY
-                d, m.ejecucion.dimension                
+                d, 
+                m.ejecucion.dimension                
             ORDER BY
                 m.ejecucion.dimension ASC,
                 d ASC

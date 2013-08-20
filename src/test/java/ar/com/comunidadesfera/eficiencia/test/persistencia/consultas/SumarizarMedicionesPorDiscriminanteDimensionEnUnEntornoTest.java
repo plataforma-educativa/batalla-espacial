@@ -26,20 +26,25 @@ public class SumarizarMedicionesPorDiscriminanteDimensionEnUnEntornoTest
 
     @Test
     @SuppressWarnings("unchecked")
-    public void sumarizaDosMedicionesParaCadaUnoDeLosDosDiscriminantesEnElEntorno() {
+    public void sumarizaTresMedicionesDeDosDimensionesDiferentesParaCadaUnoDeLosDosDiscriminantesEnElEntorno() {
         
         List<ItemReporte<?>> items = ejecutar(moduloConId(2L), Unidad.INSTRUCCIONES);
         
         assertThat("items sumarizados", items, hasSize(4));
         assertThat("items", items, contains(itemReporteCon().valor(closeTo(091.0, 0.01))
-                                                            .objeto(categoriaConId(3L)),
+                                                            .objeto(categoriaConId(3L))
+                                                            .clasificador(10L),
                                             itemReporteCon().valor(closeTo(009.0, 0.01))
-                                                            .objeto(categoriaConId(4L)),
+                                                            .objeto(categoriaConId(4L))
+                                                            .clasificador(10L),
                                             itemReporteCon().valor(closeTo(384.0, 0.01))
-                                                            .objeto(categoriaConId(3L)),
+                                                            .objeto(categoriaConId(3L))
+                                                            .clasificador(20L),
                                             itemReporteCon().valor(closeTo(020.0, 0.01))
-                                                            .objeto(categoriaConId(4L))));
+                                                            .objeto(categoriaConId(4L))
+                                                            .clasificador(20L)));
     }
+    
     
     @SuppressWarnings("unchecked")
     private List<ItemReporte<?>> ejecutar(Modulo modulo, Unidad unidadMedida) {

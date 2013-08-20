@@ -14,6 +14,8 @@ public class ItemReporteCon extends TypeSafeMatcher<ItemReporte<?>> {
 
     private Matcher<?> objeto;
     
+    private Matcher<?> clasificador;
+    
     public ItemReporteCon() {
 
     }
@@ -39,6 +41,13 @@ public class ItemReporteCon extends TypeSafeMatcher<ItemReporte<?>> {
         return this;
     }
     
+    public ItemReporteCon clasificador(Object clasificador) {
+        
+        this.clasificador = is(equalTo(clasificador));
+        
+        return this;
+    }
+    
     @Override
     public void describeTo(Description description) {
 
@@ -53,6 +62,11 @@ public class ItemReporteCon extends TypeSafeMatcher<ItemReporte<?>> {
             
             description.appendText(", objeto ").appendDescriptionOf(this.objeto);
         }
+        
+        if (this.clasificador != null) {
+            
+            description.appendText(", clasificador ").appendDescriptionOf(this.clasificador);
+        }
     }
     
 
@@ -60,7 +74,8 @@ public class ItemReporteCon extends TypeSafeMatcher<ItemReporte<?>> {
     protected boolean matchesSafely(ItemReporte<?> item) {
 
         return (this.valor == null || this.valor.matches(item.getValor())) &&
-               (this.objeto == null || this.objeto.matches(item.getObjeto()));
+               (this.objeto == null || this.objeto.matches(item.getObjeto())) &&
+               (this.clasificador == null || this.clasificador.matches(item.getClasificador()));
     }
 
     @Override
@@ -78,6 +93,12 @@ public class ItemReporteCon extends TypeSafeMatcher<ItemReporte<?>> {
             
             mismatchDescription.appendText(", objeto ");
             this.objeto.describeMismatch(item.getObjeto(), mismatchDescription);
+        }
+        
+        if (this.clasificador != null && ! this.clasificador.matches(item.getClasificador())) {
+            
+            mismatchDescription.appendText(", clasificador ");
+            this.clasificador.describeMismatch(item.getClasificador(), mismatchDescription);
         }
     }
 }
