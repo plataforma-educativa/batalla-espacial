@@ -10,7 +10,7 @@ import ar.com.comunidadesfera.eficiencia.reportes.ItemReporte;
 
 public class ItemReporteQue extends TypeSafeMatcher<ItemReporte<?>> {
 
-    private Matcher<Number> valor;
+    private Matcher<? extends Number> valor;
 
     private Matcher<?> objeto;
     
@@ -21,6 +21,13 @@ public class ItemReporteQue extends TypeSafeMatcher<ItemReporte<?>> {
     public ItemReporteQue tieneValor(Number valor) {
         
         this.valor = is(equalTo(valor));
+        
+        return this;
+    }
+    
+    public ItemReporteQue tieneValor(Matcher<? extends Number> valor) {
+        
+        this.valor = valor;
         
         return this;
     }

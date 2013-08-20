@@ -80,19 +80,20 @@
         </query>
     </named-query>
     
-<!--     <named-query name="sumarizarMedicionesPorDimensionDiscriminanteEnUnEntorno"> -->
-<!--         <query> -->
-<!--             SELECT new ar.com.comunidadesfera.eficiencia.reporte.ItemSimple(m.discriminante, SUM(m.resultado.magnitud)) -->
-<!--             FROM Medicion m -->
-<!--             WHERE -->
-<!--                 m.discriminante.entorno = :entorno -->
-<!--                 AND -->
-<!--                 m.resultado.unidad = :unidadMedida -->
-<!--             GROUP BY -->
-<!--                 m.discriminante  -->
-<!--                 AND -->
-<!--                 m.ejecucion.dimension = :dimensionEjecucion -->
-<!--         </query> -->
-<!--     </named-query> -->
+    <named-query name="sumarizarMedicionesPorDiscriminanteDimensionEnUnEntorno">
+        <query>
+            SELECT NEW ar.com.comunidadesfera.eficiencia.reportes.ItemReporte(AVG(m.resultado.magnitud))
+            FROM Medicion m
+            WHERE
+                m.discriminante.entorno = :entorno
+                AND
+                m.resultado.unidad = :unidadMedida
+            GROUP BY
+                m.discriminante, m.ejecucion.dimension                
+            ORDER BY
+                m.ejecucion.dimension ASC,
+                m.discriminante ASC
+        </query>
+    </named-query>
     
 </entity-mappings>

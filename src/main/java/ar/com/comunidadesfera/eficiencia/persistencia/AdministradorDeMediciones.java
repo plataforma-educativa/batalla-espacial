@@ -13,7 +13,6 @@ import ar.com.comunidadesfera.eficiencia.registros.Problema;
 import ar.com.comunidadesfera.eficiencia.registros.Unidad;
 import ar.com.comunidadesfera.eficiencia.reportes.ItemReporte;
 import ar.com.comunidadesfera.eficiencia.reportes.Reporte;
-import ar.com.comunidadesfera.eficiencia.reportes.ReporteAgrupadoPorClasificacion;
 import ar.com.comunidadesfera.eficiencia.reportes.ReporteSimple;
 import ar.com.comunidadesfera.persistencia.EstrategiaTransaccional;
 import ar.com.comunidadesfera.persistencia.Transaccional;
@@ -201,7 +200,7 @@ public class AdministradorDeMediciones {
                           .setParameter("unidadMedida", Unidad.INSTRUCCIONES)
                           .getResultList();
         
-        return new ReporteAgrupadoPorClasificacion<>(subitems);
+        return new ReporteSimple<>(subitems);
     }
 
 //    @SuppressWarnings("unchecked")
