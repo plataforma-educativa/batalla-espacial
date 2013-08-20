@@ -31,10 +31,14 @@ public class SumarizarMedicionesPorDiscriminanteDimensionEnUnEntornoTest
         List<ItemReporte<?>> items = ejecutar(moduloConId(2L), Unidad.INSTRUCCIONES);
         
         assertThat("items sumarizados", items, hasSize(4));
-        assertThat("items", items, contains(itemReporteCon().valor(closeTo(091.0, 0.01)),
-                                            itemReporteCon().valor(closeTo(009.0, 0.01)),
-                                            itemReporteCon().valor(closeTo(384.0, 0.01)),
-                                            itemReporteCon().valor(closeTo(020.0, 0.01))));
+        assertThat("items", items, contains(itemReporteCon().valor(closeTo(091.0, 0.01))
+                                                            .objeto(categoriaConId(3L)),
+                                            itemReporteCon().valor(closeTo(009.0, 0.01))
+                                                            .objeto(categoriaConId(4L)),
+                                            itemReporteCon().valor(closeTo(384.0, 0.01))
+                                                            .objeto(categoriaConId(3L)),
+                                            itemReporteCon().valor(closeTo(020.0, 0.01))
+                                                            .objeto(categoriaConId(4L))));
     }
     
     @SuppressWarnings("unchecked")

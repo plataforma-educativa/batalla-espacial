@@ -69,30 +69,30 @@
     
     <named-query name="sumarizarMedicionesPorDiscriminanteEnUnEntorno">
         <query>
-            SELECT NEW ar.com.comunidadesfera.eficiencia.reportes.ItemReporte(SUM(m.resultado.magnitud), m.discriminante)
-            FROM Medicion m 
+            SELECT NEW ar.com.comunidadesfera.eficiencia.reportes.ItemReporte(SUM(m.resultado.magnitud), d)
+            FROM Medicion m JOIN m.discriminante d
             WHERE 
-                m.discriminante.entorno = :entorno
+                d.entorno = :entorno
                 AND
                 m.resultado.unidad = :unidadMedida
             GROUP BY
-                m.discriminante
+                d
         </query>
     </named-query>
     
     <named-query name="sumarizarMedicionesPorDiscriminanteDimensionEnUnEntorno">
         <query>
-            SELECT NEW ar.com.comunidadesfera.eficiencia.reportes.ItemReporte(AVG(m.resultado.magnitud))
-            FROM Medicion m
+            SELECT NEW ar.com.comunidadesfera.eficiencia.reportes.ItemReporte(AVG(m.resultado.magnitud), d)
+            FROM Medicion m join m.discriminante d
             WHERE
-                m.discriminante.entorno = :entorno
+                d.entorno = :entorno
                 AND
                 m.resultado.unidad = :unidadMedida
             GROUP BY
-                m.discriminante, m.ejecucion.dimension                
+                d, m.ejecucion.dimension                
             ORDER BY
                 m.ejecucion.dimension ASC,
-                m.discriminante ASC
+                d ASC
         </query>
     </named-query>
     
