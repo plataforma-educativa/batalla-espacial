@@ -13,6 +13,7 @@ import ar.com.comunidadesfera.eficiencia.registros.Problema;
 import ar.com.comunidadesfera.eficiencia.registros.Unidad;
 import ar.com.comunidadesfera.eficiencia.reportes.ItemReporte;
 import ar.com.comunidadesfera.eficiencia.reportes.Reporte;
+import ar.com.comunidadesfera.eficiencia.reportes.ReporteAgrupadoPorClasificacion;
 import ar.com.comunidadesfera.eficiencia.reportes.ReporteSimple;
 import ar.com.comunidadesfera.persistencia.EstrategiaTransaccional;
 import ar.com.comunidadesfera.persistencia.Transaccional;
@@ -191,7 +192,7 @@ public class AdministradorDeMediciones {
 
     @SuppressWarnings("unchecked")
     @Transaccional(EstrategiaTransaccional.REQUERIDA)
-    public Reporte<Discriminante> calcularMedicionesPorDiscriminante(Discriminante discriminante) {
+    public Reporte<Discriminante> sumarizarMedicionesPorDiscriminante(Discriminante discriminante) {
         
         List<ItemReporte<Discriminante>> subitems;
         
@@ -203,19 +204,18 @@ public class AdministradorDeMediciones {
         return new ReporteSimple<>(subitems);
     }
 
-//    @SuppressWarnings("unchecked")
-//    @Transaccional(EstrategiaTransaccional.REQUERIDA)
-//    public List<ItemCompuesto<Discriminante>> calcularMedicionesPorDimensionDiscriminante(Discriminante discriminante) {
-//        
-//        List<ItemReporte<Discriminante>> subitems = this.em.createNamedQuery("calcularMedicionesPorDimensionDiscriminante")
-//                                                           .setParameter("discriminante", discriminante)
-//                                                           .getResultList();
-////        
-////        return new ItemCompuesto<Discriminante>(discriminante,
-////                                                discriminante.getNombre(), 
-////                                                subitems);
-//        
-//        return null;
-//    }
+    @SuppressWarnings("unchecked")
+    @Transaccional(EstrategiaTransaccional.REQUERIDA)
+    public Reporte<Discriminante> sumarizarMedicionesPorDiscriminanteDimension(Discriminante discriminante) {
+        
+        List<ItemReporte<Discriminante>> subitems;
+        
+        subitems = this.em.createNamedQuery("sumarizarMedicionesPorDiscriminanteDimensionEnUnEntorno")
+                          .setParameter("entorno", discriminante)
+                          .setParameter("unidadMedida", Unidad.INSTRUCCIONES)
+                          .getResultList();
+        
+        return new ReporteAgrupadoPorClasificacion<>(subitems);
+    }
 
 }

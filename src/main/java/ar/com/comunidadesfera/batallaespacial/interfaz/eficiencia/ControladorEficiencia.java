@@ -189,7 +189,7 @@ public class ControladorEficiencia {
             PieChart grafico = new PieChart();
             
             Reporte<Discriminante> reporte = this.administradorDeMediciones
-                                                                .calcularMedicionesPorDiscriminante(modulo);
+                                                                .sumarizarMedicionesPorDiscriminante(modulo);
             
             for (ItemReporte<Discriminante> item : reporte.getItems()) {
           
