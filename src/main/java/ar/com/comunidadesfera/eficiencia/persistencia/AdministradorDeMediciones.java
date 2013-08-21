@@ -210,7 +210,7 @@ public class AdministradorDeMediciones {
         
         List<ItemReporte<Discriminante>> subitems;
         
-        subitems = this.em.createNamedQuery("sumarizarMedicionesPorDiscriminanteDimensionEnUnEntorno")
+        subitems = this.em.createNamedQuery("promediarMedicionesPorDiscriminanteDimensionEnUnEntorno")
                           .setParameter("entorno", discriminante)
                           .setParameter("unidadMedida", Unidad.INSTRUCCIONES)
                           .getResultList();

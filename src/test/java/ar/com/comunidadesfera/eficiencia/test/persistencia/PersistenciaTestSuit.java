@@ -6,7 +6,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import ar.com.comunidadesfera.eficiencia.test.persistencia.consultas.BuscarIdProblemaTest;
 import ar.com.comunidadesfera.eficiencia.test.persistencia.consultas.BuscarMedicionesDeUnModuloTest;
-import ar.com.comunidadesfera.eficiencia.test.persistencia.consultas.SumarizarMedicionesPorDiscriminanteDimensionEnUnEntornoTest;
+import ar.com.comunidadesfera.eficiencia.test.persistencia.consultas.PromediarMedicionesPorDiscriminanteDimensionEnUnEntornoTest;
 import ar.com.comunidadesfera.eficiencia.test.persistencia.consultas.SumarizarMedicionesPorDiscriminanteEnUnEntornoTest;
 
 @RunWith( Suite.class )
@@ -16,7 +16,7 @@ import ar.com.comunidadesfera.eficiencia.test.persistencia.consultas.SumarizarMe
     BuscarIdProblemaTest.class,
     BuscarMedicionesDeUnModuloTest.class,
     SumarizarMedicionesPorDiscriminanteEnUnEntornoTest.class,
-    SumarizarMedicionesPorDiscriminanteDimensionEnUnEntornoTest.class
+    PromediarMedicionesPorDiscriminanteDimensionEnUnEntornoTest.class
 })
 public final class PersistenciaTestSuit {
 

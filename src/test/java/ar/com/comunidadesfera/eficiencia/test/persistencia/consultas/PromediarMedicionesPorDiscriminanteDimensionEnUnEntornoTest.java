@@ -14,7 +14,7 @@ import ar.com.comunidadesfera.eficiencia.registros.Unidad;
 import ar.com.comunidadesfera.eficiencia.reportes.ItemReporte;
 
 @DataSet
-public class SumarizarMedicionesPorDiscriminanteDimensionEnUnEntornoTest 
+public class PromediarMedicionesPorDiscriminanteDimensionEnUnEntornoTest 
     extends ConsultaTest {
 
     @Test
@@ -78,7 +78,7 @@ public class SumarizarMedicionesPorDiscriminanteDimensionEnUnEntornoTest
     @SuppressWarnings("unchecked")
     private List<ItemReporte<?>> ejecutar(Modulo modulo, Unidad unidadMedida) {
         
-        return this.em.createNamedQuery("sumarizarMedicionesPorDiscriminanteDimensionEnUnEntorno")
+        return this.em.createNamedQuery("promediarMedicionesPorDiscriminanteDimensionEnUnEntorno")
                       .setParameter("entorno", modulo)
                       .setParameter("unidadMedida", unidadMedida)
                       .getResultList();
