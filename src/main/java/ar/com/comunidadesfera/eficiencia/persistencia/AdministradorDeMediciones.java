@@ -187,6 +187,7 @@ public class AdministradorDeMediciones {
 
         return new ReporteSimple<>(this.em.createNamedQuery("buscarMedicionesDeUnModulo")
                                           .setParameter("modulo", modulo)
+                                          .setParameter("unidadMedida", Unidad.INSTRUCCIONES)
                                           .getResultList());
     }
 
@@ -206,7 +207,7 @@ public class AdministradorDeMediciones {
 
     @SuppressWarnings("unchecked")
     @Transaccional(EstrategiaTransaccional.REQUERIDA)
-    public Reporte<Discriminante> sumarizarMedicionesPorDiscriminanteDimension(Discriminante discriminante) {
+    public Reporte<Discriminante> promediarMedicionesPorDiscriminanteDimension(Discriminante discriminante) {
         
         List<ItemReporte<Discriminante>> subitems;
         

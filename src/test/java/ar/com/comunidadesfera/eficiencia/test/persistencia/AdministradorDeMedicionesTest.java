@@ -1,52 +1,51 @@
 package ar.com.comunidadesfera.eficiencia.test.persistencia;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-
-import org.jmock.Expectations;
-import org.jmock.Mockery;
-import org.jmock.integration.junit4.JMock;
-import org.jmock.integration.junit4.JUnit4Mockery;
 import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.runner.RunWith;
+import org.junit.Test;
 
 import ar.com.comunidadesfera.eficiencia.persistencia.AdministradorDeMediciones;
 
-@RunWith(JMock.class)
-@Ignore
-public class AdministradorDeMedicionesTest {
+/**
+ * Pruebas unitarias sobre los métodos del AdministradorDeMediciones 
+ * para asegurar que aquellos que ejecutan named queries proveen los parámetros
+ * correctamente.
+ * 
+ * @author Mariano Tugnarelli
+ *
+ */
+public class AdministradorDeMedicionesTest extends TestDePersistencia {
 
-    private Mockery simulador = new JUnit4Mockery();
-    
     private AdministradorDeMediciones administrador;
-    
-    private EntityManagerFactory emf;
-    
-    private EntityManager em;
     
     @Before
     public void inicializar() {
         
-        this.emf = this.simulador.mock(EntityManagerFactory.class);
-        this.em = this.simulador.mock(EntityManager.class);
-        
-        this.simulador.checking(this.expectativasComunes());
-        
         this.administrador = new AdministradorDeMediciones();
-        this.administrador.setEntityManager(emf.createEntityManager());
+        this.administrador.setEntityManager(this.em);
+    }
+
+    @Test
+    public void buscarMediciones() {
+        
+        this.administrador.buscarMediciones(moduloConId(1L));
     }
     
-    /**
-     * @return Expectativas comunes a todos los tests.
-     */
-    private Expectations expectativasComunes() {
+    @Test
+    public void sumarizarMedicionesPorDiscriminante() {
         
-        return new Expectations() {{
-            
-            oneOf(emf).createEntityManager();
-            will(returnValue(em));
-        }};
+        this.administrador.sumarizarMedicionesPorDiscriminante(categoriaConId(1L));
+    }
+    
+    @Test
+    public void promediarMedicionesPorDiscriminanteDimension() {
+        
+        this.administrador.promediarMedicionesPorDiscriminanteDimension(categoriaConId(3L));
+    }
+
+    @Test
+    public void buscarModulos() {
+        
+        this.administrador.buscarModulos("busqueda");
     }
     
 }

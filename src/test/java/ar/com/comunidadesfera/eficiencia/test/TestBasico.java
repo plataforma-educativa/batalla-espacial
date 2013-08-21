@@ -7,6 +7,7 @@ import org.junit.Before;
 
 import ar.com.comunidadesfera.eficiencia.Contexto;
 import ar.com.comunidadesfera.eficiencia.Eficiencia;
+import ar.com.comunidadesfera.eficiencia.registros.Categoria;
 import ar.com.comunidadesfera.eficiencia.registros.Discriminante;
 import ar.com.comunidadesfera.eficiencia.registros.Medicion;
 import ar.com.comunidadesfera.eficiencia.registros.Medida;
@@ -81,5 +82,29 @@ public abstract class TestBasico {
     public ItemReporteCon itemReporteCon() {
         
         return new ItemReporteCon();
+    }
+
+    protected Medicion medicionConId(Long id) {
+    
+        Medicion medicion = new Medicion();
+        medicion.setId(id);
+        
+        return medicion;
+    }
+
+    protected Modulo moduloConId(Long id) {
+        
+        Modulo modulo = new Modulo();
+        modulo.setId(id);
+        
+        return modulo;
+    }
+
+    protected Categoria categoriaConId(Long id) {
+        
+        Categoria categoria = new Categoria();
+        categoria.setId(id);
+        
+        return categoria;
     }
 }
