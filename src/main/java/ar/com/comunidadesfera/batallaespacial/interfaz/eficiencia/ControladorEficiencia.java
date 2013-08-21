@@ -207,45 +207,47 @@ public class ControladorEficiencia {
         this.graficoDistribucionComparativa.getData().clear();
 
         for (Modulo modulo : this.seleccion.obtener()) {
-            
-            Reporte<Medicion> reporte = this.administradorDeMediciones.buscarMediciones(modulo);
+                        
+            Reporte<Discriminante> 
+                reporte = this.administradorDeMediciones.promediarMedicionesPorDiscriminanteDimension(modulo);
             
             XYChart.Series<String, Number> serie = new XYChart.Series<>();
             
             serie.setName(this.getTitulo(modulo));
             
-            for (ItemReporte<Medicion> item : reporte.getItems()) {
+            for (ItemReporte<Discriminante> item : reporte.getItems()) {
                 
-                long tamaño = item.getObjeto().getEjecucion().getDimension();
-                
-                XYChart.Data<String, Number> datos = new XYChart.Data<>(String.valueOf(tamaño),
+                XYChart.Data<String, Number> datos = new XYChart.Data<>(String.valueOf(item.getClasificador()),
                                                                         item.getValor());
                 
                 GridPane pane = new GridPane();
                 
-                RowConstraints fila1 = new RowConstraints();
-                fila1.setPercentHeight(50);
-                
-                RowConstraints fila2 = new RowConstraints();
-                fila2.setPercentHeight(50);
-                
                 ColumnConstraints columna = new ColumnConstraints();
                 columna.setPercentWidth(100);
                 
-                Pane nodo1 = new Pane();
-                nodo1.setStyle("-fx-background-color:#000000;");
-                nodo1.setOpacity(0.30);
-                GridPane.setConstraints(nodo1, 0, 0);
-                GridPane.setMargin(nodo1, new Insets(0,5,0,5));
+                double incrementoOpacidad = 0.8 / (item.getSubItems().size() + 2);
+                double opacidad = 0.0;
                 
-                Pane nodo2 = new Pane();
-                nodo2.setStyle("-fx-background-color:#000000;");
-                nodo2.setOpacity(0.60);
-                GridPane.setConstraints(nodo2, 0, 1);
-                GridPane.setMargin(nodo2, new Insets(0,5,0,5));
+                int nro = 0;
+                
+                for (ItemReporte<Discriminante> subItem : item.getSubItems()) {
+                    
+                    Discriminante discriminante = subItem.getObjeto();
+                    
+                    RowConstraints fila = new RowConstraints();
+                    fila.setPercentHeight(subItem.getProporcion() * 100);
 
-                pane.getChildren().addAll(nodo1, nodo2);
-                pane.getRowConstraints().addAll(fila1, fila2);
+                    Pane nodo = new Pane();
+                    nodo.setStyle("-fx-background-color:#000000;");
+                    opacidad += incrementoOpacidad;
+                    nodo.setOpacity(opacidad);
+                    GridPane.setConstraints(nodo, 0, nro++);
+                    GridPane.setMargin(nodo, new Insets(0,5,0,5));
+                    
+                    pane.getChildren().add(nodo);
+                    pane.getRowConstraints().add(fila);
+                }
+                
                 pane.getColumnConstraints().add(columna);
                 
                 datos.setNode(pane);
