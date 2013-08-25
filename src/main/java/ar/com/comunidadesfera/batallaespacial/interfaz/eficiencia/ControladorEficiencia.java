@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
-import javafx.beans.value.ObservableValueBase;
 import javafx.collections.FXCollections;
 import javafx.collections.SetChangeListener;
 import javafx.fxml.FXML;
@@ -193,7 +192,10 @@ public class ControladorEficiencia {
             
             for (ItemReporte<Discriminante> item : reporte.getItems()) {
           
-                PieChart.Data datos = new PieChart.Data(item.getNombre(), item.getProporcion());
+                String nombre = String.format("%1s (%2.1f%%)", 
+                                              item.getObjeto().getNombre(), item.getProporcion() * 100);
+                
+                PieChart.Data datos = new PieChart.Data(nombre, item.getProporcion());
                 grafico.getData().add(datos);
             }
             
@@ -262,28 +264,5 @@ public class ControladorEficiencia {
         
         return modulo.getNombre() + " (versión " + modulo.getVersion() + ")";
     }
-    
-    public class Persona extends ObservableValueBase<String> {
 
-        private String nombre; 
-        
-        public void setNombre(String nombre) {
-            
-            this.nombre = nombre;
-            
-            this.fireValueChangedEvent();
-        }
-        
-        public String getNombre() {
-            
-            return this.nombre;
-        }
-        
-        @Override
-        public String getValue() {
-
-            return this.getNombre();
-        }
-        
-    }
 }
