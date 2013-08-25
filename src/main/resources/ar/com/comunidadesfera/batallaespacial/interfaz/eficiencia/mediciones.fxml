@@ -11,7 +11,7 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-preview-i18n-resource ../contenido.properties?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="ar.com.comunidadesfera.batallaespacial.interfaz.eficiencia.ControladorEficiencia">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ar.com.comunidadesfera.batallaespacial.interfaz.eficiencia.ControladorEficiencia">
   <ToolBar focusTraversable="false" orientation="HORIZONTAL" pickOnBounds="false" prefHeight="40.0" prefWidth="800.0" style="" styleClass="superior" visible="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
     <items>
       <Label text="%metricas.modulos.titulo" />
@@ -71,7 +71,7 @@
                 <content>
                   <AnchorPane id="AnchorPane" prefHeight="400.0">
                     <children>
-                      <BarChart fx:id="graficoDistribucionComparativa" barGap="0.0" categoryGap="4.0" legendSide="TOP" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <BarChart fx:id="graficoDistribucionComparativa" alternativeColumnFillVisible="false" barGap="0.0" categoryGap="4.0" legendSide="BOTTOM" legendVisible="false" verticalGridLinesVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                         <xAxis>
                           <CategoryAxis side="BOTTOM">
                             <categories>
