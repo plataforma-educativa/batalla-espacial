@@ -106,7 +106,7 @@ public class Partida<T extends Participante> {
     public void comenzar() {
         
         this.threadMotor = new Thread(this.motor);
-        
+        this.threadMotor.setDaemon(true);
         this.threadMotor.start();
         
     }
