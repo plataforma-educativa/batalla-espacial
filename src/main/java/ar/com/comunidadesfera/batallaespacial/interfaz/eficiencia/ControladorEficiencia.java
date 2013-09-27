@@ -15,6 +15,9 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.LabelBuilder;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
@@ -61,7 +64,7 @@ public class ControladorEficiencia {
     private TableColumn<Modulo, Long> columnaId;
     
     @FXML
-    private TableColumn<Modulo, String> columnaNombre;
+    private TableColumn<Modulo, Leyenda> columnaNombre;
     
     @FXML
     private TableColumn<Modulo, String> columnaDescripcion;
@@ -110,14 +113,81 @@ public class ControladorEficiencia {
         }
       
     };
-  
+
+    private Callback<TableColumn<Modulo, Leyenda>, TableCell<Modulo, Leyenda>> 
+        columnaNombreCellFactory = new Callback<TableColumn<Modulo, Leyenda>, TableCell<Modulo, Leyenda>>() {
+
+            @Override
+            public TableCell<Modulo, Leyenda> call(TableColumn<Modulo, Leyenda> columna) {
+
+                
+                return new TableCell<Modulo, Leyenda>() {
+                    
+                    private Label label;
+                    
+//                    private Region region;
+                    
+                    {   
+                        label = LabelBuilder.create()
+//                                    .minHeight(100)
+//                                    .prefHeight(100)
+//                                    .maxHeight(100)
+                                .build(); 
+//                        
+//                        region = RegionBuilder.create()
+//                                    .minHeight(40)
+//                                    .prefHeight(40)
+//                                    .maxHeight(40)
+//                                    .minWidth(40)
+//                                    .prefWidth(40)
+//                                    .maxWidth(40)
+////                                    .style("-fx-background-color:#cccccc;")
+////                                    .styleClass("chart-symbol","series0","data0","default-color0")
+//                                .build();
+                    }
+                    
+                    @Override
+                    protected void updateItem(Leyenda item, boolean empty) {
+                        
+                   
+                        if ( !empty) {
+                            
+                            label.setText(item.getModulo().getNombre());
+
+//                            Bindings.bindContentBidirectional(item.getEstilo(), region.getStyleClass());
+//                            item.setEstilo(region.getStyleClass());
+//                            item.setNodo(this.region);
+                            this.setGraphic(label);
+                            
+                        } else {
+                            
+                            this.setGraphic(null);
+                        }
+                    };
+                };
+            }
+        
+        };
+
+    private Callback<CellDataFeatures<Modulo, Leyenda>, ObservableValue<Leyenda>> 
+        columnaNombreCellValueFactory = new Callback<TableColumn.CellDataFeatures<Modulo, Leyenda>, ObservableValue<Leyenda>>() {
+            
+            @Override
+            public ObservableValue<Leyenda> call(CellDataFeatures<Modulo, Leyenda> param) {
+
+                return new Leyenda(param.getValue());
+            }
+    };
+
     @FXML 
     void initialize() {
 
         this.columnaSeleccionado.setCellFactory(CheckBoxTableCell.forTableColumn(this.columnaSeleccionado));
         this.columnaSeleccionado.setCellValueFactory(this.valorCeldaSeleccionado);
         this.columnaId.setCellValueFactory(new PropertyValueFactory<Modulo, Long>("id"));
-        this.columnaNombre.setCellValueFactory(new PropertyValueFactory<Modulo, String>("nombre"));
+//        this.columnaNombre.setCellValueFactory(new PropertyValueFactory<Modulo, String>("nombre"));
+        this.columnaNombre.setCellValueFactory(this.columnaNombreCellValueFactory);
+        this.columnaNombre.setCellFactory(this.columnaNombreCellFactory);
         this.columnaDescripcion.setCellValueFactory(new PropertyValueFactory<Modulo, String>("descripcion"));
         this.columnaVersion.setCellValueFactory(new PropertyValueFactory<Modulo, Integer>("version"));  
         
@@ -157,10 +227,11 @@ public class ControladorEficiencia {
         this.grafico.getData().clear();
 
         for (Modulo modulo : this.seleccion.obtener()) {
-            
+
             Reporte<Medicion> reporte = this.administradorDeMediciones.buscarMediciones(modulo);
             
             XYChart.Series<Long, Number> serie = new XYChart.Series<>();
+
             
             serie.setName(this.getTitulo(modulo));
             
@@ -174,8 +245,15 @@ public class ControladorEficiencia {
             }
             
             this.grafico.getData().add(serie);
+
+//            if (! serie.getData().isEmpty()) {
+//                
+//                Leyenda leyenda = this.columnaNombre.getCellData(modulo);
+////                leyenda.setEstilo(serie.getData().get(0).getNode().getStyleClass());
+//                
+//                leyenda.getNode().getStyleClass().addAll(serie.getData().get(0).getNode().getStyleClass());
+//            }
         }
-        
 
     }
     
@@ -217,6 +295,8 @@ public class ControladorEficiencia {
             
             serie.setName(this.getTitulo(modulo));
             
+            this.graficoDistribucionComparativa.getData().add(serie);
+
             for (ItemReporte<Discriminante> item : reporte.getItems()) {
                 
                 XYChart.Data<String, Number> datos = new XYChart.Data<>(String.valueOf(item.getClasificador()),
@@ -254,11 +334,12 @@ public class ControladorEficiencia {
                 
                 datos.setNode(pane);
                 serie.getData().add(datos);
+                
+                
             }
-            
-            this.graficoDistribucionComparativa.getData().add(serie);
-        }
-    }
+            // chart-bar default-color0
+        }     
+     }
     
     public String getTitulo(Modulo modulo) {
         
