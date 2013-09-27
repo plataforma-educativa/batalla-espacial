@@ -6,6 +6,7 @@ import java.io.InputStream;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import javax.inject.Inject;
@@ -24,6 +25,9 @@ public abstract class Iniciar {
             Parent root = (Parent) fxmlLoader.load(is);
 
             stage.setScene(new Scene(root, 800, 600));
+            
+            stage.setTitle(this.fxmlLoader.getResources().getString("titulo"));
+            stage.getIcons().add(new Image("file:icon.png"));
             
             stage.show();
             
