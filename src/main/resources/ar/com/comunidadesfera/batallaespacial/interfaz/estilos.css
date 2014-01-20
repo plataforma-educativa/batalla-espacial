@@ -26,4 +26,10 @@
     -fx-border-color:#FFFFFF #666666 #666666 #666666;
 }
 
+.distribucion {
+    -fx-border-color: -fx-box-border; 
+    -fx-background-color: -fx-background; 
+    -fx-border-radius: 5;
+}
+
   

@@ -1,6 +1,7 @@
 package ar.com.comunidadesfera.batallaespacial.interfaz.eficiencia;
 
 import java.net.URL;
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -10,18 +11,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.SetChangeListener;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.LabelBuilder;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.ColumnConstraints;
@@ -64,7 +64,7 @@ public class ControladorEficiencia {
     private TableColumn<Modulo, Long> columnaId;
     
     @FXML
-    private TableColumn<Modulo, Leyenda> columnaNombre;
+    private TableColumn<Modulo, String> columnaNombre;
     
     @FXML
     private TableColumn<Modulo, String> columnaDescripcion;
@@ -82,10 +82,10 @@ public class ControladorEficiencia {
     private TextField campoFiltro;
     
     @FXML
-    private TilePane panelDistribucionesPromedio;
+    private TilePane panelDistribuciones;
     
     @FXML
-    private BarChart<String, Number> graficoDistribucionComparativa;
+    private BarChart<String, Number> graficoContribuciones;
     
     @Inject
     private Contexto contexto;
@@ -94,6 +94,10 @@ public class ControladorEficiencia {
     
     private Seleccion<Modulo> seleccion;
 
+    private final MessageFormat formatoLeyenda = new MessageFormat("{0}\n{1,number,percent}");
+    
+    private final MessageFormat formatoTitulo = new MessageFormat("{0} (versión {1})");
+    
     private final Callback<CellDataFeatures<Modulo, Boolean>, ObservableValue<Boolean>> 
         valorCeldaSeleccionado = new Callback<CellDataFeatures<Modulo, Boolean>, ObservableValue<Boolean>>() {
             
@@ -114,80 +118,13 @@ public class ControladorEficiencia {
       
     };
 
-    private Callback<TableColumn<Modulo, Leyenda>, TableCell<Modulo, Leyenda>> 
-        columnaNombreCellFactory = new Callback<TableColumn<Modulo, Leyenda>, TableCell<Modulo, Leyenda>>() {
-
-            @Override
-            public TableCell<Modulo, Leyenda> call(TableColumn<Modulo, Leyenda> columna) {
-
-                
-                return new TableCell<Modulo, Leyenda>() {
-                    
-                    private Label label;
-                    
-//                    private Region region;
-                    
-                    {   
-                        label = LabelBuilder.create()
-//                                    .minHeight(100)
-//                                    .prefHeight(100)
-//                                    .maxHeight(100)
-                                .build(); 
-//                        
-//                        region = RegionBuilder.create()
-//                                    .minHeight(40)
-//                                    .prefHeight(40)
-//                                    .maxHeight(40)
-//                                    .minWidth(40)
-//                                    .prefWidth(40)
-//                                    .maxWidth(40)
-////                                    .style("-fx-background-color:#cccccc;")
-////                                    .styleClass("chart-symbol","series0","data0","default-color0")
-//                                .build();
-                    }
-                    
-                    @Override
-                    protected void updateItem(Leyenda item, boolean empty) {
-                        
-                   
-                        if ( !empty) {
-                            
-                            label.setText(item.getModulo().getNombre());
-
-//                            Bindings.bindContentBidirectional(item.getEstilo(), region.getStyleClass());
-//                            item.setEstilo(region.getStyleClass());
-//                            item.setNodo(this.region);
-                            this.setGraphic(label);
-                            
-                        } else {
-                            
-                            this.setGraphic(null);
-                        }
-                    };
-                };
-            }
-        
-        };
-
-    private Callback<CellDataFeatures<Modulo, Leyenda>, ObservableValue<Leyenda>> 
-        columnaNombreCellValueFactory = new Callback<TableColumn.CellDataFeatures<Modulo, Leyenda>, ObservableValue<Leyenda>>() {
-            
-            @Override
-            public ObservableValue<Leyenda> call(CellDataFeatures<Modulo, Leyenda> param) {
-
-                return new Leyenda(param.getValue());
-            }
-    };
-
     @FXML 
     void initialize() {
 
         this.columnaSeleccionado.setCellFactory(CheckBoxTableCell.forTableColumn(this.columnaSeleccionado));
         this.columnaSeleccionado.setCellValueFactory(this.valorCeldaSeleccionado);
         this.columnaId.setCellValueFactory(new PropertyValueFactory<Modulo, Long>("id"));
-//        this.columnaNombre.setCellValueFactory(new PropertyValueFactory<Modulo, String>("nombre"));
-        this.columnaNombre.setCellValueFactory(this.columnaNombreCellValueFactory);
-        this.columnaNombre.setCellFactory(this.columnaNombreCellFactory);
+        this.columnaNombre.setCellValueFactory(new PropertyValueFactory<Modulo, String>("nombre"));
         this.columnaDescripcion.setCellValueFactory(new PropertyValueFactory<Modulo, String>("descripcion"));
         this.columnaVersion.setCellValueFactory(new PropertyValueFactory<Modulo, Integer>("version"));  
         
@@ -211,10 +148,14 @@ public class ControladorEficiencia {
     public void analizar() {
         
         this.cargarMediciones();
+        this.cargarContribuciones();
         this.cargarDistribuciones();
-        this.cargarDistribucionesPromedio();
     }
     
+    /**
+     * post: busca todos los Módulo que cumplan con lo indicado en <code>filtro</code> y los despliega
+     *       en <code>tablaModulos</code>
+     */
     private void buscarModulos() {
         
         List<Modulo> modulos = this.administradorDeMediciones.buscarModulos(this.filtro.get());
@@ -222,6 +163,10 @@ public class ControladorEficiencia {
         this.tablaModulos.setItems(FXCollections.observableList(modulos));
     }
     
+    /**
+     * post: despliega las mediciones de todos los Módulos seleccionados (a través de <code>seleccion</code>)
+     *       en <code>grafico</code>. 
+     */
     private void cargarMediciones() {
         
         this.grafico.getData().clear();
@@ -231,119 +176,124 @@ public class ControladorEficiencia {
             Reporte<Medicion> reporte = this.administradorDeMediciones.buscarMediciones(modulo);
             
             XYChart.Series<Long, Number> serie = new XYChart.Series<>();
-
-            
-            serie.setName(this.getTitulo(modulo));
+            serie.setName(this.escribirTitulo(modulo));
             
             for (ItemReporte<Medicion> item : reporte.getItems()) {
                 
                 long dimension = item.getObjeto().getEjecucion().getDimension();
-                
                 XYChart.Data<Long, Number> datos = new XYChart.Data<>(dimension, item.getValor());
-                
                 serie.getData().add(datos);
             }
             
             this.grafico.getData().add(serie);
-
-//            if (! serie.getData().isEmpty()) {
-//                
-//                Leyenda leyenda = this.columnaNombre.getCellData(modulo);
-////                leyenda.setEstilo(serie.getData().get(0).getNode().getStyleClass());
-//                
-//                leyenda.getNode().getStyleClass().addAll(serie.getData().get(0).getNode().getStyleClass());
-//            }
         }
-
     }
     
-    private void cargarDistribucionesPromedio() {
+    /**
+     * post: despliega las distribuciones de mediciones parciales para cada uno de los Módulos
+     *       seleccionados creando PieCharts en <code>panelDistribuciones</code>
+     */
+    private void cargarDistribuciones() {
         
-        this.panelDistribucionesPromedio.getChildren().clear();
+        this.panelDistribuciones.getChildren().clear();
         
         for (Modulo modulo : this.seleccion.obtener()) {
             
             PieChart grafico = new PieChart();
-            
-            Reporte<Discriminante> reporte = this.administradorDeMediciones
-                                                                .sumarizarMedicionesPorDiscriminante(modulo);
+            Reporte<Discriminante> reporte = this.administradorDeMediciones.sumarizarMedicionesPorDiscriminante(modulo);
             
             for (ItemReporte<Discriminante> item : reporte.getItems()) {
           
-                String nombre = String.format("%1s (%2.1f%%)", 
-                                              item.getObjeto().getNombre(), item.getProporcion() * 100);
-                
-                PieChart.Data datos = new PieChart.Data(nombre, item.getProporcion());
+                PieChart.Data datos = new PieChart.Data(this.escribirLeyenda(item), item.getProporcion());
                 grafico.getData().add(datos);
             }
             
-            grafico.setTitle(this.getTitulo(modulo));
-            this.panelDistribucionesPromedio.getChildren().add(grafico);
+            grafico.setTitle(this.escribirTitulo(modulo));
+            grafico.getStyleClass().add("distribucion");
+            this.panelDistribuciones.getChildren().add(grafico);
         }
     }
     
-    private void cargarDistribuciones() {
+    /**
+     * post: despliega las contribuciones de mediciones parciales para cada uno de los Módulos
+     *       seleccionados en <code>graficoContribuciones</code>
+     */
+    private void cargarContribuciones() {
         
-        this.graficoDistribucionComparativa.getData().clear();
+        this.graficoContribuciones.getData().clear();
 
         for (Modulo modulo : this.seleccion.obtener()) {
                         
-            Reporte<Discriminante> 
-                reporte = this.administradorDeMediciones.promediarMedicionesPorDiscriminanteDimension(modulo);
-            
-            XYChart.Series<String, Number> serie = new XYChart.Series<>();
-            
-            serie.setName(this.getTitulo(modulo));
-            
-            this.graficoDistribucionComparativa.getData().add(serie);
-
-            for (ItemReporte<Discriminante> item : reporte.getItems()) {
-                
-                XYChart.Data<String, Number> datos = new XYChart.Data<>(String.valueOf(item.getClasificador()),
-                                                                        item.getValor());
-                
-                GridPane pane = new GridPane();
-                
-                ColumnConstraints columna = new ColumnConstraints();
-                columna.setPercentWidth(100);
-                
-                double incrementoOpacidad = 0.8 / (item.getSubItems().size() + 2);
-                double opacidad = 0.0;
-                
-                int nro = 0;
-                
-                for (ItemReporte<Discriminante> subItem : item.getSubItems()) {
-                    
-                    Discriminante discriminante = subItem.getObjeto();
-                    
-                    RowConstraints fila = new RowConstraints();
-                    fila.setPercentHeight(subItem.getProporcion() * 100);
-
-                    Pane nodo = new Pane();
-                    nodo.setStyle("-fx-background-color:#000000;");
-                    opacidad += incrementoOpacidad;
-                    nodo.setOpacity(opacidad);
-                    GridPane.setConstraints(nodo, 0, nro++);
-                    GridPane.setMargin(nodo, new Insets(0,5,0,5));
-                    
-                    pane.getChildren().add(nodo);
-                    pane.getRowConstraints().add(fila);
-                }
-                
-                pane.getColumnConstraints().add(columna);
-                
-                datos.setNode(pane);
-                serie.getData().add(datos);
-                
-                
-            }
-            // chart-bar default-color0
+            this.agregarContribuciones(modulo);
         }     
      }
-    
-    public String getTitulo(Modulo modulo) {
+
+    private void agregarContribuciones(Modulo modulo) {
         
-        return modulo.getNombre() + " (versión " + modulo.getVersion() + ")";
+        Reporte<Discriminante> reporte = this.administradorDeMediciones
+                                                .promediarMedicionesPorDiscriminanteDimension(modulo);
+        XYChart.Series<String, Number> serie = new XYChart.Series<>();
+        serie.setName(this.escribirTitulo(modulo));
+        this.graficoContribuciones.getData().add(serie);
+
+        for (ItemReporte<Discriminante> item : reporte.getItems()) {
+            
+            XYChart.Data<String, Number> datos = new XYChart.Data<>(String.valueOf(item.getClasificador()),
+                                                                    item.getValor());
+            Node pane = this.agregarContribuciones(item);
+            datos.setNode(pane);
+            serie.getData().add(datos);
+        }
     }
 
+    private Node agregarContribuciones(ItemReporte<Discriminante> item) {
+        
+        GridPane pane = new GridPane();
+
+        ColumnConstraints columna = new ColumnConstraints();
+        columna.setPercentWidth(100);
+        
+        double incrementoOpacidad = 0.8 / (item.getSubItems().size() + 2);
+        double opacidad = 0.0;
+        int nro = 0;
+        
+        for (ItemReporte<Discriminante> subItem : item.getSubItems()) {
+            
+            RowConstraints fila = new RowConstraints();
+            fila.setPercentHeight(subItem.getProporcion() * 100);
+
+            Pane seccion = new Pane();
+            seccion.setStyle("-fx-background-color:#000000;");
+            opacidad += incrementoOpacidad;
+            seccion.setOpacity(opacidad);
+            GridPane.setConstraints(seccion, 0, nro++);
+            GridPane.setMargin(seccion, new Insets(0,5,0,5));
+
+            pane.getChildren().add(seccion);
+            pane.getRowConstraints().add(fila);
+            
+            this.agregarLeyenda(subItem, seccion);
+        }
+        pane.getColumnConstraints().add(columna);
+        return pane;
+    }
+
+    private void agregarLeyenda(ItemReporte<Discriminante> item, Pane seccion) {
+        
+        Tooltip leyenda = new Tooltip(this.escribirLeyenda(item));
+        
+        seccion.setOnMouseMoved(new MostrarTooltipEventHandler(leyenda, seccion));
+        seccion.setOnMouseEntered(new MostrarTooltipEventHandler(leyenda, seccion));
+        seccion.setOnMouseExited(new OcultarTooltipEventHandler(leyenda));
+    }
+    
+    private String escribirTitulo(Modulo modulo) {
+        
+        return this.formatoTitulo.format(new Object[] { modulo.getNombre(), modulo.getVersion() });
+    }
+    
+    private String escribirLeyenda(ItemReporte<Discriminante> item) {
+        
+        return this.formatoLeyenda.format(new Object[] { item.getObjeto().getNombre(), item.getProporcion() });
+    }
 }

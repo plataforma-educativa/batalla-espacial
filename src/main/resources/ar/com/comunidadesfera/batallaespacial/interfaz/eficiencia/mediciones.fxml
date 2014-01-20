@@ -20,7 +20,7 @@
       <Button fx:id="botonLimpiar" cancelButton="true" defaultButton="false" disable="false" mnemonicParsing="false" onAction="#limpiar" text="%metricas.acciones.limpiar" visible="true" />
     </items>
   </ToolBar>
-  <SplitPane dividerPositions="0.2992874109263658" focusTraversable="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+  <SplitPane dividerPositions="0.3503562945368171" focusTraversable="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
     <items>
       <VBox maxWidth="1.7976931348623157E308" prefHeight="-1.0" prefWidth="-1.0">
         <children>
@@ -44,47 +44,65 @@
             <tabs>
               <Tab text="%metricas.mediciones">
                 <content>
-                  <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                    <children>
-                      <ScatterChart fx:id="grafico" legendSide="TOP" legendVisible="true" prefHeight="542.0" prefWidth="221.0" title="" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                    <center>
+                      <ScatterChart fx:id="grafico" legendSide="TOP" legendVisible="true" prefHeight="542.0" prefWidth="221.0" title="">
                         <xAxis>
                           <NumberAxis label="%metricas.grafico.abscisas" side="BOTTOM" />
                         </xAxis>
                         <yAxis>
-                          <NumberAxis side="LEFT" />
+                          <NumberAxis label="%metricas.grafico.ordenadas" side="LEFT" />
                         </yAxis>
                       </ScatterChart>
-                    </children>
-                  </AnchorPane>
+                    </center>
+                  </BorderPane>
                 </content>
               </Tab>
-              <Tab text="%metricas.distribuciones">
+              <Tab text="%metricas.contribuciones">
                 <content>
-                  <ScrollPane id="ScrollPane" disable="false" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" opacity="1.0" pannable="true" prefViewportHeight="552.0" prefViewportWidth="546.0" style="-fx-background-color:transparent;" vbarPolicy="AS_NEEDED" visible="true">
-                    <content>
-                      <TilePane fx:id="panelDistribucionesPromedio" alignment="CENTER" orientation="HORIZONTAL" prefColumns="1" prefHeight="-1.0" prefRows="1" prefTileHeight="-1.0" prefTileWidth="-1.0" prefWidth="-1.0" style="" tileAlignment="CENTER" visible="true" />
-                    </content>
-                  </ScrollPane>
-                </content>
-              </Tab>
-              <Tab text="%metricas.distribuciones">
-                <content>
-                  <AnchorPane id="AnchorPane" prefHeight="400.0">
-                    <children>
-                      <BarChart fx:id="graficoDistribucionComparativa" alternativeColumnFillVisible="false" barGap="0.0" categoryGap="4.0" legendSide="BOTTOM" legendVisible="false" verticalGridLinesVisible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                    <center>
+                      <BarChart id="graficoContribuciones" fx:id="graficoContribuciones" alternativeColumnFillVisible="false" barGap="0.0" categoryGap="4.0" legendSide="TOP" legendVisible="true" prefHeight="374.0" verticalGridLinesVisible="true">
                         <xAxis>
-                          <CategoryAxis side="BOTTOM">
+                          <CategoryAxis label="%metricas.grafico.abscisas" side="BOTTOM">
                             <categories>
                               <FXCollections fx:factory="observableArrayList" />
                             </categories>
                           </CategoryAxis>
                         </xAxis>
                         <yAxis>
-                          <NumberAxis side="LEFT" />
+                          <NumberAxis label="%metricas.grafico.ordenadas" side="LEFT" />
                         </yAxis>
                       </BarChart>
-                    </children>
-                  </AnchorPane>
+                    </center>
+                    <top>
+                      <Label disable="false" focusTraversable="false" maxHeight="-1.0" minHeight="-1.0" prefHeight="-1.0" text="%metricas.contribuciones.descripcion" textAlignment="JUSTIFY" underline="false" wrapText="true">
+                        <BorderPane.margin>
+                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" fx:id="x1" />
+                        </BorderPane.margin>
+                      </Label>
+                    </top>
+                  </BorderPane>
+                </content>
+              </Tab>
+              <Tab text="%metricas.distribuciones">
+                <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                    <center>
+                      <ScrollPane id="ScrollPane" disable="false" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" opacity="1.0" pannable="true" prefViewportHeight="552.0" prefViewportWidth="546.0" style="-fx-background-color:transparent;" vbarPolicy="AS_NEEDED" visible="true">
+                        <content>
+                          <TilePane fx:id="panelDistribuciones" alignment="CENTER" hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="HORIZONTAL" prefColumns="1" prefHeight="-1.0" prefRows="1" prefTileHeight="-1.0" prefTileWidth="-1.0" prefWidth="-1.0" style="" tileAlignment="CENTER" vgap="10.0" visible="true">
+                            <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                            </padding>
+                          </TilePane>
+                        </content>
+                      </ScrollPane>
+                    </center>
+                    <top>
+                      <Label text="%metricas.distribuciones.descripcion" textAlignment="JUSTIFY" wrapText="true" BorderPane.margin="$x1" />
+                    </top>
+                  </BorderPane>
                 </content>
               </Tab>
             </tabs>

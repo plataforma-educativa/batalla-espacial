@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import ar.com.comunidadesfera.eficiencia.registros.Modulo;
 
-
+@Deprecated
 public class Leyenda extends ObservableValueBase<Leyenda>{
     
     private Modulo modulo;

@@ -17,7 +17,7 @@ public class OrdenadorDeContenedoresConSeleccion implements OrdenadorDeContenedo
     public void ordenar(Contenedor[] contenedores) {
 
         Ejecucion ejecucion = contexto.iniciarEjecucion("OrdenadorDeContenedoresConSeleccion", "Ordenamiento", contenedores.length);
-        ejecucion.getModulo().setVersion(3);
+        ejecucion.getModulo().setVersion(1);
         Contador contador = ejecucion.contarInstrucciones();
 
         for (int longitud = contenedores.length; longitud > 1; longitud--) {
