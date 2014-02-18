@@ -1,5 +1,7 @@
 package ar.com.comunidadesfera.batallaespacial.interfaz.eficiencia;
 
+import static javafx.beans.binding.Bindings.*;
+
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.List;
@@ -17,6 +19,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
@@ -80,6 +83,9 @@ public class ControladorEficiencia {
     
     @FXML
     private TextField campoFiltro;
+
+    @FXML
+    private TabPane panelGraficos;
     
     @FXML
     private TilePane panelDistribuciones;
@@ -132,6 +138,9 @@ public class ControladorEficiencia {
     
         this.seleccion = new Seleccion<>();
         this.seleccion.obtener().addListener(this.actualizar);
+        
+        this.panelGraficos.visibleProperty().bind(not(isEmpty(this.seleccion.obtener())));
+        
     }
 
     public void buscar() {
@@ -168,7 +177,7 @@ public class ControladorEficiencia {
      *       en <code>grafico</code>. 
      */
     private void cargarMediciones() {
-        
+
         this.grafico.getData().clear();
 
         for (Modulo modulo : this.seleccion.obtener()) {
@@ -187,6 +196,7 @@ public class ControladorEficiencia {
             
             this.grafico.getData().add(serie);
         }
+        this.grafico.setLegendVisible(!this.grafico.isLegendVisible());
     }
     
     /**
@@ -228,6 +238,9 @@ public class ControladorEficiencia {
         }     
      }
 
+    /**
+     * post: agrega las contribuciones para el Módulo indicado.
+     */
     private void agregarContribuciones(Modulo modulo) {
         
         Reporte<Discriminante> reporte = this.administradorDeMediciones
@@ -240,13 +253,18 @@ public class ControladorEficiencia {
             
             XYChart.Data<String, Number> datos = new XYChart.Data<>(String.valueOf(item.getClasificador()),
                                                                     item.getValor());
-            Node pane = this.agregarContribuciones(item);
+            Node pane = this.dibujarContribuciones(item);
             datos.setNode(pane);
             serie.getData().add(datos);
         }
     }
 
-    private Node agregarContribuciones(ItemReporte<Discriminante> item) {
+    /**
+     * post: construye la representación gráfica de las constribuciones parciales de <code>item</code>.
+     * 
+     * @return Node a ser insertado en la serie de datos.
+     */
+    private Node dibujarContribuciones(ItemReporte<Discriminante> item) {
         
         GridPane pane = new GridPane();
 
