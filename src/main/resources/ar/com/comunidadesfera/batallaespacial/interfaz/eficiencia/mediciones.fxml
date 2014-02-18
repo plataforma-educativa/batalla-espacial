@@ -40,7 +40,7 @@
       </VBox>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
         <children>
-          <TabPane prefHeight="200.0" prefWidth="200.0" styleClass="floating" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+          <TabPane fx:id="panelGraficos" prefHeight="200.0" prefWidth="200.0" styleClass="floating" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
             <tabs>
               <Tab text="%metricas.mediciones">
                 <content>

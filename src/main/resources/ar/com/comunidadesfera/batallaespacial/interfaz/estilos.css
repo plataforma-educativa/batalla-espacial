@@ -31,5 +31,7 @@
     -fx-background-color: -fx-background; 
     -fx-border-radius: 5;
 }
-
+.label.chart-legend-item {
+ -fx-wrap-text: true;
+}
   
