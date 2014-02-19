@@ -46,7 +46,7 @@
                 <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                     <center>
-                      <ScatterChart fx:id="grafico" legendSide="TOP" legendVisible="true" prefHeight="542.0" prefWidth="221.0" title="">
+                      <ScatterChart fx:id="grafico" legendSide="BOTTOM" legendVisible="true" prefHeight="542.0" prefWidth="221.0" title="">
                         <xAxis>
                           <NumberAxis label="%metricas.grafico.abscisas" side="BOTTOM" />
                         </xAxis>
@@ -62,7 +62,7 @@
                 <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                     <center>
-                      <BarChart id="graficoContribuciones" fx:id="graficoContribuciones" alternativeColumnFillVisible="false" barGap="0.0" categoryGap="4.0" legendSide="TOP" legendVisible="true" prefHeight="374.0" verticalGridLinesVisible="true">
+                      <BarChart fx:id="graficoContribuciones" alternativeColumnFillVisible="false" barGap="0.0" categoryGap="4.0" legendSide="BOTTOM" legendVisible="true" prefHeight="374.0" verticalGridLinesVisible="true">
                         <xAxis>
                           <CategoryAxis label="%metricas.grafico.abscisas" side="BOTTOM">
                             <categories>

@@ -36,6 +36,8 @@ import javafx.util.Callback;
 
 import javax.inject.Inject;
 
+import org.apache.commons.lang.StringUtils;
+
 import ar.com.comunidadesfera.eficiencia.Contexto;
 import ar.com.comunidadesfera.eficiencia.persistencia.AdministradorDeMediciones;
 import ar.com.comunidadesfera.eficiencia.registros.Discriminante;
@@ -102,7 +104,7 @@ public class ControladorEficiencia {
 
     private final MessageFormat formatoLeyenda = new MessageFormat("{0}\n{1,number,percent}");
     
-    private final MessageFormat formatoTitulo = new MessageFormat("{0} (versión {1})");
+    private final MessageFormat formatoTitulo = new MessageFormat("{0}- {1} (versión {2})");
     
     private final Callback<CellDataFeatures<Modulo, Boolean>, ObservableValue<Boolean>> 
         valorCeldaSeleccionado = new Callback<CellDataFeatures<Modulo, Boolean>, ObservableValue<Boolean>>() {
@@ -183,9 +185,8 @@ public class ControladorEficiencia {
         for (Modulo modulo : this.seleccion.obtener()) {
 
             Reporte<Medicion> reporte = this.administradorDeMediciones.buscarMediciones(modulo);
-            
             XYChart.Series<Long, Number> serie = new XYChart.Series<>();
-            serie.setName(this.escribirTitulo(modulo));
+            serie.setName(this.escribirLeyenda(modulo));
             
             for (ItemReporte<Medicion> item : reporte.getItems()) {
                 
@@ -196,7 +197,6 @@ public class ControladorEficiencia {
             
             this.grafico.getData().add(serie);
         }
-        this.grafico.setLegendVisible(!this.grafico.isLegendVisible());
     }
     
     /**
@@ -246,7 +246,7 @@ public class ControladorEficiencia {
         Reporte<Discriminante> reporte = this.administradorDeMediciones
                                                 .promediarMedicionesPorDiscriminanteDimension(modulo);
         XYChart.Series<String, Number> serie = new XYChart.Series<>();
-        serie.setName(this.escribirTitulo(modulo));
+        serie.setName("xx");
         this.graficoContribuciones.getData().add(serie);
 
         for (ItemReporte<Discriminante> item : reporte.getItems()) {
@@ -257,6 +257,7 @@ public class ControladorEficiencia {
             datos.setNode(pane);
             serie.getData().add(datos);
         }
+        serie.setName(this.escribirLeyenda(modulo));
     }
 
     /**
@@ -307,7 +308,14 @@ public class ControladorEficiencia {
     
     private String escribirTitulo(Modulo modulo) {
         
-        return this.formatoTitulo.format(new Object[] { modulo.getNombre(), modulo.getVersion() });
+        return this.formatoTitulo.format(new Object[] { modulo.getId(), modulo.getNombre(), modulo.getVersion() });
+    }
+    
+    private String escribirLeyenda(Modulo modulo) {
+        
+        String nombreReducido = StringUtils.abbreviateMiddle(modulo.getNombre(), "...", 20);
+        
+        return this.formatoTitulo.format(new Object[] { modulo.getId(), nombreReducido, modulo.getVersion() });
     }
     
     private String escribirLeyenda(ItemReporte<Discriminante> item) {
