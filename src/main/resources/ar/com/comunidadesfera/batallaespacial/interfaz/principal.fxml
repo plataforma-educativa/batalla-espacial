@@ -4,15 +4,34 @@
 <?import java.util.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.input.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?scenebuilder-preview-i18n-resource contenido.properties?>
+<?scenebuilder-stylesheet estilos.css?>
 
-<fx:root type="javafx.scene.layout.BorderPane" mouseTransparent="false" pickOnBounds="true" prefHeight="590.0" prefWidth="740.0" style="&#10;" stylesheets="ar/com/comunidadesfera/batallaespacial/interfaz/estilos.css" xmlns:fx="http://javafx.com/fxml" fx:controller="ar.com.comunidadesfera.batallaespacial.interfaz.ControladorPrincipal">
+<fx:root type="javafx.scene.layout.BorderPane" minHeight="600.0" minWidth="720.0" mouseTransparent="false" pickOnBounds="true" prefHeight="600.0" prefWidth="720.0" style="&#10;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ar.com.comunidadesfera.batallaespacial.interfaz.ControladorPrincipal">
   <center>
     <TabPane cache="false" mouseTransparent="false" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" side="TOP" tabClosingPolicy="UNAVAILABLE" visible="true">
       <tabs>
-        <Tab text="%seccion.partida">
+        <Tab text="%seccion.inicio">
+          <content>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+              <center>
+                <ImageView fitHeight="540.0" fitWidth="720.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                  <image>
+                    <Image url="@inicio.png" />
+                  </image>
+                  <BorderPane.margin>
+                    <Insets />
+                  </BorderPane.margin>
+                </ImageView>
+              </center>
+            </BorderPane>
+          </content>
+        </Tab>
+        <Tab fx:id="seccionPartida" text="%seccion.partida">
           <content>
             <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
               <center>
@@ -30,6 +49,9 @@
               </right>
             </BorderPane>
           </content>
+          <graphic>
+            <ImageView fitHeight="0.0" fitWidth="0.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" styleClass="partida" />
+          </graphic>
         </Tab>
         <Tab id="" text="%seccion.laboratorio">
           <content>
@@ -52,16 +74,25 @@
               </children>
             </AnchorPane>
           </content>
+          <graphic>
+            <ImageView fitHeight="0.0" fitWidth="0.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" styleClass="laboratorio" />
+          </graphic>
         </Tab>
         <Tab closable="false" text="%seccion.registros">
           <content>
             <fx:include fx:id="panelEficiencia" source="eficiencia/mediciones.fxml" />
           </content>
+          <graphic>
+            <ImageView fitHeight="0.0" fitWidth="0.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" styleClass="registros" />
+          </graphic>
         </Tab>
         <Tab text="%seccion.configuracion">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
           </content>
+          <graphic>
+            <ImageView fitHeight="0.0" fitWidth="0.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" styleClass="configuracion" />
+          </graphic>
         </Tab>
       </tabs>
       <BorderPane.margin>
@@ -70,20 +101,41 @@
     </TabPane>
   </center>
   <top>
-    <MenuBar>
+    <MenuBar pickOnBounds="true">
       <menus>
-        <Menu mnemonicParsing="false" text="%menu.partida">
+        <Menu disable="false" mnemonicParsing="false" style="" text="%menu.partida" visible="true">
+          <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true" styleClass="partida" />
+          </graphic>
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#nuevaPartida" text="%menu.partida.nueva" />
-            <MenuItem mnemonicParsing="false" text="%menu.partida.salir" />
+            <MenuItem mnemonicParsing="false" onAction="#nuevaPartida" text="%menu.partida.nueva" fx:id="nuevaPartida">
+              <accelerator>
+                <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+              </accelerator>
+              <graphic>
+                <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" styleClass="nuevaPartida" />
+              </graphic>
+            </MenuItem>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="%menu.partida.salir">
+              <graphic>
+                <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" styleClass="salir" />
+              </graphic>
+            </MenuItem>
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="%menu.metricas">
+          <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true" styleClass="metricas" />
+          </graphic>
           <items>
-            <CheckMenuItem mnemonicParsing="false" text="%menu.metricas.registrar" fx:id="menuMetricasRegistrar" />
+            <CheckMenuItem id="" mnemonicParsing="false" text="%menu.metricas.registrar" fx:id="menuMetricasRegistrar" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="%menu.ayuda">
+          <graphic>
+            <ImageView pickOnBounds="true" preserveRatio="true" styleClass="ayuda" />
+          </graphic>
           <items>
             <MenuItem mnemonicParsing="false" text="%menu.ayuda.acercaDe" />
           </items>

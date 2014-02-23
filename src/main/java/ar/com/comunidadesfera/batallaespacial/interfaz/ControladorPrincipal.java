@@ -1,5 +1,7 @@
 package ar.com.comunidadesfera.batallaespacial.interfaz;
 
+import static javafx.beans.binding.Bindings.*;
+
 import java.io.File;
 import java.net.URL;
 import java.nio.file.Path;
@@ -10,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.FileChooserBuilder;
@@ -47,6 +50,9 @@ public class ControladorPrincipal implements Controlador {
     private ControladorOrdenarContenedores panelOrdenamientoController;
     
     @FXML
+    private Tab seccionPartida;
+    
+    @FXML
     private ScrollPane panelMarcoTablero; 
 
     @FXML
@@ -65,6 +71,8 @@ public class ControladorPrincipal implements Controlador {
 
     @Inject
     private Contexto contexto;
+    
+    private PartidaActivada partidaActiva = new PartidaActivada();
     
     @FXML
     void nuevaPartida(ActionEvent event) {
@@ -89,13 +97,16 @@ public class ControladorPrincipal implements Controlador {
     @FXML
     void initialize() throws NoSuchMethodException {
 
-      this.menuMetricasRegistrar.selectedProperty().bindBidirectional(JavaBeanBooleanPropertyBuilder
+        this.seccionPartida.disableProperty().bind( not( this.partidaActiva ));
+    
+        this.menuMetricasRegistrar.selectedProperty().bindBidirectional(JavaBeanBooleanPropertyBuilder
                                                                           .create()
                                                                           .bean(this.contexto)
                                                                           .name("persistente")
                                                                           .build());
-      
-      this.batallaEspacial.agregarObservador(this.panelOrdenamientoController);
+  
+        this.batallaEspacial.agregarObservador(this.panelOrdenamientoController);
+        this.batallaEspacial.agregarObservador(this.partidaActiva);
     }
     
     private void jugar(Path rutaConfiguracion) {

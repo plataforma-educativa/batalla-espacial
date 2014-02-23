@@ -6,6 +6,8 @@ import java.util.concurrent.Callable;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.IntegerExpression;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -21,6 +23,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 
 import javax.inject.Inject;
 
@@ -49,6 +52,14 @@ public class ControladorOrdenarContenedores implements BatallaEspacial.Observado
 
     @FXML
     private URL location;
+    
+    private BooleanProperty laboratorioHabilitado = new SimpleBooleanProperty(false);
+    
+    @FXML
+    private Pane panel;
+    
+    @FXML
+    private Label mensaje;
 
     @FXML
     private ListView<ValorSeleccionable<Contenedor>> listaParametros;
@@ -143,6 +154,9 @@ public class ControladorOrdenarContenedores implements BatallaEspacial.Observado
     @FXML
     void initialize() {
 
+        this.panel.visibleProperty().bind(this.laboratorioHabilitado);
+        this.mensaje.visibleProperty().bind(Bindings.not(this.laboratorioHabilitado));
+        
         this.listaParametros.setItems(this.parametros);
         
         this.listaParametros.setCellFactory(
@@ -184,7 +198,7 @@ public class ControladorOrdenarContenedores implements BatallaEspacial.Observado
 
         this.parametros.clear();
         this.resultado.clear();
-
+        
         for (Pieza pieza : partida.getTablero()) {
 
             // TODO hay que usar NullValue
@@ -193,6 +207,8 @@ public class ControladorOrdenarContenedores implements BatallaEspacial.Observado
                 pieza.recibir(recolectarContenedores);
             }
         }
+        
+        this.laboratorioHabilitado.setValue(true);
     }
 
 }

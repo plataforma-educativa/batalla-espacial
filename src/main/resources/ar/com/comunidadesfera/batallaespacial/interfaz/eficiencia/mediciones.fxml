@@ -10,17 +10,23 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?scenebuilder-preview-i18n-resource ../contenido.properties?>
+<?scenebuilder-stylesheet ../estilos.css?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ar.com.comunidadesfera.batallaespacial.interfaz.eficiencia.ControladorEficiencia">
+  <Label fx:id="mensajeBuscarModulo" styleClass="notificacion-busqueda" text="%metricas.requiere.buscar.modulo" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
   <ToolBar focusTraversable="false" orientation="HORIZONTAL" pickOnBounds="false" prefHeight="40.0" prefWidth="800.0" style="" styleClass="superior" visible="true" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
     <items>
-      <Label text="%metricas.modulos.titulo" />
-      <TextField id="campoBuscar" fx:id="campoFiltro" prefWidth="168.0" promptText="%metricas.modulos.filtro" />
-      <Button fx:id="botonBuscar" alignment="CENTER" cancelButton="false" defaultButton="true" minWidth="-Infinity" mnemonicParsing="false" onAction="#buscar" prefWidth="80.0" text="%metricas.acciones.buscar" textAlignment="CENTER" textOverrun="CLIP" wrapText="false" />
-      <Button fx:id="botonLimpiar" cancelButton="true" defaultButton="false" disable="false" mnemonicParsing="false" onAction="#limpiar" text="%metricas.acciones.limpiar" visible="true" />
+      <Label styleClass="buscar" text="%metricas.modulos.titulo">
+        <labelFor>
+          <TextField id="campoBuscar" fx:id="campoFiltro" onAction="#buscar" prefWidth="168.0" promptText="%metricas.modulos.filtro" />
+        </labelFor>
+      </Label>
+      <fx:reference source="campoFiltro" />
+      <Button fx:id="botonBuscar" alignment="CENTER" cancelButton="false" defaultButton="true" minWidth="-Infinity" mnemonicParsing="false" onAction="#buscar" prefWidth="80.0" styleClass="buscar" text="%metricas.acciones.buscar" textAlignment="CENTER" textOverrun="CLIP" wrapText="false" />
+      <Button fx:id="botonLimpiar" cancelButton="true" defaultButton="false" disable="false" mnemonicParsing="false" onAction="#limpiar" styleClass="limpiar" text="%metricas.acciones.limpiar" visible="true" />
     </items>
   </ToolBar>
-  <SplitPane dividerPositions="0.3503562945368171" focusTraversable="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+  <SplitPane fx:id="panelResultado" dividerPositions="0.3503562945368171" focusTraversable="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
     <items>
       <VBox maxWidth="1.7976931348623157E308" prefHeight="-1.0" prefWidth="-1.0">
         <children>
@@ -40,9 +46,10 @@
       </VBox>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
         <children>
+          <Label id="mensaje" fx:id="mensajeSeleccionarModulo" alignment="CENTER" styleClass="notificacion-advertencia" text="%metricas.requiere.seleccionar.modulo" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
           <TabPane fx:id="panelGraficos" prefHeight="200.0" prefWidth="200.0" styleClass="floating" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
             <tabs>
-              <Tab text="%metricas.mediciones">
+              <Tab style="" text="%metricas.mediciones">
                 <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                     <center>
@@ -76,7 +83,7 @@
                       </BarChart>
                     </center>
                     <top>
-                      <Label disable="false" focusTraversable="false" maxHeight="-1.0" minHeight="-1.0" prefHeight="-1.0" text="%metricas.contribuciones.descripcion" textAlignment="JUSTIFY" underline="false" wrapText="true">
+                      <Label alignment="CENTER_LEFT" disable="false" focusTraversable="false" maxHeight="-1.0" minHeight="-1.0" prefHeight="-1.0" styleClass="descripcion" text="%metricas.contribuciones.descripcion" textAlignment="JUSTIFY" underline="false" wrapText="false">
                         <BorderPane.margin>
                           <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" fx:id="x1" />
                         </BorderPane.margin>
@@ -100,7 +107,7 @@
                       </ScrollPane>
                     </center>
                     <top>
-                      <Label text="%metricas.distribuciones.descripcion" textAlignment="JUSTIFY" wrapText="true" BorderPane.margin="$x1" />
+                      <Label styleClass="descripcion" text="%metricas.distribuciones.descripcion" textAlignment="JUSTIFY" wrapText="true" BorderPane.margin="$x1" />
                     </top>
                   </BorderPane>
                 </content>

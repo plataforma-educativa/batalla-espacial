@@ -31,7 +31,93 @@
     -fx-background-color: -fx-background; 
     -fx-border-radius: 5;
 }
+
 .label.chart-legend-item {
- -fx-wrap-text: true;
+    -fx-wrap-text: true;
 }
-  
+
+.notificacion-advertencia {
+    -fx-graphic: url("iconos/x32/notification_warning.png");
+    -fx-graphic-text-gap: 10;
+    -fx-content-display: left;
+    -fx-wrap-text: true;
+    -fx-padding: 10;
+    -fx-text-alignment: left;
+    -fx-alignment: center;
+}
+
+.notificacion-busqueda {
+    -fx-graphic: url("iconos/x32/search.png");
+    -fx-graphic-text-gap: 10;
+    -fx-content-display: left;
+    -fx-wrap-text: true;
+    -fx-padding: 10;
+    -fx-text-alignment: left;
+    -fx-alignment: center;
+}
+
+
+.button.ejecutar {
+}
+
+.button.buscar {
+}
+
+.button.limpiar {
+}
+
+.label.descripcion {
+    -fx-graphic: url("iconos/x32/description.png");
+    -fx-content-display: left;
+    -fx-graphic-text-gap: 10;
+    -fx-wrap-text: true ;
+    -fx-text-alignment: justify;
+    -fx-alignment: top-center;
+}
+
+.menu .partida { 
+    -fx-image: url("iconos/x16/file.png");
+}
+
+.menu:hover .partida, .menu:showing .partida { 
+    -fx-image: url("iconos/x16/file_selected.png");
+}
+
+.menu-item .nuevaPartida {
+    -fx-image: url("iconos/x16/file_add.png");
+}
+
+.menu-item .salir { 
+}
+
+.menu .metricas { 
+    -fx-image: url("iconos/x16/metric.png");
+}
+
+.menu:hover .metricas, .menu:showing .metricas { 
+    -fx-image: url("iconos/x16/metric_selected.png");
+}
+
+.menu .ayuda { 
+    -fx-image: url("iconos/x16/help.png");
+}
+
+.menu:hover .ayuda, .menu:showing .ayuda { 
+    -fx-image: url("iconos/x16/help_selected.png");
+}
+
+.label.buscar {
+    -fx-graphic: url("iconos/x16/search.png");
+}
+
+.tab:selected .partida {
+}
+
+.tab:selected .laboratorio {
+}
+
+.tab:selected .registros {
+}
+
+.tab:selected .configuracion {
+}

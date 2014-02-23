@@ -7,6 +7,8 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -19,6 +21,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
@@ -56,9 +59,17 @@ public class ControladorEficiencia {
     @FXML
     private URL location;
 
+    private BooleanProperty busquedaRealizada = new SimpleBooleanProperty(false);
+    
     @Inject
     private AdministradorDeMediciones administradorDeMediciones;
     
+    @FXML
+    private Node mensajeSeleccionarModulo;
+    
+    @FXML
+    private Node mensajeBuscarModulo;
+
     @FXML
     private TableView<Modulo> tablaModulos;
 
@@ -91,6 +102,9 @@ public class ControladorEficiencia {
     
     @FXML
     private TilePane panelDistribuciones;
+    
+    @FXML
+    private SplitPane panelResultado;
     
     @FXML
     private BarChart<String, Number> graficoContribuciones;
@@ -141,19 +155,26 @@ public class ControladorEficiencia {
         this.seleccion = new Seleccion<>();
         this.seleccion.obtener().addListener(this.actualizar);
         
-        this.panelGraficos.visibleProperty().bind(not(isEmpty(this.seleccion.obtener())));
-        
+        this.panelGraficos.visibleProperty().bind( not( isEmpty( this.seleccion.obtener() )));
+        this.mensajeSeleccionarModulo.visibleProperty().bind( isEmpty( this.seleccion.obtener() )); 
+
+        this.panelResultado.visibleProperty().bind( this.busquedaRealizada );
+        this.mensajeBuscarModulo.visibleProperty().bind( not( this.busquedaRealizada ));
     }
 
     public void buscar() {
                
         this.buscarModulos();
+        
+        this.busquedaRealizada.set(true);
     }
     
     public void limpiar() {
 
+        this.busquedaRealizada.set(false);
         this.tablaModulos.getItems().clear();
         this.seleccion.limpiar();
+        this.filtro.set("");
     }
     
     public void analizar() {
