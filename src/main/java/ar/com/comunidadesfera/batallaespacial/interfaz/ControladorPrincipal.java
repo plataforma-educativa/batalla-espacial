@@ -53,6 +53,12 @@ public class ControladorPrincipal implements Controlador {
     private Tab seccionPartida;
     
     @FXML
+    private Tab seccionLaboratorio;
+    
+    @FXML
+    private Tab seccionRegistros;
+    
+    @FXML
     private ScrollPane panelMarcoTablero; 
 
     @FXML
@@ -92,6 +98,18 @@ public class ControladorPrincipal implements Controlador {
             
             this.jugar(archivo.toPath());
         }
+    }
+    
+    @FXML
+    void usarLaboratorio() {
+        
+        this.seccionLaboratorio.getTabPane().getSelectionModel().select(this.seccionLaboratorio);
+    }
+    
+    @FXML
+    void verRegistros() {
+        
+        this.seccionRegistros.getTabPane().getSelectionModel().select(this.seccionRegistros);
     }
     
     @FXML

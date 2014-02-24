@@ -121,3 +121,42 @@
 
 .tab:selected .configuracion {
 }
+
+.inicio .button {
+    -fx-content-display: left;
+    -fx-graphic-text-gap: 10;
+    -fx-background-radius: 10 30 30 10;
+    -fx-border-radius: 10 30 30 10;
+    -fx-alignment: center-left;
+    -fx-background-color: rgba(255,255,255,0.2);
+    -fx-border-color: white;
+    -fx-border-width: 2;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.inicio .button:hover {
+
+    -fx-effect:dropshadow(gaussian, rgba(255,255,255,1), 10, 0.5, 4, 4);
+    -fx-text-fill: black;
+}
+
+.inicio .button:armed {
+    -fx-translate-x: 3;
+    -fx-translate-y: 3;
+    -fx-effect:dropshadow(gaussian, rgba(255,255,255,1), 10, 0.4, 1, 1);
+    -fx-text-fill: black;
+}
+
+.inicio .button.nuevaPartida {
+    -fx-graphic: url("iconos/x32/file_add.png");
+}
+
+.inicio .button.usarLaboratorio {
+    -fx-graphic: url("iconos/x32/clock.png");
+}
+
+.inicio .button.verRegistros {
+    -fx-graphic: url("iconos/x32/disc.png");
+}

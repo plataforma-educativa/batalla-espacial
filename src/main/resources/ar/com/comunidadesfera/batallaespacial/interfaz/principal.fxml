@@ -15,20 +15,34 @@
   <center>
     <TabPane cache="false" mouseTransparent="false" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" side="TOP" tabClosingPolicy="UNAVAILABLE" visible="true">
       <tabs>
-        <Tab text="%seccion.inicio">
+        <Tab styleClass="inicio" text="%seccion.inicio">
           <content>
-            <BorderPane prefHeight="200.0" prefWidth="200.0">
-              <center>
-                <ImageView fitHeight="540.0" fitWidth="720.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-                  <image>
-                    <Image url="@inicio.png" />
-                  </image>
-                  <BorderPane.margin>
-                    <Insets />
-                  </BorderPane.margin>
-                </ImageView>
-              </center>
-            </BorderPane>
+            <GridPane id="GridPane">
+              <children>
+                <AnchorPane minWidth="-1.0" prefHeight="540.0" prefWidth="720.0" style="-fx-background-color:red;&#10;" styleClass="inicio" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <children>
+                    <ImageView fitHeight="540.0" fitWidth="720.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                      <image>
+                        <Image url="@inicio.png" />
+                      </image>
+                    </ImageView>
+                    <Button cancelButton="true" defaultButton="false" layoutX="472.0" layoutY="253.0" mnemonicParsing="true" onAction="#nuevaPartida" opacity="1.0" prefHeight="52.0" prefWidth="226.0" style="" styleClass="nuevaPartida" text="%inicio.partida.nueva" visible="true" />
+                    <Button cancelButton="true" defaultButton="false" layoutX="472.0" layoutY="322.0" mnemonicParsing="true" onAction="#usarLaboratorio" opacity="1.0" prefHeight="52.0" prefWidth="226.0" style="" styleClass="usarLaboratorio" text="%inicio.laboratorio.usar" visible="true" />
+                    <Button cancelButton="true" defaultButton="false" layoutX="472.0" layoutY="391.0" mnemonicParsing="true" onAction="#verRegistros" opacity="1.0" prefHeight="52.0" prefWidth="226.0" style="" styleClass="verRegistros" text="%inicio.registros.ver" visible="true" />
+                  </children>
+                </AnchorPane>
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" percentWidth="0.0" />
+                <ColumnConstraints hgrow="NEVER" minWidth="720.0" percentWidth="0.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" percentWidth="0.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints fillHeight="true" minHeight="0.0" percentHeight="0.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="450.0" percentHeight="0.0" vgrow="NEVER" />
+                <RowConstraints minHeight="0.0" percentHeight="0.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
           </content>
         </Tab>
         <Tab fx:id="seccionPartida" text="%seccion.partida">
@@ -53,7 +67,7 @@
             <ImageView fitHeight="0.0" fitWidth="0.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" styleClass="partida" />
           </graphic>
         </Tab>
-        <Tab id="" text="%seccion.laboratorio">
+        <Tab id="" fx:id="seccionLaboratorio" text="%seccion.laboratorio">
           <content>
             <AnchorPane id="AnchorPane" prefHeight="530.0" prefWidth="740.0">
               <children>
@@ -78,7 +92,7 @@
             <ImageView fitHeight="0.0" fitWidth="0.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" styleClass="laboratorio" />
           </graphic>
         </Tab>
-        <Tab closable="false" text="%seccion.registros">
+        <Tab fx:id="seccionRegistros" closable="false" text="%seccion.registros">
           <content>
             <fx:include fx:id="panelEficiencia" source="eficiencia/mediciones.fxml" />
           </content>
