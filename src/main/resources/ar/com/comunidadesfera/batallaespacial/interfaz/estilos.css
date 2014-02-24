@@ -122,6 +122,10 @@
 .tab:selected .configuracion {
 }
 
+GridPane.inicio{
+    /* -fx-background-image:url('fondo.png'); */
+}
+
 .inicio .button {
     -fx-content-display: left;
     -fx-graphic-text-gap: 10;

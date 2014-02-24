@@ -17,9 +17,9 @@
       <tabs>
         <Tab styleClass="inicio" text="%seccion.inicio">
           <content>
-            <GridPane id="GridPane">
+            <GridPane id="GridPane" style="" styleClass="inicio">
               <children>
-                <AnchorPane minWidth="-1.0" prefHeight="540.0" prefWidth="720.0" style="-fx-background-color:red;&#10;" styleClass="inicio" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <AnchorPane minWidth="-1.0" prefHeight="540.0" prefWidth="720.0" style="&#10;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                   <children>
                     <ImageView fitHeight="540.0" fitWidth="720.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <image>
