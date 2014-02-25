@@ -1,7 +1,5 @@
 package ar.com.comunidadesfera.batallaespacial.interfaz;
 
-import static javafx.beans.binding.Bindings.*;
-
 import java.io.File;
 import java.net.URL;
 import java.nio.file.Path;
@@ -13,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.FileChooserBuilder;
@@ -27,6 +26,7 @@ import ar.com.comunidadesfera.batallaespacial.config.ConfiguracionInvalidaExcept
 import ar.com.comunidadesfera.batallaespacial.interfaz.eficiencia.ControladorEficiencia;
 import ar.com.comunidadesfera.batallaespacial.interfaz.informes.ControladorInformes;
 import ar.com.comunidadesfera.batallaespacial.interfaz.ordenamiento.ControladorOrdenarContenedores;
+import ar.com.comunidadesfera.batallaespacial.juego.Participante;
 import ar.com.comunidadesfera.batallaespacial.juego.Partida;
 import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
 import ar.com.comunidadesfera.eficiencia.Contexto;
@@ -48,6 +48,9 @@ public class ControladorPrincipal implements Controlador {
     
     @FXML
     private ControladorOrdenarContenedores panelOrdenamientoController;
+    
+    @FXML
+    private TabPane secciones;
     
     @FXML
     private Tab seccionPartida;
@@ -78,7 +81,24 @@ public class ControladorPrincipal implements Controlador {
     @Inject
     private Contexto contexto;
     
-    private PartidaActivada partidaActiva = new PartidaActivada();
+    private BatallaEspacial.Observador partidaActivada = new BatallaEspacial.Observador() {
+        
+        @Override
+        public void jugando(BatallaEspacial batallaEspacial, Partida<? extends Participante> partida) {
+            
+            if (! secciones.getTabs().contains(seccionPartida)) {
+                
+                secciones.getTabs().add(1, seccionPartida);
+            }
+            
+            secciones.getSelectionModel().select(seccionPartida);
+        }
+        
+        @Override
+        public void iniciada(BatallaEspacial batallaEspacial) {
+
+        }
+    };
     
     @FXML
     void nuevaPartida(ActionEvent event) {
@@ -115,8 +135,7 @@ public class ControladorPrincipal implements Controlador {
     @FXML
     void initialize() throws NoSuchMethodException {
 
-        this.seccionPartida.disableProperty().bind( not( this.partidaActiva ));
-    
+        this.secciones.getTabs().remove(seccionPartida);
         this.menuMetricasRegistrar.selectedProperty().bindBidirectional(JavaBeanBooleanPropertyBuilder
                                                                           .create()
                                                                           .bean(this.contexto)
@@ -124,7 +143,7 @@ public class ControladorPrincipal implements Controlador {
                                                                           .build());
   
         this.batallaEspacial.agregarObservador(this.panelOrdenamientoController);
-        this.batallaEspacial.agregarObservador(this.partidaActiva);
+        this.batallaEspacial.agregarObservador(this.partidaActivada);
     }
     
     private void jugar(Path rutaConfiguracion) {
