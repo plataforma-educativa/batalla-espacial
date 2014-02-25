@@ -123,7 +123,19 @@
 }
 
 GridPane.inicio{
-    /* -fx-background-image:url('fondo.png'); */
+    -fx-background-color:#28303e;
+}
+
+.tab.inicio:selected {
+    -fx-background-color:#28303e;
+}
+
+.tab.inicio .inicio {
+    -fx-image: url("iconos/x16/home.png");
+}
+
+.tab.inicio:selected .inicio {
+    -fx-image: url("iconos/x16/home_selected.png");
 }
 
 .inicio .button {

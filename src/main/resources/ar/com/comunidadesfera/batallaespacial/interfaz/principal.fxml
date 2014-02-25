@@ -23,7 +23,7 @@
                   <children>
                     <ImageView fitHeight="540.0" fitWidth="720.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <image>
-                        <Image url="@inicio.png" />
+                        <Image url="@inicio2.png" />
                       </image>
                     </ImageView>
                     <Button cancelButton="true" defaultButton="false" layoutX="472.0" layoutY="253.0" mnemonicParsing="true" onAction="#nuevaPartida" opacity="1.0" prefHeight="52.0" prefWidth="226.0" style="" styleClass="nuevaPartida" text="%inicio.partida.nueva" visible="true" />
@@ -44,6 +44,9 @@
               </rowConstraints>
             </GridPane>
           </content>
+          <graphic>
+            <ImageView fitHeight="0.0" fitWidth="0.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" styleClass="inicio" />
+          </graphic>
         </Tab>
         <Tab fx:id="seccionPartida" text="%seccion.partida">
           <content>
