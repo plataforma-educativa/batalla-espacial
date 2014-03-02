@@ -132,7 +132,7 @@
         <dependency>
             <groupId>org.jboss.weld.se</groupId>
             <artifactId>weld-se-core</artifactId>
-            <version>2.0.3.Final</version>
+            <version>2.1.2.Final</version>
             <scope>compile</scope>
         </dependency>
 
@@ -179,6 +179,11 @@
         </dependency>
 
         <!-- Otros -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.1</version>
+        </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
@@ -236,6 +241,12 @@
             <artifactId>unitils-dbunit</artifactId>
             <version>3.3</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-nop</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>

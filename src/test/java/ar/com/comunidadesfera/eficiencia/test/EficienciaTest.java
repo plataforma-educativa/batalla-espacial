@@ -5,6 +5,7 @@ import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.Matchers.*;
 
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
 
@@ -47,25 +48,29 @@ public class EficienciaTest extends TestBasico {
     }
     
     @Test
-    public void obtenerRegistroDeEjecucion() {
+    public void obtenerRegistroDeEjecucion() throws InterruptedException {
         
-        long antes = System.nanoTime();
-        
+        long antes = System.currentTimeMillis();
         Ejecucion ejecucion = this.contexto.iniciarEjecucion(SIMPLE_10.modulo.nombre, 
                                                              SIMPLE_10.problema.nombre,
                                                              SIMPLE_10.dimension); 
-
-        ejecucion.terminar();
         
-        long despues = System.nanoTime();
+        TimeUnit.MILLISECONDS.sleep(100);
+        long durante = System.currentTimeMillis();
+        TimeUnit.MILLISECONDS.sleep(100);
+        
+        ejecucion.terminar();
+        long despues = System.currentTimeMillis();
         
         RegistroDeEjecucion registro = ejecucion.getRegistro();
         
         assertThat("registro", registro, notNullValue());
         assertThat("problema del registro", registro.getProblema(), sameInstance(ejecucion.getProblema()));
         assertThat("modulo del registro", registro.getModulo(), sameInstance(ejecucion.getModulo()));
-        assertThat("inicio del registro", registro.getInicio().getTime(), lessThanOrEqualTo(antes));
-        assertThat("fin del registro", registro.getFin().getTime(), lessThanOrEqualTo(despues));
+        assertThat("inicio del registro", registro.getInicio().getTime(), both(greaterThanOrEqualTo(antes))
+                                                                          .and(lessThanOrEqualTo(durante)));
+        assertThat("fin del registro", registro.getFin().getTime(), both(greaterThanOrEqualTo(durante))
+                                                                    .and(lessThanOrEqualTo(despues)));
     }
     
     @Test
