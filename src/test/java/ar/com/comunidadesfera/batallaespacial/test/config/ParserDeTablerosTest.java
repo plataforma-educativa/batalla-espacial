@@ -15,8 +15,8 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import ar.com.comunidadesfera.batallaespacial.aplicacion.ParserDeTableros;
+import ar.com.comunidadesfera.batallaespacial.config.ConfiguracionBasica;
 import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
-import ar.com.comunidadesfera.batallaespacial.juego.ConfiguracionBasica;
 import ar.com.comunidadesfera.batallaespacial.juego.FabricaDePiezas;
 import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
 import ar.com.comunidadesfera.batallaespacial.juego.Tablero;

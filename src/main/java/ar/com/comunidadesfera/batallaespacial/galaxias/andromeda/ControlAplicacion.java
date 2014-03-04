@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
-import ar.com.comunidadesfera.batallaespacial.juego.ConfiguracionBasica;
+import ar.com.comunidadesfera.batallaespacial.config.ConfiguracionBasica;
 import ar.com.comunidadesfera.batallaespacial.ui.TipoControl;
 import ar.com.comunidadesfera.batallaespacial.ui.VistaAplicacion;
 

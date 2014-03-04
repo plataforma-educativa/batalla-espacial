@@ -7,7 +7,7 @@ import static org.mockito.Mockito.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import ar.com.comunidadesfera.batallaespacial.juego.ConfiguracionBasica;
+import ar.com.comunidadesfera.batallaespacial.config.ConfiguracionBasica;
 import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.DefinicionDeBases;
 import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.DefinicionDeNaves;
 import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.Reglamentacion;

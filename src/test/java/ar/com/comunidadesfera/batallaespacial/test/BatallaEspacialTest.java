@@ -8,8 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import ar.com.comunidadesfera.batallaespacial.BatallaEspacial;
+import ar.com.comunidadesfera.batallaespacial.config.ConfiguracionBasica;
 import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
-import ar.com.comunidadesfera.batallaespacial.juego.ConfiguracionBasica;
 import ar.com.comunidadesfera.batallaespacial.juego.Partida;
 import ar.com.comunidadesfera.batallaespacial.juego.Tablero;
 

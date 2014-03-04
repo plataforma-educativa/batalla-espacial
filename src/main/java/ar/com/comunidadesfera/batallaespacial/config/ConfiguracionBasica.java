@@ -1,4 +1,4 @@
-package ar.com.comunidadesfera.batallaespacial.juego;
+package ar.com.comunidadesfera.batallaespacial.config;
 
 import java.nio.file.Path;
 import java.util.Iterator;
@@ -6,6 +6,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ar.com.comunidadesfera.batallaespacial.Civilizacion;
+import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
+import ar.com.comunidadesfera.batallaespacial.juego.Participante;
+import ar.com.comunidadesfera.batallaespacial.juego.Tablero;
 import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.BaseUnicaCentral;
 import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.DefinicionDeBases;
 import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.DefinicionDeNaves;
@@ -13,7 +16,6 @@ import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.NavesDe
 import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.Reglamentacion;
 import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.ReglamentacionBasica;
 
-//TODO Definir interfaz
 public class ConfiguracionBasica implements Configuracion {
 
     /**

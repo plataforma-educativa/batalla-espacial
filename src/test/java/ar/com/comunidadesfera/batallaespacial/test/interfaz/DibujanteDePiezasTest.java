@@ -14,9 +14,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 
 import ar.com.comunidadesfera.batallaespacial.Civilizacion;
+import ar.com.comunidadesfera.batallaespacial.config.ConfiguracionBasica;
 import ar.com.comunidadesfera.batallaespacial.interfaz.DibujanteDePiezas;
 import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
-import ar.com.comunidadesfera.batallaespacial.juego.ConfiguracionBasica;
 import ar.com.comunidadesfera.batallaespacial.juego.Participante;
 import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
 import ar.com.comunidadesfera.batallaespacial.piezas.asteroide.Asteroide;
