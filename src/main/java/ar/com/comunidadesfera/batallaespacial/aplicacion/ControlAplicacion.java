@@ -29,6 +29,7 @@ import ar.com.comunidadesfera.batallaespacial.ui.PanelTablero;
 import ar.com.comunidadesfera.batallaespacial.ui.TipoControl;
 import ar.com.comunidadesfera.batallaespacial.ui.VistaAplicacion;
 
+@Deprecated
 public class ControlAplicacion implements VistaAplicacion.Observador,
                                           Motor.Observador {
 
@@ -199,7 +200,7 @@ public class ControlAplicacion implements VistaAplicacion.Observador,
         if (configuracion != null) {
             
             /* si la configuración fue cargada correctamente crea la nueva partida */
-            partida = new Partida(configuracion);
+//            partida = new Partida(configuracion);
             
         }
         

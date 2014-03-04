@@ -1,4 +1,4 @@
-package ar.com.comunidadesfera.batallaespacial.aplicacion;
+package ar.com.comunidadesfera.batallaespacial.galaxias;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import ar.com.comunidadesfera.batallaespacial.BatallaEspacial;
 import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
 import ar.com.comunidadesfera.batallaespacial.juego.Partida;
+import ar.com.comunidadesfera.batallaespacial.juego.partidas.PartidaSimple;
 
 /**
  * Implementación básica de Batalla Espacial. Es una implementación completa
@@ -50,7 +51,7 @@ public abstract class BatallaEspacialBasica implements BatallaEspacial {
     @Override
     public Partida jugar(Configuracion configuracion) {
         
-        Partida partida = new Partida(configuracion);
+        Partida partida = new PartidaSimple(configuracion);
         
         for (Observador observador : this.observadores) {
             

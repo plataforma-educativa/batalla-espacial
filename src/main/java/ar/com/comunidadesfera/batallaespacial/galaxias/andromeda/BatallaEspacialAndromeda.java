@@ -1,6 +1,6 @@
 package ar.com.comunidadesfera.batallaespacial.galaxias.andromeda;
 
-import ar.com.comunidadesfera.batallaespacial.aplicacion.BatallaEspacialBasica;
+import ar.com.comunidadesfera.batallaespacial.galaxias.BatallaEspacialBasica;
 
 public class BatallaEspacialAndromeda extends BatallaEspacialBasica {
 
