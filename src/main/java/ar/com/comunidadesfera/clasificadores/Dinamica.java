@@ -1,4 +1,4 @@
-package ar.com.comunidadesfera.batallaespacial.calificadores;
+package ar.com.comunidadesfera.clasificadores;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -8,9 +8,9 @@ import java.lang.annotation.Target;
 import javax.inject.Qualifier;
 
 /**
- * Calificador para una implementación seleccionada dinámicamente de una interfaz.
+ * Clasificador para una implementación seleccionada dinámicamente de una interfaz.
  * 
- * Diseñada para calificar métodos anotados como @Produces que seleccionan la implementación
+ * Diseñada para clasificar métodos anotados como @Produces que seleccionan la implementación
  * concreta dinámicamente. 
  * 
  * Aplicado a un método, un parámero o un atributo indica que debe inyectarse
@@ -21,7 +21,7 @@ import javax.inject.Qualifier;
  *
  */
 @Qualifier
-@Target({ElementType.TYPE, ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD})
+@Target({ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Dinamica {
 

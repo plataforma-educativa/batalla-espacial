@@ -10,16 +10,16 @@ import ar.com.comunidadesfera.batallaespacial.juego.Partida;
  */
 public abstract class EstrategiaAbstracta implements Estrategia {
 
-    private Partida<?> partida;
+    private Partida partida;
 
-    public void setPartida(Partida<?> partida) {
+    public void setPartida(Partida partida) {
 
         this.partida = partida;
 
         this.configurar();
     }
 
-    protected Partida<?> getPartida() {
+    protected Partida getPartida() {
 
         return this.partida;
     }

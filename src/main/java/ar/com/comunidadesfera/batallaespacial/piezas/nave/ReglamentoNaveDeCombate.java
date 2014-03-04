@@ -14,7 +14,7 @@ import ar.com.comunidadesfera.batallaespacial.juego.Reglamento;
  */
 public class ReglamentoNaveDeCombate extends Reglamento {
     
-    public ReglamentoNaveDeCombate(Partida<?> partida) {
+    public ReglamentoNaveDeCombate(Partida partida) {
         
         super(partida);
     }

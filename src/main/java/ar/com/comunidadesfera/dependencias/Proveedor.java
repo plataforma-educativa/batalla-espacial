@@ -1,18 +1,14 @@
 package ar.com.comunidadesfera.dependencias;
 
-import java.lang.annotation.Annotation;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
-import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Provider;
 
-import ar.com.comunidadesfera.batallaespacial.calificadores.Basica;
-import ar.com.comunidadesfera.batallaespacial.calificadores.Dinamica;
+import ar.com.comunidadesfera.clasificadores.Clasificadores;
 
 /**
  * Proveedor de implementaciones para la interfaz T. 
@@ -24,25 +20,6 @@ import ar.com.comunidadesfera.batallaespacial.calificadores.Dinamica;
  */
 public class Proveedor<T> {
 
-    private final static Annotation[] CUALIFICADORES_POR_DEFECTO = {
-
-        new AnnotationLiteral<Basica>(){
-            private static final long serialVersionUID = 1L;
-        }
-    };
-    
-    private final static Annotation[] CUALIFICADORES_DISPONIBLES = {
-        
-        new AnnotationLiteral<Any>() {
-            private static final long serialVersionUID = 1L;
-        }
-    };    
-
-    private final static Annotation CUALIFICADOR_DINAMICO = new AnnotationLiteral<Dinamica>() {
-        
-        private static final long serialVersionUID = 1L;
-    };
-    
     private final Class<T> interfaz;
     
     private final Instance<T> instance;
@@ -50,7 +27,6 @@ public class Proveedor<T> {
     private final BeanManager beanManager;
 
     private Provider<T> provider;
-    
     
     // TODO hacerlo package
     public Proveedor(BeanManager beanManager, Class<T> interfaz, Instance<T> instance) {
@@ -72,7 +48,7 @@ public class Proveedor<T> {
                 
             } else {
                 
-                Instance<T> defaultIntance = this.instance.select(CUALIFICADORES_POR_DEFECTO); 
+                Instance<T> defaultIntance = this.instance.select(Clasificadores.Basica); 
                 
                 if (defaultIntance.isAmbiguous() || defaultIntance.isUnsatisfied()) {
                     
@@ -103,14 +79,12 @@ public class Proveedor<T> {
     public Set<Alternativa<T>> getAlternativas() {
         
         Set<Alternativa<T>> alternativas = new HashSet<Alternativa<T>>();
-        
-        Set<Bean<?>> beans = beanManager.getBeans(this.interfaz, CUALIFICADORES_DISPONIBLES);
+        Set<Bean<?>> beans = beanManager.getBeans(this.interfaz, Clasificadores.Any);
 
-        /* remueve todos los beans que están cualificados como Dinámicos */
+        /* remueve todos los beans que están calificados como Dinámicos */
         for (Bean<?> bean: beans) {
             
-            if (! bean.getQualifiers().contains(CUALIFICADOR_DINAMICO)) {
-                
+            if (! bean.getQualifiers().contains(Clasificadores.Dinamica)) {
                 alternativas.add(new Alternativa<T>(this, bean));
             }
         }

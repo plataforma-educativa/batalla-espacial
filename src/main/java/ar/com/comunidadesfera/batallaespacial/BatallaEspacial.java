@@ -1,11 +1,7 @@
 package ar.com.comunidadesfera.batallaespacial;
 
 import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
-import ar.com.comunidadesfera.batallaespacial.juego.Participante;
 import ar.com.comunidadesfera.batallaespacial.juego.Partida;
-
-
-
 
 /**
  * Interfaz que define las instancias de Batalla Espacial.
@@ -34,7 +30,7 @@ public interface BatallaEspacial {
      * @param configuracion
      * @return Partida creada
      */
-    <P extends Participante> Partida<P> jugar(Configuracion<P> configuracion);
+    Partida jugar(Configuracion configuracion);
 
     /**
      * BatallaEspacial.Observador define la interfaz para los objetos que deben
@@ -55,7 +51,7 @@ public interface BatallaEspacial {
          * @param batallaEspacial
          * @param partida
          */
-        void jugando(BatallaEspacial batallaEspacial, Partida<? extends Participante> partida);
+        void jugando(BatallaEspacial batallaEspacial, Partida partida);
     }
 
 }

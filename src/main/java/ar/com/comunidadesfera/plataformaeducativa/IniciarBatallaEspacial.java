@@ -10,10 +10,12 @@ import javafx.stage.Stage;
 
 import javax.enterprise.inject.Produces;
 
+import ar.com.comunidadesfera.clasificadores.Basica;
 import ar.com.comunidadesfera.fx.Iniciar;
 import ar.com.comunidadesfera.persistencia.Configuracion;
 import ar.com.comunidadesfera.persistencia.Configuracion.Tipo;
 
+@Basica
 public class IniciarBatallaEspacial extends Iniciar {
 
     private static final String PERSISTENCE_UNIT_PROPERTIES = "/META-INF/persistence.properties";
@@ -38,7 +40,6 @@ public class IniciarBatallaEspacial extends Iniciar {
         
         return persistenceUnitProperties;
     }
-    
     
     @Override
     protected String getFxmlLocation() {

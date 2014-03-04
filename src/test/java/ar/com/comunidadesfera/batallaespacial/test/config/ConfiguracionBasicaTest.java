@@ -7,20 +7,19 @@ import static org.mockito.Mockito.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
-import ar.com.comunidadesfera.batallaespacial.juego.Participante;
+import ar.com.comunidadesfera.batallaespacial.juego.ConfiguracionBasica;
 import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.DefinicionDeBases;
 import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.DefinicionDeNaves;
 import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.Reglamentacion;
 
-public class ConfiguracionTest {
+public class ConfiguracionBasicaTest {
 
-    private Configuracion<Participante> configuracion;
+    private ConfiguracionBasica configuracion;
 
     @Before
     public void crear() {
         
-        this.configuracion = new Configuracion<>();
+        this.configuracion = new ConfiguracionBasica();
     }
     
     @Test

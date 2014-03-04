@@ -3,6 +3,9 @@ package ar.com.comunidadesfera.fx;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import javax.enterprise.inject.Instance;
+import javax.inject.Provider;
+
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
 
@@ -13,8 +16,11 @@ public abstract class Aplicacion extends Application {
 
         WeldContainer weldContainer = new Weld().initialize();
         
-        weldContainer.instance().select(this.getClaseIniciar()).get().ejecutar(stagePrincipal);
+        this.seleccionarIniciar(weldContainer.instance()).get().ejecutar(stagePrincipal);
     }
     
-    protected abstract Class<? extends Iniciar> getClaseIniciar();
+    protected Provider<? extends Iniciar> seleccionarIniciar(Instance<Object> instancias) {
+        
+        return instancias.select(Iniciar.class);
+    }
 }

@@ -15,7 +15,7 @@ public class BatallaEspacial {
     private static final String DESCRIPCION = "Batalla Espacial iniciada";
     
     public BatallaEspacial() {
-     
+        
         Thread thread = new Thread(new LanzarAplicacionBatallaEspacial());
 
         /* hack para que funcione el Interaction Pane de DrJava */

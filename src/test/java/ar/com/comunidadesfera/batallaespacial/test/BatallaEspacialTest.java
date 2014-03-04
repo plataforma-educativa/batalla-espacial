@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import ar.com.comunidadesfera.batallaespacial.BatallaEspacial;
 import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
-import ar.com.comunidadesfera.batallaespacial.juego.Participante;
+import ar.com.comunidadesfera.batallaespacial.juego.ConfiguracionBasica;
 import ar.com.comunidadesfera.batallaespacial.juego.Partida;
 import ar.com.comunidadesfera.batallaespacial.juego.Tablero;
 
@@ -41,12 +41,9 @@ public abstract class BatallaEspacialTest {
     @Test
     public void jugar() {
         
-        Configuracion<Participante> configuracion = new Configuracion<Participante>();
-        configuracion.setRondas(2);
-        configuracion.setTimeout(0);
-        configuracion.setTablero(new Tablero(1, 1));
+        Configuracion configuracion = this.crearConfiguracion(2 , 0, new Tablero(1, 1));
         
-        Partida<Participante> partida = this.batallaEspacial.jugar(configuracion);
+        Partida partida = this.batallaEspacial.jugar(configuracion);
         
         assertThat("partida a jugar", partida, notNullValue());
         assertThat("configuracion de la partida", partida.getConfiguracion(), is(configuracion));
@@ -59,13 +56,20 @@ public abstract class BatallaEspacialTest {
         
         this.batallaEspacial.agregarObservador(observador);
         
-        Configuracion<Participante> configuracion = new Configuracion<Participante>();
-        configuracion.setRondas(2);
-        configuracion.setTimeout(0);
-        configuracion.setTablero(new Tablero(1, 1));
+        Configuracion configuracion = this.crearConfiguracion(2, 0, new Tablero(1, 1));
         
-        Partida<Participante> partida = this.batallaEspacial.jugar(configuracion);
+        Partida partida = this.batallaEspacial.jugar(configuracion);
         
         verify(observador).jugando(this.batallaEspacial, partida);
+    }
+    
+    protected Configuracion crearConfiguracion(int rondas, long timeout, Tablero tablero) {
+        
+        ConfiguracionBasica configuracion = new ConfiguracionBasica();
+        configuracion.setRondas(rondas);
+        configuracion.setTimeout(timeout);
+        configuracion.setTablero(tablero);
+        
+        return configuracion;
     }
 }

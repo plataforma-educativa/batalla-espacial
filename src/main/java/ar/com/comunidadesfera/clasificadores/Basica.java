@@ -1,4 +1,4 @@
-package ar.com.comunidadesfera.batallaespacial.calificadores;
+package ar.com.comunidadesfera.clasificadores;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -8,10 +8,14 @@ import java.lang.annotation.Target;
 import javax.inject.Qualifier;
 
 /**
- * Calificador para una implementación alternativa de una interfaz.
+ * Clasificador para una implementación básica, por defecto, de una interfaz.
  * 
  * Aplicado a un clase indica que corresponde con una implementación
- * alternativa (no básica) de una interfaz.
+ * básica de una interfaz.
+ * 
+ * Aplicado a un método, un parámero o un atributo indica que debe inyectarse
+ * la implementación así anotada.
+ * 
  * 
  * @author Mariano Tugnarelli
  *
@@ -19,6 +23,6 @@ import javax.inject.Qualifier;
 @Qualifier
 @Target({ElementType.TYPE, ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Alternativa {
+public @interface Basica {
 
 }

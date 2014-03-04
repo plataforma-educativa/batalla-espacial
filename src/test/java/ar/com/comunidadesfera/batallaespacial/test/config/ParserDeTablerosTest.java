@@ -16,8 +16,8 @@ import org.mockito.stubbing.Answer;
 
 import ar.com.comunidadesfera.batallaespacial.aplicacion.ParserDeTableros;
 import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
+import ar.com.comunidadesfera.batallaespacial.juego.ConfiguracionBasica;
 import ar.com.comunidadesfera.batallaespacial.juego.FabricaDePiezas;
-import ar.com.comunidadesfera.batallaespacial.juego.Participante;
 import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
 import ar.com.comunidadesfera.batallaespacial.juego.Tablero;
 import ar.com.comunidadesfera.batallaespacial.piezas.asteroide.Asteroide;
@@ -90,7 +90,7 @@ public class ParserDeTablerosTest {
     @Test
     public void crearTablero() {
         
-        Configuracion<Participante> configuracion = new Configuracion<Participante>();
+        Configuracion configuracion = new ConfiguracionBasica();
 
         fila("####   ");
         fila("      #");
@@ -133,7 +133,7 @@ public class ParserDeTablerosTest {
     @Test
     public void crearTableroVacio() {
         
-        Configuracion<Participante> configuracion = new Configuracion<Participante>();
+        Configuracion configuracion = new ConfiguracionBasica();
 
         Tablero tablero = this.parser.crearTablero(configuracion, origen());
 

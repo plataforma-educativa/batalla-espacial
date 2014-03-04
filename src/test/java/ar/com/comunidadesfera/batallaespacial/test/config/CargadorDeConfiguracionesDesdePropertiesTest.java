@@ -16,13 +16,13 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import ar.com.comunidadesfera.batallaespacial.aplicacion.FabricaDeTableros;
-import ar.com.comunidadesfera.batallaespacial.aplicacion.ParticipanteExtendido;
 import ar.com.comunidadesfera.batallaespacial.civilizaciones.humana.CivilizacionHumana;
 import ar.com.comunidadesfera.batallaespacial.civilizaciones.numenor.Numenor;
 import ar.com.comunidadesfera.batallaespacial.config.CargadorDeConfiguraciones;
 import ar.com.comunidadesfera.batallaespacial.config.CargadorDeConfiguracionesDesdeProperties;
 import ar.com.comunidadesfera.batallaespacial.config.ConfiguracionInvalidaException;
 import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
+import ar.com.comunidadesfera.batallaespacial.juego.Participante;
 import ar.com.comunidadesfera.batallaespacial.juego.Tablero;
 import ar.com.comunidadesfera.batallaespacial.test.civilizaciones.simulada.CivilizacionSimulada;
 
@@ -32,7 +32,6 @@ public class CargadorDeConfiguracionesDesdePropertiesTest {
 
     private FabricaDeTableros fabricaDeTableros;
 
-    @SuppressWarnings("unchecked")
     @Before
     public void iniciar() {
         
@@ -51,7 +50,7 @@ public class CargadorDeConfiguracionesDesdePropertiesTest {
         
         Path ruta = Paths.get("src/test/content/config/test-config-1.properties");
         
-        Configuracion<ParticipanteExtendido> configuracion = cargador.cargar(ruta);
+        Configuracion configuracion = cargador.cargar(ruta);
         
         assertThat(configuracion, notNullValue());
         
@@ -66,7 +65,7 @@ public class CargadorDeConfiguracionesDesdePropertiesTest {
         assertThat("participantes", configuracion.getParticipantes(), notNullValue());
         assertThat("cantidad de participantes", configuracion.getParticipantes().size(), is(1));
         
-        ParticipanteExtendido participante;
+        Participante participante;
         
         participante = configuracion.getParticipantes().get(0);
         assertThat("civilizacion del participante 1", participante.getCivilizacion(), instanceOf(Numenor.class));
@@ -83,7 +82,7 @@ public class CargadorDeConfiguracionesDesdePropertiesTest {
         
         Path ruta = Paths.get("src/test/content/config/test-config-2.properties");
         
-        Configuracion<ParticipanteExtendido> configuracion = cargador.cargar(ruta);
+        Configuracion configuracion = cargador.cargar(ruta);
         
         assertThat(configuracion, notNullValue());
         
@@ -98,7 +97,7 @@ public class CargadorDeConfiguracionesDesdePropertiesTest {
         assertThat("participantes", configuracion.getParticipantes(), notNullValue());
         assertThat("cantidad de participantes", configuracion.getParticipantes().size(), is(3));
         
-        ParticipanteExtendido participante;
+        Participante participante;
         
         participante = configuracion.getParticipantes().get(0); 
         assertThat("civilizacion del participante 1", participante.getCivilizacion(), instanceOf(Numenor.class));

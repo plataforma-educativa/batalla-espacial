@@ -4,7 +4,6 @@ import java.nio.file.Path;
 import java.util.List;
 
 import ar.com.comunidadesfera.batallaespacial.aplicacion.FabricaDeTableros;
-import ar.com.comunidadesfera.batallaespacial.aplicacion.ParticipanteExtendido;
 import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
 import ar.com.comunidadesfera.batallaespacial.juego.FabricaDePiezas;
 
@@ -21,7 +20,7 @@ public interface CargadorDeConfiguraciones {
      */
     List<String> getFiltros();
     
-    Configuracion<ParticipanteExtendido> cargar(Path ruta) throws ConfiguracionInvalidaException;
+    Configuracion cargar(Path ruta) throws ConfiguracionInvalidaException;
 
     void setFabricaDeTableros(FabricaDeTableros fabrica);
 

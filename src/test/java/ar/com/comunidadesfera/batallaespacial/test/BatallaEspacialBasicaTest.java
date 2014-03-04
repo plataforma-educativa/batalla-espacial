@@ -8,6 +8,6 @@ public class BatallaEspacialBasicaTest extends BatallaEspacialTest {
     @Override
     protected BatallaEspacial crear() {
         
-        return new BatallaEspacialBasica();
+        return new BatallaEspacialBasica() {};
     }
 }

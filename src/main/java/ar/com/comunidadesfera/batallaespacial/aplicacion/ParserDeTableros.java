@@ -10,7 +10,6 @@ import javax.inject.Inject;
 import ar.com.comunidadesfera.batallaespacial.juego.CasilleroInvalidoException;
 import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
 import ar.com.comunidadesfera.batallaespacial.juego.FabricaDePiezas;
-import ar.com.comunidadesfera.batallaespacial.juego.Participante;
 import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
 import ar.com.comunidadesfera.batallaespacial.juego.Tablero;
 
@@ -115,7 +114,7 @@ public class ParserDeTableros implements FabricaDeTableros {
     }
 
     @Override
-    public Tablero crearTablero(Configuracion<? extends Participante> configuracion, InputStream origen) {
+    public Tablero crearTablero(Configuracion configuracion, InputStream origen) {
 
         Tablero tablero = new Tablero();
         Tablero.Iterador iterador = tablero.iterator();

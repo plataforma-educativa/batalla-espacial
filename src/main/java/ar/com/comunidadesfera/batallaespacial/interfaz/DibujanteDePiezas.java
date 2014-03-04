@@ -12,8 +12,8 @@ import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.MoveToBuilder;
 import javafx.scene.shape.Path;
 import javafx.scene.shape.RectangleBuilder;
-import ar.com.comunidadesfera.batallaespacial.aplicacion.ParticipanteExtendido;
 import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
+import ar.com.comunidadesfera.batallaespacial.juego.Participante;
 import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
 import ar.com.comunidadesfera.batallaespacial.piezas.PiezaNoVisitableException;
 import ar.com.comunidadesfera.batallaespacial.piezas.VisitanteDePiezas;
@@ -30,12 +30,12 @@ public class DibujanteDePiezas implements VisitanteDePiezas {
     
     private final double margen = dimension * 0.1;
     
-    private Configuracion<ParticipanteExtendido> configuracion;
+    private Configuracion configuracion;
 
     public DibujanteDePiezas() {
      
     }
-    public void setConfiguracion(Configuracion<ParticipanteExtendido> configuracion) {
+    public void setConfiguracion(Configuracion configuracion) {
         
         this.configuracion = configuracion;
     }
@@ -50,7 +50,7 @@ public class DibujanteDePiezas implements VisitanteDePiezas {
         
         Path dibujoNave = new Path();
         
-        ParticipanteExtendido participante = this.configuracion.getParticipante(nave.getCivilizacion());
+        Participante participante = this.configuracion.getParticipante(nave.getCivilizacion());
         
         dibujoNave.setStroke(new Color(0.0, 0.0, 0.0, 1.0));
         dibujoNave.setFill(participante.getPintura());
@@ -72,7 +72,7 @@ public class DibujanteDePiezas implements VisitanteDePiezas {
         Canvas dibujoContenedor = new Canvas(this.dimension, this.dimension);
         GraphicsContext grafico = dibujoContenedor.getGraphicsContext2D();
 
-        ParticipanteExtendido participante = this.configuracion.getParticipante(base.getCivilizacion());
+        Participante participante = this.configuracion.getParticipante(base.getCivilizacion());
 
         grafico.setStroke(new Color(0.0, 0.0, 0.0, 1.0));
         grafico.setFill(participante.getPintura());

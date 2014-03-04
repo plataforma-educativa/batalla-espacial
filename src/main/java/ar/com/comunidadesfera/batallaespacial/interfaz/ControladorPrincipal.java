@@ -19,20 +19,18 @@ import javafx.stage.FileChooserBuilder;
 import javax.inject.Inject;
 
 import ar.com.comunidadesfera.batallaespacial.BatallaEspacial;
-import ar.com.comunidadesfera.batallaespacial.aplicacion.ParticipanteExtendido;
-import ar.com.comunidadesfera.batallaespacial.calificadores.Dinamica;
 import ar.com.comunidadesfera.batallaespacial.config.CargadorDeConfiguraciones;
 import ar.com.comunidadesfera.batallaespacial.config.ConfiguracionInvalidaException;
 import ar.com.comunidadesfera.batallaespacial.interfaz.eficiencia.ControladorEficiencia;
 import ar.com.comunidadesfera.batallaespacial.interfaz.informes.ControladorInformes;
 import ar.com.comunidadesfera.batallaespacial.interfaz.ordenamiento.ControladorOrdenarContenedores;
-import ar.com.comunidadesfera.batallaespacial.juego.Participante;
 import ar.com.comunidadesfera.batallaespacial.juego.Partida;
 import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
+import ar.com.comunidadesfera.clasificadores.Dinamica;
 import ar.com.comunidadesfera.eficiencia.Contexto;
 
 
-public class ControladorPrincipal implements Controlador {
+public class ControladorPrincipal implements Controlador, BatallaEspacial.Observador {
 
     @FXML
     private ResourceBundle resources;
@@ -73,32 +71,13 @@ public class ControladorPrincipal implements Controlador {
     @Inject
     private CargadorDeConfiguraciones cargador;
 
-    private Partida<ParticipanteExtendido> partida;
+    private Partida partida;
     
     @Inject
     private DibujanteDePiezas dibujante;
 
     @Inject
     private Contexto contexto;
-    
-    private BatallaEspacial.Observador partidaActivada = new BatallaEspacial.Observador() {
-        
-        @Override
-        public void jugando(BatallaEspacial batallaEspacial, Partida<? extends Participante> partida) {
-            
-            if (! secciones.getTabs().contains(seccionPartida)) {
-                
-                secciones.getTabs().add(1, seccionPartida);
-            }
-            
-            secciones.getSelectionModel().select(seccionPartida);
-        }
-        
-        @Override
-        public void iniciada(BatallaEspacial batallaEspacial) {
-
-        }
-    };
     
     @FXML
     void nuevaPartida(ActionEvent event) {
@@ -143,7 +122,7 @@ public class ControladorPrincipal implements Controlador {
                                                                           .build());
   
         this.batallaEspacial.agregarObservador(this.panelOrdenamientoController);
-        this.batallaEspacial.agregarObservador(this.partidaActivada);
+        this.batallaEspacial.agregarObservador(this);
     }
     
     private void jugar(Path rutaConfiguracion) {
@@ -152,18 +131,7 @@ public class ControladorPrincipal implements Controlador {
             
             this.panelMarcoTablero.setContent(null);
             
-            this.partida = this.batallaEspacial.jugar(this.cargador.cargar(rutaConfiguracion));
-            
-            this.dibujante.setConfiguracion(this.partida.getConfiguracion());
-            
-            PanelTablero panelTablero = new PanelTablero();
-            panelTablero.setTablero(this.partida.getTablero());
-            panelTablero.setDibujanteDePiezas(this.dibujante);
-            panelTablero.setControlador(this);
-            panelTablero.disponerPiezas();
-            
-            this.panelMarcoTablero.setContent(panelTablero);
-            this.partida.comenzar();
+            this.batallaEspacial.jugar(this.cargador.cargar(rutaConfiguracion));
             
         } catch (ConfiguracionInvalidaException e) {
             
@@ -172,10 +140,49 @@ public class ControladorPrincipal implements Controlador {
         }
     }
 
+    private void configurarTablero() {
+        
+        this.dibujante.setConfiguracion(this.partida.getConfiguracion());
+        
+        PanelTablero panelTablero = new PanelTablero();
+        panelTablero.setTablero(this.partida.getTablero());
+        panelTablero.setDibujanteDePiezas(this.dibujante);
+        panelTablero.setControlador(this);
+        panelTablero.disponerPiezas();
+        
+        this.panelMarcoTablero.setContent(panelTablero);
+        this.partida.comenzar();
+    }
+
+    /**
+     * post: Hace visible el panel del Tablero.
+     */
+    private void visualizarTablero() {
+        
+        if (! this.secciones.getTabs().contains(this.seccionPartida)) {
+            this.secciones.getTabs().add(1, this.seccionPartida);
+        }
+        
+        this.secciones.getSelectionModel().select(this.seccionPartida);
+    }
+    
     @Override
     public void seleccionar(Pieza pieza, Vista origen) {
 
         this.panelInformesController.seleccionar(pieza, origen);
     }
-    
+
+    @Override
+    public void iniciada(BatallaEspacial batallaEspacial) {
+        
+    }
+
+    @Override
+    public void jugando(BatallaEspacial batallaEspacial, Partida partida) {
+
+        this.partida = partida;
+        this.configurarTablero();
+        this.visualizarTablero();
+    }
+
 }

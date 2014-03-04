@@ -14,9 +14,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Answers;
 
 import ar.com.comunidadesfera.batallaespacial.Civilizacion;
-import ar.com.comunidadesfera.batallaespacial.aplicacion.ParticipanteExtendido;
 import ar.com.comunidadesfera.batallaespacial.interfaz.DibujanteDePiezas;
 import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
+import ar.com.comunidadesfera.batallaespacial.juego.ConfiguracionBasica;
+import ar.com.comunidadesfera.batallaespacial.juego.Participante;
 import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
 import ar.com.comunidadesfera.batallaespacial.piezas.asteroide.Asteroide;
 import ar.com.comunidadesfera.batallaespacial.piezas.base.BaseEspacial;
@@ -39,14 +40,14 @@ public class DibujanteDePiezasTest {
     
     private DibujanteDePiezas dibujante;
 
-    private Configuracion<ParticipanteExtendido> configuracion;
+    private Configuracion configuracion;
     
     @Before
     public void crear() {
         
-        this.configuracion = spy(new Configuracion<ParticipanteExtendido>());
+        this.configuracion = spy(new ConfiguracionBasica());
         
-        ParticipanteExtendido participante = mock(ParticipanteExtendido.class);
+        Participante participante = mock(Participante.class);
         Civilizacion civilizacion = anyObject();
 
         when(this.configuracion.getParticipante(civilizacion))

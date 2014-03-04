@@ -32,7 +32,6 @@ import ar.com.comunidadesfera.batallaespacial.interfaz.util.AlternativaStringCon
 import ar.com.comunidadesfera.batallaespacial.interfaz.util.GetSeleccionado;
 import ar.com.comunidadesfera.batallaespacial.interfaz.util.PiezaSeleccionableStringConverter;
 import ar.com.comunidadesfera.batallaespacial.interfaz.util.ValorSeleccionable;
-import ar.com.comunidadesfera.batallaespacial.juego.Participante;
 import ar.com.comunidadesfera.batallaespacial.juego.Partida;
 import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
 import ar.com.comunidadesfera.batallaespacial.laboratorios.ordenamiento.OrdenadorDeContenedores;
@@ -194,7 +193,7 @@ public class ControladorOrdenarContenedores implements BatallaEspacial.Observado
     }
 
     @Override
-    public void jugando(BatallaEspacial batallaEspacial, Partida<? extends Participante> partida) {
+    public void jugando(BatallaEspacial batallaEspacial, Partida partida) {
 
         this.parametros.clear();
         this.resultado.clear();

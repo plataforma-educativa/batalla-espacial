@@ -3,10 +3,10 @@ package ar.com.comunidadesfera.batallaespacial.ui;
 import java.awt.Image;
 
 import ar.com.comunidadesfera.batallaespacial.Reporte;
-import ar.com.comunidadesfera.batallaespacial.Sustancia;
 import ar.com.comunidadesfera.batallaespacial.Reporte.Espectro;
-import ar.com.comunidadesfera.batallaespacial.aplicacion.ParticipanteExtendido;
+import ar.com.comunidadesfera.batallaespacial.Sustancia;
 import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
+import ar.com.comunidadesfera.batallaespacial.juego.Participante;
 import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
 import ar.com.comunidadesfera.batallaespacial.juego.Tablero;
 
@@ -22,7 +22,7 @@ public class FabricaDePanelesTablero {
         this.fabricaDeImagenes = new FabricaDeImagenes();
     }
 
-    public PanelTablero crearTablero(Configuracion<ParticipanteExtendido> configuracion) {
+    public PanelTablero crearTablero(Configuracion configuracion) {
         
         Tablero tablero = configuracion.getTablero(); 
         
@@ -50,7 +50,7 @@ public class FabricaDePanelesTablero {
     
     
     public void crearPieza(Pieza pieza, PanelTablero panel, 
-                           Configuracion<ParticipanteExtendido> configuracion) {
+                           Configuracion configuracion) {
         
         Reporte reporte = pieza.reportar();
         
@@ -62,7 +62,7 @@ public class FabricaDePanelesTablero {
         if (imagen == null) {
 
             /* busca el participante de la Civilización correspondiente */
-            ParticipanteExtendido participante = configuracion.getParticipante(reporte.getCivilizacion());
+            Participante participante = configuracion.getParticipante(reporte.getCivilizacion());
             
             this.fabricaDeImagenes.crearImagen(idImagen, DIMENSION_CASILLERO - 2, 
                                                reporte, participante);

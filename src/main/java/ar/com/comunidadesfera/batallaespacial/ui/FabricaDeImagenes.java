@@ -5,9 +5,9 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Polygon;
 import java.awt.RenderingHints;
+import java.awt.geom.CubicCurve2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.GeneralPath;
-import java.awt.geom.CubicCurve2D;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.Collections;
@@ -16,7 +16,7 @@ import java.util.Map;
 
 import ar.com.comunidadesfera.batallaespacial.Reporte;
 import ar.com.comunidadesfera.batallaespacial.Sustancia;
-import ar.com.comunidadesfera.batallaespacial.aplicacion.ParticipanteExtendido;
+import ar.com.comunidadesfera.batallaespacial.juego.Participante;
 
 
 public class FabricaDeImagenes {
@@ -242,7 +242,7 @@ public class FabricaDeImagenes {
      * @param reporte
      */
     public void crearImagen(String nombre, int dimension, Reporte reporte,
-                            ParticipanteExtendido participante) {
+                            Participante participante) {
        
         Color colorParticipante = participante != null ? 
                                     participante.getColor() : 

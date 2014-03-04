@@ -3,14 +3,12 @@ package ar.com.comunidadesfera.batallaespacial.aplicacion;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ar.com.comunidadesfera.batallaespacial.BatallaEspacial;
-import ar.com.comunidadesfera.batallaespacial.calificadores.Basica;
 import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
-import ar.com.comunidadesfera.batallaespacial.juego.Participante;
 import ar.com.comunidadesfera.batallaespacial.juego.Partida;
-import ar.com.comunidadesfera.batallaespacial.ui.FrameAplicacion;
-import ar.com.comunidadesfera.batallaespacial.ui.VistaAplicacion;
-import ar.com.comunidadesfera.batallaespacial.ui.VistaAplicacionThreadSafe;
 
 /**
  * Implementación básica de Batalla Espacial. Es una implementación completa
@@ -19,61 +17,28 @@ import ar.com.comunidadesfera.batallaespacial.ui.VistaAplicacionThreadSafe;
  * @author Mariano Tugnarelli
  *
  */
-@Basica
-public class BatallaEspacialBasica implements BatallaEspacial {
+public abstract class BatallaEspacialBasica implements BatallaEspacial {
 
+    private static Logger LOG = LoggerFactory.getLogger(BatallaEspacial.class);
+    
     private List<Observador> observadores;
     
-    private ControlAplicacion control;
-    private VistaAplicacion vista;
-    
     public BatallaEspacialBasica() {
+        
+        LOG.info("Batalla Espacial creada: {}", this.getClass().getName());
 
         this.observadores = new LinkedList<Observador>();
-    }
-
-    /**
-     * @pre se encuentra inicializada la Vista de la Aplicación.
-     * @post instancia y devuelve el ControlAplicación.
-     */
-    protected ControlAplicacion crearControlAplicacion() {
-        
-        return new ControlAplicacion(this.getVista());
-    }
-    
-    /**
-     * @post instancia y devuelve la VistaAplicación.
-     */
-    protected VistaAplicacion crearVistaAplicacion() {
-        
-        return new VistaAplicacionThreadSafe(new FrameAplicacion());
-    }
-
-    protected ControlAplicacion getControl() {
-        
-        return this.control;
-    }
-    
-    public VistaAplicacion getVista() {
-        
-        return this.vista;
     }
 
     @Override
     public void iniciar() {
         
-        this.vista = this.crearVistaAplicacion();
-        
-        this.control = this.crearControlAplicacion();
-        
-        /* hace visible el frame */
-        this.getVista().setVisible(true);
-        
         for (Observador observador : this.observadores) {
             
             observador.iniciada(this);
         }
-        
+
+        LOG.debug("Iniciar");
     }
 
     @Override
@@ -83,14 +48,16 @@ public class BatallaEspacialBasica implements BatallaEspacial {
     }
     
     @Override
-    public <P extends Participante> Partida<P> jugar(Configuracion<P> configuracion) {
+    public Partida jugar(Configuracion configuracion) {
         
-        Partida<P> partida = new Partida<P>(configuracion);
+        Partida partida = new Partida(configuracion);
         
         for (Observador observador : this.observadores) {
             
             observador.jugando(this, partida);
         }
+        
+        LOG.debug("Jugando: {}", partida);
         
         return partida;
     }

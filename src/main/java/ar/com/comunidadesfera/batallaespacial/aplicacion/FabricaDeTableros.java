@@ -4,7 +4,6 @@ import java.io.InputStream;
 
 import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
 import ar.com.comunidadesfera.batallaespacial.juego.FabricaDePiezas;
-import ar.com.comunidadesfera.batallaespacial.juego.Participante;
 import ar.com.comunidadesfera.batallaespacial.juego.Tablero;
 
 /**
@@ -31,7 +30,7 @@ public interface FabricaDeTableros {
      * @param configuracion 
      * @return nuevo tablero creado a partir de la configuración dada.  
      */
-    Tablero crearTablero(Configuracion<? extends Participante> configuracion, InputStream origen);
+    Tablero crearTablero(Configuracion configuracion, InputStream origen);
     
     /**
      * Asigna la Fabrica de Piezas especificada, que será utilizada

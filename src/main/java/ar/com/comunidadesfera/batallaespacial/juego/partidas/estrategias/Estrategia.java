@@ -12,6 +12,6 @@ public interface Estrategia {
     /**
      * @post inicializa la instancia a partir de la Partida indicada 
      */
-    void setPartida(Partida<?> partida);
+    void setPartida(Partida partida);
 
 }

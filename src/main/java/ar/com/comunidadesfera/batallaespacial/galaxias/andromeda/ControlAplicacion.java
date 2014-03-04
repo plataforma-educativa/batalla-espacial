@@ -5,8 +5,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
-import ar.com.comunidadesfera.batallaespacial.aplicacion.ParticipanteExtendido;
-import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
+import ar.com.comunidadesfera.batallaespacial.juego.ConfiguracionBasica;
 import ar.com.comunidadesfera.batallaespacial.ui.TipoControl;
 import ar.com.comunidadesfera.batallaespacial.ui.VistaAplicacion;
 
@@ -47,7 +46,7 @@ public class ControlAplicacion extends
      * @post redefinido para recuperar el Tablero desde el classpath.
      */
     @Override
-    protected void configurarTablero(Configuracion<ParticipanteExtendido> configuracion,
+    protected void configurarTablero(ConfiguracionBasica configuracion,
                                      Properties properties) throws IOException {
 
         String pathTablero = properties.getProperty(PARTIDA_TABLERO);

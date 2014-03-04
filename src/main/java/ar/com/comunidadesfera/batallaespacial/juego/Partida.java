@@ -13,7 +13,7 @@ import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.Reglame
 import ar.com.comunidadesfera.batallaespacial.piezas.base.BaseEspacial;
 import ar.com.comunidadesfera.batallaespacial.piezas.nave.Nave;
 
-public class Partida<T extends Participante> {
+public class Partida {
 
     /**
      * Tablero en el que se desarrolla la Partida.
@@ -40,7 +40,7 @@ public class Partida<T extends Participante> {
     /**
      * Configuración de la Partida.
      */
-    private Configuracion<T> configuracion;
+    private Configuracion configuracion;
     
     /**
      * Control del Radar de las Naves
@@ -79,7 +79,7 @@ public class Partida<T extends Participante> {
      * 
      * @param configuracion
      */
-    public Partida(Configuracion<T> configuracion) {
+    public Partida(Configuracion configuracion) {
         
         super();
         
@@ -182,11 +182,11 @@ public class Partida<T extends Participante> {
         }
     }
     
-    public Configuracion<T> getConfiguracion() {
+    public Configuracion getConfiguracion() {
         return configuracion;
     }
 
-    private void setConfiguracion(Configuracion<T> configuracion) {
+    private void setConfiguracion(Configuracion configuracion) {
         this.configuracion = configuracion;
     }
 

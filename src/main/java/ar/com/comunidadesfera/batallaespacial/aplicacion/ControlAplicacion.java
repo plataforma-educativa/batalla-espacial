@@ -14,8 +14,10 @@ import ar.com.comunidadesfera.batallaespacial.Civilizacion;
 import ar.com.comunidadesfera.batallaespacial.Piloto;
 import ar.com.comunidadesfera.batallaespacial.comandos.Comando;
 import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
+import ar.com.comunidadesfera.batallaespacial.juego.ConfiguracionBasica;
 import ar.com.comunidadesfera.batallaespacial.juego.FabricaDePiezas;
 import ar.com.comunidadesfera.batallaespacial.juego.Motor;
+import ar.com.comunidadesfera.batallaespacial.juego.Participante;
 import ar.com.comunidadesfera.batallaespacial.juego.Partida;
 import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
 import ar.com.comunidadesfera.batallaespacial.juego.Tablero;
@@ -59,7 +61,7 @@ public class ControlAplicacion implements VistaAplicacion.Observador,
     
     private VistaAplicacion vista;
     
-    private Partida<ParticipanteExtendido> partida;
+    private Partida partida;
 
     private Integer rondas;
     
@@ -104,7 +106,7 @@ public class ControlAplicacion implements VistaAplicacion.Observador,
         
         Tablero tablero = this.crearTablero(new InputStreamReader(origen));
         
-        Configuracion<ParticipanteExtendido> config = new Configuracion<ParticipanteExtendido>();
+        ConfiguracionBasica config = new ConfiguracionBasica();
         config.setTablero(tablero);
         this.presentacion = this.fabricaDePanelesTablero.crearTablero(config);
 
@@ -180,24 +182,24 @@ public class ControlAplicacion implements VistaAplicacion.Observador,
     public void partidaCargada(InputStream origenConfiguracion) {
 
         /* crea la partida actual */
-        Partida<ParticipanteExtendido> partida = this.crearPartida(origenConfiguracion); 
+        Partida partida = this.crearPartida(origenConfiguracion); 
         this.setPartida(partida);
     }
 
     /**
      * Crea una partida a partir de su configuración.
      */ 
-    protected Partida<ParticipanteExtendido> crearPartida(InputStream origenConfiguracion) {
+    protected Partida crearPartida(InputStream origenConfiguracion) {
 
-        Partida<ParticipanteExtendido> partida = null;
+        Partida partida = null;
      
         /* toma la configuración */
-        Configuracion<ParticipanteExtendido> configuracion =  this.crearConfiguracion(origenConfiguracion);
+        ConfiguracionBasica configuracion =  this.crearConfiguracion(origenConfiguracion);
         
         if (configuracion != null) {
             
             /* si la configuración fue cargada correctamente crea la nueva partida */
-            partida = new Partida<ParticipanteExtendido>(configuracion);
+            partida = new Partida(configuracion);
             
         }
         
@@ -205,9 +207,9 @@ public class ControlAplicacion implements VistaAplicacion.Observador,
     }
     
     
-    protected Configuracion<ParticipanteExtendido> crearConfiguracion(InputStream origenConfiguracion) {
+    protected ConfiguracionBasica crearConfiguracion(InputStream origenConfiguracion) {
 
-        Configuracion<ParticipanteExtendido> configuracion;
+        ConfiguracionBasica configuracion;
         
         try {
 
@@ -248,15 +250,15 @@ public class ControlAplicacion implements VistaAplicacion.Observador,
      * @post instancia la configuración de la partida.
      * 
      */
-    protected Configuracion<ParticipanteExtendido> newConfiguracion(Properties properties) {
+    protected ConfiguracionBasica newConfiguracion(Properties properties) {
         
-        return new Configuracion<ParticipanteExtendido>();
+        return new ConfiguracionBasica();
     }
 
     /**
      * @post carga la configuración del tablero para la partida. 
      */
-    protected void configurarTablero(Configuracion<ParticipanteExtendido> configuracion, 
+    protected void configurarTablero(ConfiguracionBasica configuracion, 
                                      Properties properties)
         throws IOException {
         
@@ -276,7 +278,7 @@ public class ControlAplicacion implements VistaAplicacion.Observador,
     /**
      * @post configura el timeout entre rondas de la partida.
      */
-    protected void configurarTimeout(Configuracion<ParticipanteExtendido> configuracion, 
+    protected void configurarTimeout(ConfiguracionBasica configuracion, 
                                      Properties properties) {
         
         long timeout = Long.parseLong(properties.getProperty(PARTIDA_RONDAS_TIMEOUT));
@@ -286,7 +288,7 @@ public class ControlAplicacion implements VistaAplicacion.Observador,
     /**
      * @post configura la cantidad de rondas de la partida.
      */
-    protected void configurarRondas(Configuracion<ParticipanteExtendido> configuracion, 
+    protected void configurarRondas(ConfiguracionBasica configuracion, 
                                     Properties properties) {
         
         int rondas = Integer.parseInt(properties.getProperty(PARTIDA_RONDAS_CANTIDAD));
@@ -301,7 +303,7 @@ public class ControlAplicacion implements VistaAplicacion.Observador,
      * @throws IllegalAccessException 
      * @throws InstantiationException 
      */
-    protected void configurarParticipantes(Configuracion<ParticipanteExtendido> configuracion,
+    protected void configurarParticipantes(ConfiguracionBasica configuracion,
                                            Properties properties) 
         throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 
@@ -340,7 +342,7 @@ public class ControlAplicacion implements VistaAplicacion.Observador,
                 
                 /* agrega el Participante a la Configuración */
                 configuracion.getParticipantes()
-                             .add(new ParticipanteExtendido(civilizacion, naves, 
+                             .add(new Participante(civilizacion, naves, 
                                                    this.getFabricaDePiezas(), color));
             }
             
@@ -356,7 +358,7 @@ public class ControlAplicacion implements VistaAplicacion.Observador,
      *  
      * @param partida
      */
-    protected void setPartida(Partida<ParticipanteExtendido> partida) {
+    protected void setPartida(Partida partida) {
         
         if (this.partida != null) {
 
@@ -395,7 +397,7 @@ public class ControlAplicacion implements VistaAplicacion.Observador,
         /* crea la interfaz para la partida */
         if (this.partida != null) {
 
-            Configuracion<ParticipanteExtendido> config = this.partida.getConfiguracion(); 
+            Configuracion config = this.partida.getConfiguracion(); 
             
             /* Tablero y Piezas en el Tablero */
             PanelTablero panel =  this.fabricaDePanelesTablero.crearTablero(config);

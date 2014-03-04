@@ -8,14 +8,14 @@ package ar.com.comunidadesfera.batallaespacial.juego;
  */
 public class Reglamento implements Pieza.Observador {
 
-    private Partida<?> partida;
+    private Partida partida;
     
-    public Reglamento(Partida<?> partida) {
+    public Reglamento(Partida partida) {
         
         this.partida = partida;
     }
     
-    protected Partida<?> getPartida() {
+    protected Partida getPartida() {
         
         return this.partida;
     }

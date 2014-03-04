@@ -10,14 +10,14 @@ import javax.enterprise.inject.spi.BeanManager;
 import javax.inject.Inject;
 
 import ar.com.comunidadesfera.batallaespacial.BatallaEspacial;
-import ar.com.comunidadesfera.batallaespacial.calificadores.Dinamica;
+import ar.com.comunidadesfera.clasificadores.Dinamica;
 
 /**
  * Permite seleccionar entre las múltiples implementaciones disponibles para las interfaces
  * de las que depende el kernel de la Batalla Espacial.
  * 
  * El Selector proporciona las instancias a ser inyectadas para aquellas dependencias
- * cualificada con @Dinamica.  
+ * clasificadas con @Dinamica.  
  * La implementación puede ser cambiada en tiempo de ejecución.
  * 
  * @author Mariano Tugnarelli
@@ -29,18 +29,10 @@ public class Selector {
     
     private Proveedor<BatallaEspacial> batallaEspacial;
     
-    private BeanManager beanManager;
-    
     @Inject
-    public void setBeanManager(BeanManager beanManager) {
-        
-        this.beanManager = beanManager;
-    }
-    
-    @Inject
-    public void setBatallaEspacial(@Any Instance<BatallaEspacial> batallaEspacial) {
+    protected void configurar(BeanManager beanManager, @Any Instance<BatallaEspacial> batallaEspacial) {
 
-        this.batallaEspacial = new Proveedor<BatallaEspacial>(this.beanManager,
+        this.batallaEspacial = new Proveedor<BatallaEspacial>(beanManager,
                                                               BatallaEspacial.class, 
                                                               batallaEspacial);
     }
@@ -54,5 +46,20 @@ public class Selector {
     public Set<Alternativa<BatallaEspacial>> getAlternativasBatallaEspacial() {
         
         return this.batallaEspacial.getAlternativas();
+    }
+    
+    public Alternativa<BatallaEspacial> getAlternativa(Class<? extends BatallaEspacial> implementacion) {
+        
+        Alternativa<BatallaEspacial> encontrada = null;
+        
+        for (Alternativa<BatallaEspacial> alternativa : this.getAlternativasBatallaEspacial()) {
+            
+            if (alternativa.getImplementacion().equals(implementacion)) {
+                
+                encontrada = alternativa;
+            }
+        }
+        
+        return encontrada;
     }
 }

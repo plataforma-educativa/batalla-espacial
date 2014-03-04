@@ -15,9 +15,10 @@ import org.apache.commons.lang.exception.ExceptionUtils;
 
 import ar.com.comunidadesfera.batallaespacial.Civilizacion;
 import ar.com.comunidadesfera.batallaespacial.aplicacion.FabricaDeTableros;
-import ar.com.comunidadesfera.batallaespacial.aplicacion.ParticipanteExtendido;
 import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
+import ar.com.comunidadesfera.batallaespacial.juego.ConfiguracionBasica;
 import ar.com.comunidadesfera.batallaespacial.juego.FabricaDePiezas;
+import ar.com.comunidadesfera.batallaespacial.juego.Participante;
 import ar.com.comunidadesfera.batallaespacial.juego.Tablero;
 
 public class CargadorDeConfiguracionesDesdeProperties implements CargadorDeConfiguraciones {
@@ -40,11 +41,11 @@ public class CargadorDeConfiguracionesDesdeProperties implements CargadorDeConfi
     private FabricaDePiezas fabricaDePiezas;
     
     @Override
-    public Configuracion<ParticipanteExtendido> cargar(Path ruta) throws ConfiguracionInvalidaException {
+    public Configuracion cargar(Path ruta) throws ConfiguracionInvalidaException {
 
         this.validarOrigen(ruta);
         
-        Configuracion<ParticipanteExtendido> configuracion = new Configuracion<ParticipanteExtendido>();
+        ConfiguracionBasica configuracion = new ConfiguracionBasica();
         configuracion.setRuta(ruta.getParent());
 
         try {
@@ -76,7 +77,7 @@ public class CargadorDeConfiguracionesDesdeProperties implements CargadorDeConfi
         }
     }
 
-    private void cargarPartida(Configuracion<ParticipanteExtendido> configuracion, Configuration config) 
+    private void cargarPartida(ConfiguracionBasica configuracion, Configuration config) 
             throws Exception {
         
         this.cargarRondas(configuracion, config.subset(RONDAS));
@@ -85,14 +86,14 @@ public class CargadorDeConfiguracionesDesdeProperties implements CargadorDeConfi
         this.cargarTablero(configuracion, config.subset(TABLERO));
     }
     
-    private void cargarRondas(Configuracion<ParticipanteExtendido> configuracion, Configuration config) 
+    private void cargarRondas(ConfiguracionBasica configuracion, Configuration config) 
             throws Exception {
 
         configuracion.setRondas(config.getInt(CANTIDAD, 0));
         configuracion.setTimeout(config.getLong(TIMEOUT, 0L));
     }
 
-    private void cargarParticipantes(Configuracion<ParticipanteExtendido> configuracion, Configuration config) 
+    private void cargarParticipantes(ConfiguracionBasica configuracion, Configuration config) 
             throws Exception {
 
         Configuration configParticipante;
@@ -113,7 +114,7 @@ public class CargadorDeConfiguracionesDesdeProperties implements CargadorDeConfi
         } while (! configParticipante.isEmpty()); 
     }
 
-    private void cargarParticipante(Configuracion<ParticipanteExtendido> configuracion, Configuration config) 
+    private void cargarParticipante(ConfiguracionBasica configuracion, Configuration config) 
             throws Exception {
 
         /* Instancia la civilización */
@@ -132,16 +133,16 @@ public class CargadorDeConfiguracionesDesdeProperties implements CargadorDeConfi
         int naves = config.getInt("naves", NAVES_POR_DEFECTO);
         String color = config.getString("color", COLOR_POR_DEFECTO); 
         
-        ParticipanteExtendido participante = new ParticipanteExtendido(civilizacion, 
-                                                                       naves, 
-                                                                       this.fabricaDePiezas, 
-                                                                       color);
+        Participante participante = new Participante(civilizacion, 
+                                                     naves, 
+                                                     this.fabricaDePiezas, 
+                                                     color);
         
         /* agrega el Participante a la Configuración */
         configuracion.getParticipantes().add(participante);
     }
 
-    private void cargarTablero(Configuracion<ParticipanteExtendido> configuracion, Configuration config) 
+    private void cargarTablero(ConfiguracionBasica configuracion, Configuration config) 
             throws Exception {
 
         Path rutaOrigenTablero = configuracion.getRuta()
