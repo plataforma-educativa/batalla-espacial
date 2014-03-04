@@ -1,6 +1,5 @@
 package ar.com.comunidadesfera.batallaespacial.juego;
 
-import java.nio.file.Path;
 import java.util.List;
 
 import ar.com.comunidadesfera.batallaespacial.Civilizacion;
@@ -35,11 +34,6 @@ public interface Configuracion {
      * @return milisegundos a esperar entre cada ronda.
      */
     long getTimeout();
-    
-    /**
-     * @return ruta desde la cual se cargó la Configuración.
-     */
-    Path getRuta();
     
     /**
      * @return estrategia a utilizar para definir las Bases en la Partida.

@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.mockito.Answers;
 
 import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
-import ar.com.comunidadesfera.batallaespacial.piezas.PiezaNoVisitableException;
 import ar.com.comunidadesfera.batallaespacial.piezas.VisitanteDePiezas;
 import ar.com.comunidadesfera.batallaespacial.piezas.asteroide.Asteroide;
 import ar.com.comunidadesfera.batallaespacial.piezas.base.BaseEspacial;
@@ -24,12 +23,14 @@ public class PiezaVisitableTest {
         this.visitante = mock(VisitanteDePiezas.class);
     }
     
-    @Test(expected = PiezaNoVisitableException.class)
-    public void recibirEnPiezaNoVisitable() {
+    @Test
+    public void recibirEnPiezaNoDiferenciada() {
         
         Pieza pieza = mock(Pieza.class, Answers.CALLS_REAL_METHODS.get());
         
         pieza.recibir(visitante);
+        
+        verify(visitante).visitar(pieza);
     }
     
     @Test

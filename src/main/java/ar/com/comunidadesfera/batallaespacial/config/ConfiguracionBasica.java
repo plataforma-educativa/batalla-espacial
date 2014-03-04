@@ -49,6 +49,7 @@ public class ConfiguracionBasica implements Configuracion {
 
     private Reglamentacion reglamentacion;
     
+    @Override
     public List<Participante> getParticipantes() {
         
         return this.participantes;
@@ -59,24 +60,23 @@ public class ConfiguracionBasica implements Configuracion {
      * @param civilizacion
      * @return Participante que pertenece a la Civilizacion dada.
      */
+    @Override
     public Participante getParticipante(Civilizacion civilizacion) {
         
+        boolean encontrado = false;
         Participante participante = null;
         
         Iterator<Participante>  it = this.getParticipantes().iterator();
-        while (it.hasNext() && (participante == null)) {
+        while (it.hasNext() && (! encontrado)) {
 
             participante = it.next();
-            
-            if (! participante.getCivilizacion().equals(civilizacion)) {
-                
-                participante = null;
-            }
+            encontrado = participante.getCivilizacion().equals(civilizacion);
         }
 
-        return participante;
+        return encontrado ? participante : null;
     }
     
+    @Override
     public Tablero getTablero() {
         return tablero;
     }
@@ -85,17 +85,7 @@ public class ConfiguracionBasica implements Configuracion {
         this.tablero = tablero;
     }
     
-    public String toString() {
-        
-        return new StringBuffer()
-                    .append("Configuracion [ tablero: ")
-                    .append(this.getTablero())
-                    .append(", participantes: ")
-                    .append(this.getParticipantes())
-                    .append(" ]")
-                    .toString();
-    }
-    
+    @Override
     public int getRondas() {
         return rondas;
     }
@@ -104,6 +94,7 @@ public class ConfiguracionBasica implements Configuracion {
         this.rondas = rondas;
     }
 
+    @Override
     public long getTimeout() {
         return timeout;
     }
@@ -113,15 +104,14 @@ public class ConfiguracionBasica implements Configuracion {
     }
 
     public Path getRuta() {
-        
         return this.ruta;
     }
     
     public void setRuta(Path ruta) {
-        
         this.ruta = ruta;
     }
 
+    @Override
     public DefinicionDeBases getDefinicionDeBases() {
         
         if (this.definicionDeBases == null) {
@@ -131,6 +121,7 @@ public class ConfiguracionBasica implements Configuracion {
         return this.definicionDeBases;
     }
 
+    @Override
     public DefinicionDeNaves getDefinicionDeNaves() {
 
         if (this.definicionDeNaves == null) {
@@ -141,6 +132,7 @@ public class ConfiguracionBasica implements Configuracion {
         return this.definicionDeNaves;
     }
 
+    @Override
     public Reglamentacion getReglamentacion() {
 
         if (this.reglamentacion == null) {
@@ -164,5 +156,17 @@ public class ConfiguracionBasica implements Configuracion {
     public void setReglamentacion(Reglamentacion estrategia) {
 
         this.reglamentacion = estrategia;
+    }
+    
+    @Override
+    public String toString() {
+        
+        return new StringBuffer()
+                    .append("Configuracion [ tablero: ")
+                    .append(this.getTablero())
+                    .append(", participantes: ")
+                    .append(this.getParticipantes())
+                    .append(" ]")
+                    .toString();
     }
 }

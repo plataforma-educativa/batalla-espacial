@@ -27,7 +27,7 @@ import ar.com.comunidadesfera.batallaespacial.piezas.nave.Nave;
 public class DibujanteDePiezasTest {
 
     @DataPoint
-    public static final Class<Pieza> PIEZA_NO_VISITABLE = Pieza.class; 
+    public static final Class<Pieza> PIEZA_NO_DIFERENCIADA = Pieza.class; 
     
     @DataPoint
     public static final Class<Asteroide> ASTEROIDE = Asteroide.class; 

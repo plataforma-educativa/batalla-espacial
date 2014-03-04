@@ -15,7 +15,6 @@ import javafx.scene.shape.RectangleBuilder;
 import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
 import ar.com.comunidadesfera.batallaespacial.juego.Participante;
 import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
-import ar.com.comunidadesfera.batallaespacial.piezas.PiezaNoVisitableException;
 import ar.com.comunidadesfera.batallaespacial.piezas.VisitanteDePiezas;
 import ar.com.comunidadesfera.batallaespacial.piezas.asteroide.Asteroide;
 import ar.com.comunidadesfera.batallaespacial.piezas.base.BaseEspacial;
@@ -75,7 +74,9 @@ public class DibujanteDePiezas implements VisitanteDePiezas {
         Participante participante = this.configuracion.getParticipante(base.getCivilizacion());
 
         grafico.setStroke(new Color(0.0, 0.0, 0.0, 1.0));
-        grafico.setFill(participante.getPintura());
+        
+        grafico.setFill((participante != null) ? participante.getPintura() : Color.WHITE);
+
         grafico.fillRoundRect(this.margen, this.margen, 
                               this.dimension - 2 * this.margen, this.dimension - 2 * this.margen,
                               this.dimension * 0.1, this.dimension * 0.1);
@@ -139,6 +140,13 @@ public class DibujanteDePiezas implements VisitanteDePiezas {
         this.dibujo = dibujoContenedor;
     }
 
+    @Override
+    public void visitar(Pieza pieza) {
+        
+        /* como la pieza no es distinguible, crea un panel en vacio */
+        this.dibujo = PaneBuilder.create().prefHeight(this.dimension).prefWidth(this.dimension).build();
+    }
+    
     /**
      * @post construye un dibujo que representa la Pieza dada.
      * 
@@ -149,16 +157,7 @@ public class DibujanteDePiezas implements VisitanteDePiezas {
 
         this.dibujo = null;
         
-        try {
-            
-            pieza.recibir(this);
-        
-        } catch (PiezaNoVisitableException ignorada) {
-            
-            /* como la pieza no es visitable, crea un panel en vacio */
-            this.dibujo = PaneBuilder.create().prefHeight(this.dimension).prefWidth(this.dimension).build();
-            
-        }
+        pieza.recibir(this);
         
         return this.dibujo;
     }

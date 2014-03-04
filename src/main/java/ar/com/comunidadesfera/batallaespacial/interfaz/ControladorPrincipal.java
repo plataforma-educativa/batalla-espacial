@@ -123,6 +123,8 @@ public class ControladorPrincipal implements Controlador, BatallaEspacial.Observ
   
         this.batallaEspacial.agregarObservador(this.panelOrdenamientoController);
         this.batallaEspacial.agregarObservador(this);
+        
+        this.batallaEspacial.iniciar();
     }
     
     private void jugar(Path rutaConfiguracion) {

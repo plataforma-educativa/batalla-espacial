@@ -111,6 +111,9 @@ public class ControladorOrdenarContenedores implements BatallaEspacial.Observado
         public void visitar(Nave nave) {
         }
         
+        @Override
+        public void visitar(Pieza pieza) {
+        }
     };
 
     private final ChangeListener<Alternativa<OrdenadorDeContenedores>> 
@@ -197,7 +200,6 @@ public class ControladorOrdenarContenedores implements BatallaEspacial.Observado
 
             // TODO hay que usar NullValue
             if (pieza != null) {
-                
                 pieza.recibir(recolectarContenedores);
             }
         }

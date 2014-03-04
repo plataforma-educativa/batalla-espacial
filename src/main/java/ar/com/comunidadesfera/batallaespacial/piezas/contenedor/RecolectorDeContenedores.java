@@ -3,6 +3,7 @@ package ar.com.comunidadesfera.batallaespacial.piezas.contenedor;
 import java.util.LinkedList;
 import java.util.List;
 
+import ar.com.comunidadesfera.batallaespacial.juego.Pieza;
 import ar.com.comunidadesfera.batallaespacial.piezas.VisitanteDePiezas;
 import ar.com.comunidadesfera.batallaespacial.piezas.asteroide.Asteroide;
 import ar.com.comunidadesfera.batallaespacial.piezas.base.BaseEspacial;
@@ -13,18 +14,19 @@ public class RecolectorDeContenedores implements VisitanteDePiezas {
     private List<Contenedor> contenedor = new LinkedList<Contenedor>();
     
     @Override
+    public void visitar(Pieza pieza) {
+    }
+    
+    @Override
     public void visitar(Nave nave) {
-
     }
 
     @Override
     public void visitar(BaseEspacial base) {
-
     }
 
     @Override
     public void visitar(Asteroide asteroide) {
-
     }
 
     @Override

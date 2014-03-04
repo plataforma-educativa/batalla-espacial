@@ -106,26 +106,26 @@ public class PanelTablero extends GridPane implements VisitanteDePiezas {
     }
     
     @Override
+    public void visitar(Pieza pieza) {
+    }
+    
+    @Override
     public void visitar(Nave nave) {
-
     }
 
     @Override
     public void visitar(BaseEspacial base) {
         
         for (Nave nave : base.getNaves()) {
-            
             this.agregar(nave);
         }
     }
 
     @Override
     public void visitar(Asteroide asteroide) {
-        
     }
 
     @Override
     public void visitar(Contenedor contenedor) {
-        
     }
 }

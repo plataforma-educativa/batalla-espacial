@@ -52,7 +52,6 @@ public class ControladorInformes implements Controlador, VisitanteDePiezas {
     public void seleccionar(Pieza pieza, Vista origen) {
 
         pieza.recibir(this);
-
     }
 
     @Override
@@ -69,14 +68,16 @@ public class ControladorInformes implements Controlador, VisitanteDePiezas {
     
     @Override
     public void visitar(Asteroide asteroide) {
-        
     }
 
     @Override
     public void visitar(Contenedor contenedor) {
-        
     }
 
+    @Override
+    public void visitar(Pieza pieza) {
+    }
+    
     private <T extends Pieza> void cargarInforme(T pieza, Class<? extends ControladorInformePieza<T>> claseControlador, 
                                                  String recurso) {
         

@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXMLLoader;
 import javafx.util.Callback;
 
+import javax.enterprise.inject.Default;
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
@@ -14,7 +15,7 @@ public class ProductorDeFXMLLoader {
     @Inject
     private Instance<Object> instance;
     
-    @Produces
+    @Produces @Default
     public FXMLLoader createLoader() {
         
         FXMLLoader loader = new FXMLLoader();

@@ -6,7 +6,6 @@ import java.util.Random;
 
 import ar.com.comunidadesfera.batallaespacial.juego.Tablero.Casillero;
 import ar.com.comunidadesfera.batallaespacial.juego.escenarios.Escenario;
-import ar.com.comunidadesfera.batallaespacial.piezas.PiezaNoVisitableException;
 import ar.com.comunidadesfera.batallaespacial.piezas.VisitanteDePiezas;
 
 public abstract class Pieza implements Comparable<Pieza>, Detectable, Cloneable {
@@ -273,8 +272,8 @@ public abstract class Pieza implements Comparable<Pieza>, Detectable, Cloneable 
      */
     public void recibir(VisitanteDePiezas visitante) {
         
-        /* por defecto una pieza no acepta visitantes */
-        throw new PiezaNoVisitableException();
+        /* por defecto una pieza no se diferencia */
+        visitante.visitar(this);
     }
 
     /**
