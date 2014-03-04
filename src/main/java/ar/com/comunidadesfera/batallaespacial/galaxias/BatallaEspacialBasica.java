@@ -34,11 +34,6 @@ public abstract class BatallaEspacialBasica implements BatallaEspacial {
     @Override
     public void iniciar() {
         
-        for (Observador observador : this.observadores) {
-            
-            observador.iniciada(this);
-        }
-
         LOG.debug("Iniciar");
     }
 

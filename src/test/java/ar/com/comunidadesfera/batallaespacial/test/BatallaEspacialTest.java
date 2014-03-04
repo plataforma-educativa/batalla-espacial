@@ -26,19 +26,6 @@ public abstract class BatallaEspacialTest {
     }
     
     @Test
-    public void observarIniciada() {
-        
-        BatallaEspacial.Observador observador = mock(BatallaEspacial.Observador.class);
-        
-        this.batallaEspacial.agregarObservador(observador);
-        
-        this.batallaEspacial.iniciar();
-        
-        verify(observador).iniciada(this.batallaEspacial);
-        verifyNoMoreInteractions(observador);
-    }
-    
-    @Test
     public void jugar() {
         
         Configuracion configuracion = this.crearConfiguracion(2 , 0, new Tablero(1, 1));

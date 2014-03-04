@@ -173,11 +173,6 @@ public class ControladorPrincipal implements Controlador, BatallaEspacial.Observ
     }
 
     @Override
-    public void iniciada(BatallaEspacial batallaEspacial) {
-        
-    }
-
-    @Override
     public void jugando(BatallaEspacial batallaEspacial, Partida partida) {
 
         this.partida = partida;

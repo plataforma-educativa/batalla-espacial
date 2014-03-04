@@ -188,11 +188,6 @@ public class ControladorOrdenarContenedores implements BatallaEspacial.Observado
     }
 
     @Override
-    public void iniciada(BatallaEspacial batallaEspacial) {
-        
-    }
-
-    @Override
     public void jugando(BatallaEspacial batallaEspacial, Partida partida) {
 
         this.parametros.clear();

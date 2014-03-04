@@ -40,13 +40,6 @@ public interface BatallaEspacial {
     public interface Observador {
 
         /**
-         * @pre <code>batallaEspacial</code> ha sido iniciada.
-         * 
-         * @param batallaEspacial
-         */
-        void iniciada(BatallaEspacial batallaEspacial);
-
-        /**
          * @pre <code>batallaEspacial</code> comenzó a jugar la Partida <code>partida</code>.
          * @param batallaEspacial
          * @param partida
