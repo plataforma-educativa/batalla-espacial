@@ -7,7 +7,7 @@
 <?import javafx.scene.paint.*?>
 <?scenebuilder-preview-i18n-resource ../contenido.properties?>
 
-<fx:root type="javafx.scene.control.TitledPane" fx:id="panel" animated="false" text="" xmlns:fx="http://javafx.com/fxml">
+<TitledPane fx:id="panel" animated="false" text="" xmlns:fx="http://javafx.com/fxml">
   <content>
     <GridPane id="GridPane">
       <children>
@@ -35,4 +35,4 @@
       </rowConstraints>
     </GridPane>
   </content>
-</fx:root>
+</TitledPane>

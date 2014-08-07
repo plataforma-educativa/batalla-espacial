@@ -11,7 +11,7 @@
 <?scenebuilder-preview-i18n-resource contenido.properties?>
 <?scenebuilder-stylesheet estilos.css?>
 
-<fx:root type="javafx.scene.layout.BorderPane" minHeight="600.0" minWidth="720.0" mouseTransparent="false" pickOnBounds="true" prefHeight="600.0" prefWidth="720.0" style="&#10;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ar.com.comunidadesfera.batallaespacial.interfaz.ControladorPrincipal">
+<BorderPane minHeight="600.0" minWidth="720.0" mouseTransparent="false" pickOnBounds="true" prefHeight="600.0" prefWidth="720.0" style="&#10;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ar.com.comunidadesfera.batallaespacial.interfaz.ControladorPrincipal">
   <center>
     <TabPane fx:id="secciones" cache="false" mouseTransparent="false" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" side="TOP" tabClosingPolicy="UNAVAILABLE" visible="true">
       <tabs>
@@ -160,4 +160,4 @@
       </menus>
     </MenuBar>
   </top>
-</fx:root>
+</BorderPane>

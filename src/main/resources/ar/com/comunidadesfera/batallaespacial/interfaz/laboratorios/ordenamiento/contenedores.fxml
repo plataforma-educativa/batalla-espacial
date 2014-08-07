@@ -11,7 +11,7 @@
 <?scenebuilder-preview-i18n-resource ../../contenido.properties?>
 <?scenebuilder-stylesheet ../../estilos.css?>
 
-<fx:root type="javafx.scene.layout.AnchorPane" prefHeight="377.0000999999975" prefWidth="554.0" snapToPixel="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ar.com.comunidadesfera.batallaespacial.interfaz.ordenamiento.ControladorOrdenarContenedores">
+<AnchorPane prefHeight="377.0000999999975" prefWidth="554.0" snapToPixel="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ar.com.comunidadesfera.batallaespacial.interfaz.ordenamiento.ControladorOrdenarContenedores">
   <Label fx:id="mensaje" alignment="CENTER" contentDisplay="LEFT" graphicTextGap="4.0" mnemonicParsing="false" mouseTransparent="false" pickOnBounds="false" style="" styleClass="notificacion-advertencia" text="%laboratorio.requiere.partida" textAlignment="CENTER" underline="false" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
   <padding>
     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -79,4 +79,4 @@
       <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" percentHeight="-1.0" prefHeight="150.0" vgrow="ALWAYS" />
     </rowConstraints>
   </GridPane>
-</fx:root>
+</AnchorPane>
