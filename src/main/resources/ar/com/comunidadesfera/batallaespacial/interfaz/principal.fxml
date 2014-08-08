@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.geometry.*?>
@@ -11,15 +12,15 @@
 <?scenebuilder-preview-i18n-resource contenido.properties?>
 <?scenebuilder-stylesheet estilos.css?>
 
-<BorderPane minHeight="600.0" minWidth="720.0" mouseTransparent="false" pickOnBounds="true" prefHeight="600.0" prefWidth="720.0" style="&#10;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ar.com.comunidadesfera.batallaespacial.interfaz.ControladorPrincipal">
+<BorderPane minHeight="600.0" minWidth="720.0" mouseTransparent="false" pickOnBounds="true" prefHeight="400" prefWidth="600" style="&#10;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ar.com.comunidadesfera.batallaespacial.interfaz.ControladorPrincipal">
   <center>
     <TabPane fx:id="secciones" cache="false" mouseTransparent="false" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" side="TOP" tabClosingPolicy="UNAVAILABLE" visible="true">
       <tabs>
         <Tab styleClass="inicio" text="%seccion.inicio">
           <content>
-            <GridPane id="GridPane" style="" styleClass="inicio">
-              <children>
-                <AnchorPane minWidth="-1.0" prefHeight="540.0" prefWidth="720.0" style="&#10;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <FlowPane alignment="CENTER" columnHalignment="RIGHT" prefHeight="200.0" prefWidth="200.0" prefWrapLength="0.0" styleClass="inicio">
+                     <children>
+                <AnchorPane minWidth="-1.0" prefHeight="336.0" prefWidth="537.0" style="&#10;">
                   <children>
                     <ImageView fitHeight="540.0" fitWidth="720.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                       <image>
@@ -31,18 +32,8 @@
                     <Button cancelButton="true" defaultButton="false" layoutX="472.0" layoutY="391.0" mnemonicParsing="true" onAction="#verRegistros" opacity="1.0" prefHeight="52.0" prefWidth="226.0" style="" styleClass="verRegistros" text="%inicio.registros.ver" visible="true" />
                   </children>
                 </AnchorPane>
-              </children>
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" percentWidth="0.0" />
-                <ColumnConstraints hgrow="NEVER" minWidth="720.0" percentWidth="0.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="0.0" percentWidth="0.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints fillHeight="true" minHeight="0.0" percentHeight="0.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="450.0" percentHeight="0.0" vgrow="NEVER" />
-                <RowConstraints minHeight="0.0" percentHeight="0.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
+                     </children>
+                  </FlowPane>
           </content>
           <graphic>
             <ImageView fitHeight="0.0" fitWidth="0.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" styleClass="inicio" />
@@ -125,7 +116,7 @@
             <ImageView pickOnBounds="true" preserveRatio="true" styleClass="partida" />
           </graphic>
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#nuevaPartida" text="%menu.partida.nueva" fx:id="nuevaPartida">
+            <MenuItem fx:id="nuevaPartida" mnemonicParsing="false" onAction="#nuevaPartida" text="%menu.partida.nueva">
               <accelerator>
                 <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
               </accelerator>
@@ -146,7 +137,7 @@
             <ImageView pickOnBounds="true" preserveRatio="true" styleClass="metricas" />
           </graphic>
           <items>
-            <CheckMenuItem id="" mnemonicParsing="false" text="%menu.metricas.registrar" fx:id="menuMetricasRegistrar" />
+            <CheckMenuItem id="" fx:id="menuMetricasRegistrar" mnemonicParsing="false" text="%menu.metricas.registrar" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="%menu.ayuda">
