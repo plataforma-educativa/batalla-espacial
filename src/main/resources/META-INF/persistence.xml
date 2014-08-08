@@ -6,6 +6,15 @@
     <persistence-unit name="eficienciaPersistenceUnit" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>     
         <mapping-file>ar/com/comunidadesfera/eficiencia/consultas.xml</mapping-file>
+        <class>ar.com.comunidadesfera.eficiencia.registros.Categoria</class>
+        <class>ar.com.comunidadesfera.eficiencia.registros.Discriminante</class>
+        <class>ar.com.comunidadesfera.eficiencia.registros.Medicion</class>
+        <class>ar.com.comunidadesfera.eficiencia.registros.Medida</class>
+        <class>ar.com.comunidadesfera.eficiencia.registros.Modulo</class>
+        <class>ar.com.comunidadesfera.eficiencia.registros.Problema</class>
+        <class>ar.com.comunidadesfera.eficiencia.registros.RegistroDeEjecucion</class>
+        <class>ar.com.comunidadesfera.eficiencia.registros.Unidad</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
         <validation-mode>CALLBACK</validation-mode>
         <properties>
