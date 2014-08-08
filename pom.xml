@@ -5,7 +5,7 @@
     <groupId>ar.com.comunidadesfera</groupId>
     <artifactId>batalla-espacial</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.0</version>
+    <version>2.0.0</version>
 
     <name>batalla-espacial</name>
     <url>http://code.google.com/p/batalla-espacial/</url>
@@ -21,6 +21,10 @@
             <email>marianotugnarelli@gmail.com</email>
         </developer>
     </developers>
+    
+    <organization>
+        <name>Comunidad Esfera</name>
+    </organization>
 
     <build>
         <plugins>
@@ -67,6 +71,26 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <index>true</index>
+<!--                         <manifest> -->
+<!--                             <addClasspath>true</addClasspath> -->
+<!--                         </manifest> -->
+                        <manifestEntries>
+                            <Main-Class>ar.com.comunidadesfera.plataformaeducativa.AplicacionBatallaEspacial</Main-Class>
+<!-- <Main-Class>com/javafx/main/Main</Main-Class> -->
+<!-- <JavaFX-Version>2.2</JavaFX-Version> -->
+<!-- <JavaFX-Application-Class>ar.com.comunidadesfera.plataformaeducativa.AplicacionBatallaEspacial</JavaFX-Application-Class> -->
+<!-- <Created-By>JavaFX Packager</Created-By>  -->
+                        </manifestEntries>
+                  </archive>
+                </configuration>            
+            </plugin>            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.8.1</version>
                 <executions>
@@ -111,6 +135,14 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.zenjava</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>2.0</version>
+                <configuration>
+                    <mainClass>ar.com.comunidadesfera.plataformaeducativa.AplicacionBatallaEspacial</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>
