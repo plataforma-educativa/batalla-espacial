@@ -41,15 +41,9 @@ public class PanelTablero extends GridPane implements VisitanteDePiezas {
 
     public void disponerPiezas() {
 
-        this.setVgap(3);
-        this.setHgap(3);
-        this.setGridLinesVisible(true);
-        
-        /* Recorre todas las Piezas que están ocupando una posición en el Tablero */
-        for (Pieza pieza : this.tablero) {
-                            
-            this.agregar(pieza);
-        }
+        this.setVgap(0);
+        this.setHgap(0);
+        //this.setGridLinesVisible(true);
         
         for (int columna = 0; columna <= this.tablero.getColumnas() + 2; columna++) {
             
@@ -61,6 +55,20 @@ public class PanelTablero extends GridPane implements VisitanteDePiezas {
             
             this.add(this.dibujanteDePiezas.dibujarMargen(), 0, fila);
             this.add(this.dibujanteDePiezas.dibujarMargen(), this.tablero.getColumnas() + 2, fila);
+        }
+        
+        for (int fila = 1; fila <= this.tablero.getFilas() + 1; fila++) {
+            
+            for (int columna = 1; columna <= this.tablero.getColumnas() + 1; columna++) {
+                
+                this.add(this.dibujanteDePiezas.dibujarCasillero(fila, columna), columna, fila);
+            }
+        }
+        
+        /* Recorre todas las Piezas que están ocupando una posición en el Tablero */
+        for (Pieza pieza : this.tablero) {
+            
+            this.agregar(pieza);
         }
         
     }

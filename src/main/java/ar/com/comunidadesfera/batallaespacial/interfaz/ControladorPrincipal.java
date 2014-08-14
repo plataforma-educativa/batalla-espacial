@@ -74,7 +74,7 @@ public class ControladorPrincipal implements Controlador, BatallaEspacial.Observ
     private Partida partida;
     
     @Inject
-    private DibujanteDePiezas dibujante;
+    private DibujanteProfesionalDePiezas dibujante;
 
     @Inject
     private Contexto contexto;

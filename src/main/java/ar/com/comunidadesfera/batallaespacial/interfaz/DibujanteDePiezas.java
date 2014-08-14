@@ -23,13 +23,13 @@ import ar.com.comunidadesfera.batallaespacial.piezas.nave.Nave;
 
 public class DibujanteDePiezas implements VisitanteDePiezas {
 
-    private Node dibujo;
+    protected Node dibujo;
     
-    private final double dimension = 30.0;
+    protected final double dimension = 30.0;
     
-    private final double margen = dimension * 0.1;
+    protected final double margen = dimension * 0.1;
     
-    private Configuracion configuracion;
+    protected Configuracion configuracion;
 
     public DibujanteDePiezas() {
      
@@ -112,9 +112,9 @@ public class DibujanteDePiezas implements VisitanteDePiezas {
 
     }
 
-    private CubicCurveTo crearCurva(double controlX1, double controlY1, 
-                                    double controlX2, double controlY2, 
-                                    double x, double y) {
+    protected CubicCurveTo crearCurva(double controlX1, double controlY1, 
+                                      double controlX2, double controlY2, 
+                                      double x, double y) {
         
         return CubicCurveToBuilder.create()
                 .controlX1(this.dimension * controlX1).controlY1(this.dimension * controlY1)
@@ -158,7 +158,7 @@ public class DibujanteDePiezas implements VisitanteDePiezas {
         this.dibujo = null;
         
         pieza.recibir(this);
-        
+
         return this.dibujo;
     }
     
@@ -169,6 +169,16 @@ public class DibujanteDePiezas implements VisitanteDePiezas {
                     .height(this.dimension)
                     .fill(Color.GRAY)
                     .stroke(Color.GRAY)
+                    .build();
+    }
+    
+    public Node dibujarCasillero(int fila, int columna) {
+        
+        return  RectangleBuilder.create()
+                    .width(this.dimension)
+                    .height(this.dimension)
+                    .fill(Color.TRANSPARENT)
+                    .stroke(Color.TRANSPARENT)
                     .build();
     }
 }
