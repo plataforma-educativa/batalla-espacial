@@ -12,6 +12,7 @@
 
     <properties>
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+        <javancss-version>33.54</javancss-version>        
     </properties>
 
     <developers>
@@ -21,7 +22,7 @@
             <email>marianotugnarelli@gmail.com</email>
         </developer>
     </developers>
-    
+
     <organization>
         <name>Comunidad Esfera</name>
     </organization>
@@ -33,8 +34,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <compilerArgument>-proc:none</compilerArgument>
                 </configuration>
                 <executions>
@@ -76,19 +77,19 @@
                 <configuration>
                     <archive>
                         <index>true</index>
-<!--                         <manifest> -->
-<!--                             <addClasspath>true</addClasspath> -->
-<!--                         </manifest> -->
+                        <!-- <manifest> -->
+                        <!-- <addClasspath>true</addClasspath> -->
+                        <!-- </manifest> -->
                         <manifestEntries>
                             <Main-Class>ar.com.comunidadesfera.plataformaeducativa.AplicacionBatallaEspacial</Main-Class>
-<!-- <Main-Class>com/javafx/main/Main</Main-Class> -->
-<!-- <JavaFX-Version>2.2</JavaFX-Version> -->
-<!-- <JavaFX-Application-Class>ar.com.comunidadesfera.plataformaeducativa.AplicacionBatallaEspacial</JavaFX-Application-Class> -->
-<!-- <Created-By>JavaFX Packager</Created-By>  -->
+                            <!-- <Main-Class>com/javafx/main/Main</Main-Class> -->
+                            <!-- <JavaFX-Version>2.2</JavaFX-Version> -->
+                            <!-- <JavaFX-Application-Class>ar.com.comunidadesfera.plataformaeducativa.AplicacionBatallaEspacial</JavaFX-Application-Class> -->
+                            <!-- <Created-By>JavaFX Packager</Created-By> -->
                         </manifestEntries>
-                  </archive>
-                </configuration>            
-            </plugin>            
+                    </archive>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
@@ -117,7 +118,8 @@
                     <format>html</format>
                     <instrumentation>
                         <excludes>
-                            <!-- excluye el código generado por el metamodelo de JPA -->
+                            <!-- excluye el código generado por el metamodelo 
+                                de JPA -->
                             <exclude>**/*_.class</exclude>
                         </excludes>
                     </instrumentation>
@@ -144,9 +146,80 @@
                     <mainClass>ar.com.comunidadesfera.plataformaeducativa.AplicacionBatallaEspacial</mainClass>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>javancss-maven-plugin</artifactId>
+                <version>2.1-SNAPSHOT</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.javancss</groupId>
+                        <artifactId>javancss</artifactId>
+                        <version>33.54</version>            
+                    </dependency>
+                </dependencies>
+            </plugin>
         </plugins>
     </build>
 
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>cim</report>
+                            <report>dependencies</report>
+                            <report>dependency-convergence</report>
+                            <report>dependency-management</report>
+                            <report>issue-tracking</report>
+                            <report>license</report>
+                            <report>mailing-list</report>
+                            <report>plugin-management</report>
+                            <report>project-team</report>
+                            <report>scm</report>
+                            <report>summary</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <configuration>
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                    <tags>
+                        <tag>
+                            <name>pre</name>
+                            <placement>a</placement>
+                            <head>Precondición:</head>
+                        </tag>
+                        <tag>
+                            <name>post</name>
+                            <placement>a</placement>
+                            <head>Postcondición:</head>
+                        </tag>
+                        <tag>
+                            <name>nota</name>
+                            <placement>a</placement>
+                            <head>Nota:</head>
+                        </tag>
+                    </tags>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>javancss-maven-plugin</artifactId>
+                <version>2.1-SNAPSHOT</version>
+            </plugin>
+        </plugins>
+    </reporting>
 
     <repositories>
         <repository>
@@ -158,6 +231,13 @@
             <url>http://repository.jboss.org/nexus/content/groups/public/</url>
         </repository>
     </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>codehaus</id>
+            <url>http://nexus.codehaus.org/snapshots/</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <dependencyManagement>
         <dependencies>
@@ -242,13 +322,9 @@
         </dependency>
 
         <!-- Interfaz Gráfica -->
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>javafx</artifactId>
-            <version>2.2.3</version>
-            <systemPath>${java.home}/lib/jfxrt.jar</systemPath>
-            <scope>system</scope>
-        </dependency>
+        <!-- Ya incluida en el JDK 8 <dependency> <groupId>com.oracle</groupId> 
+            <artifactId>javafx</artifactId> <version>2.2.3</version> <systemPath>${java.home}/lib/jfxrt.jar</systemPath> 
+            <scope>system</scope> </dependency> -->
 
         <!-- Pruebas -->
         <dependency>
@@ -308,10 +384,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-          <groupId>org.jboss.arquillian.container</groupId>
-          <artifactId>arquillian-weld-se-embedded-1.1</artifactId>
-          <version>1.0.0.CR7</version>
-          <scope>test</scope>
+            <groupId>org.jboss.arquillian.container</groupId>
+            <artifactId>arquillian-weld-se-embedded-1.1</artifactId>
+            <version>1.0.0.CR7</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

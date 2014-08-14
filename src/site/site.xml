@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project xmlns="http://maven.apache.org/DECORATION/1.4.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/DECORATION/1.4.0 http://maven.apache.org/xsd/decoration-1.4.0.xsd"
+    name="LoJack Middleware">
+
+    <bannerLeft>
+        <name>Batalla Espacial</name>
+    </bannerLeft>
+    <version position="left"/>
+    
+    <bannerRight>
+        <name>Plataforma Educativa</name>
+    </bannerRight>
+    <publishDate position="right" format="yyyy-MM-dd"/>
+
+    <body>
+        <menu ref="reports" />
+    </body>
+    
+    <skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>1.3.0</version>
+    </skin>
+    
+</project>
