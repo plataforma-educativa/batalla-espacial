@@ -12,7 +12,7 @@ import ar.com.comunidadesfera.plataformaeducativa.AplicacionBatallaEspacialInter
  */
 public class BatallaEspacial {
 
-    private static final String DESCRIPCION = "Batalla Espacial iniciada";
+    private static final String DESCRIPCION = "Iniciando Batalla Espacial";
     
     public BatallaEspacial() {
         
