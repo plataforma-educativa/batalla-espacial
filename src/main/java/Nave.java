@@ -268,7 +268,7 @@ public class Nave {
      * @post devuelve el Radar de la Nave que permite conocer el contexto
      *       del Tablero.
      */
-    public Radar getRadar() {
+    public Radar obtenerRadar() {
         
         return this.radar;
     }
@@ -277,7 +277,7 @@ public class Nave {
      * @post devuelve el Monitor de la Nave que permite conocer el estado
      *       general del la Nave.
      */
-    public Monitor getMonitor() {
+    public Monitor obtenerMonitor() {
         
         return this.monitor;
     }

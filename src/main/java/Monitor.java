@@ -33,7 +33,7 @@ public class Monitor {
     /**
      * @post devuelve la cantidad de Torpedos de Fotones que posee disponibles.
      */
-    public int getCantidadDeTorpedos() {
+    public int consultarCantidadDeTorpedos() {
         
         return this.monitorear(new MonitorearCantidadDeTorpedos());
     }
@@ -42,7 +42,7 @@ public class Monitor {
      * @post devuelve la cantidad de Sustancia sustancia que 
      *       existe en la bodega. 
      */
-    public long getCarga(Sustancia sustancia) {
+    public long consultarCarga(Sustancia sustancia) {
         
         return this.monitorear(new MonitorearCarga(Traductor.instancia().traducir(sustancia)));
     }
@@ -54,7 +54,7 @@ public class Monitor {
      *       El valor 0 indica que no existe carga, bodega vacia.
      *       El valor 100 indica que la bodega está completa.
      */
-    public byte getNivelDeCarga() {
+    public byte consultarNivelDeCarga() {
         
         return this.monitorear(new MonitorearNivelDeCarga());
     }
@@ -65,7 +65,7 @@ public class Monitor {
      *       El valor 100 indica máximo poder en los Escudos.
      *       El valor 0 indica Escudos fuera de funcionamiento.
      */  
-    public byte getNivelDeEscudos() {
+    public byte consultarNivelDeEscudos() {
         
         return this.monitorear(new MonitorearNivelDeEscudos());
     }
