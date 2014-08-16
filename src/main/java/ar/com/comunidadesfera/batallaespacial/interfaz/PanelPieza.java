@@ -22,7 +22,6 @@ public class PanelPieza extends Group implements Vista, Pieza.Observador {
         public void run() {
             
             panelTablero.actualizar(PanelPieza.this);
-            
         }
     };
 
@@ -53,6 +52,14 @@ public class PanelPieza extends Group implements Vista, Pieza.Observador {
         
         this.getChildren().clear();
         this.getChildren().add(dibujoPieza);
+    }
+    
+    public void mostrarDibujoPieza() {
+        
+        for (Node node : this.getChildrenUnmodifiable()) {
+            
+            node.setVisible(true);
+        }
     }
     
     public void setControlador(Controlador controlador) {

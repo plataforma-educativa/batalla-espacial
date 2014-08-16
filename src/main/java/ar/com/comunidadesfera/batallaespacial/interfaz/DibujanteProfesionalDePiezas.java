@@ -21,6 +21,10 @@ public class DibujanteProfesionalDePiezas extends DibujanteDePiezas {
     private static final Paint COLOR_CASILLERO_PAR = Color.web("e6e7e8");
     private static final Paint COLOR_CASILLERO_IMPAR = Color.web("FFFFFF");
 
+    public DibujanteProfesionalDePiezas() {
+        
+    }
+    
     @Override
     public void visitar(Nave nave) {
 

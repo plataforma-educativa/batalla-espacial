@@ -43,7 +43,6 @@ public class PanelTablero extends GridPane implements VisitanteDePiezas {
 
         this.setVgap(0);
         this.setHgap(0);
-        //this.setGridLinesVisible(true);
         
         for (int columna = 0; columna <= this.tablero.getColumnas() + 2; columna++) {
             
@@ -78,6 +77,9 @@ public class PanelTablero extends GridPane implements VisitanteDePiezas {
         
         if (pieza != null) {
             
+            /* hace tareas específicas para cada tipo de Pieza */
+            pieza.recibir(this);
+            
             /* dibuja la Pieza */
             Node dibujoPieza = this.dibujanteDePiezas.dibujar(pieza);
             
@@ -88,8 +90,6 @@ public class PanelTablero extends GridPane implements VisitanteDePiezas {
             
             this.actualizar(panelPieza);
 
-            /* hace tareas específicas para cada tipo de Pieza */
-            pieza.recibir(this);
         }
     }
 
