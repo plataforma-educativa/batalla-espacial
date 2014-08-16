@@ -17,14 +17,16 @@
         </layout>
     </appender>
 
+    <!-- 
     <category name="ar.com.comunidadesfera.eficiencia">
         <priority value="DEBUG" />
     </category>
+     -->
 
     <root>
-        <priority value="DEBUG" />
+        <priority value="ERROR" />
         <appender-ref ref="CONSOLE" />
-        <appender-ref ref="FILE" />
+<!--         <appender-ref ref="FILE" /> -->
     </root>
 
 </log4j:configuration>
