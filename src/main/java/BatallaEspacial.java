@@ -1,4 +1,6 @@
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import javafx.application.Application;
 import ar.com.comunidadesfera.plataformaeducativa.AplicacionBatallaEspacialInteractiva;
 
@@ -12,16 +14,23 @@ import ar.com.comunidadesfera.plataformaeducativa.AplicacionBatallaEspacialInter
  */
 public class BatallaEspacial {
 
-    private static final String DESCRIPCION = "Iniciando Batalla Espacial";
+    private static AtomicBoolean iniciada = new AtomicBoolean(false);
     
     public BatallaEspacial() {
         
-        Thread thread = new Thread(new LanzarAplicacionBatallaEspacial());
-
-        /* hack para que funcione el Interaction Pane de DrJava */
-        thread.setContextClassLoader(this.getClass().getClassLoader());
-        
-        thread.start();
+        if (! iniciada.getAndSet(true)) {
+            
+            Thread thread = new Thread(new LanzarAplicacionBatallaEspacial());
+            /* hack para que funcione el Interaction Pane de DrJava */
+            thread.setContextClassLoader(this.getClass().getClassLoader());
+            thread.start();
+            
+            System.out.println("Iniciando ...");
+            
+        } else {
+            
+            System.out.println("Iniciada previamente");
+        }
     }
 
     @Override
@@ -30,7 +39,7 @@ public class BatallaEspacial {
         /* Devuelve una descripción para que al ser usado desde un intérprete al intentar mostrar
          * el contenido de una variable que la referencie.
          */
-        return DESCRIPCION;
+        return "Batalla Espacial";
     }
     
     private static class LanzarAplicacionBatallaEspacial implements Runnable {
