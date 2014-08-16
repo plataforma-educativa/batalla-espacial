@@ -9,7 +9,7 @@ import ar.com.comunidadesfera.batallaespacial.Civilizacion;
 import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
 import ar.com.comunidadesfera.batallaespacial.juego.Participante;
 import ar.com.comunidadesfera.batallaespacial.juego.Tablero;
-import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.BaseUnicaCentral;
+import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.BaseUnicaPosicionadaAleatoriamente;
 import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.DefinicionDeBases;
 import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.DefinicionDeNaves;
 import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.NavesDeCombatePosicionadasEnBase;
@@ -116,7 +116,8 @@ public class ConfiguracionBasica implements Configuracion {
         
         if (this.definicionDeBases == null) {
             
-            this.definicionDeBases = new BaseUnicaCentral();
+//            this.definicionDeBases = new BaseUnicaCentral();
+            this.definicionDeBases = new BaseUnicaPosicionadaAleatoriamente();
         }
         return this.definicionDeBases;
     }

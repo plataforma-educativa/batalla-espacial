@@ -121,6 +121,18 @@
           <mainClass>ar.com.comunidadesfera.plataformaeducativa.AplicacionBatallaEspacial</mainClass>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>javancss-maven-plugin</artifactId>
+        <version>2.1-SNAPSHOT</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.codehaus.javancss</groupId>
+            <artifactId>javancss</artifactId>
+            <version>33.54</version>
+          </dependency>
+        </dependencies>
+      </plugin>
     </plugins>
   </build>
   <repositories>
@@ -133,6 +145,12 @@
       <url>http://repository.jboss.org/nexus/content/groups/public/</url>
     </repository>
   </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>codehaus</id>
+      <url>http://nexus.codehaus.org/snapshots/</url>
+    </pluginRepository>
+  </pluginRepositories>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -301,6 +319,63 @@
       </exclusions>
     </dependency>
   </dependencies>
+  <reporting>
+    <plugins>
+      <plugin>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>2.7</version>
+        <configuration>
+          <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+        </configuration>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>cim</report>
+              <report>dependencies</report>
+              <report>dependency-convergence</report>
+              <report>dependency-management</report>
+              <report>issue-tracking</report>
+              <report>license</report>
+              <report>mailing-list</report>
+              <report>plugin-management</report>
+              <report>project-team</report>
+              <report>scm</report>
+              <report>summary</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.9.1</version>
+        <configuration>
+          <additionalparam>-Xdoclint:none</additionalparam>
+          <tags>
+            <tag>
+              <name>pre</name>
+              <placement>a</placement>
+              <head>Precondición:</head>
+            </tag>
+            <tag>
+              <name>post</name>
+              <placement>a</placement>
+              <head>Postcondición:</head>
+            </tag>
+            <tag>
+              <name>nota</name>
+              <placement>a</placement>
+              <head>Nota:</head>
+            </tag>
+          </tags>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>javancss-maven-plugin</artifactId>
+        <version>2.1-SNAPSHOT</version>
+      </plugin>
+    </plugins>
+  </reporting>
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -313,6 +388,7 @@
     </dependencies>
   </dependencyManagement>
   <properties>
+    <javancss-version>33.54</javancss-version>
     <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
   </properties>
 </project>

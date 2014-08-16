@@ -22,6 +22,16 @@ public abstract class ControladorInformePieza<T extends Pieza> implements Contro
         }
     };
     
+    
+    private final Runnable completarDatos = new Runnable() {
+        
+        @Override
+        public void run() {
+            
+            completar();
+        }
+    };
+    
     @FXML
     protected ResourceBundle resources;
 
@@ -33,14 +43,23 @@ public abstract class ControladorInformePieza<T extends Pieza> implements Contro
     
     protected T pieza;
     
+    @FXML
+    void initialize() {
+        
+        this.completar();
+    }
+    
     public void setPieza(T pieza) {
         
         this.pieza = pieza;
+        
+        this.pieza.agregarObservador(this);
     }
 
     @Override
     public void cambio(Pieza pieza) {
         
+        Platform.runLater(this.completarDatos);
     }
 
     @Override
@@ -50,4 +69,6 @@ public abstract class ControladorInformePieza<T extends Pieza> implements Contro
         
         Platform.runLater(this.requerirFoco);
     }
+    
+    protected abstract void completar();
 }
