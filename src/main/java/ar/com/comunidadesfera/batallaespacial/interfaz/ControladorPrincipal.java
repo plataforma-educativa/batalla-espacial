@@ -5,6 +5,7 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.beans.property.adapter.JavaBeanBooleanPropertyBuilder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -79,6 +80,17 @@ public class ControladorPrincipal implements Controlador, BatallaEspacial.Observ
     @Inject
     private Contexto contexto;
     
+    private Runnable centrarTablero = new Runnable() {
+        
+        @Override
+        public void run() {
+            
+            panelMarcoTablero.setHvalue((panelMarcoTablero.getHmin() + panelMarcoTablero.getHmax()) / 2);
+            panelMarcoTablero.setVvalue(panelMarcoTablero.getVmin() + (panelMarcoTablero.getVmax() - panelMarcoTablero.getVmin()) / 2);
+            
+        }
+    };
+    
     @FXML
     void nuevaPartida(ActionEvent event) {
 
@@ -151,9 +163,11 @@ public class ControladorPrincipal implements Controlador, BatallaEspacial.Observ
         panelTablero.setDibujanteDePiezas(this.dibujante);
         panelTablero.setControlador(this);
         panelTablero.disponerPiezas();
-        
         this.panelMarcoTablero.setContent(panelTablero);
         this.partida.comenzar();
+        
+        Platform.runLater(this.centrarTablero);
+        
     }
 
     /**
