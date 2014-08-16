@@ -20,7 +20,14 @@ public class DibujanteProfesionalDePiezas extends DibujanteDePiezas {
     private static final Paint COLOR_MARGEN = Color.web("4e4d50");
     private static final Paint COLOR_CASILLERO_PAR = Color.web("e6e7e8");
     private static final Paint COLOR_CASILLERO_IMPAR = Color.web("FFFFFF");
-
+    private static final Paint COLOR_ASTEROIDE_SUPERFICIE = Color.web("504100"); 
+    private static final Paint COLOR_ASTEROIDE_CRATER = Color.web("655300");
+    private static final Paint COLOR_CONTENEDOR = Color.web("555555");
+    private static final Paint COLOR_CONTENEDOR_INDICADOR_VACIO = Color.BLACK;
+    private static final Paint COLOR_CONTENEDOR_INDICADOR_ANTIMATERIA = Color.web("ffe35b");
+    private static final Paint COLOR_CONTENEDOR_INDICADOR_METAL = Color.web("dd1539");
+    private static final Paint COLOR_CONTENEDOR_INDICADOR_CRISTAL = Color.web("3daeb6");
+            
     public DibujanteProfesionalDePiezas() {
         
     }
@@ -69,31 +76,29 @@ public class DibujanteProfesionalDePiezas extends DibujanteDePiezas {
     public void visitar(Asteroide asteroide) {
 
         SVGPath cuerpo = new SVGPath();
-        cuerpo.setFill(Color.BLACK);
+        cuerpo.setFill(COLOR_ASTEROIDE_SUPERFICIE);
         cuerpo.setContent("M32.495,16.372c-0.096-1.128-0.555-2.351-1.214-3.592c-0.711-1.338-4.192-6.084-4.845-6.978c-0.974-1.333-1.615-2.363-1.439-2.868c0.259-0.751-2.625-0.417-5.776,0.155c-1.218,0.222-3.503-0.41-3.071,1.267c0.433,1.675-4.446,0.34-4.446,0.34s-5.501,1.718-4.503,2.75c0.609,0.633-4.748,7.37-4.7,8.921c0.139,4.239,2.907,10.175,3.008,8.913c0.098-1.26,3.011,3.024,4.492,4.523c1.693,1.712,10.246,1.347,10.093,2.396s6.058-0.899,4.905-2.396c-1.306-1.689,4.431-5.439,3.537-6.6C27.641,22.05,32.682,18.657,32.495,16.372z");
 
-        Paint pinturaCrater = Color.web("#828282");
-        
         Ellipse crater1 = new Ellipse(7.759,20.256,0.859,0.886);
-        crater1.setFill(pinturaCrater);
+        crater1.setFill(COLOR_ASTEROIDE_CRATER);
 
         Ellipse crater2 = new Ellipse(19.623,25.974,2.518,2.603);
-        crater2.setFill(pinturaCrater);
+        crater2.setFill(COLOR_ASTEROIDE_CRATER);
         
         SVGPath crater3 = new SVGPath();
-        crater3.setFill(pinturaCrater);
+        crater3.setFill(COLOR_ASTEROIDE_CRATER);
         crater3.setContent("M14.699,19.507c-0.791,0-1.432-0.66-1.432-1.48c0-0.817,0.641-1.478,1.432-1.478c0.787,0,1.427,0.66,1.427,1.478S15.486,19.507,14.699,19.507z");
 
         SVGPath crater4 = new SVGPath();
-        crater4.setFill(pinturaCrater);
+        crater4.setFill(COLOR_ASTEROIDE_CRATER);
         crater4.setContent("M12.876,13.559c-0.942,1.17-2.292,1.611-3.011,0.991c-0.724-0.624-0.542-2.078,0.399-3.246c0.946-1.17,2.296-1.614,3.016-0.991C14.004,10.936,13.822,12.389,12.876,13.559z");
         
         SVGPath crater5 = new SVGPath();
-        crater5.setFill(pinturaCrater);
+        crater5.setFill(COLOR_ASTEROIDE_CRATER);
         crater5.setContent("M26.819,15.82c0.577,0,1.047,0.486,1.047,1.082c0,0.602-0.47,1.087-1.047,1.087s-1.049-0.489-1.049-1.087C25.771,16.306,26.242,15.82,26.819,15.82z");
 
         SVGPath crater6 = new SVGPath();
-        crater6.setFill(pinturaCrater);
+        crater6.setFill(COLOR_ASTEROIDE_CRATER);
         crater6.setContent("M20.778,11.917c0-1.1,1.126-1.992,2.518-1.992c1.385,0,2.517,0.892,2.517,1.992c0,1.096-1.132,1.988-2.517,1.988C21.904,13.905,20.778,13.013,20.778,11.917z");
 
         this.dibujo = new Group(cuerpo, crater1, crater2, crater3, crater4, crater5, crater6);
@@ -104,22 +109,39 @@ public class DibujanteProfesionalDePiezas extends DibujanteDePiezas {
     public void visitar(Contenedor contenedor) {
 
         SVGPath estructura = new SVGPath();
-        estructura.setFill(Color.DARKGRAY);
+        estructura.setFill(COLOR_CONTENEDOR);
         estructura.setContent("M28,4H8C6.9,4,6,4.9,6,6v23.001c0,1.1,0.9,2,2,2h20c1.101,0,2-0.9,2-2V6C30,4.9,29.101,4,28,4z");
 
-        Rectangle indicadorAntimateria = new Rectangle(10, 22.001, 16, 2);
-        indicadorAntimateria.setFill(contenedor.getCantidad(Sustancia.ANTIMATERIA) > 0 ? Color.YELLOW : Color.WHITE);
-//        indicadorAntimateria.setBlendMode(BlendMode.DIFFERENCE);
+        Paint colorIndicador = COLOR_CONTENEDOR_INDICADOR_VACIO;
         
-        Rectangle indicadorMetal = new Rectangle(10, 11, 16, 2);
-        indicadorMetal.setFill(contenedor.getCantidad(Sustancia.METAL) > 0 ? Color.RED : Color.WHITE);
-//        indicadorMetal.setBlendMode(BlendMode.DIFFERENCE);
+        long antimateria = contenedor.getCantidad(Sustancia.ANTIMATERIA);
+        long metal = contenedor.getCantidad(Sustancia.METAL);
+        long cristal = contenedor.getCantidad(Sustancia.CRISTAL);
         
-        Rectangle indicadorCristal = new Rectangle(10, 16.5, 16, 2);
-        indicadorCristal.setFill(contenedor.getCantidad(Sustancia.CRISTAL) > 0 ? Color.BLUE : Color.WHITE);
-//        indicadorCristal.setBlendMode(BlendMode.DIFFERENCE);
+        if ((antimateria > 0) || (metal > 0) || (cristal > 0)) {
+            
+            if ((antimateria >= metal) && (antimateria >= cristal)) {
+                
+                colorIndicador = COLOR_CONTENEDOR_INDICADOR_ANTIMATERIA;
+                
+            } else if ((metal >= antimateria) && (metal >= cristal)) {
+                
+                colorIndicador = COLOR_CONTENEDOR_INDICADOR_METAL;
+                
+            } else {
+                
+                colorIndicador = COLOR_CONTENEDOR_INDICADOR_CRISTAL;
+            }
+        }
         
-        this.dibujo = new Group(estructura, indicadorAntimateria, indicadorMetal, indicadorCristal);
+        Rectangle indicador1 = new Rectangle(10, 22.001, 16, 2);
+        Rectangle indicador2 = new Rectangle(10, 11, 16, 2);
+        Rectangle indicador3 = new Rectangle(10, 16.5, 16, 2);
+        indicador1.setFill(colorIndicador);
+        indicador2.setFill(colorIndicador);
+        indicador3.setFill(colorIndicador);
+        
+        this.dibujo = new Group(estructura, indicador1, indicador2, indicador3);
     }
     
     @Override

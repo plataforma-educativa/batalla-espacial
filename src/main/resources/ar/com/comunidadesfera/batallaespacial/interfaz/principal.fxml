@@ -14,9 +14,9 @@
 
 <BorderPane minHeight="600.0" minWidth="720.0" mouseTransparent="false" pickOnBounds="true" prefHeight="400" prefWidth="600" style="&#10;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ar.com.comunidadesfera.batallaespacial.interfaz.ControladorPrincipal">
   <center>
-    <TabPane fx:id="secciones" cache="false" mouseTransparent="false" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" side="TOP" tabClosingPolicy="UNAVAILABLE" visible="true">
+    <TabPane fx:id="secciones" cache="false" mouseTransparent="false" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE" visible="true">
       <tabs>
-        <Tab styleClass="inicio" text="%seccion.inicio">
+        <Tab styleClass="inicio" text="%seccion.inicio" disable="true">
           <content>
                   <FlowPane alignment="CENTER" columnHalignment="RIGHT" prefHeight="200.0" prefWidth="200.0" prefWrapLength="0.0" styleClass="inicio">
                      <children>
@@ -61,7 +61,7 @@
             <ImageView fitHeight="0.0" fitWidth="0.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" styleClass="partida" />
           </graphic>
         </Tab>
-        <Tab id="" fx:id="seccionLaboratorio" text="%seccion.laboratorio">
+        <Tab id="" fx:id="seccionLaboratorio" text="%seccion.laboratorio" disable="true">
           <content>
             <AnchorPane id="AnchorPane" prefHeight="530.0" prefWidth="740.0">
               <children>
@@ -86,7 +86,7 @@
             <ImageView fitHeight="0.0" fitWidth="0.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" styleClass="laboratorio" />
           </graphic>
         </Tab>
-        <Tab fx:id="seccionRegistros" closable="false" text="%seccion.registros">
+        <Tab fx:id="seccionRegistros" closable="false" text="%seccion.registros" disable="true">
           <content>
             <fx:include fx:id="panelEficiencia" source="eficiencia/mediciones.fxml" />
           </content>
@@ -94,7 +94,7 @@
             <ImageView fitHeight="0.0" fitWidth="0.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" styleClass="registros" />
           </graphic>
         </Tab>
-        <Tab text="%seccion.configuracion">
+        <Tab text="%seccion.configuracion" disable="true">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
           </content>
@@ -109,7 +109,7 @@
     </TabPane>
   </center>
   <top>
-    <MenuBar pickOnBounds="true">
+    <MenuBar pickOnBounds="true" disable="true">
       <menus>
         <Menu disable="false" mnemonicParsing="false" style="" text="%menu.partida" visible="true">
           <graphic>
