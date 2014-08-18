@@ -1,5 +1,6 @@
 package ar.com.comunidadesfera.batallaespacial.galaxias.magallanes;
 
+import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -40,9 +41,10 @@ public class BatallaEspacialMagallanes extends BatallaEspacialBasica {
         configuracion.setTimeout(TimeUnit.MILLISECONDS.toMillis(250));
         Participante participante = new Participante(civilizacion, 1, this.fabricaDePiezas, "0x00629A");
         configuracion.getParticipantes().add(participante );
-        configuracion.setTablero(this.fabricaDeTableros.crearTablero(configuracion, this.getClass()
-                .getResourceAsStream("config/magallanes.tablero")));
-        configuracion.setDefinicionDeBases(new BaseUnica("Entrada Laberinto", 0, 1));
+        
+        InputStream tablero = this.leerTablero("/laberinto.tablero", "config/magallanes.tablero");
+        configuracion.setTablero(this.fabricaDeTableros.crearTablero(configuracion, tablero));
+        configuracion.setDefinicionDeBases(new BaseUnica("Laberinto", 0, 0));
         return configuracion;
     }
 }

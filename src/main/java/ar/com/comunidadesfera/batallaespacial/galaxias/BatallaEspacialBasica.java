@@ -1,5 +1,6 @@
 package ar.com.comunidadesfera.batallaespacial.galaxias;
 
+import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -56,5 +57,17 @@ public abstract class BatallaEspacialBasica implements BatallaEspacial {
         LOG.debug("Jugando: {}", partida);
         
         return partida;
+    }
+    
+    protected InputStream leerTablero(String ruta, String rutaPorDefecto) {
+        
+        InputStream tablero = this.getClass().getResourceAsStream(ruta);
+        
+        if (tablero == null) {
+            
+            tablero = this.getClass().getResourceAsStream(rutaPorDefecto);
+        }
+        
+        return tablero;
     }
 }

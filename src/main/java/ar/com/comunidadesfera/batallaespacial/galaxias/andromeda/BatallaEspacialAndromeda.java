@@ -1,5 +1,6 @@
 package ar.com.comunidadesfera.batallaespacial.galaxias.andromeda;
 
+import java.io.InputStream;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -39,9 +40,10 @@ public class BatallaEspacialAndromeda extends BatallaEspacialBasica {
         configuracion.setRondas(Integer.MAX_VALUE);
         configuracion.setTimeout(TimeUnit.SECONDS.toMillis(1));
         Participante participante = new Participante(civilizacion, 10, this.fabricaDePiezas, "0x00AA22");
-        configuracion.getParticipantes().add(participante );
-        configuracion.setTablero(this.fabricaDeTableros.crearTablero(configuracion, this.getClass()
-                .getResourceAsStream("config/andromeda.tablero")));
+        configuracion.getParticipantes().add(participante);
+        
+        InputStream tablero = this.leerTablero("/batalla.tablero", "config/andromeda.tablero");
+        configuracion.setTablero(this.fabricaDeTableros.crearTablero(configuracion, tablero));
         configuracion.setDefinicionDeBases(new BaseUnicaCentral());
         
         return configuracion;
