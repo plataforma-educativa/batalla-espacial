@@ -2,7 +2,6 @@ package ar.com.comunidadesfera.plataformaeducativa;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -61,8 +60,6 @@ public class AplicacionBatallaEspacialInteractiva extends Aplicacion {
      * 
      */
     public static class Ejecucion implements Runnable {
-
-        public AtomicBoolean cargaTerminada = new AtomicBoolean(false);
 
         private final CountDownLatch cargada;
         
