@@ -1,8 +1,6 @@
 
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import ar.com.comunidadesfera.plataformaeducativa.AplicacionBatallaEspacialInteractiva;
+import ar.com.comunidadesfera.plataformaeducativa.JuegoInteractivo;
 
 /**
  * Batalla Espacial en la Galaxia Andrómeda.
@@ -12,39 +10,13 @@ import ar.com.comunidadesfera.plataformaeducativa.AplicacionBatallaEspacialInter
  * @author Mariano Tugnarelli
  *
  */
-public class BatallaEspacial {
+public class BatallaEspacial extends JuegoInteractivo{
 
-    private static AtomicBoolean iniciada = new AtomicBoolean(false);
-    
     public BatallaEspacial() {
-        
-        if (! iniciada.getAndSet(true)) {
-            
-            Thread thread = new Thread(AplicacionBatallaEspacialInteractiva.EJECUCION);
-            /* hack para que funcione el Interaction Pane de DrJava */
-            thread.setContextClassLoader(this.getClass().getClassLoader());
-            thread.start();
 
-            this.esperarCarga();
-            
-        } else {
-
-            System.out.println("Iniciada previamente");
-        }
+        super(AplicacionBatallaEspacialInteractiva.class);
     }
 
-    private void esperarCarga() {
-        
-        System.out.print("Cargando");
-        
-        while (AplicacionBatallaEspacialInteractiva.EJECUCION.estaCargando(1, TimeUnit.SECONDS)) {
-            
-            System.out.print(".");
-        }
-        
-        System.out.println();
-    }
-    
     @Override
     public String toString() {
 

@@ -1,4 +1,4 @@
-package ar.com.comunidadesfera.batallaespacial.galaxias.andromeda;
+package ar.com.comunidadesfera.batallaespacial.galaxias.magallanes;
 
 import java.util.concurrent.TimeUnit;
 
@@ -11,9 +11,9 @@ import ar.com.comunidadesfera.batallaespacial.galaxias.BatallaEspacialBasica;
 import ar.com.comunidadesfera.batallaespacial.juego.Configuracion;
 import ar.com.comunidadesfera.batallaespacial.juego.FabricaDePiezas;
 import ar.com.comunidadesfera.batallaespacial.juego.Participante;
-import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.BaseUnicaCentral;
+import ar.com.comunidadesfera.batallaespacial.juego.partidas.estrategias.BaseUnica;
 
-public class BatallaEspacialAndromeda extends BatallaEspacialBasica {
+public class BatallaEspacialMagallanes extends BatallaEspacialBasica {
 
     @Inject
     private FabricaDeTableros fabricaDeTableros;
@@ -37,13 +37,12 @@ public class BatallaEspacialAndromeda extends BatallaEspacialBasica {
         ConfiguracionBasica configuracion = new ConfiguracionBasica();
         
         configuracion.setRondas(Integer.MAX_VALUE);
-        configuracion.setTimeout(TimeUnit.SECONDS.toMillis(1));
-        Participante participante = new Participante(civilizacion, 10, this.fabricaDePiezas, "0x00AA22");
+        configuracion.setTimeout(TimeUnit.MILLISECONDS.toMillis(250));
+        Participante participante = new Participante(civilizacion, 1, this.fabricaDePiezas, "0x00629A");
         configuracion.getParticipantes().add(participante );
         configuracion.setTablero(this.fabricaDeTableros.crearTablero(configuracion, this.getClass()
-                .getResourceAsStream("config/andromeda.tablero")));
-        configuracion.setDefinicionDeBases(new BaseUnicaCentral());
-        
+                .getResourceAsStream("config/magallanes.tablero")));
+        configuracion.setDefinicionDeBases(new BaseUnica("Entrada Laberinto", 0, 1));
         return configuracion;
     }
 }
