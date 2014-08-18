@@ -50,6 +50,15 @@ public class AplicacionBatallaEspacialInteractiva extends Aplicacion {
         stage.setScene(scene);
     }
 
+    @Override
+    protected void cerrando(Stage stage) {
+
+        super.cerrando(stage);
+        
+        /* fuerza el cierre del Intérprete de DrJava */
+        System.exit(0);
+    }
+    
     public static void main(String[] args) {
         
         Application.launch(args);
