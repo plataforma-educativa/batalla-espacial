@@ -8,6 +8,7 @@ import javafx.stage.StageStyle;
 import javax.enterprise.inject.Instance;
 import javax.inject.Provider;
 
+import org.controlsfx.dialog.Dialogs;
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
 
@@ -15,7 +16,7 @@ public abstract class Aplicacion extends Application {
 
     private Stage stageCargando;
     
-    private Task<WeldContainer> cargar = new Task<WeldContainer>() {
+    protected final Task<WeldContainer> cargar = new Task<WeldContainer>() {
         
         @Override
         protected WeldContainer call() throws Exception {
@@ -26,12 +27,28 @@ public abstract class Aplicacion extends Application {
         @Override
         protected void succeeded() {
 
-            Stage stagePrincipal = new Stage(StageStyle.DECORATED);
-            WeldContainer weldContainer = this.valueProperty().get();
-            seleccionarIniciar(weldContainer.instance()).get().ejecutar(stagePrincipal);
-            stageCargando.close();
+            try {
+
+                Stage stagePrincipal = new Stage(StageStyle.DECORATED);
+                WeldContainer weldContainer = this.valueProperty().get();
+                seleccionarIniciar(weldContainer.instance()).get().ejecutar(stagePrincipal);
+                
+            } catch (Exception e) {
+
+                Dialogs.create()
+                       .showException(e);
+                
+            } finally {
+                
+                cargaTerminada();
+            }
         }
     };
+    
+    protected void cargaTerminada() {
+        
+        this.stageCargando.close();
+    }
     
     @Override
     public void start(Stage stageInicial) throws Exception {

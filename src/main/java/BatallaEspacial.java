@@ -1,7 +1,7 @@
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javafx.application.Application;
 import ar.com.comunidadesfera.plataformaeducativa.AplicacionBatallaEspacialInteractiva;
 
 /**
@@ -20,19 +20,31 @@ public class BatallaEspacial {
         
         if (! iniciada.getAndSet(true)) {
             
-            Thread thread = new Thread(new LanzarAplicacionBatallaEspacial());
+            Thread thread = new Thread(AplicacionBatallaEspacialInteractiva.EJECUCION);
             /* hack para que funcione el Interaction Pane de DrJava */
             thread.setContextClassLoader(this.getClass().getClassLoader());
             thread.start();
-            
-            System.out.println("Iniciando ...");
+
+            this.esperarCarga();
             
         } else {
-            
+
             System.out.println("Iniciada previamente");
         }
     }
 
+    private void esperarCarga() {
+        
+        System.out.print("Cargando");
+        
+        while (AplicacionBatallaEspacialInteractiva.EJECUCION.estaCargando(1, TimeUnit.SECONDS)) {
+            
+            System.out.print(".");
+        }
+        
+        System.out.println();
+    }
+    
     @Override
     public String toString() {
 
@@ -40,15 +52,5 @@ public class BatallaEspacial {
          * el contenido de una variable que la referencie.
          */
         return "Batalla Espacial";
-    }
-    
-    private static class LanzarAplicacionBatallaEspacial implements Runnable {
-        
-        @Override
-        public void run() {
-            
-            Application.launch(AplicacionBatallaEspacialInteractiva.class);
-            
-        }
     }
 }

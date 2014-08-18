@@ -321,6 +321,12 @@
             <version>1.9</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.controlsfx</groupId>
+            <artifactId>controlsfx</artifactId>
+            <version>8.0.6</version>
+        </dependency>
+
         <!-- Interfaz Gráfica -->
         <!-- Ya incluida en el JDK 8 <dependency> <groupId>com.oracle</groupId> 
             <artifactId>javafx</artifactId> <version>2.2.3</version> <systemPath>${java.home}/lib/jfxrt.jar</systemPath> 
