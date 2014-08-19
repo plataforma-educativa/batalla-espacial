@@ -109,9 +109,9 @@
     </TabPane>
   </center>
   <top>
-    <MenuBar pickOnBounds="true" disable="true">
+    <MenuBar pickOnBounds="true">
       <menus>
-        <Menu disable="false" mnemonicParsing="false" style="" text="%menu.partida" visible="true">
+        <Menu disable="true" mnemonicParsing="false" style="" text="%menu.partida">
           <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true" styleClass="partida" />
           </graphic>
@@ -132,7 +132,7 @@
             </MenuItem>
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="%menu.metricas">
+        <Menu mnemonicParsing="false" text="%menu.metricas" disable="true">
           <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true" styleClass="metricas" />
           </graphic>
@@ -145,7 +145,7 @@
             <ImageView pickOnBounds="true" preserveRatio="true" styleClass="ayuda" />
           </graphic>
           <items>
-            <MenuItem mnemonicParsing="false" text="%menu.ayuda.acercaDe" />
+            <MenuItem fx:id="menuAyudaDocumentacion" mnemonicParsing="false" text="%menu.ayuda.documentacion" />
           </items>
         </Menu>
       </menus>

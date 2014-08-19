@@ -1,6 +1,8 @@
 package ar.com.comunidadesfera.batallaespacial.interfaz;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Path;
 import java.util.ResourceBundle;
@@ -8,16 +10,25 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.property.adapter.JavaBeanBooleanPropertyBuilder;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckMenuItem;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.FileChooserBuilder;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import javax.inject.Inject;
+
+import org.controlsfx.dialog.Dialogs;
 
 import ar.com.comunidadesfera.batallaespacial.BatallaEspacial;
 import ar.com.comunidadesfera.batallaespacial.config.CargadorDeConfiguraciones;
@@ -66,6 +77,9 @@ public class ControladorPrincipal implements Controlador, BatallaEspacial.Observ
     @FXML
     private CheckMenuItem menuMetricasRegistrar;
     
+    @FXML
+    private MenuItem menuAyudaDocumentacion;
+    
     @Inject @Dinamica
     private BatallaEspacial batallaEspacial;
     
@@ -80,6 +94,9 @@ public class ControladorPrincipal implements Controlador, BatallaEspacial.Observ
     @Inject
     private Contexto contexto;
     
+    @Inject
+    private FXMLLoader fxmlLoader;
+    
     private Runnable centrarTablero = new Runnable() {
         
         @Override
@@ -87,6 +104,40 @@ public class ControladorPrincipal implements Controlador, BatallaEspacial.Observ
             
             panelMarcoTablero.setHvalue((panelMarcoTablero.getHmin() + panelMarcoTablero.getHmax()) / 2);
             panelMarcoTablero.setVvalue(panelMarcoTablero.getVmin() + (panelMarcoTablero.getVmax() - panelMarcoTablero.getVmin()) / 2);
+            
+        }
+    };
+
+    private final EventHandler<ActionEvent> mostrarAyudaDocumentacion = new EventHandler<ActionEvent>() {
+
+        private Stage stageAyudaDocumentacion = null;
+        
+        @Override
+        public void handle(ActionEvent event) {
+
+            if (this.stageAyudaDocumentacion == null) {
+                
+                this.stageAyudaDocumentacion = new Stage(StageStyle.DECORATED);
+                
+                try (InputStream is = getClass().getResourceAsStream("documentacion.fxml")) {
+                    
+                    Parent root = (Parent) fxmlLoader.load(is);
+                    
+                    Scene scene = new Scene(root);
+                    this.stageAyudaDocumentacion.setScene(scene);
+                    this.stageAyudaDocumentacion.show();
+                    
+                } catch (IOException e) {
+                    
+                    Dialogs.create()
+                           .showException(e);
+                }
+                
+            } else {
+                
+                this.stageAyudaDocumentacion.show();
+                this.stageAyudaDocumentacion.requestFocus();
+            }
             
         }
     };
@@ -137,6 +188,8 @@ public class ControladorPrincipal implements Controlador, BatallaEspacial.Observ
         this.batallaEspacial.agregarObservador(this);
         
         this.batallaEspacial.iniciar();
+        
+        this.menuAyudaDocumentacion.setOnAction(this.mostrarAyudaDocumentacion);
     }
     
     private void jugar(Path rutaConfiguracion) {
@@ -148,9 +201,9 @@ public class ControladorPrincipal implements Controlador, BatallaEspacial.Observ
             this.batallaEspacial.jugar(this.cargador.cargar(rutaConfiguracion));
             
         } catch (ConfiguracionInvalidaException e) {
-            
-            // TODO 
-            e.printStackTrace();
+
+            Dialogs.create()
+                   .showException(e);
         }
     }
 

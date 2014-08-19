@@ -1,0 +1,770 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<title></title>
+	<meta name="generator" content="LibreOffice 4.2.4.2 (Linux)">
+	<meta name="author" content="Mariano Tugnarelli">
+	<meta name="created" content="20080330;0">
+	<meta name="changed" content="20140819;5427338870802">
+	<meta name="Info 1" content="">
+	<meta name="Info 2" content="">
+	<meta name="Info 3" content="">
+	<meta name="Info 4" content="">
+	<style type="text/css">
+	<!--
+		@page { margin: 2cm }
+		p { text-indent: 1.5cm; margin-bottom: 0.21cm; background: transparent; color: #000000; line-height: 150%; page-break-before: auto; page-break-after: auto }
+		p.western { font-family: "Arial", sans-serif; font-size: 10pt }
+		td p { text-indent: 1.5cm; margin-bottom: 0cm; background: transparent; color: #000000; line-height: 150%; page-break-before: auto; page-break-after: auto }
+		td p.western { font-family: "Arial", sans-serif; font-size: 10pt }
+		h1 { margin-bottom: 0.21cm; color: #000000 }
+		h1.western { font-family: "Arial", sans-serif; font-size: 16pt }
+		h1.cjk { font-family: "Lucida Sans Unicode"; font-size: 16pt }
+		h1.ctl { font-family: "Tahoma"; font-size: 16pt }
+		h2 { margin-top: 0.42cm; color: #000000 }
+		h2.western { font-family: "Arial", sans-serif; font-size: 14pt; font-style: italic }
+		h2.cjk { font-family: "Lucida Sans Unicode"; font-size: 14pt; font-style: italic }
+		h2.ctl { font-family: "Tahoma"; font-size: 14pt; font-style: italic }
+		h3 { margin-top: 0.42cm; background: transparent; color: #000000 }
+		h3.western { font-family: "Arial", sans-serif; font-size: 12pt }
+		h3.cjk { font-family: "Lucida Sans Unicode" }
+		h3.ctl { font-family: "Tahoma" }
+		a:link { so-language: en-US }
+	-->
+	</style>
+</head>
+<body lang="es-ES" text="#000000" dir="ltr" style="background: transparent">
+<div title="header">
+	<table width="100%" cellpadding="4" cellspacing="0" style="page-break-before: auto; page-break-after: auto">
+		<col width="116*">
+		<col width="140*">
+		<tr valign="top">
+			<td width="45%" style="border: none; padding: 0cm">
+				<p class="western" style="text-indent: 0cm; background: transparent">
+				<font face="Verdana, sans-serif"><font size="2" style="font-size: 10pt">Estructuras
+				de Control</font></font></p>
+			</td>
+			<td width="55%" style="border: none; padding: 0cm">
+				<p class="western" align="right"><font face="Verdana, sans-serif"><font size="2" style="font-size: 10pt">Plataforma
+				Educativa</font></font></p>
+			</td>
+		</tr>
+		<tr valign="top">
+			<td width="45%" style="border: none; padding: 0cm">
+				<p class="western" style="text-indent: 0cm; background: transparent">
+				<font face="Verdana, sans-serif"><font size="2" style="font-size: 10pt">Documentación</font></font></p>
+			</td>
+			<td width="55%" style="border: none; padding: 0cm">
+				<p class="western" align="right"><font face="Verdana, sans-serif"><font size="2" style="font-size: 10pt">Batalla
+				Espacial 2.0</font></font></p>
+			</td>
+		</tr>
+	</table>
+	<p class="western" style="text-indent: 0cm; margin-bottom: 0.5cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+	<br><br>
+	</p>
+</div>
+<h1 class="western">Documentación</h1>
+<h2 class="western">Convenciones</h2>
+<p class="western">Para describir cada uno de los Tipos de datos se
+utilizará la siguiente estructura:</p>
+<p class="western" style="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<br><br>
+</p>
+<h3 class="western">Tipo</h3>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<font color="#008000"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Nombre
+del Tipo de dato.</font></font></font></p>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<br>
+</p>
+<h3 class="western">Descripción</h3>
+<p class="western"><font color="#008000">Propósito del Tipo. Rol que
+cumple dentro de la Batalla Espacial.</font></p>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<br>
+</p>
+<h3 class="western">Valores</h3>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<font color="#008000"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Valores
+posibles para aquellos tipos que son enumerados.</font></font></font></p>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<br>
+</p>
+<h3 class="western">Métodos 
+</h3>
+<p class="western"><font color="#008000">Lista de todos los métodos
+disponibles para ese Tipo. Se indica el Tipo de valor que retorna, el
+nombre del método y los Tipos de valores que recibe como parámetro.</font></p>
+<p class="western"><font color="#008000">Se utiliza la palabra “<i>void</i>”
+para aquellos métodos que no devuelven ningún valor (<i>void</i> se
+puede traducir como vacío)</font></p>
+<p class="western"><font color="#008000">Además se indican la pre y
+post-condición de cada método. </font>
+</p>
+<p class="western"><font color="#008000">La pre-condición (si la
+tiene) es lo que debo cumplir antes de invocarlo.</font></p>
+<p class="western"><font color="#008000">La post-condición es lo que
+se cumple luego de ejecutarlo.</font></p>
+<dl>
+	<dl>
+		<dd>
+		<table width="567" cellpadding="4" cellspacing="0" style="page-break-before: auto; page-break-after: auto">
+			<col width="292">
+			<col width="257">
+			<tr valign="top">
+				<td width="292" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><font color="#008000">retorno</font>
+					<font color="#008000">nombreDelMétodo</font>(<font color="#008000">parámetros</font>)</font></font></p>
+				</td>
+				<td width="257" style="border: 1px solid #000000; padding: 0.1cm">
+					<p class="western" style="margin-bottom: 0.5cm"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>pre</b><span style="font-weight: normal">:
+					</span><font color="#008000"><span style="font-weight: normal">pre-condición</span></font><span style="font-weight: normal">.
+					</span></font></font>
+					</p>
+					<p class="western" style="margin-bottom: 0.5cm"><br><br>
+					</p>
+					<p class="western" style="margin-bottom: 0.5cm"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					<font color="#008000">post-condición</font>.</font></font></p>
+					<p class="western"><br>
+					</p>
+				</td>
+			</tr>
+		</table>
+	</dl>
+</dl>
+<h3 class="western" style="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<br><br>
+</h3>
+<h3 class="western">Tipo</h3>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">BatallaEspacial</font></font></p>
+<h3 class="western">Descripción</h3>
+<p class="western">Es un juego de tablero para programadores donde
+existen Civilizaciones con Naves que parten de una Base, pueden
+trasladar Sustancias que encuentren en el espacio y tienen poder de
+ataque. En el espacio también existen Asteroides que obstruyen los
+movimientos de las Naves.</p>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<br>
+</p>
+<p class="western" style="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<br><br>
+</p>
+<h3 class="western">Tipo</h3>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Nave</font></font></p>
+<h3 class="western">Descripción</h3>
+<p class="western">Nave de la Civilización Humana. Brinda acceso
+inmediato al control de una Nave pilotada por Humanos. 
+</p>
+<h3 class="western">Métodos</h3>
+<dl>
+	<dl>
+		<dd>
+		<table width="567" cellpadding="4" cellspacing="0" style="page-break-before: auto; page-break-after: auto">
+			<col width="257">
+			<col width="293">
+			<tr valign="top">
+				<td width="257" bgcolor="#e6e6e6" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" align="center" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Método</font></font></p>
+				</td>
+				<td width="293" bgcolor="#e6e6e6" style="border: 1px solid #000000; padding: 0.1cm">
+					<p class="western" align="center"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>Pre</b>-condición
+					y <b>Post</b>-condición</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Monitor
+					obtenerMonitor()</font></font></p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					devuelve el Monitor de la Nave que permite conocer el estado
+					general del la Nave.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">void
+					despegar()</font></font></p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					ordena el despegue desde la Base. </font></font>
+					</p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">void
+					avanzarAlNorte()</font></font></p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western" style="margin-bottom: 0.5cm"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>pre</b>:
+					no existe otra Pieza ocupando el casillero destino.</font></font></p>
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					mueve la Nave al casillero contiguo en dirección NORTE.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">void
+					avanzarAlSur()</font></font></p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western" style="margin-bottom: 0.5cm"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>pre</b>:
+					no existe otra Pieza ocupando el casillero destino.</font></font></p>
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					mueve la Nave al casillero contiguo en dirección SUR.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">void
+					avanzarAlEste()</font></font></p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western" style="margin-bottom: 0.5cm"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>pre</b>:
+					no existe otra Pieza ocupando el casillero destino. </font></font>
+					</p>
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					mueve la Nave al casillero contiguo en dirección ESTE.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">void
+					avanzarAlOeste() </font></font>
+					</p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western" style="margin-bottom: 0.5cm"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>pre</b>:
+					no existe otra Pieza ocupando el casillero destino.</font></font></p>
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					mueve la Nave al casillero contiguo en dirección OESTE.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Radar
+					<span style="text-decoration: none">obtenerRadar</span>()</font></font></p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					devuelve el Radar de la Nave que permite conocer el contexto del
+					Tablero.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">void
+					atacarAlNorte()</font></font></p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western" style="margin-bottom: 0.5cm"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>pre</b>:
+					existe otra Pieza ocupando el casillero destinatario del ataque.
+					</font></font>
+					</p>
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					ataca a la Pieza en el casillero contiguo en dirección NORTE.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">void
+					atacarAlSur()</font></font></p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western" style="margin-bottom: 0.5cm"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>pre</b>:
+					existe otra Pieza ocupando el casillero destinatario del ataque.
+					</font></font>
+					</p>
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					ataca a la Pieza en el casillero contiguo en dirección SUR.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">void
+					atacarAlEste()</font></font></p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western" style="margin-bottom: 0.5cm"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>pre</b>:
+					existe otra Pieza ocupando el casillero destinatario del ataque.
+					</font></font>
+					</p>
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					ataca a la Pieza en el casillero contiguo en dirección ESTE.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">void
+					atacarAlOeste()</font></font></p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western" style="margin-bottom: 0.5cm"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>pre</b>:
+					existe otra Pieza ocupando el casillero destinatario del ataque.
+					</font></font>
+					</p>
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					ataca a la Pieza en el casillero contiguo en dirección OESTE.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">void
+					cargarDesdeNorte(Sustancia, int)</font></font></p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western" style="margin-bottom: 0.5cm"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>pre</b>:
+					existe otra Pieza ocupando el casillero destino con más
+					sustancia que la cantidad indicada y existe capacidad disponible
+					en la bodega de la Nave.</font></font></p>
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					traslada la cantidad de sustancia desde el casillero contiguo en
+					dirección NORTE hasta la Nave.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">void
+					cargarDesdeSur(Sustancia, int)</font></font></p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western" style="margin-bottom: 0.5cm"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>pre</b>:
+					existe otra Pieza ocupando el casillero destino con más
+					sustancia que la cantidad indicada y existe capacidad disponible
+					en la bodega de la Nave.</font></font></p>
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					traslada la cantidad de sustancia desde el casillero contiguo en
+					dirección SUR hasta la Nave.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">void
+					cargarDesdeEste(Sustancia, int)</font></font></p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western" style="margin-bottom: 0.5cm"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>pre</b>:
+					existe otra Pieza ocupando el casillero destino con más
+					sustancia que la cantidad indicada y existe capacidad disponible
+					en la bodega de la Nave.</font></font></p>
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					traslada la cantidad de sustancia desde el casillero contiguo en
+					dirección ESTE hasta la Nave.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">void
+					cargarDesdeOeste(Sustancia, int)</font></font></p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western" style="margin-bottom: 0.5cm"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>pre</b>:
+					existe otra Pieza ocupando el casillero destino con más
+					sustancia que la cantidad indicada y existe capacidad disponible
+					en la bodega de la Nave.</font></font></p>
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					traslada la cantidad de sustancia desde el casillero contiguo en
+					dirección OESTE hasta la Nave.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">void
+					descargarEnNorte(Sustancia, int) </font></font>
+					</p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western" style="margin-bottom: 0.5cm"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>pre</b>:
+					existe otra Pieza ocupando el casillero destino con capacidad
+					disponible. </font></font>
+					</p>
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					traslada la cantidad de sustancia desde la Nave hasta el
+					casillero contiguo en dirección NORTE hasta la Nave.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">void
+					descargarEnSur(Sustancia, int) </font></font>
+					</p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western" style="margin-bottom: 0.5cm"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>pre</b>:
+					existe otra Pieza ocupando el casillero destino con capacidad
+					disponible. </font></font>
+					</p>
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					traslada la cantidad de sustancia desde la Nave hasta el
+					casillero contiguo en dirección SUR hasta la Nave.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">void
+					descargarEnEste(Sustancia, int) </font></font>
+					</p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western" style="margin-bottom: 0.5cm"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>pre</b>:
+					existe otra Pieza ocupando el casillero destino con capacidad
+					disponible. </font></font>
+					</p>
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					traslada la cantidad de sustancia desde la Nave hasta el
+					casillero contiguo en dirección ESTE hasta la Nave.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">void
+					descargarEnOeste(Sustancia, int) </font></font>
+					</p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western" style="margin-bottom: 0.5cm"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>pre</b>:
+					existe otra Pieza ocupando el casillero destino con capacidad
+					disponible. </font></font>
+					</p>
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					traslada la cantidad de sustancia desde la Nave hasta el
+					casillero contiguo en dirección OESTE hasta la Nave.</font></font></p>
+				</td>
+			</tr>
+		</table>
+	</dl>
+</dl>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<br>
+</p>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<br>
+</p>
+<p class="western" style="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<br><br>
+</p>
+<p class="western" style="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<br><br>
+</p>
+<h3 class="western">Tipo</h3>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Sustancia</font></font></p>
+<h3 class="western">Descripción</h3>
+<p class="western">Sustancias capaces de ser transportadas por Naves,
+Contenedores y Bases.</p>
+<h3 class="western">Valores</h3>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Sustancia.ANTIMATERIA</font></font></p>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<br>
+</p>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Sustancia.CRISTAL</font></font></p>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<br>
+</p>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Sustancia.METAL</font></font></p>
+<p class="western"><br><br>
+</p>
+<p class="western" style="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<br><br>
+</p>
+<h3 class="western">Tipo</h3>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Monitor</font></font></p>
+<h3 class="western">Descripción</h3>
+<p class="western">El Monitor se encuentra asociado a una Nave de la
+cual reporta su condición.</p>
+<h3 class="western">Métodos</h3>
+<dl>
+	<dl>
+		<dd>
+		<table width="567" cellpadding="4" cellspacing="0" style="page-break-before: auto; page-break-after: auto">
+			<col width="257">
+			<col width="293">
+			<tr valign="top">
+				<td width="257" bgcolor="#e6e6e6" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" align="center" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Método</font></font></p>
+				</td>
+				<td width="293" bgcolor="#e6e6e6" style="border: 1px solid #000000; padding: 0.1cm">
+					<p class="western" align="center"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>Pre</b>-condición
+					y <b>Post</b>-condición</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">int
+					consultarCantidadDeTorpedos()</font></font></p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					devuelve la cantidad de Torpedos de Fotones que posee
+					disponibles la Nave.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">int
+					consultarCarga(Sustancia)</font></font></p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					devuelve la cantidad de Sustancia sustancia que existe en la
+					bodega de la Nave. </font></font>
+					</p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">int
+					consultarNivelDeCarga()</font></font></p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western" style="margin-bottom: 0.5cm"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					devuelve un valor entre 0 y 100 que representa el porcentaje de
+					la bodega que es ocupado por la carga. </font></font>
+					</p>
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt">El
+					valor 0 indica que no existe carga, bodega vacía. El valor 100
+					indica que la bodega está completa.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">int
+					consultarNivelDeEscudos()</font></font></p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western" style="margin-bottom: 0.5cm"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					devuelve un valor entre 0 y 100 que representa el nivel de
+					energía que tienen los Escudos [%]. </font></font>
+					</p>
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt">El
+					valor 100 indica máximo poder en los Escudos. El valor 0 indica
+					Escudos fuera de funcionamiento.</font></font></p>
+				</td>
+			</tr>
+		</table>
+	</dl>
+</dl>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<br>
+</p>
+<p class="western" style="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<br><br>
+</p>
+<h3 class="western">Tipo</h3>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Espectro</font></font></p>
+<h3 class="western">Descripción</h3>
+<p class="western">El Espectro indica el resultado de haber realizar
+un escaneo con el Radar sobre un casillero. 
+</p>
+<p class="western">Indica la presencia o ausencia de algún tipo de
+Pieza en Tablero.</p>
+<h3 class="western">Valores:</h3>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Espectro.VACIO</font></font></p>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<br>
+</p>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Espectro.DESCONOCIDO</font></font></p>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<br>
+</p>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Espectro.ASTEROIDE</font></font></p>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<br>
+</p>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Espectro.CONTENEDOR</font></font></p>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<br>
+</p>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Espectro.NAVE</font></font></p>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<br>
+</p>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Espectro.BASE</font></font></p>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<br>
+</p>
+<p class="western" style="border-top: none; border-bottom: 1px solid #000000; border-left: none; border-right: none; padding-top: 0cm; padding-bottom: 0.07cm; padding-left: 0cm; padding-right: 0cm">
+<br><br>
+</p>
+<h3 class="western">Tipo</h3>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Radar</font></font></p>
+<h3 class="western">Descripción</h3>
+<p class="western">El Radar es la herramienta que provee una Nave
+para conocer el contexto inmediato de la misma.</p>
+<h3 class="western">Métodos</h3>
+<dl>
+	<dl>
+		<dd>
+		<table width="567" cellpadding="4" cellspacing="0" style="page-break-before: auto; page-break-after: auto">
+			<col width="257">
+			<col width="293">
+			<tr valign="top">
+				<td width="257" bgcolor="#e6e6e6" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0.1cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" align="center" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Método</font></font></p>
+				</td>
+				<td width="293" bgcolor="#e6e6e6" style="border: 1px solid #000000; padding: 0.1cm">
+					<p class="western" align="center"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>Pre</b>-condición
+					y <b>Post</b>-condición</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Espectro
+					escanearNorte() </font></font>
+					</p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					escanea el casillero contiguo en dirección NORTE y devuelve el
+					Espectro encontrado.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Espectro
+					escanearSur() </font></font>
+					</p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					escanea el casillero contiguo en dirección SUR y devuelve el
+					Espectro encontrado.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Espectro
+					escanearEste() </font></font>
+					</p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					escanea el casillero contiguo en dirección ESTE y devuelve el
+					Espectro encontrado.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">Espectro
+					escanearOeste() </font></font>
+					</p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					escanea el casillero contiguo en dirección OESTE y devuelve el
+					Espectro encontrado.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">int
+					buscarAlNorte(Sustancia) </font></font>
+					</p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					busca en el casillero contiguo en dirección NORTE y devuelve la
+					cantidad de sustancia encontrada.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">int
+					buscarAlSur(Sustancia) </font></font>
+					</p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					busca en el casillero contiguo en dirección SUR y devuelve la
+					cantidad de sustancia encontrada.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">int
+					buscarAlEste(Sustancia) </font></font>
+					</p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					busca en el casillero contiguo en dirección ESTE y devuelve la
+					cantidad de sustancia encontrada.</font></font></p>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td width="257" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0cm">
+					<p class="western" style="text-indent: 0cm; background: transparent">
+					<font face="Courier New, monospace"><font size="1" style="font-size: 8pt">int
+					buscarAlOeste(Sustancia) </font></font>
+					</p>
+				</td>
+				<td width="293" style="border-top: none; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; padding-top: 0cm; padding-bottom: 0.1cm; padding-left: 0.1cm; padding-right: 0.1cm">
+					<p class="western"><font face="Courier New, monospace"><font size="1" style="font-size: 8pt"><b>post</b>:
+					busca en el casillero contiguo en dirección OESTE y devuelve la
+					cantidad de sustancia encontrada.</font></font></p>
+				</td>
+			</tr>
+		</table>
+	</dl>
+</dl>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<br>
+</p>
+<p class="western" style="margin-left: 2cm; margin-bottom: 0cm; background: transparent; line-height: 100%; page-break-before: auto; page-break-after: auto">
+<br>
+</p>
+</body>
+</html>
