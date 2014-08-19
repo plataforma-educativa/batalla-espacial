@@ -23,8 +23,6 @@ public class ControladorDocumentacion {
 
         URL url = this.getClass().getResource("documentacion/BatallaEspacial-EstructurasDeControl-Documentacion.html");
         
-        System.out.println(url);
-        
         this.webView.getEngine().load(url.toString());
     }
 }
