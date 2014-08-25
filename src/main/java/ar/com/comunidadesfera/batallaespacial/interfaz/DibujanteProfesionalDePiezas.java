@@ -44,10 +44,10 @@ public class DibujanteProfesionalDePiezas extends DibujanteDePiezas {
     
     private static final Paint COLOR_CONTENEDOR = Color.web("555555");
     private static final Color COLOR_CONTENEDOR_INDICADOR_VACIO = Color.WHITE;
-    private static final Color COLOR_CONTENEDOR_INDICADOR_ANTIMATERIA = Color.web("ffe35b");
-    private static final Color COLOR_CONTENEDOR_INDICADOR_METAL = Color.web("dd1539");
-    private static final Color COLOR_CONTENEDOR_INDICADOR_CRISTAL = Color.web("3daeb6");
-    
+    private static final Color COLOR_CONTENEDOR_INDICADOR_ANTIMATERIA = Color.web("ffe35b"); // Color.web("ffff99");
+    private static final Color COLOR_CONTENEDOR_INDICADOR_METAL = Color.web("dd1539"); // Color.web("ff99ff");
+    private static final Color COLOR_CONTENEDOR_INDICADOR_CRISTAL = Color.web("3daeb6"); // Color.web("66ffff");
+
     private Random aleatorio = new Random();
     
     public DibujanteProfesionalDePiezas() {
@@ -180,12 +180,18 @@ public class DibujanteProfesionalDePiezas extends DibujanteDePiezas {
             }
         }
         
-        Rectangle indicador1 = new Rectangle(10, 22.001, 16, 2);
-        Rectangle indicador2 = new Rectangle(10, 11, 16, 2);
-        Rectangle indicador3 = new Rectangle(10, 16.5, 16, 2);
+        InnerShadow brillo = new InnerShadow(3, Color.BLACK);
+        
+        Rectangle indicador1 = new Rectangle(10, 8, 16, 4);
+        Rectangle indicador2 = new Rectangle(10, 15, 16, 4);
+        Rectangle indicador3 = new Rectangle(10, 22, 16, 4);
+        
         indicador1.setFill(colorIndicador);
         indicador2.setFill(colorIndicador);
         indicador3.setFill(colorIndicador);
+        indicador1.setEffect(brillo);
+        indicador2.setEffect(brillo);
+        indicador3.setEffect(brillo);
         
         this.dibujo = new Group(estructura, indicador1, indicador2, indicador3);
     }
