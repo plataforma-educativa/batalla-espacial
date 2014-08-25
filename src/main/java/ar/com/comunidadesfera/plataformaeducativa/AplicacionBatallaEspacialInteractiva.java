@@ -37,7 +37,7 @@ public class AplicacionBatallaEspacialInteractiva extends Aplicacion {
     protected void cargando(Stage stage) {
         
         Pane panel = new Pane();
-        panel.setStyle("-fx-background-image: url('/ar/com/comunidadesfera/batallaespacial/interfaz/inicio-interactivo.png')");
+        panel.setStyle("-fx-background-image: url('/ar/com/comunidadesfera/batallaespacial/interfaz/inicio.png')");
         Scene scene = new Scene(panel, 600, 231);
         stage.setScene(scene);
     }

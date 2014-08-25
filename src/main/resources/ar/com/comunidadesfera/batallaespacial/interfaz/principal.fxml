@@ -16,24 +16,20 @@
   <center>
     <TabPane fx:id="secciones" cache="false" mouseTransparent="false" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" side="BOTTOM" tabClosingPolicy="UNAVAILABLE" visible="true">
       <tabs>
-        <Tab styleClass="inicio" text="%seccion.inicio" disable="true">
+        <Tab disable="false" styleClass="inicio" text="%seccion.inicio">
           <content>
-                  <FlowPane alignment="CENTER" columnHalignment="RIGHT" prefHeight="200.0" prefWidth="200.0" prefWrapLength="0.0" styleClass="inicio">
+                  <VBox alignment="CENTER" spacing="80.0" styleClass="inicio">
                      <children>
-                <AnchorPane minWidth="-1.0" prefHeight="336.0" prefWidth="537.0" style="&#10;">
-                  <children>
-                    <ImageView fitHeight="540.0" fitWidth="720.0" opacity="1.0" pickOnBounds="true" preserveRatio="true" visible="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                      <image>
-                        <Image url="@inicio2.png" />
-                      </image>
-                    </ImageView>
-                    <Button cancelButton="true" defaultButton="false" layoutX="472.0" layoutY="253.0" mnemonicParsing="true" onAction="#nuevaPartida" opacity="1.0" prefHeight="52.0" prefWidth="226.0" style="" styleClass="nuevaPartida" text="%inicio.partida.nueva" visible="true" />
-                    <Button cancelButton="true" defaultButton="false" layoutX="472.0" layoutY="322.0" mnemonicParsing="true" onAction="#usarLaboratorio" opacity="1.0" prefHeight="52.0" prefWidth="226.0" style="" styleClass="usarLaboratorio" text="%inicio.laboratorio.usar" visible="true" />
-                    <Button cancelButton="true" defaultButton="false" layoutX="472.0" layoutY="391.0" mnemonicParsing="true" onAction="#verRegistros" opacity="1.0" prefHeight="52.0" prefWidth="226.0" style="" styleClass="verRegistros" text="%inicio.registros.ver" visible="true" />
-                  </children>
-                </AnchorPane>
+                    <fx:include fx:id="panelTitulo" source="titulo.fxml" />
+                              <HBox alignment="CENTER" spacing="30.0">
+                                 <children>
+                          <Button defaultButton="false" layoutX="472.0" layoutY="253.0" mnemonicParsing="true" onAction="#nuevaPartida" opacity="1.0" style="" styleClass="nuevaPartida" text="%inicio.partida.nueva" visible="true" />
+                          <Button defaultButton="false" layoutX="472.0" layoutY="322.0" mnemonicParsing="true" onAction="#usarLaboratorio" opacity="1.0" style="" styleClass="usarLaboratorio" text="%inicio.laboratorio.usar" visible="true" />
+                          <Button defaultButton="false" layoutX="472.0" layoutY="391.0" mnemonicParsing="true" onAction="#verRegistros" opacity="1.0" style="" styleClass="verRegistros" text="%inicio.registros.ver" visible="true" />
+                                 </children>
+                              </HBox>
                      </children>
-                  </FlowPane>
+                  </VBox>
           </content>
           <graphic>
             <ImageView fitHeight="0.0" fitWidth="0.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" styleClass="inicio" />
@@ -43,7 +39,7 @@
           <content>
             <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
               <center>
-                <ScrollPane fx:id="panelMarcoTablero" content="$null" prefHeight="200.0" prefWidth="200.0" pannable="true">
+                <ScrollPane fx:id="panelMarcoTablero" content="$null" pannable="true" prefHeight="200.0" prefWidth="200.0">
                   <BorderPane.margin>
                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
                   </BorderPane.margin>
@@ -61,7 +57,7 @@
             <ImageView fitHeight="0.0" fitWidth="0.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" styleClass="partida" />
           </graphic>
         </Tab>
-        <Tab id="" fx:id="seccionLaboratorio" text="%seccion.laboratorio" disable="true">
+        <Tab id="" fx:id="seccionLaboratorio" disable="true" text="%seccion.laboratorio">
           <content>
             <AnchorPane id="AnchorPane" prefHeight="530.0" prefWidth="740.0">
               <children>
@@ -86,7 +82,7 @@
             <ImageView fitHeight="0.0" fitWidth="0.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" styleClass="laboratorio" />
           </graphic>
         </Tab>
-        <Tab fx:id="seccionRegistros" closable="false" text="%seccion.registros" disable="true">
+        <Tab fx:id="seccionRegistros" closable="false" disable="true" text="%seccion.registros">
           <content>
             <fx:include fx:id="panelEficiencia" source="eficiencia/mediciones.fxml" />
           </content>
@@ -94,7 +90,7 @@
             <ImageView fitHeight="0.0" fitWidth="0.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" styleClass="registros" />
           </graphic>
         </Tab>
-        <Tab text="%seccion.configuracion" disable="true">
+        <Tab disable="true" text="%seccion.configuracion">
           <content>
             <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
           </content>
@@ -111,7 +107,7 @@
   <top>
     <MenuBar pickOnBounds="true">
       <menus>
-        <Menu disable="true" mnemonicParsing="false" style="" text="%menu.partida">
+        <Menu mnemonicParsing="false" style="" text="%menu.partida">
           <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true" styleClass="partida" />
           </graphic>
@@ -132,7 +128,7 @@
             </MenuItem>
           </items>
         </Menu>
-        <Menu mnemonicParsing="false" text="%menu.metricas" disable="true">
+        <Menu mnemonicParsing="false" text="%menu.metricas">
           <graphic>
             <ImageView pickOnBounds="true" preserveRatio="true" styleClass="metricas" />
           </graphic>
@@ -145,7 +141,11 @@
             <ImageView pickOnBounds="true" preserveRatio="true" styleClass="ayuda" />
           </graphic>
           <items>
-            <MenuItem fx:id="menuAyudaDocumentacion" mnemonicParsing="false" text="%menu.ayuda.documentacion" />
+            <MenuItem fx:id="menuAyudaDocumentacion" mnemonicParsing="false" text="%menu.ayuda.documentacion">
+              <graphic>
+                <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true" styleClass="documentacion" />
+              </graphic>
+            </MenuItem>
           </items>
         </Menu>
       </menus>

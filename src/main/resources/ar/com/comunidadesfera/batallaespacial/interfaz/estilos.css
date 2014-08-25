@@ -106,6 +106,10 @@
     -fx-image: url("iconos/x16/help_selected.png");
 }
 
+.menu-item .documentacion {
+    -fx-image: url("iconos/x16/description.png");
+}
+
 .label.buscar {
     -fx-graphic: url("iconos/x16/search.png");
 }
@@ -132,6 +136,12 @@ FlowPane.inicio{
     -fx-background-color:#28303e;
 }
  */
+VBox.inicio{
+    -fx-background-color:#000000;
+    -fx-background-image: url("imagenes/fondo.jpg");
+    -fx-background-position: center, center;
+    -fx-background-repeat: no-repeat, no-repeat;
+}
 
 .tab.inicio .inicio {
     -fx-image: url("iconos/x16/home.png");
@@ -141,14 +151,20 @@ FlowPane.inicio{
     -fx-image: url("iconos/x16/home_selected.png");
 }
 
+.inicio .button {
+    -fx-pref-height: 30;
+    -fx-pref-width: 180;
+    -fx-graphic-text-gap: 10;
+}
+
 .inicio .button.nuevaPartida {
-    -fx-graphic: url("iconos/x32/file_add.png");
+    -fx-graphic: url("iconos/x16/file_add.png");
 }
 
 .inicio .button.usarLaboratorio {
-    -fx-graphic: url("iconos/x32/clock.png");
+    -fx-graphic: url("iconos/x16/clock.png");
 }
 
 .inicio .button.verRegistros {
-    -fx-graphic: url("iconos/x32/disc.png");
+    -fx-graphic: url("iconos/x16/disc.png");
 }
