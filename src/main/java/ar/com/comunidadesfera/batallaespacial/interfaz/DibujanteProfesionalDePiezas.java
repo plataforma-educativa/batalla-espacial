@@ -5,6 +5,8 @@ import java.util.Random;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.effect.BlendMode;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.InnerShadow;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Ellipse;
@@ -41,10 +43,10 @@ public class DibujanteProfesionalDePiezas extends DibujanteDePiezas {
     };
     
     private static final Paint COLOR_CONTENEDOR = Color.web("555555");
-    private static final Paint COLOR_CONTENEDOR_INDICADOR_VACIO = Color.WHITE;
-    private static final Paint COLOR_CONTENEDOR_INDICADOR_ANTIMATERIA = Color.web("ffe35b");
-    private static final Paint COLOR_CONTENEDOR_INDICADOR_METAL = Color.web("dd1539");
-    private static final Paint COLOR_CONTENEDOR_INDICADOR_CRISTAL = Color.web("3daeb6");
+    private static final Color COLOR_CONTENEDOR_INDICADOR_VACIO = Color.WHITE;
+    private static final Color COLOR_CONTENEDOR_INDICADOR_ANTIMATERIA = Color.web("ffe35b");
+    private static final Color COLOR_CONTENEDOR_INDICADOR_METAL = Color.web("dd1539");
+    private static final Color COLOR_CONTENEDOR_INDICADOR_CRISTAL = Color.web("3daeb6");
     
     private Random aleatorio = new Random();
     
@@ -60,7 +62,16 @@ public class DibujanteProfesionalDePiezas extends DibujanteDePiezas {
         SVGPath casco = new SVGPath();
         casco.setFill(participante.getPintura());
         casco.setContent("M4.477,24.277c0,0,1.084,5.091,1.402,5.489c0.126,0.158,0.368,0.345,0.802,0.345c0.214,0,2.511-0.548,2.511-0.548l7.611,2.938c0,0,1.316-0.008,1.504,0l7.611-2.915c0,0,2.08,0.523,2.291,0.523c0.455,0,0.69-0.216,0.791-0.346c0.308-0.403,1.521-5.506,1.521-5.506s0.312,0.212,0.5,0.212c0.084,0,0.158-0.017,0.219-0.038c0.135-0.021,0.296-0.079,0.449-0.226c0.408-0.388,0.867-1.457,0.804-6.313l-0.002-0.231c0-2.223-0.286-11.386-1.654-11.386c-0.313,0-0.594,0.121-0.812,0.344c-0.489,0.509-0.559,8.034-0.546,8.7l-3.126-0.498c-0.169-0.396-0.329-0.781-0.479-1.148c-0.933-2.298-3.7-8.389-4.397-8.812c-0.117-0.07-3.86-2.359-4.024-2.359c-0.154,0-0.293-0.006-0.32,0c-0.031,0.008-3.663,2.308-3.692,2.322c-0.257,0.116-3.299,5.317-4.789,8.989c-0.151,0.374-0.314,0.767-0.485,1.169L5.521,15.32c0.011-0.645-0.062-8.125-0.539-8.622C4.763,6.473,4.48,6.353,4.163,6.353c-1.367,0-1.654,9.14-1.654,11.346l-0.003,0.23c-0.062,4.843,0.396,5.907,0.804,6.293c0.155,0.148,0.317,0.207,0.453,0.23C3.957,24.512,4.477,24.277,4.477,24.277z");
-
+        
+        DropShadow sombra = new DropShadow();
+        sombra.setOffsetY(1.0);
+        sombra.setOffsetX(1.0);
+        sombra.setWidth(3.0);
+        sombra.setHeight(3.0);
+        sombra.setColor(Color.BLACK);
+        sombra.setRadius(2.0);
+        casco.setEffect(sombra);
+        
         SVGPath puente = new SVGPath();
         puente.setFill(participante.getPintura());
         puente.setBlendMode(BlendMode.MULTIPLY);
@@ -88,7 +99,16 @@ public class DibujanteProfesionalDePiezas extends DibujanteDePiezas {
         cubierta.setFill(pinturaBase);
         cubierta.setBlendMode(BlendMode.MULTIPLY);
         cubierta.setContent("M26.242,18.541c-0.424,0-0.763,0.338-0.763,0.76v4.766l-1.411,1.41H19.26c-0.421,0-0.76,0.34-0.76,0.762v3.953h-2V26.24c0-0.422-0.339-0.762-0.76-0.762h-4.805l-1.415-1.412V19.26c0-0.422-0.339-0.76-0.76-0.76H4.485v-2h4.275c0.42,0,0.76-0.34,0.76-0.76v-4.807l1.415-1.414h4.805c0.42,0,0.76-0.338,0.76-0.76V4.807h2V8.76c0,0.422,0.339,0.76,0.76,0.76h4.809l1.408,1.414v4.807c0,0.42,0.34,0.76,0.763,0.76h4.275v2.041H26.242z");
-
+        
+        InnerShadow sombra = new InnerShadow();
+        sombra.setOffsetY(1.0);
+        sombra.setOffsetX(1.0);
+        sombra.setWidth(3.0);
+        sombra.setHeight(3.0);
+        sombra.setColor(Color.BLACK);
+        sombra.setRadius(2.0);
+        cubierta.setEffect(sombra);
+        
         this.dibujo = new Group(casco, cubierta);
     }
     
@@ -138,7 +158,7 @@ public class DibujanteProfesionalDePiezas extends DibujanteDePiezas {
         estructura.setFill(COLOR_CONTENEDOR);
         estructura.setContent("M28,4H8C6.9,4,6,4.9,6,6v23.001c0,1.1,0.9,2,2,2h20c1.101,0,2-0.9,2-2V6C30,4.9,29.101,4,28,4z");
 
-        Paint colorIndicador = COLOR_CONTENEDOR_INDICADOR_VACIO;
+        Color colorIndicador = COLOR_CONTENEDOR_INDICADOR_VACIO;
         
         long antimateria = contenedor.getCantidad(Sustancia.ANTIMATERIA);
         long metal = contenedor.getCantidad(Sustancia.METAL);

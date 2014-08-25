@@ -57,7 +57,7 @@
             <ImageView fitHeight="0.0" fitWidth="0.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" styleClass="partida" />
           </graphic>
         </Tab>
-        <Tab id="" fx:id="seccionLaboratorio" disable="true" text="%seccion.laboratorio">
+        <Tab id="" fx:id="seccionLaboratorio" text="%seccion.laboratorio">
           <content>
             <AnchorPane id="AnchorPane" prefHeight="530.0" prefWidth="740.0">
               <children>
@@ -82,7 +82,7 @@
             <ImageView fitHeight="0.0" fitWidth="0.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" styleClass="laboratorio" />
           </graphic>
         </Tab>
-        <Tab fx:id="seccionRegistros" closable="false" disable="true" text="%seccion.registros">
+        <Tab fx:id="seccionRegistros" closable="false" text="%seccion.registros">
           <content>
             <fx:include fx:id="panelEficiencia" source="eficiencia/mediciones.fxml" />
           </content>
