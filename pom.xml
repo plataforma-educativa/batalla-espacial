@@ -8,11 +8,12 @@
     <version>2.0.0</version>
 
     <name>batalla-espacial</name>
-    <url>http://code.google.com/p/batalla-espacial/</url>
+    <url>https://github.com/mtugnarelli/batalla-espacial</url>
 
     <properties>
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
-        <javancss-version>33.54</javancss-version>        
+        <javancss-version>33.54</javancss-version>
+        <github.global.server>github</github.global.server>
     </properties>
 
     <developers>
@@ -20,12 +21,19 @@
             <id>mtugnarelli</id>
             <name>Mariano Tugnarelli</name>
             <email>marianotugnarelli@gmail.com</email>
+            <url>https://github.com/mtugnarelli</url>
         </developer>
     </developers>
 
     <organization>
         <name>Comunidad Esfera</name>
     </organization>
+    
+    <scm>
+        <url>https://github.com/mtugnarelli/batalla-espacial</url>
+        <connection>scm:git:git://github.com/mtugnarelli/batalla-espacial.git</connection>
+        <developerConnection>scm:git:git@github.com:mtugnarelli/batalla-espacial.git</developerConnection>
+    </scm>
 
     <build>
         <plugins>
@@ -158,6 +166,22 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.11</version>
+                <configuration>
+                    <message>Creating site for ${project.version}</message>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                        <phase>site</phase>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
@@ -211,6 +235,7 @@
                             <head>Nota:</head>
                         </tag>
                     </tags>
+                    <notimestamp>true</notimestamp>
                 </configuration>
             </plugin>
             <plugin>
