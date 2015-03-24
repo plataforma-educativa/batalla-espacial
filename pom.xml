@@ -34,6 +34,11 @@
         <connection>scm:git:git://github.com/mtugnarelli/batalla-espacial.git</connection>
         <developerConnection>scm:git:git@github.com:mtugnarelli/batalla-espacial.git</developerConnection>
     </scm>
+    
+    <issueManagement>
+        <url>https://github.com/mtugnarelli/batalla-espacial/issues</url>
+        <system>GitHub</system>
+    </issueManagement>
 
     <build>
         <plugins>
