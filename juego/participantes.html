@@ -9,8 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Date-Revision-yyyymmdd" content="20150323" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>LoJack Middleware - 
-        Batalla Espacial: Civilización</title>
+    <title>LoJack Middleware - </title>
     <link rel="stylesheet" href="../css/apache-maven-fluido-1.3.0.min.css" />
     <link rel="stylesheet" href="../css/site.css" />
     <link rel="stylesheet" href="../css/print.css" media="print" />
@@ -81,12 +80,10 @@
         Piezas</a>
             </li>
                   
-      <li>
+      <li class="active">
     
-                          <a href="../juego/participantes.html" title="Participantes">
-          <i class="none"></i>
-        Participantes</a>
-            </li>
+            <a href="#"><i class="none"></i>Participantes</a>
+          </li>
                               <li class="nav-header">Project Documentation</li>
                                                                                                                                                                                                                                                     
       <li>
@@ -122,24 +119,58 @@
                 
         <div id="bodyColumn"  class="span9" >
                                   
-            <html xmlns="http://www.w3.org/1999/xhtml">
-    
-        
-<h1>Civilizaci&#xf3;n</h1>
-        
-<p>
-            </p>
-<ol style="list-style-type: decimal">
-                
-<li> No tiene representaci&#xf3;n en el tablero pero debe contar con
-                    un Comandante.</li>
-                
-<li> El juego le pedir&#xe1; a la Civilizaci&#xf3;n que indique su
-                    comandante s&#xf3;lo una vez.</li>
-            </ol>
-        
-    
-</html>
+            <div class="section">
+<h2>Participantes<a name="Participantes"></a></h2>
+<p>El programador que desee participar del Juego debe implementar tres interfaces:</p>
+<ul>
+<li><tt>Civilizacion</tt></li>
+<li><tt>Comandante</tt></li>
+<li><tt>Piloto</tt></li></ul>
+<div class="section">
+<h3>Caracter&#xed;sticas<a name="Caractersticas"></a></h3>
+<div class="section">
+<h4>Civilizaci&#xf3;n<a name="Civilizacin"></a></h4>
+<ul>
+<li>No tiene representaci&#xf3;n en el tablero pero debe contar con un Comandante.</li>
+<li>El juego le pedir&#xe1; a la Civilizaci&#xf3;n que indique su comandante s&#xf3;lo una vez.</li></ul></div>
+<div class="section">
+<h4>Comandante<a name="Comandante"></a></h4>
+<ul>
+<li>No tiene representaci&#xf3;n en el tablero pero tiene la capacidad de armar un escuadr&#xf3;n de Pilotos.</li>
+<li>El escuadr&#xf3;n se armar&#xe1; al comienzo del juego y no se le volver&#xe1; a solicitar un nuevo escuadr&#xf3;n.</li></ul></div>
+<div class="section">
+<h4>Piloto<a name="Piloto"></a></h4>
+<ul>
+<li>Es asignado a una Nave, recibiendo su Cabina de Control a trav&#xe9;s de la cual puede maniobrarla, conocer su estado y el contexto en el que se encuentra.</li>
+<li>Podr&#xe1; controlar su nave mediante Comandos.</li>
+<li>El juego solicitar&#xe1; a cada Piloto un Comando por turno.</li>
+<li>Los comandos posibles son:
+<ul>
+<li><b>AVANZAR</b>
+<p>Mueve la nave un casillero en la direcci&#xf3;n indicada.</p>
+<p>El casillero al que se desea avanzar no debe estar ocupado por otra Pieza, caso contrario se produce un choque y el movimiento no se realiza.</p></li>
+<li><b>ATACAR</b>
+<p>Puede atacar a cualquiera de las otras Piezas del Tablero. Las distintas Piezas reaccionan de manera diferentes a los ataques, pero todas pueden ser destruidas, y por consiguiente retiradas de la Partida.</p></li>
+<li><b>TRANSFERIR CARGA</b>
+<p>Puede transferir carga desde o hacia la bodega de la nave, interactuando con una Nave o Base de la misma Civilizaci&#xf3;n, o con un Contenedor.</p></li></ul></li>
+<li>Para seleccionar el pr&#xf3;ximo Comando, cada Piloto podr&#xe1; solicitarle al Radar de la Cabina de Control el reporte en una direcci&#xf3;n dada de un casillero contiguo. Podr&#xe1; solicitar el n&#xfa;mero de reportes que desee. Este reporte contendr&#xe1;:
+<ul>
+<li><b>ESPECTRO</b>
+<p>Permitir&#xe1; identificar si lo que hay en esa direcci&#xf3;n es un ASTEROIDE, BASE, CONTENEDOR, NAVE, VACIO o DESCONOCIDO. Este &#xfa;ltimo indicar&#xe1; que en esa direcci&#xf3;n no se puede mover porque se termina el tablero.</p></li>
+<li><b>CIVILIZACION</b>
+<p>Permite determinar la civilizaci&#xf3;n que hay all&#xed;.</p></li>
+<li><b>CANTIDAD DE SUSTANCIA</b>
+<p>Indica la cantidad de sustancia de determinado tipo que hay en esa direcci&#xf3;n.</p></li></ul></li>
+<li>Adicionalmente, el Piloto podr&#xe1; solicitar la lista de eventos que tuvieron relaci&#xf3;n con su nave desde su &#xfa;ltima decisi&#xf3;n. Estos eventos pueden ser:
+<ul>
+<li><b>ATAQUE</b>
+<p>La nave fue atacada.</p></li>
+<li><b>CHOQUE</b>
+<p>La nave fue chocada.</p></li>
+<li><b>DESPEGUE</b>
+<p>Se recibe al efectuar el primer MOVER saliendo de la base.</p></li>
+<li><b>DESTRUCCI&#xd3;N</b>
+<p>Si se recibe, la decisi&#xf3;n que tenga que tomar el piloto ser&#xe1; la &#xfa;ltima de su vida.</p></li></ul></li></ul></div></div></div>
                   </div>
             </div>
           </div>

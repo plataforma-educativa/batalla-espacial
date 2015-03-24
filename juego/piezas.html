@@ -9,14 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Date-Revision-yyyymmdd" content="20150323" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>LoJack Middleware - 
-        Batalla Espacial</title>
-    <link rel="stylesheet" href="./css/apache-maven-fluido-1.3.0.min.css" />
-    <link rel="stylesheet" href="./css/site.css" />
-    <link rel="stylesheet" href="./css/print.css" media="print" />
+    <title>LoJack Middleware - </title>
+    <link rel="stylesheet" href="../css/apache-maven-fluido-1.3.0.min.css" />
+    <link rel="stylesheet" href="../css/site.css" />
+    <link rel="stylesheet" href="../css/print.css" media="print" />
 
       
-    <script type="text/javascript" src="./js/apache-maven-fluido-1.3.0.min.js"></script>
+    <script type="text/javascript" src="../js/apache-maven-fluido-1.3.0.min.js"></script>
 
     
             </head>
@@ -62,28 +61,26 @@
                                 
       <li>
     
-                          <a href="juego/introduccion.html" title="Introducción">
+                          <a href="../juego/introduccion.html" title="Introducción">
           <i class="none"></i>
         Introducción</a>
             </li>
                   
       <li>
     
-                          <a href="juego/reglas.html" title="Reglas">
+                          <a href="../juego/reglas.html" title="Reglas">
           <i class="none"></i>
         Reglas</a>
             </li>
                   
-      <li>
+      <li class="active">
     
-                          <a href="juego/piezas.html" title="Piezas">
-          <i class="none"></i>
-        Piezas</a>
-            </li>
+            <a href="#"><i class="none"></i>Piezas</a>
+          </li>
                   
       <li>
     
-                          <a href="juego/participantes.html" title="Participantes">
+                          <a href="../juego/participantes.html" title="Participantes">
           <i class="none"></i>
         Participantes</a>
             </li>
@@ -91,14 +88,14 @@
                                                                                                                                                                                                                                                     
       <li>
     
-                          <a href="project-info.html" title="Project Information">
+                          <a href="../project-info.html" title="Project Information">
           <i class="icon-chevron-right"></i>
         Project Information</a>
                   </li>
                                                                                                         
       <li>
     
-                          <a href="project-reports.html" title="Project Reports">
+                          <a href="../project-reports.html" title="Project Reports">
           <i class="icon-chevron-right"></i>
         Project Reports</a>
                   </li>
@@ -113,7 +110,7 @@
                             <div class="clear"></div>
                             <div class="clear"></div>
                              <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
-        <img class="builtBy" alt="Built by Maven" src="./images/logos/maven-feather.png" />
+        <img class="builtBy" alt="Built by Maven" src="../images/logos/maven-feather.png" />
       </a>
                   </div>
           </div>
@@ -122,14 +119,46 @@
                 
         <div id="bodyColumn"  class="span9" >
                                   
-            <html xmlns="http://www.w3.org/1999/xhtml">
-    
-        
-<h1></h1>
-        
-<p></p>
-    
-</html>
+            <div class="section">
+<h2>Piezas<a name="Piezas"></a></h2>
+<p>Piezas que pueden formar parte del Tablero de la Batalla Espacial.</p>
+<div class="section">
+<h3>Tipo de Pieza<a name="Tipo_de_Pieza"></a></h3>
+<div class="section">
+<h4>Asteroide<a name="Asteroide"></a></h4>
+<ul>
+<li>Son dispuestas en forma azarosa al comienzo del juego.</li>
+<li>No se mueven.</li>
+<li>La cantidad es determinada en forma azarosa al comienzo del juego.</li>
+<li>No tiene capacidad de recepci&#xf3;n de sustancias.</li>
+<li>Pueden ser destruidos por ataques o choques.</li></ul></div>
+<div class="section">
+<h4>Contenedor<a name="Contenedor"></a></h4>
+<ul>
+<li>Son dispuestos en forma azarosa al comienzo del juego.</li>
+<li>No se mueven.</li>
+<li>La cantidad es determinada en forma azarosa al comienzo del juego.</li>
+<li>Tiene capacidad de recepci&#xf3;n de sustancias ilimitada.</li>
+<li>Pueden ser destruidos por ataques o choques.</li></ul></div>
+<div class="section">
+<h4>Base<a name="Base"></a></h4>
+<ul>
+<li>Son dispuestas en forma azarosa al comienzo del juego.</li>
+<li>No se mueven.</li>
+<li>Habr&#xe1; una base por civilizaci&#xf3;n.</li>
+<li>Tiene capacidad de recepci&#xf3;n de sustancias ilimitada.</li>
+<li>No pueden atacar.</li>
+<li>Posee un escudo que la protege. A medida que sufre ataques y choques el nivel del escudo se reduce. Cuando el escudo se agota (nivel 0%) cualquier ataque o choque ocasiona su destrucci&#xf3;n.</li></ul></div>
+<div class="section">
+<h4>Nave<a name="Nave"></a></h4>
+<ul>
+<li>Son ubicadas en el casillero de la base de su civilizaci&#xf3;n al comienzo.</li>
+<li>Pueden moverse a alguno de los casilleros contiguos.</li>
+<li>El n&#xfa;mero de naves es determinado al comienzo del juego.</li>
+<li>Tiene capacidad de recepci&#xf3;n de sustancias limitada.</li>
+<li>Pueden atacar a Naves, Meteoritos, Bases y Contenedores, no necesariamente los destruir&#xe1;n en el primer ataque. Esto depender&#xe1; de la cantidad de puntos de vida que tengan los elementos en cuesti&#xf3;n.</li>
+<li>Posee un escudo que la protege. A medida que sufre ataques y choques el nivel del escudo se reduce. Cuando el escudo se agota (nivel 0%, tiene exactamente 1 punto de vida) cualquier ataque o choque ocasiona su destrucci&#xf3;n.</li>
+<li>Cuenta con dos tipos de armas, Torpedos de Fotones y L&#xe1;ser. Los primeros tienen mayor poder de ataque, pero su n&#xfa;mero es limitado. El L&#xe1;ser es utilizado como arma secundaria cuando se agotan los Torpedos (es inagotable).</li></ul></div></div></div>
                   </div>
             </div>
           </div>
