@@ -1,6 +1,4 @@
-# Plataforma Educativa: Batalla Espacial
-
-![Título](./src/site/resources/img/titulo.png "Título")
+![Plataforma Educativa: Batalla Espacial](./src/site/resources/img/titulo.png "Plataforma Educativa: Batalla Espacial")
 
 
 ## Objetivo
