@@ -1,5 +1,4 @@
-![Plataforma Educativa: Batalla Espacial](./src/site/resources/img/titulo.png "Plataforma Educativa: Batalla Espacial")
-
+#Plataforma Educativa: Batalla Espacial
 
 ## Objetivo
 
@@ -9,6 +8,8 @@ En el marco de este sistema los alumnos tendrán espacio para realizar múltiples 
 desde la construcción de pequeños módulos que se integren a los ya existentes, hasta extensiones
 complejas del sistema. La temática del desarrollo está basada en un juego, para motivar a los alumnos, 
 capturar su interés y facilitar el proceso de aprendizaje. 
+
+![Plataforma Educativa: Batalla Espacial](./src/site/resources/img/titulo.png "Plataforma Educativa: Batalla Espacial")
 
 ## Referencias
 
