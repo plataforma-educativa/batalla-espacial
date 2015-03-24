@@ -1,0 +1,106 @@
+Participantes
+
+    El programador que desee participar del Juego debe implementar tres interfaces:
+    
+        * <<<Civilizacion>>>
+        
+        * <<<Comandante>>>
+        
+        * <<<Piloto>>>
+
+* Características
+         
+** Civilización
+
+    * No tiene representación en el tablero pero debe contar con
+        un Comandante.
+        
+    * El juego le pedirá a la Civilización que indique su
+        comandante sólo una vez.
+
+** Comandante
+
+    * No tiene representación en el tablero pero tiene la
+        capacidad de armar un escuadrón de Pilotos.
+        
+    * El escuadrón se armará al comienzo del juego y no se le
+        volverá a solicitar un nuevo escuadrón.
+
+** Piloto
+
+    * Es asignado a una Nave, recibiendo su Cabina de Control a
+        través de la cual puede maniobrarla, conocer su estado y el
+        contexto en el que se encuentra.
+
+    * Podrá controlar su nave mediante Comandos.
+
+    * El juego solicitará a cada Piloto un Comando por turno.
+
+    * Los comandos posibles son:
+
+        * <<AVANZAR>>
+
+            Mueve la nave un casillero en la dirección indicada.
+            
+            El casillero al que se desea avanzar no debe estar
+            ocupado por otra Pieza, caso contrario se produce un
+            choque y el movimiento no se realiza.
+
+        * <<ATACAR>>
+
+            Puede atacar a cualquiera de las otras Piezas del
+            Tablero. Las distintas Piezas reaccionan de manera
+            diferentes a los ataques, pero todas pueden ser
+            destruidas, y por consiguiente retiradas de la
+            Partida.
+
+        * <<TRANSFERIR CARGA>>
+
+            Puede transferir carga desde o hacia la bodega de la
+            nave, interactuando con una Nave o Base de la misma
+            Civilización, o con un Contenedor.
+
+    * Para seleccionar el próximo Comando, cada Piloto podrá
+        solicitarle al Radar de la Cabina de Control el reporte en
+        una dirección dada de un casillero contiguo. Podrá solicitar
+        el número de reportes que desee. Este reporte contendrá:
+
+        * <<ESPECTRO>>
+
+            Permitirá identificar si lo que hay en esa dirección
+            es un ASTEROIDE, BASE, CONTENEDOR, NAVE, VACIO o
+            DESCONOCIDO. Este último indicará que en esa
+            dirección no se puede mover porque se termina el
+            tablero.
+
+        * <<CIVILIZACION>>
+
+            Permite determinar la civilización que hay allí.
+
+        * <<CANTIDAD DE SUSTANCIA>>
+
+            Indica la cantidad de sustancia de determinado tipo
+            que hay en esa dirección.
+
+    * Adicionalmente, el Piloto podrá solicitar la lista de
+        eventos que tuvieron relación con su nave desde su última
+        decisión. Estos eventos pueden ser:
+
+
+        * <<ATAQUE>>
+            
+            La nave fue atacada.
+
+        * <<CHOQUE>>
+
+            La nave fue chocada.
+
+        * <<DESPEGUE>>
+
+            Se recibe al efectuar el primer MOVER saliendo de la base.
+
+        * <<DESTRUCCIÓN>>
+
+            Si se recibe, la decisión que tenga que tomar el
+            piloto será la última de su vida.
+

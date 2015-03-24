@@ -1,0 +1,27 @@
+El Juego
+
+    Batalla Espacial.
+
+* Introducción
+
+** Contexto
+
+    La Batalla Espacial un juego de tablero para programadores donde existen
+    Civilizaciones con Naves que parten de una Base, pueden trasladar
+    sustancias que encuentren en el espacio y tienen poder de ataque. 
+    En el espacio también existen Asteroides que obstruyen los movimientos de las Naves.
+
+** Objetivo
+ 
+    El objetivo del juego es programar una Civilización, con su
+    Comandante y Pilotos capaces de llevar hasta su Base la mayor
+    cantidad posible de sustancias teniendo en cuenta que en la misma
+    partida pueden existir otras Civilizaciones
+
+** Descripción
+
+    * {{{./reglas.html} Reglas}}
+    
+    * {{{./piezas.html} Piezas}}
+    
+    * {{{./participantes.html} Participantes}}
