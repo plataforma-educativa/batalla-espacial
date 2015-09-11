@@ -5,14 +5,24 @@
   <artifactId>batalla-espacial</artifactId>
   <name>batalla-espacial</name>
   <version>2.0.0</version>
-  <url>http://code.google.com/p/batalla-espacial/</url>
+  <url>https://github.com/mtugnarelli/batalla-espacial</url>
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/plataforma-educativa/batalla-espacial/issues</url>
+  </issueManagement>
   <developers>
     <developer>
       <id>mtugnarelli</id>
       <name>Mariano Tugnarelli</name>
       <email>marianotugnarelli@gmail.com</email>
+      <url>https://github.com/mtugnarelli</url>
     </developer>
   </developers>
+  <scm>
+    <connection>scm:git:git://github.com/plataforma-educativa/batalla-espacial.git</connection>
+    <developerConnection>scm:git:git@github.com:plataforma-educativa/batalla-espacial.git</developerConnection>
+    <url>https://github.com/plataforma-educativa/batalla-espacial</url>
+  </scm>
   <organization>
     <name>Comunidad Esfera</name>
   </organization>
@@ -132,6 +142,22 @@
             <version>33.54</version>
           </dependency>
         </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>com.github.github</groupId>
+        <artifactId>site-maven-plugin</artifactId>
+        <version>0.11</version>
+        <executions>
+          <execution>
+            <phase>site</phase>
+            <goals>
+              <goal>site</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <message>Creating site for ${project.version}</message>
+        </configuration>
       </plugin>
     </plugins>
   </build>
@@ -367,6 +393,7 @@
               <head>Nota:</head>
             </tag>
           </tags>
+          <notimestamp>true</notimestamp>
         </configuration>
       </plugin>
       <plugin>
@@ -388,6 +415,7 @@
     </dependencies>
   </dependencyManagement>
   <properties>
+    <github.global.server>github</github.global.server>
     <javancss-version>33.54</javancss-version>
     <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
   </properties>
